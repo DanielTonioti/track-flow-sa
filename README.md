@@ -26,21 +26,21 @@
 ## Requisitos Funcionais Previstos:
 
 ### Login/Logout:
-- Login(Conseguir colocar email e senha para entrar no aplicativo)
-- Logout(sair da conta)
+- Log-in;
+- Log-out.
 ---
 ###  Gerenciamento de Sensores (Exclusivo de administradores):
 
 - Cadastrar novo sensor, vinculado a um trem ou linha;
-- Remover sensores;
+- Remover sensores.
 
 ---
 ### Gerenciamento de Funcionários (Exclusivo de administradores):
 
 - Listagem de todos os usuários, com duas tabelas para administradores e funcionários;
-- Função de Cadastrar usuários
-- Função de Remover usuários
-- Função de Permitir mudança de acesso de funcionários
+- Função de Cadastrar usuários;
+- Função de Remover usuários;
+- Função de Permitir mudança de acesso de funcionários.
 ---
 ### Relatórios:
 
@@ -52,9 +52,10 @@
 ---
 ### Gerenciamento de Trens (Exclusivo de administradores):
 
-- Cadastrar trens(Conseguir adicionar novo trem)
-- Remover trens(Conseguir remover trem)
+- Cadastrar trens;
+- Remover trens.
 ---
-### Gerenciamento de Tags Padrão (Exclusivo de administradores):
+### Gerenciamento de Linhas (Exclusivo de administradores):
 
-- Tela de confirmação(Segunda etapa para remoção de dados)
+- Cadastrar linhas;
+- Remover linhas.
