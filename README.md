@@ -4,54 +4,56 @@
 #### Samuel Elias Candinho, Roberto Stockhausen Hille, Lucas Vieira Pedroso , Daniel Tonioti e Natan Vitor Dré Avanço Barbosa
 ---
 ## Tecnologias Utilizadas:
-- Front-end: HTML / CSS / JavaScript
-- Framework: Bootstrap
-- IDE: Visual Studio Code
+- Front-end: HTML / CSS / JavaScript / PHP / SQL;
+- Framework: Bootstrap;
+- IDE: Visual Studio Code.
+---
+## Metodologias utilizadas:
+- Kanban: Com o objetivo de separar as diversas funções que cada um aplicara no projeto, o kanban foi utilizado para manter um senso de organização encima do que foi feito e o que está para ser feito;
+- Sob sugestão do docente, o SCRUM será utilizado para manter a comunicação entre membros em relação ao progresso de cada dia. Estamos supostos a realizar uma reunião diária (Provavelmente próxima ao fim da aula) para conversar sobre o que cada um fez e quais são os próximos passos. Ainda estamos a definir o "SCRUM Master";
+---
+
+## Formatação
+- Supostamente vamos usar snake_case para o projeto. (camelCase é objetivamente feio);
+
 ---
 ## Conceito:
-#### O projeto consiste em fazer um aplicativo que simula um sistema interno de uma empresa ferroviária, gerando relatórios, gerenciando usuários e administradores, além de um sistema de autenticação de funcionários em base dos estados de seus trens e administradores. Tendo a possibilidade de mostrar relatórios diários do trem ou da linha de remover e cadastrar os sensores responsáveis por monitorar e acompanhar o trajeto e situação do trem ou do trilho, entretanto, não sendo possível remover um sensor que possui dados armazenados em si.
+
+#### O projeto consiste em fazer um aplicativo de um sistema interno de uma empresa ferroviária, com funções de geração de relatórios, gerenciamento de usuários, sensores, linhas e trens, além de um sistema de autenticação para permitir acesso apenas a pessoal autorizado. Usuários são separados entre Funcionários e Administradores, com o primeiro tendo apenas permissões de gerenciamento de relatórios, enquanto o último tem acesso total as funcioanlidades do site. 
 #### O objetivo do projeto é criar um aplicativo que consiga, de maneira automática, registrar, monitorar e relatar a atual situação dos trens e trilhos com seus respectivos sensores, no final, tendo um sistema automatizado.
 ---
-## Funções Previstas:
+## Requisitos Funcionais Previstos:
 
 ### Login/Logout:
 - Login(Conseguir colocar email e senha para entrar no aplicativo)
 - Logout(sair da conta)
 ---
-###  Gerenciamento de Sensores:
+###  Gerenciamento de Sensores (Exclusivo de administradores):
 
-- Mostrar carrossel de gráficos ligados aos relatórios(ligados a temperatura, velocidade e falha)
-- Botão de sensores(Levar a página de sensores)
-- Menu do usuário (Abrir menu do usuário)
-- Cadastrar sensores(Conseguir adicionar um novo sensor)
-- Remover sensores(Conseguir remover um sensor)
-- Não conseguir remover sensores caso contenha alguma informação/dado dentro de si
+- Cadastrar novo sensor, vinculado a um trem ou linha;
+- Remover sensores;
+
 ---
-### Gerenciamento de Funcionários:
+### Gerenciamento de Funcionários (Exclusivo de administradores):
 
-- Administradores podem gerenciar outros administradores e usuários
-- Administradores conseguem registrar funcionários
-- Cadastrar funcionários(Conseguir adicionar novo funcionários)
-- Remover funcionários(Conseguir remover funcionários)
-- Permitir mudança de acesso de funcionários
-- Botão de funcionários(Levar a página de funcionários)
+- Listagem de todos os usuários, com duas tabelas para administradores e funcionários;
+- Função de Cadastrar usuários
+- Função de Remover usuários
+- Função de Permitir mudança de acesso de funcionários
 ---
 ### Relatórios:
 
-- Botão de gerar relatório
-- Botão de relatórios(Levar a página de relatórios)
-- Botão para baixar relatório
-- Botão para visualizar relatório
-- Relatório dos sensores em tempo real e de um tempo especifico
-- Relatório da situação dos sensores em tempo real
-- Relatório passados de sensores podem ser acessados
-- Mostrar gráficos ligados aos relatórios(histórico ligadas a temperatura, velocidade e falhas)
+- Função de para gerar um novo relatório usando um trem ou linha com sensores cadastrados;
+- Listagem de relatórios passados;
+- Opção de visualizar detalhes de um relatório passado, mostrado gráficos de alterações ao longo do tempo especificado;
+- Função de excluir um relatório passado.
+
 ---
-### Gerenciamento de Trens:
+### Gerenciamento de Trens (Exclusivo de administradores):
 
 - Cadastrar trens(Conseguir adicionar novo trem)
 - Remover trens(Conseguir remover trem)
 ---
-### Gerenciamento de Tags Padrão:
+### Gerenciamento de Tags Padrão (Exclusivo de administradores):
 
 - Tela de confirmação(Segunda etapa para remoção de dados)
