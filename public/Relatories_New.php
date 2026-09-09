@@ -38,10 +38,10 @@
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="Admin.php">Funcionarios</a>
+                                    <a class="nav-link active" aria-current="page" href="admin.php">Funcionarios</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="Relatories.php">Relatórios</a>
+                                    <a class="nav-link active" aria-current="page" href="relatories.php">Relatórios</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
@@ -66,7 +66,7 @@
                                 </a>
                             </p>
                             <p class="Menu_Deslogar">
-                                <a href="Login.html">
+                                <a href="login.php">
                                     Deslogar
                                 </a>
                             </p>
