@@ -25,9 +25,9 @@ document.getElementById("form-login").addEventListener("submit", function (e) {
     }
     if (cancel == 0) {
         localStorage.setItem(usuario, senha);
-        window.location.href = "../public/hub.html";
+        window.location.href = "../public/hub.php";
     }
 
 }) // This will allow anyone to log-in, only checking requirements inside the input. This will be connected to the database later.
 
-// Login can be bypassed by typing window.location.href = "../public/hub.html"; in the console.
+// Login can be bypassed by typing window.location.href = "../public/hub.php"; in the console.

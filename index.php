@@ -30,7 +30,7 @@
     <footer>
 
     </footer>
-    <script src="scripts/script-index.js"> </script>
+    <script src="scripts/scriptIndex.js"> </script>
 </body>
 
 </html>

@@ -42,14 +42,14 @@
                                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="admin.html">Funcionarios</a>
+                                            href="Admin.php">Funcionarios</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="relatories.html">Relatórios</a>
+                                            href="Relatories.php">Relatórios</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="hub.html">Sensores</a>
+                                        <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
                                     </li>
 
                                 </ul>
@@ -517,9 +517,9 @@
 
     </footer>
 
-    <script src="../scripts/script-sair.js"></script>
-    <script src="../scripts/script-navbar.js"></script>
-    <script src="../scripts/script-hub.js"></script>
+    <script src="../scripts/scriptSair.js"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/scriptHub.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

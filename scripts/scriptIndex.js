@@ -6,7 +6,7 @@ document.getElementById("index-button").onclick = () => {
             time -= 1;
         }
         else {
-            window.location.href = "public/login.html";
+            window.location.href = "public/Login.php";
             time = 30;
             clearInterval(id001);
         }

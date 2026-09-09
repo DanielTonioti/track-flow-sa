@@ -14,7 +14,7 @@ document.getElementById("hub-toggle-admin").onclick = () => {
             timenav -= 1;
         }
         else {
-            window.location.href = "admin.html";
+            window.location.href = "Admin.php";
             timenav = 30;
             clearInterval(id001);
         }
@@ -27,7 +27,7 @@ document.getElementById("hub-toggle-relatories").onclick = () => {
             timenav -= 1;
         }
         else {
-            window.location.href = "relatories.html";
+            window.location.href = "Relatories.php";
             timenav = 30;
             clearInterval(id001);
         }
@@ -40,7 +40,7 @@ document.getElementById("hub-toggle-sensor").onclick = () => {
             timenav -= 1;
         }
         else {
-            window.location.href = "hub.html";
+            window.location.href = "hub.php";
             timenav = 30;
             clearInterval(id001);
         }
