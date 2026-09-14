@@ -35,9 +35,9 @@
                         <label for="nome"> E-mail: </label>
                         <input type="email" name="email" required>
                         <label for="senha"> Senha: </label>
-                        <input type="password">
+                        <input type="password" name="password">
                         <label for="senha"> Confirmar senha: </label>
-                        <input type="password">
+                        <input type="password" name="passwordconfirm">
                         <label for="acesso"> Nível de acesso: </label>
                         <div>
                         <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
