@@ -92,15 +92,18 @@
             <h1 class="cores-color" data-color="white">Editar Usuario: Placeholder</h1>
         </div>
         <div class="blockcentro">
-            <label for="inputPassword5" class="cores-color  form-label" data-color="white">Name</label>
-            <input type="Text" id="inputPassword5" placeholder="Marlon" class=" FormUsuario form-control"
-                aria-describedby="passwordHelpBlock">
-            <label for="inputPassword5" class="cores-color  form-label" data-color="white">E-mail</label>
-            <input type="Text" id="inputPassword5" placeholder="Marlon" class=" FormUsuario form-control"
-                aria-describedby="passwordHelpBlock">
-            <label for="inputPassword5" class="cores-color  form-label" data-color="white">Senha</label>
-            <input type="Text" id="inputPassword5" placeholder="Marlon" class="FormUsuario form-control"
-                aria-describedby="passwordHelpBlock">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
+            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="NomeUpdate">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
+            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="EmailUpdate">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
+            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
+            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm">
         </div>
         <div class="DangerZone">
             <div class="blockcentro">
