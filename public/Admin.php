@@ -116,8 +116,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -137,8 +137,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -158,8 +158,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -179,8 +179,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -215,10 +215,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99538-8303
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                     <div>
@@ -235,10 +236,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99025-1026
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                     <div>
@@ -255,10 +257,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99125-0154
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                     <div>
@@ -275,10 +278,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99195-1900
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                 </div>
