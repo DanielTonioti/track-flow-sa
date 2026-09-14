@@ -297,7 +297,7 @@
         <div class="cores-color cores-background centralizar-tabela flex" data-color="White">
             <button
                 class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
-                data-color="white" data-background="azure-claro-fundo">
+                data-color="white" data-background="azure-claro-fundo" id="admin-button">
                 <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
             </button>
         </div>
