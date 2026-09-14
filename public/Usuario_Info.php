@@ -117,8 +117,8 @@
             </div>
         </div>
         <div class="blockcentro">
-            <button type="button" class="  btn cores-color cores-background" data-color="white"
-                data-background="azure-claro-fundo">Atualizar</button>
+            <input type="submit" class="btn cores-color cores-background" data-color="white"
+                data-background="azure-claro-fundo" value="Atualizar usuário"></input>
         </div>
 
 
