@@ -34,7 +34,12 @@
                         <input type="text" name="nome" required>
                         <label for="nome"> E-mail: </label>
                         <input type="email" name="email" required>
-                        <div class="center-sensor">
+                        <label for="senha"> Senha: </label>
+                        <input type="password">
+                        <label for="senha"> Confirmar senha: </label>
+                        <input type="password">
+                        <label for="acesso"> Nível de acesso: </label>
+                        <div>
                         <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
                         <input type="radio" name="acesso" id="administrador" value=false> Administrador
                         </div>
