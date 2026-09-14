@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/style.css">
-    <title> Informações do Usuarios </title>
+    <title> Informações do usuario </title>
 </head>
 
 <body class="cores-background " data-background="azure-escuro-fundo">
@@ -89,7 +89,7 @@
 
     <main>
         <div class="blockcentro">
-            <h1 class="cores-color" data-color="white">Detalhes de Usuario, PAPAPAU</h1>
+            <h1 class="cores-color" data-color="white">Editar Usuario: Placeholder</h1>
         </div>
         <div class="blockcentro">
             <label for="inputPassword5" class="cores-color  form-label" data-color="white">Name</label>
@@ -98,14 +98,14 @@
             <label for="inputPassword5" class="cores-color  form-label" data-color="white">E-mail</label>
             <input type="Text" id="inputPassword5" placeholder="Marlon" class=" FormUsuario form-control"
                 aria-describedby="passwordHelpBlock">
-            <label for="inputPassword5" class="cores-color  form-label" data-color="white">senha</label>
+            <label for="inputPassword5" class="cores-color  form-label" data-color="white">Senha</label>
             <input type="Text" id="inputPassword5" placeholder="Marlon" class="FormUsuario form-control"
                 aria-describedby="passwordHelpBlock">
         </div>
         <div class="DangerZone">
             <div class="blockcentro">
                 <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
-                    acesso</label>
+                    Acesso</label>
                 <input type="se" id="inputPassword5" placeholder="Marlon" class="FormUsuarioDanger form-control"
                     aria-describedby="passwordHelpBlock">
                 <div class="ButtonExcluirUsuario">
