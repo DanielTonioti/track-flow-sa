@@ -80,6 +80,40 @@
 
     </header>
 
+    <main class="container py-4">
+        <div class="ReportFormPanel mx-auto cores-background rounded-4 p-4 p-md-5" data-background="azure-claro-fundo">
+            <h1 class="text-white mb-4">Novo relatório</h1>
+            <form>
+                <div class="mb-3">
+                    <label class="form-label text-white" for="TituloRelatorio">Título</label>
+                    <input class="form-control" type="text" id="TituloRelatorio" placeholder="Título do relatório">
+                </div>
+                <div class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label text-white" for="SensorRelatorio">Sensor ou rota</label>
+                        <select class="form-select" id="SensorRelatorio">
+                            <option selected>Selecione</option>
+                            <option>Rota Norte</option>
+                            <option>Sensor S001</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label text-white" for="PeriodoRelatorio">Período</label>
+                        <select class="form-select" id="PeriodoRelatorio">
+                            <option selected>Últimos 7 dias</option>
+                            <option>Últimos 30 dias</option>
+                            <option>Período personalizado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a class="btn btn-outline-light" href="Relatories.php">Cancelar</a>
+                    <button class="btn btn-light fw-bold" type="button">Gerar relatório</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
     </head>
 
     <script src="../scripts/script-voltar.js"></script>

@@ -121,6 +121,10 @@
     width: 54%;
 }
 
+.ReportFormPanel {
+    max-width: 48rem;
+}
+
 /* Sensor */
 .titulo-Sensor {
     color: white;
