@@ -91,26 +91,30 @@
         <div class="blockcentro">
             <h1 class="cores-color" data-color="white">Editar Usuario: Placeholder</h1>
         </div>
+        <form action="">
         <div class="blockcentro">
+            
             <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
             <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
                 aria-describedby="passwordHelpBlock" name="NomeUpdate">
             <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
-            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+            <input type="email" id="inputPassword5" required class="FormUsuario form-control"
                 aria-describedby="passwordHelpBlock" name="EmailUpdate">
             <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
-            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+            <input type="password" id="inputPassword5" required class="FormUsuario form-control"
                 aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular">
             <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
-            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+            <input type="password" id="inputPassword5" required class="FormUsuario form-control"
                 aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm">
-        </div>
+            </div>
         <div class="DangerZone">
             <div class="blockcentro">
                 <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                     Acesso</label>
-                <input type="se" id="inputPassword5" placeholder="Marlon" class="FormUsuarioDanger form-control"
-                    aria-describedby="passwordHelpBlock">
+                        <div>
+                        <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
+                        <input type="radio" name="acesso" id="administrador" value=false> Administrador
+                        </div>
                 <div class="ButtonExcluirUsuario">
                     <button type="button" class="  btn btn-danger">Excluir Usuario</button>
                 </div>
@@ -120,6 +124,8 @@
             <input type="submit" class="btn cores-color cores-background" data-color="white"
                 data-background="azure-claro-fundo" value="Atualizar usuário"></input>
         </div>
+        </form>
+        
 
 
 
