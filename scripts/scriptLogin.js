@@ -24,6 +24,9 @@ document.getElementById("form-login").addEventListener("submit", function (e) {
         alert("Dados Incorretos");
     }
     if (cancel == 0) {
+        const nomeUsuario = usuario.split("@")[0];
+        localStorage.setItem("trackflow_user", usuario);
+        localStorage.setItem("trackflow_nome", nomeUsuario);
         localStorage.setItem(usuario, senha);
         window.location.href = "../public/hub.php";
     }

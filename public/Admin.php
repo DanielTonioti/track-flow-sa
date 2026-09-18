@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="../assets/icone.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../Styles/style.css">
     <title>Administradores</title>
 </head>
 
@@ -39,11 +39,11 @@
                                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="admin.php">Funcionarios</a>
+                                            href="Admin.php">Funcionários</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="relatories.php">Relatórios</a>
+                                            href="Relatories.php">Relatórios</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
@@ -68,7 +68,7 @@
                                     </a>
                                 </p>
                                 <p class="Menu_Deslogar">
-                                    <a href="login.php">
+                                    <a href="Login.php">
                                         Deslogar
                                     </a>
                                 </p>
@@ -84,11 +84,11 @@
             <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
                 data-background="azure-claro-fundo">
                 <p class="admin-titulo-texto cores-color fw-bold mx-3" data-color="white">
-                    Funcionarios
+                    Funcionários
                 </p>
             </div>
         </div>
-        <!-- Área dos funcionarios -->
+        <!-- Ãrea dos funcionarios -->
         <div>
             <div class="text-center text-white p-3">
                 <button id="botao-admin" class="btn text-white fw-bold" type="button">
@@ -194,7 +194,7 @@
         </div>
         <div class="text-center cores-color p-3" data-color="white">
             <button id="botao-func" class="btn text-white fw-bold" type="button">
-                Funcionarios
+                Funcionários
                 <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin" class="users-page-arrow"
                     id="seta-func">
             </button>
@@ -294,7 +294,7 @@
             <button
                 class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
                 data-color="white" data-background="azure-claro-fundo" id="admin-button">
-                <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
+                <p class="my-auto fw-bold mx-3">Adicionar FuncionÃ¡rio</p>
             </button>
         </div>
         </div>
@@ -305,7 +305,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuário</h2>
+                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuÃ¡rio</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
@@ -323,9 +323,9 @@
                             <input class="form-control" id="SenhaUsuarioModal" type="password">
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="AcessoUsuarioModal">Nível de acesso</label>
+                            <label class="form-label" for="AcessoUsuarioModal">NÃ­vel de acesso</label>
                             <select class="form-select" id="AcessoUsuarioModal">
-                                <option>Funcionário</option>
+                                <option>FuncionÃ¡rio</option>
                                 <option>Administrador</option>
                             </select>
                         </div>

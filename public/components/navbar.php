@@ -1,4 +1,4 @@
-<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
+﻿<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
     <!-- http://127.0.0.1:5500/public/hub.html -->
     <div class="container-fluid">
 
@@ -25,11 +25,11 @@
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                                href="admin.php">Funcionarios</a>
+                                href="Admin.php">Funcionários</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"
-                                href="relatories.php">Relatórios</a>
+                                href="Relatories.php">Relatórios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
@@ -54,7 +54,7 @@
                         </a>
                     </p>
                     <p class="Menu_Deslogar">
-                        <a href="login.php">
+                        <a href="Login.php">
                             Deslogar
                         </a>
                     </p>
