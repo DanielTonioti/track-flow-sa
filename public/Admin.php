@@ -116,7 +116,7 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                             </div>
@@ -137,7 +137,7 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                             </div>
@@ -158,7 +158,7 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                             </div>
@@ -179,7 +179,7 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                             </div>
@@ -217,7 +217,7 @@
                             </p>
                             <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                         </div>
@@ -238,7 +238,7 @@
                             </p>
                             <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                         </div>
@@ -259,7 +259,7 @@
                             </p>
                             <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                         </div>
@@ -280,7 +280,7 @@
                             </p>
                             <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white">
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
                                     Editar
                                 </button>
                         </div>
@@ -300,6 +300,44 @@
         </div>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
+    <div class="modal fade" id="ModalEditarUsuario" tabindex="-1" aria-labelledby="TituloModalEditarUsuario"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuário</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="NomeUsuarioModal">Nome</label>
+                            <input class="form-control" id="NomeUsuarioModal" type="text" value="Marlon">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="EmailUsuarioModal">E-mail</label>
+                            <input class="form-control" id="EmailUsuarioModal" type="email" value="marlon@email.com">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="SenhaUsuarioModal">Senha</label>
+                            <input class="form-control" id="SenhaUsuarioModal" type="password">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="AcessoUsuarioModal">Nível de acesso</label>
+                            <select class="form-select" id="AcessoUsuarioModal">
+                                <option>Funcionário</option>
+                                <option>Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
 
     </footer>
