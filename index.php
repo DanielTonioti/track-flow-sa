@@ -21,7 +21,7 @@
 
     <main>
         <div class="d-flex flex-column align-items-center justify-content-center vh-100">
-            <img src="Assets/logo-track-flow.png" alt="Logo TrackFlow" class="img-login-page">
+            <img src="Assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="img-login-page">
             <p class="index-titulo-pag">Bem vindo ao site TrackFlow</p>
             <button type="submit" class="btn btn-light fs-3 shadow" id="index-button"> Ir para o login </button>
         </div>
