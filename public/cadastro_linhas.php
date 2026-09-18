@@ -62,7 +62,7 @@
 
     <main class="CadastroTremPage">
         
-    <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Trem</h1>
+    <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Linha</h1>
 
         <form class="CadastroTremForm" id="CadastroTremForm" novalidate>
             <div class="CadastroTremFields">
