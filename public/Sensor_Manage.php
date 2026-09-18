@@ -101,7 +101,7 @@
                     S001
                 </p>
                 <button class=" admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho">
+                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
                     Remover
                 </button>
             </div>
@@ -111,7 +111,7 @@
                     S002
                 </p>
                 <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho">
+                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
                     Remover
                 </button>
             </div>
@@ -121,7 +121,7 @@
                     S003
                 </p>
                 <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho">
+                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
                     Remover
                 </button>
             </div>
@@ -130,8 +130,8 @@
                     data-background="azure-claro-fundo">
                     S004
                 </p>
-                <button class=" admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho">
+                <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
+                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
                     Remover
                 </button>
             </div>
@@ -140,8 +140,8 @@
                     data-background="azure-claro-fundo">
                     S005
                 </p>
-                <button class=" admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho">
+                <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
+                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
                     Remover
                 </button>
             </div>
@@ -155,6 +155,22 @@
         </div>
         <button id="voltarsensor" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
+    <div class="modal fade" id="ModalExcluirSensor" tabindex="-1" aria-labelledby="TituloModalExcluirSensor"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="TituloModalExcluirSensor">Excluir sensor</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">Tem certeza que deseja excluir este sensor?</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
 
     </footer>
