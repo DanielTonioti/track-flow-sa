@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="../assets/logo/icone.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../Styles/style.css">
     <title> Informações do usuario </title>
 </head>
 
@@ -42,11 +42,11 @@
                                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="admin.php">Funcionarios</a>
+                                            href="Admin.php">Funcionários</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page"
-                                            href="relatories.php">Relatórios</a>
+                                            href="Relatories.php">Relatórios</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
@@ -71,7 +71,7 @@
                                     </a>
                                 </p>
                                 <p class="Menu_Deslogar">
-                                    <a href="login.php">
+                                    <a href="Login.php">
                                         Deslogar
                                     </a>
                                 </p>
@@ -112,7 +112,7 @@
                 <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                     Acesso</label>
                         <div>
-                        <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
+                        <input type="radio" name="acesso" id="funcionario" value=true required> FuncionÃ¡rio
                         <input type="radio" name="acesso" id="administrador" value=false> Administrador
                         </div>
                 <div class="ButtonExcluirUsuario">
@@ -122,7 +122,7 @@
         </div>
         <div class="blockcentro">
             <input type="submit" class="btn cores-color cores-background" data-color="white"
-                data-background="azure-claro-fundo" value="Atualizar usuário"></input>
+                data-background="azure-claro-fundo" value="Atualizar usuÃ¡rio"></input>
         </div>
         </form>
         

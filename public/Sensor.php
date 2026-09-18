@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="../assets/logo/icone.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../Styles/style.css">
     <title>Sensor</title>
 </head>
 
@@ -39,10 +39,10 @@
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="admin.php">Funcionarios</a>
+                                    <a class="nav-link active" aria-current="page" href="Admin.php">Funcionários</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="relatories.php">Relatórios</a>
+                                    <a class="nav-link active" aria-current="page" href="Relatories.php">Relatórios</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
@@ -67,7 +67,7 @@
                                 </a>
                             </p>
                             <p class="Menu_Deslogar">
-                                <a href="login.php">
+                                <a href="Login.php">
                                     Deslogar
                                 </a>
                             </p>
@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="hiden" id="localisation">
-                            <label for="loc-trilho">Localização</label>
+                            <label for="loc-trilho">LocalizaÃ§Ã£o</label>
                             <br>
                             <input class="w-100" type="text" id="loc-trilho" placeholder="asfa" required>
                         </div>
@@ -135,12 +135,13 @@
 
     </footer>
 
-    <script src="../scripts/script-sensor.js"></script>
-    <script src="../scripts/script-admin.js"></script>
-    <script src="../scripts/script-navbar.js"></script>
+    <script src="../scripts/scriptSensor.js"></script>
+    <script src="../scripts/scriptAdmin.js"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 </body>
 
 </html>
+

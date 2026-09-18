@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -36,8 +36,8 @@
                         </div>
                         <div class="offcanvas-body">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                <li class="nav-item"><a class="nav-link" href="Admin.php">Funcionarios</a></li>
-                                <li class="nav-item"><a class="nav-link" href="Relatories.php">Relatorios</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Admin.php">Funcionários</a></li>
+                                <li class="nav-item"><a class="nav-link" href="Relatories.php">Relatórios</a></li>
                                 <li class="nav-item"><a class="nav-link" href="hub.php">Sensores</a></li>
                                 <li class="nav-item"><a class="nav-link active" aria-current="page"
                                         href="Trilhos.html">Trilhos e rotas</a></li>
@@ -66,13 +66,13 @@
         <form class="CadastroTremForm" id="CadastroTremForm" novalidate>
             <div class="CadastroTremFields">
                 <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="Numeracao">Numeração:</label>
+                    <label class="CadastroTremLabel" for="Numeracao">NumeraÃ§Ã£o:</label>
                     <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao"
                         placeholder="Ex: N289T" required>
                 </div>
 
                 <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="EstacaoOrigem">Estação de Origem:</label>
+                    <label class="CadastroTremLabel" for="EstacaoOrigem">EstaÃ§Ã£o de Origem:</label>
                     <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="EstacaoOrigem"
                         placeholder="Inicial" required>
                 </div>
@@ -122,3 +122,4 @@
 </body>
 
 </html>
+

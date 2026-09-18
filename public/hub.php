@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -93,10 +93,46 @@
     
 
         <hr class="opacity-100 cores-background hub-main-hr d-flex m-0" data-background="cinza-claro">
-        <div class="cores-background hub-main-graphics d-flex align-items-center justify-content-center"
-            data-background="azure-apagado">
-            <p>a</p>
-        </div>
+        <section class="container-fluid px-3 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-3 px-2">
+                <h2 class="text-white mb-0">Relatórios em destaque</h2>
+                <div class="hub-carousel-controls">
+                    <button class="btn btn-light btn-sm rounded-circle" type="button" data-bs-target="#hubCarousel"
+                        data-bs-slide="prev" aria-label="Gráfico anterior">&#8249;</button>
+                    <button class="btn btn-light btn-sm rounded-circle" type="button" data-bs-target="#hubCarousel"
+                        data-bs-slide="next" aria-label="Próximo gráfico">&#8250;</button>
+                </div>
+            </div>
+
+            <div id="hubCarousel" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="hub-chart-panel">
+                            <div class="hub-chart-header">
+                                <span>Velocidade média por sensor</span>
+                            </div>
+                            <div id="chart-velocidade" class="hub-chart"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="hub-chart-panel">
+                            <div class="hub-chart-header">
+                                <span>Temperatura média</span>
+                            </div>
+                            <div id="chart-temperatura" class="hub-chart"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="hub-chart-panel">
+                            <div class="hub-chart-header">
+                                <span>Status dos sensores</span>
+                            </div>
+                            <div id="chart-status" class="hub-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Area sensores -->
         <div class="flex centralizar-tabela mt-4 cores-color" data-color="white">
             <div class="d-flex flex-column">
@@ -535,6 +571,93 @@
         if (elementoUsuario) {
             elementoUsuario.textContent = `Olá, ${nomeExibicao}`;
         }
+    </script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { packages: ['corechart'], language: 'pt-BR' });
+
+        const dadosGraficos = [
+            {
+                id: 'chart-velocidade',
+                type: 'ColumnChart',
+                data: [
+                    ['Sensor', 'Velocidade média'],
+                    ['S.TRM.001', 12],
+                    ['S.TRM.002', 26],
+                    ['S.TRM.003', 14],
+                    ['S.TRM.004', 18]
+                ],
+                options: {
+                    title: 'Velocidade média por sensor',
+                    backgroundColor: 'transparent',
+                    legend: { position: 'none' },
+                    hAxis: { textStyle: { color: '#fff' } },
+                    vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
+                    titleTextStyle: { color: '#fff', fontSize: 18 },
+                    colors: ['#c1ff72'],
+                    chartArea: { width: '80%', height: '70%' },
+                }
+            },
+            {
+                id: 'chart-temperatura',
+                type: 'LineChart',
+                data: [
+                    ['Semana', 'Temperatura'],
+                    ['Seg', 24],
+                    ['Ter', 28],
+                    ['Qua', 26],
+                    ['Qui', 29],
+                    ['Sex', 31],
+                    ['Sáb', 27]
+                ],
+                options: {
+                    title: 'Temperatura média semanal',
+                    backgroundColor: 'transparent',
+                    legend: { position: 'none' },
+                    hAxis: { textStyle: { color: '#fff' } },
+                    vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
+                    titleTextStyle: { color: '#fff', fontSize: 18 },
+                    colors: ['#67a4ff'],
+                    chartArea: { width: '80%', height: '70%' },
+                    pointSize: 5
+                }
+            },
+            {
+                id: 'chart-status',
+                type: 'PieChart',
+                data: [
+                    ['Status', 'Quantidade'],
+                    ['Funcionando', 74],
+                    ['Em alerta', 16],
+                    ['Manutenção', 10]
+                ],
+                options: {
+                    title: 'Status dos sensores',
+                    backgroundColor: 'transparent',
+                    legend: { textStyle: { color: '#fff' } },
+                    titleTextStyle: { color: '#fff', fontSize: 18 },
+                    colors: ['#00bf63', '#ff5757', '#67a4ff'],
+                    chartArea: { width: '80%', height: '70%' },
+                    pieSliceTextStyle: { color: '#fff' }
+                }
+            }
+        ];
+
+        function desenharGrafico({ id, type, data, options }) {
+            const elemento = document.getElementById(id);
+            if (!elemento) return;
+
+            const tabela = google.visualization.arrayToDataTable(data);
+            const chart = new google.visualization[type](elemento);
+            chart.draw(tabela, options);
+        }
+
+        google.charts.setOnLoadCallback(() => {
+            dadosGraficos.forEach(desenharGrafico);
+            window.addEventListener('resize', () => {
+                dadosGraficos.forEach(desenharGrafico);
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
