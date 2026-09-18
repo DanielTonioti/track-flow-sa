@@ -1,3 +1,4 @@
+
 let currentSensor;
 let currentList;
 let currentArrow;
@@ -128,7 +129,4 @@ function shower() {
         currentList.classList.add('show');
         currentArrow.style.transform = "rotate(180deg)";
     }
-}
-document.getElementById("AddSensor").onclick = () => {
-    window.location.href = "../public/Sensor.html";
 }

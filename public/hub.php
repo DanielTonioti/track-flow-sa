@@ -559,9 +559,6 @@
 
     </footer>
 
-    <script src="../scripts/scriptSair.js"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
-    <script src="../scripts/scriptHub.js"></script>
     <script>
         const usuarioLogado = localStorage.getItem("trackflow_nome") || localStorage.getItem("trackflow_user") || "Visitante";
         const nomeFormatado = usuarioLogado.includes("@") ? usuarioLogado.split("@")[0] : usuarioLogado;
@@ -663,6 +660,10 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
 
+    <script src="../scripts/scriptSair.js"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/scriptHub.js"></script>
+    <script src="../scripts/ScriptAdicionar.js"></script>
 </body>
 
 </html>
