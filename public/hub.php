@@ -62,6 +62,9 @@
                         <img src="../assets/icons/User.png" alt="...">
                     </div>
                 </div>
+                <div class="d-flex flex-column align-items-end me-2">
+                    <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">Visitante</span>
+                </div>
                 <div id="menu_user"  class="cores-color menu" data-color="white">
                     <div>
                         <p>
@@ -86,6 +89,9 @@
 
     </head>
     <main>
+
+    
+
         <hr class="opacity-100 cores-background hub-main-hr d-flex m-0" data-background="cinza-claro">
         <div class="cores-background hub-main-graphics d-flex align-items-center justify-content-center"
             data-background="azure-apagado">
@@ -520,6 +526,16 @@
     <script src="../scripts/scriptSair.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>
     <script src="../scripts/scriptHub.js"></script>
+    <script>
+        const usuarioLogado = localStorage.getItem("trackflow_nome") || localStorage.getItem("trackflow_user") || "Visitante";
+        const nomeFormatado = usuarioLogado.includes("@") ? usuarioLogado.split("@")[0] : usuarioLogado;
+        const nomeExibicao = nomeFormatado.charAt(0).toUpperCase() + nomeFormatado.slice(1);
+        const elementoUsuario = document.getElementById("usuario-logado");
+
+        if (elementoUsuario) {
+            elementoUsuario.textContent = `Olá, ${nomeExibicao}`;
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
