@@ -1,4 +1,16 @@
-
+document.getElementById("admin-button").onclick = () => {
+    time = 30;
+    let id001 = setInterval(function () {
+        if (time >= 1) {
+            time -= 1;
+        }
+        else {
+            window.location.href = "cadastro_usuario.php";
+            time = 30;
+            clearInterval(id001);
+        }
+    }, 10);
+}
 
 const botao = document.getElementById("botao-admin");
 const lista = document.getElementById("lista-adm");

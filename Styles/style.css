@@ -111,7 +111,6 @@
 
 .ButtonExcluirUsuario {
     margin-top: 5%;
-    margin-bottom: -4%;
 }
 
 .FormUsuario {
@@ -120,6 +119,10 @@
 
 .FormUsuarioDanger {
     width: 54%;
+}
+
+.ReportFormPanel {
+    max-width: 48rem;
 }
 
 /* Sensor */
@@ -256,6 +259,197 @@ justify-content: center;
 .hub-brand {
     display: flex;
     justify-content: start;
+}
+
+/* Cadastro de trem */
+.CadastroTremPage {
+    min-height: calc(100vh - 7rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.CadastroTremTitle {
+    width: min(22rem, 100%);
+    margin: 0 0 1.1rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: 4rem;
+    background: var(--cor-azure-claro-fundo);
+    text-align: center;
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    line-height: 1.2;
+}
+
+.CadastroTremForm {
+    width: min(48rem, 100%);
+    min-height: 17rem;
+    padding: 1rem 1.15rem 1.2rem;
+    border-radius: 2.25rem;
+    background: var(--cor-azure-claro-fundo);
+}
+
+.CadastroTremFields {
+    width: min(20.5rem, 100%);
+    margin: 0 auto;
+}
+
+.CadastroTremField {
+    margin-bottom: 1rem;
+}
+
+.CadastroTremLabel {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: var(--cor-letra);
+    font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+}
+
+.CadastroTremInput {
+    width: 100%;
+    height: 1.9rem;
+    padding: 0.25rem 0.55rem;
+    border: 2px solid var(--cor-cinza-claro);
+    border-radius: 0.75rem;
+    outline: none;
+    background: transparent;
+    color: var(--cor-letra);
+    font-size: 0.85rem;
+}
+
+.CadastroTremInput::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.CadastroTremInput:focus {
+    border-color: var(--cor-letra);
+    box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.2);
+}
+
+.CadastroTremInput:invalid:not(:placeholder-shown) {
+    border-color: var(--cor-vermelho);
+}
+
+.CadastroTremButton {
+    width: 10.5rem;
+    min-height: 2.3rem;
+    margin-top: 1.8rem;
+    border: 0;
+    border-radius: 3rem;
+    background: var(--cor-azure-claro-fundo);
+    color: var(--cor-letra);
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.CadastroTremButton:hover,
+.CadastroTremButton:focus-visible {
+    background: var(--cor-azure-apagado);
+}
+
+.CadastroTremList {
+    width: min(48rem, 100%);
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    border-radius: 1.5rem;
+    background: var(--cor-azure-claro-fundo);
+}
+
+.CadastroTremListTitle {
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+}
+
+.CadastroTremListItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.CadastroTremListItem span {
+    display: block;
+    color: var(--cor-letra);
+    opacity: 0.7;
+    font-size: 0.85rem;
+}
+
+.CadastroTremDeleteButton {
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--cor-vermelho);
+    border-radius: 0.4rem;
+    background: transparent;
+    font-size: 0.8rem;
+}
+
+.CadastroTremDeleteButton:hover{
+    background: var(--cor-vermelho);
+}
+
+.CadastroTremModalBox {
+    padding: 3.3rem 2.5rem 2rem;
+    border: 3px solid var(--cor-black);
+    border-radius: 1.7rem;
+    text-align: center;
+}
+
+.CadastroTremModalBox h2 {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    line-height: 1.25;
+}
+
+.CadastroTremModalButtons {
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    margin-top: 4.2rem;
+}
+
+.CadastroTremModalButtons button {
+    min-width: 7.2rem;
+    padding: 0.8rem 0.45rem;
+    border: 0;
+    border-radius: 0.7rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.CadastroTremModalButtons button:first-child {
+    background: var(--cor-vermelho);
+}
+
+.CadastroTremModalButtons button:last-child {
+    background: var(--cor-verde);
+}
+
+.CadastroTremModalButtons button:hover,
+.CadastroTremModalButtons button:focus-visible {
+    filter: brightness(0.92);
+}
+
+@media (max-width: 600px) {
+    .CadastroTremPage {
+        padding: 0.75rem 1rem 1.5rem;
+    }
+
+    .CadastroTremForm {
+        min-height: auto;
+        padding: 1.2rem 1rem 1.5rem;
+        border-radius: 1.75rem;
+    }
+
+    .CadastroTremButton {
+        margin-top: 2rem;
+    }
+
+    .CadastroTremList {
+        margin-top: 1.2rem;
+    }
 }
 
 

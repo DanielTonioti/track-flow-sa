@@ -11,10 +11,7 @@
 </head>
 
 <body class="cores-background" data-background="azure-escuro-fundo">
-
-    <head>
         <header>
-
             <nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
                 <!-- http://127.0.0.1:5500/public/hub.html -->
                 <div class="container-fluid">
@@ -81,12 +78,7 @@
                     </div>
                 </div>
             </nav>
-
-
         </header>
-
-    </head>
-
     <main>
         <div class="flex justify-content-center">
             <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
@@ -124,8 +116,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -145,8 +137,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -166,8 +158,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -187,8 +179,8 @@
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="vermelho">
-                                    Remover
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
                                 </button>
                             </div>
                         </div>
@@ -223,10 +215,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99538-8303
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                     <div>
@@ -243,10 +236,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99025-1026
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                     <div>
@@ -263,10 +257,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99125-0154
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                     <div>
@@ -283,10 +278,11 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99195-1900
                             </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="vermelho">
-                                Remover
-                            </button>
+                            <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
+                                </button>
                         </div>
                     </div>
                 </div>
@@ -297,13 +293,51 @@
         <div class="cores-color cores-background centralizar-tabela flex" data-color="White">
             <button
                 class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
-                data-color="white" data-background="azure-claro-fundo">
+                data-color="white" data-background="azure-claro-fundo" id="admin-button">
                 <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
             </button>
         </div>
         </div>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
+    <div class="modal fade" id="ModalEditarUsuario" tabindex="-1" aria-labelledby="TituloModalEditarUsuario"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuário</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="NomeUsuarioModal">Nome</label>
+                            <input class="form-control" id="NomeUsuarioModal" type="text" value="Marlon">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="EmailUsuarioModal">E-mail</label>
+                            <input class="form-control" id="EmailUsuarioModal" type="email" value="marlon@email.com">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="SenhaUsuarioModal">Senha</label>
+                            <input class="form-control" id="SenhaUsuarioModal" type="password">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="AcessoUsuarioModal">Nível de acesso</label>
+                            <select class="form-select" id="AcessoUsuarioModal">
+                                <option>Funcionário</option>
+                                <option>Administrador</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer>
 
     </footer>
@@ -312,9 +346,9 @@
 
 
 
-    <script src="../scripts/script-users-page.js"></script>
-    <script src="../scripts/script-voltar.js"></script>
-    <script src="../scripts/script-navbar.js"></script>
+    <script src="../scripts/scriptUsersPage.js"></script>
+    <script src="../scripts/scriptVoltar.js"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

@@ -10,6 +10,8 @@
     <title>Tela de login</title>
 </head>
 
+<?php include_once("../infra/conn.php"); ?>
+
 <body>
 
 

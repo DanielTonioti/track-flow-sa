@@ -87,11 +87,46 @@
 
     </head>
 
-    <main>
+    <main class="container py-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+            <div>
+                <h1 class="text-white mb-1">Relatórios</h1>
+                <p class="text-white-50 mb-0">Cadastre e consulte relatórios do sistema.</p>
+            </div>
+            <a class="btn btn-light fw-bold" href="Relatories_New.php">Novo relatório</a>
+        </div>
 
+        <section class="cores-background rounded-4 p-4 mb-4" data-background="azure-claro-fundo">
+            <h2 class="h4 text-white mb-3">Relatórios recentes</h2>
+            <div class="table-responsive">
+                <table class="table table-dark table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Título</th>
+                            <th scope="col">Período</th>
+                            <th scope="col">Responsável</th>
+                            <th scope="col">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monitoramento da Rota Norte</td>
+                            <td>01/09/2026 - 07/09/2026</td>
+                            <td>Daniel</td>
+                            <td><a class="btn btn-sm btn-outline-light" href="Relatorie_Info.php">Visualizar</a></td>
+                        </tr>
+                        <tr>
+                            <td>Dados dos sensores</td>
+                            <td>08/09/2026 - 14/09/2026</td>
+                            <td>Equipe TrackFlow</td>
+                            <td><a class="btn btn-sm btn-outline-light" href="Relatorie_Info.php">Visualizar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
-
-        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+        <button id="voltarhub" class="btn btn-danger back-buttom">Voltar</button>
     </main>
     <script src="../scripts/script-voltar.js"></script>
     <script src="../scripts/script-navbar.js"></script>
