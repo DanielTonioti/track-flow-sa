@@ -82,11 +82,11 @@
 
     <main class="container py-4">
         <div class="ReportFormPanel mx-auto cores-background rounded-4 p-4 p-md-5" data-background="azure-claro-fundo">
-            <h1 class="text-white mb-4">Novo relatÃ³rio</h1>
+            <h1 class="text-white mb-4">Novo relatario</h1>
             <form>
                 <div class="mb-3">
                     <label class="form-label text-white" for="TituloRelatório">Título</label>
-                    <input class="form-control" type="text" id="TituloRelatório" placeholder="Título do relatÃ³rio">
+                    <input class="form-control" type="text" id="TituloRelatório" placeholder="Título do relatario">
                 </div>
                 <div class="row g-3">
                     <div class="col-12 col-md-6">
