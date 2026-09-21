@@ -91,9 +91,9 @@
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
             <div>
                 <h1 class="text-white mb-1">Relatórios</h1>
-                <p class="text-white-50 mb-0">Cadastre e consulte relatÃ³rios do sistema.</p>
+                <p class="text-white-50 mb-0">Cadastre e consulte relatórios do sistema.</p>
             </div>
-            <a class="btn btn-light fw-bold" href="Relatories_New.php">Novo relatÃ³rio</a>
+            <a class="btn btn-light fw-bold" href="Relatories_New.php">Novo relatório</a>
         </div>
 
         <section class="cores-background rounded-4 p-4 mb-4" data-background="azure-claro-fundo">
