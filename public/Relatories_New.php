@@ -100,15 +100,15 @@
                     <div class="col-12 col-md-6">
                         <label class="form-label text-white" for="PeriodoRelatório">Período</label>
                         <select class="form-select" id="PeriodoRelatório">
-                            <option selected>Ãšltimos 7 dias</option>
-                            <option>Ãšltimos 30 dias</option>
+                            <option selected>últimos 7 dias</option>
+                            <option>últimos 30 dias</option>
                             <option>Período personalizado</option>
                         </select>
                     </div>
                 </div>
                 <div class="d-flex justify-content-end gap-2 mt-4">
                     <a class="btn btn-outline-light" href="Relatories.php">Cancelar</a>
-                    <button class="btn btn-light fw-bold" type="button">Gerar relatÃ³rio</button>
+                    <button class="btn btn-light fw-bold" type="button">Gerar relatório</button>
                 </div>
             </form>
         </div>

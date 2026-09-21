@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="hiden" id="localisation">
-                            <label for="loc-trilho">LocalizaÃ§Ã£o</label>
+                            <label for="loc-trilho">Localização</label>
                             <br>
                             <input class="w-100" type="text" id="loc-trilho" placeholder="asfa" required>
                         </div>
