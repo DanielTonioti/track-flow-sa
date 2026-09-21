@@ -15,11 +15,11 @@
     <head>
         <header>
 
-             <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
+            <?php
+
+            include("components/navbar.php");
+
+            ?>
 
 
         </header>
@@ -31,40 +31,40 @@
             <h1 class="cores-color" data-color="white">Editar Usuario: Placeholder</h1>
         </div>
         <form action="">
-        <div class="blockcentro">
-            
-            <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
-            <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
-                aria-describedby="passwordHelpBlock" name="NomeUpdate">
-            <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
-            <input type="email" id="inputPassword5" required class="FormUsuario form-control"
-                aria-describedby="passwordHelpBlock" name="EmailUpdate">
-            <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
-            <input type="password" id="inputPassword5" required class="FormUsuario form-control"
-                aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular">
-            <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
-            <input type="password" id="inputPassword5" required class="FormUsuario form-control"
-                aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm">
-            </div>
-        <div class="DangerZone">
             <div class="blockcentro">
-                <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
-                    Acesso</label>
-                        <div>
+
+                <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
+                <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
+                    aria-describedby="passwordHelpBlock" name="NomeUpdate">
+                <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
+                <input type="email" id="inputPassword5" required class="FormUsuario form-control"
+                    aria-describedby="passwordHelpBlock" name="EmailUpdate">
+                <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
+                <input type="password" id="inputPassword5" required class="FormUsuario form-control"
+                    aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular">
+                <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
+                <input type="password" id="inputPassword5" required class="FormUsuario form-control"
+                    aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm">
+            </div>
+            <div class="DangerZone">
+                <div class="blockcentro">
+                    <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
+                        Acesso</label>
+                    <div>
                         <input type="radio" name="acesso" id="funcionario" value=true required> Funcionario
                         <input type="radio" name="acesso" id="administrador" value=false> Administrador
-                        </div>
-                <div class="ButtonExcluirUsuario">
-                    <button type="button" class="  btn btn-danger">Excluir Usuario</button>
+                    </div>
+                    <div class="ButtonExcluirUsuario">
+                        <button type="button" class="  btn btn-danger">Excluir Usuario</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="blockcentro">
-            <input type="submit" class="btn cores-color cores-background" data-color="white"
-                data-background="azure-claro-fundo" value="Atualizar usuario"></input>
-        </div>
+            <div class="blockcentro">
+                <input type="submit" class="btn cores-color cores-background" data-color="white"
+                    data-background="azure-claro-fundo" value="Atualizar usuario"></input>
+            </div>
         </form>
-        
+
 
 
 

@@ -11,13 +11,13 @@
 </head>
 
 <body class="cores-background" data-background="azure-escuro-fundo">
-        <header>
-             <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
-        </header>
+    <header>
+        <?php
+
+        include("components/navbar.php");
+
+        ?>
+    </header>
     <main>
         <div class="flex justify-content-center">
             <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
@@ -154,11 +154,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99538-8303
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -175,11 +174,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99025-1026
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -196,11 +194,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99125-0154
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -217,11 +214,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99195-1900
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                 </div>

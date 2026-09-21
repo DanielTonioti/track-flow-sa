@@ -15,7 +15,7 @@
     <head>
         <header>
 
-              <?php 
+        <?php 
          
          include("components/navbar.php");
          

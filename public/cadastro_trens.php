@@ -13,24 +13,24 @@
 
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
-         <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
+        <?php
+
+        include("components/navbar.php");
+
+        ?>
 
     </header>
 
     <main class="CadastroTremPage">
-        
-    <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Trem</h1>
+
+        <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Trem</h1>
 
         <form class="CadastroTremForm" id="CadastroTremForm" novalidate>
             <div class="CadastroTremFields">
                 <div class="CadastroTremField">
                     <label class="CadastroTremLabel" for="Numeracao">Numeração:</label>
-                    <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao"
-                        placeholder="Ex: N289T" required>
+                    <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao" placeholder="Ex: N289T"
+                        required>
                 </div>
 
                 <div class="CadastroTremField">
@@ -69,12 +69,13 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content CadastroTremModalBox cores-background cores-color" data-background="cinza-claro"
                 data-color="black">
-            <h2 id="TituloModalExcluirTrilho">Certeza que deseja<br> excluir Trem:<br>
-                <span>N289T</span>.</h2>
-            <div class="CadastroTremModalButtons">
-                <button type="button" id="ConfirmarExclusaoTrilho" data-bs-dismiss="modal">Confirmar</button>
-                <button type="button" data-bs-dismiss="modal">voltar</button>
-            </div>
+                <h2 id="TituloModalExcluirTrilho">Certeza que deseja<br> excluir Trem:<br>
+                    <span>N289T</span>.
+                </h2>
+                <div class="CadastroTremModalButtons">
+                    <button type="button" id="ConfirmarExclusaoTrilho" data-bs-dismiss="modal">Confirmar</button>
+                    <button type="button" data-bs-dismiss="modal">voltar</button>
+                </div>
             </div>
         </div>
     </div>
