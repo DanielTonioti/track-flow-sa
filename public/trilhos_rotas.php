@@ -105,7 +105,8 @@
                 </tr>
             </table>
    </div>
-   </div>
+   <a href="cadastro_trens.php"> Cadastrar trem </a>
+   <a href="cadastro_linhas.php"> Cadastrar linha </a>
    </main>
 
     <footer>

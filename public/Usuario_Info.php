@@ -112,7 +112,7 @@
                 <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                     Acesso</label>
                         <div>
-                        <input type="radio" name="acesso" id="funcionario" value=true required> FuncionÃ¡rio
+                        <input type="radio" name="acesso" id="funcionario" value=true required> Funcionario
                         <input type="radio" name="acesso" id="administrador" value=false> Administrador
                         </div>
                 <div class="ButtonExcluirUsuario">
@@ -122,7 +122,7 @@
         </div>
         <div class="blockcentro">
             <input type="submit" class="btn cores-color cores-background" data-color="white"
-                data-background="azure-claro-fundo" value="Atualizar usuÃ¡rio"></input>
+                data-background="azure-claro-fundo" value="Atualizar usuario"></input>
         </div>
         </form>
         
