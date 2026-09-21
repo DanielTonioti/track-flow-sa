@@ -90,6 +90,7 @@
         <div class="flex">
             <div>
             <div class="cores-background p-2 rounded-4 blockcentro table-trems" data-background="azure-claro-fundo">
+                <h3> Trens </h3>
                     <div>
                         <table class="table">
                             <tr>
@@ -106,6 +107,7 @@
             </div>
             <div>
             <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
+                <h3> Linhas </h3>
                     <table class="table table-trilhos">
                         <tr>
                             <th>ID</th>
