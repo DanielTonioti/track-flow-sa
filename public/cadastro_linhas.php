@@ -24,29 +24,29 @@
 
         <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Linha</h1>
 
-        <form class="CadastroTremForm" id="CadastroTremForm" novalidate>
+        <?php if ($message !== ''): ?>
+            <div class="alert alert-<?php echo htmlspecialchars($messageType, ENT_QUOTES, 'UTF-8'); ?> mt-3">
+                <?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>
+            </div>
+        <?php endif; ?>
+
+        <form class="CadastroTremForm" id="CadastroTremForm" method="POST" novalidate>
             <div class="CadastroTremFields">
                 <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="Numeracao">Numeração:</label>
+                    <label class="CadastroTremLabel" for="Numeracao">Nome:</label>
                     <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao" placeholder="Ex: N289T"
                         required>
                 </div>
 
                 <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="EstacaoOrigem">Estação de Origem:</label>
+                    <label class="CadastroTremLabel" for="EstacaoOrigem">Local:</label>
                     <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="EstacaoOrigem"
                         placeholder="Inicial" required>
-                </div>
-
-                <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="Tamanho">Tamanho:</label>
-                    <input class="CadastroTremInput" type="number" id="Tamanho" name="Tamanho"
-                        placeholder="Tamanho em metros" min="1" required>
                 </div>
             </div>
         </form>
 
-        <button class="CadastroTremButton" type="button">Cadastrar</button>
+        <button class="CadastroTremButton" type="submit" form="CadastroTremForm">Cadastrar</button>
 
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>

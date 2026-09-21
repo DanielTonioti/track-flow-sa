@@ -1,4 +1,20 @@
-﻿<html lang="en">
+﻿<?php
+session_start();
+include "../infra/conn.php";
+$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
+$user = null;
+if ($id > 0) {
+    $sql = "SELECT * FROM usuarios WHERE id = ? LIMIT 1";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $user = $res->fetch_assoc();
+        $stmt->close();
+    }
+}
+?>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -30,39 +46,40 @@
         <div class="blockcentro">
             <h1 class="cores-color" data-color="white">Editar Usuario: Placeholder</h1>
         </div>
-        <form action="">
-            <div class="blockcentro">
-
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
-                <input type="Text" id="inputPassword5" required class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="NomeUpdate">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
-                <input type="email" id="inputPassword5" required class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="EmailUpdate">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
-                <input type="password" id="inputPassword5" required class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
-                <input type="password" id="inputPassword5" required class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm">
+        <form action="" method="POST">
+        <div class="blockcentro">
+            <input type="hidden" name="id" value="<?php echo $user['id']?>">
+            
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
+            <input type="text" id="inputPassword5" class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="NomeUpdate" value="<?php echo $user['nome']?>">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
+            <input type="email" id="inputPassword5" class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="EmailUpdate" value="<?php echo $user['email']?>">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
+            <input type="password" id="inputPassword5" class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular" value="">
+            <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
+            <input type="password" id="inputPassword5" class="FormUsuario form-control"
+                aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm" value="">
             </div>
-            <div class="DangerZone">
-                <div class="blockcentro">
-                    <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
-                        Acesso</label>
-                    <div>
-                        <input type="radio" name="acesso" id="funcionario" value=true required> Funcionario
-                        <input type="radio" name="acesso" id="administrador" value=false> Administrador
-                    </div>
+        <div class="DangerZone">
+            <div class="blockcentro">
+                <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
+                    Acesso</label>
+                        <div>
+                        <input type="radio" name="acesso" id="funcionario" value=true <?php echo $user['acesso'] && $user['acesso']==1 ?> required> Funcionario
+                        <input type="radio" name="acesso" id="administrador" value=false <?php echo $user['acesso'] && $user['acesso']==0 ?>> Administrador
+                        </div>
                     <div class="ButtonExcluirUsuario">
-                        <button type="button" class="  btn btn-danger">Excluir Usuario</button>
+                        <button type="submit" name="action" value="delete" formnovalidate class="btn btn-danger">Excluir Usuario</button>
                     </div>
-                </div>
             </div>
-            <div class="blockcentro">
-                <input type="submit" class="btn cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo" value="Atualizar usuario"></input>
-            </div>
+        </div>
+        <div class="blockcentro">
+                <button type="submit" name="action" value="update" class="btn cores-color cores-background" data-color="white"
+                    data-background="azure-claro-fundo">Atualizar usuario</button>
+        </div>
         </form>
 
 

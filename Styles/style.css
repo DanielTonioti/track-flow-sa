@@ -437,7 +437,6 @@ justify-content: center;
     }
 
     .CadastroTremForm {
-        min-height: auto;
         padding: 1.2rem 1rem 1.5rem;
         border-radius: 1.75rem;
     }
