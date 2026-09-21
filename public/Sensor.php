@@ -14,11 +14,11 @@
     data-background="azure-escuro-fundo">
     <header>
 
-         <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
+        <?php
+
+        include("components/navbar.php");
+
+        ?>
 
 
     </header>
@@ -76,7 +76,7 @@
     <footer>
 
     </footer>
-    <script src="../scripts/scriptVoltar.js"></script> 
+    <script src="../scripts/scriptVoltar.js"></script>
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>
@@ -86,4 +86,3 @@
 </body>
 
 </html>
-

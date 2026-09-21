@@ -11,60 +11,61 @@
 </head>
 
 <body class="cores-background" data-background="azure-escuro-fundo">
-        <header>
-             <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
-        </header>
+    <header>
+        <?php
+
+        include("components/navbar.php");
+
+        ?>
+    </header>
     <main>
-    <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
-    <div class="blockcentro titulo-Sensor">
-        <div class="cores-background p-2 rounded-4 flex" data-background="azure-claro-fundo">
-            <h2 class="titulo-Sensor"> Gerenciar trems e rotas </h2>
+        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+        <div class="blockcentro titulo-Sensor">
+            <div class="cores-background p-2 rounded-4 flex" data-background="azure-claro-fundo">
+                <h2 class="titulo-Sensor"> Gerenciar trems e sensores </h2>
+            </div>
         </div>
-    </div> 
-    <div class="blockcentro">
-        <div class="flex">
-            <div>
-            <div class="cores-background p-2 rounded-4 blockcentro table-trems" data-background="azure-claro-fundo">
-                <h3> Trens </h3>
-                    <div>
-                        <table class="table">
+        <div class="blockcentro">
+            <div class="flex">
+                <div>
+                    <div class="cores-background p-2 rounded-4 blockcentro table-trems"
+                        data-background="azure-claro-fundo">
+                        <h3> Trens </h3>
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Número</th>
+                                    <th>Estação</th>
+                                    <th>Tamanho</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </table>
+                        </div>
+                        <a href="cadastro_trens.php"> Cadastrar trem </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
+                        <h3> Linhas </h3>
+                        <table class="table table-trilhos">
                             <tr>
                                 <th>ID</th>
-                                <th>Número</th>
-                                <th>Estação</th>
+                                <th>Nome</th>
                                 <th>Tamanho</th>
-                                <th>Ações</th>
                             </tr>
                         </table>
+                        <a href="cadastro_linhas.php"> Cadastrar linha </a>
                     </div>
-                    <a href="cadastro_trens.php"> Cadastrar trem </a>
-            </div>
-            </div>
-            <div>
-            <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
-                <h3> Linhas </h3>
-                    <table class="table table-trilhos">
-                        <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Tamanho</th>
-                        </tr>
-                    </table>
-            <a href="cadastro_linhas.php"> Cadastrar linha </a>
-            </div>
+                </div>
             </div>
         </div>
-    </div> 
 
-   
-   
-   
-   
-   </main>
+
+
+
+
+    </main>
 
     <footer>
 

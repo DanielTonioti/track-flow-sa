@@ -13,11 +13,11 @@
 <body class="cores-background " data-background="azure-escuro-fundo" class=" cores-background "
     data-background="azure-escuro-fundo">
     <header>
-         <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
+        <?php
+
+        include("components/navbar.php");
+
+        ?>
     </header>
 
     <main>
@@ -40,14 +40,15 @@
                         <input type="password" name="passwordconfirm">
                         <label for="acesso"> Nível de acesso: </label>
                         <div>
-                        <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
-                        <input type="radio" name="acesso" id="administrador" value=false> Administrador
+                            <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
+                            <input type="radio" name="acesso" id="administrador" value=false> Administrador
                         </div>
                     </div>
                 </div>
                 <br>
-                <input type="submit" value="Cadastrar" class="border-none-buttom cores-background titulo-Sensor p-2 rounded-3"
-                data-background="azure-claro-fundo"></button>
+                <input type="submit" value="Cadastrar"
+                    class="border-none-buttom cores-background titulo-Sensor p-2 rounded-3"
+                    data-background="azure-claro-fundo"></button>
             </div>
         </form>
 

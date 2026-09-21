@@ -1,19 +1,19 @@
-const localisation = document.getElementById("localisation"); 
+const localisation = document.getElementById("localisation");
 const tout = document.getElementById("tout");
 const trem = document.getElementById("trem");
 const trilho = document.getElementById("trilho");
 const valortipo = document.getElementById("valortipo");
 
-function mostrartipo(){
+function mostrartipo() {
     const valortiposss = valortipo.value;
 
-    if (trem.checked){
+    if (trem.checked) {
         tout.classList.remove("hiden");
-    }else{
+    } else {
         tout.classList.add("hiden");
-    }if (trilho.checked){
+    } if (trilho.checked) {
         localisation.classList.remove("hiden");
-    }else{
+    } else {
         localisation.classList.add("hiden");
     }
 }
