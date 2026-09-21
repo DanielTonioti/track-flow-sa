@@ -294,7 +294,7 @@
             <button
                 class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
                 data-color="white" data-background="azure-claro-fundo" id="admin-button">
-                <p class="my-auto fw-bold mx-3">Adicionar FuncionÃ¡rio</p>
+                <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
             </button>
         </div>
         </div>
@@ -305,7 +305,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuÃ¡rio</h2>
+                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuario</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
@@ -323,9 +323,9 @@
                             <input class="form-control" id="SenhaUsuarioModal" type="password">
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="AcessoUsuarioModal">NÃ­vel de acesso</label>
+                            <label class="form-label" for="AcessoUsuarioModal">Nivel de acesso</label>
                             <select class="form-select" id="AcessoUsuarioModal">
-                                <option>FuncionÃ¡rio</option>
+                                <option>Funcionário</option>
                                 <option>Administrador</option>
                             </select>
                         </div>
