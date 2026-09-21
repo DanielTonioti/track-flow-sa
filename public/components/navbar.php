@@ -34,7 +34,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
                                     </li>
-
+                                    <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="trilhos_rotas.php">Trilhos e Trems</a>
+                                    </li>
                                 </ul>
 
                             </div>
