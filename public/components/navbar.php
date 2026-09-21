@@ -10,7 +10,30 @@
                 data-bs-target="#offcanvasDarkNavbar">
                 <span class=" navbar-toggler-icon"></span>
             </button>
+            <div class="hub-end offcanvas offcanvas-start cores-background" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel" data-background="azure-claro-fundo">
+                <div class="offcanvas-header">
+                    <h3 class="offcanvas-title cores-color" data-color="white" id="offcanvasDarkNavbarLabel">
+                        TrackFlow</h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="admin.php">Funcionarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="relatories.php">Relatórios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
+                        </li>
 
+                    </ul>
+
+                </div>
+            </div>
             <div class="d-flex flex-column align-items-end me-2">
                 <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">Visitante</span>
             </div>
