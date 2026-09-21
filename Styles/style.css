@@ -763,6 +763,12 @@ hr {
     margin-right: 2rem;
 }
 
+.centro {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
 /* Cores Color */
 [data-color="black"] {
     --cor-color: var(--cor-black);
