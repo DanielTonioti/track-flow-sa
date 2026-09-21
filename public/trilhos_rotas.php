@@ -86,10 +86,12 @@
             <h2 class="titulo-Sensor"> Gerenciar trems e sensores </h2>
         </div>
     </div> 
-        <div class="flex blockcentro">
-            <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
-                <div>
-                    <div class="table-trems">
+    <div class="blockcentro">
+        <div class="flex">
+            <div>
+            <div class="cores-background p-2 rounded-4 blockcentro table-trems" data-background="azure-claro-fundo">
+                <h3> Trens </h3>
+                    <div>
                         <table class="table">
                             <tr>
                                 <th>ID</th>
@@ -100,11 +102,12 @@
                             </tr>
                         </table>
                     </div>
-                </div>
+                    <a href="cadastro_trens.php"> Cadastrar trem </a>
             </div>
-
+            </div>
+            <div>
             <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
-                <div>
+                <h3> Linhas </h3>
                     <table class="table table-trilhos">
                         <tr>
                             <th>ID</th>
@@ -112,13 +115,15 @@
                             <th>Tamanho</th>
                         </tr>
                     </table>
-                </div>
+            <a href="cadastro_linhas.php"> Cadastrar linha </a>
             </div>
-        </div> 
+            </div>
+        </div>
+    </div> 
 
    
-   <a href="cadastro_trens.php"> Cadastrar trem </a>
-   <a href="cadastro_linhas.php"> Cadastrar linha </a>
+   
+   
    
    </main>
 
