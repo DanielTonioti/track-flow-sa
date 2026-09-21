@@ -112,7 +112,7 @@
                         <div class="hiden" id="localisation">
                             <label for="loc-trilho">Localização</label>
                             <br>
-                            <input class="w-100" type="text" id="loc-trilho" placeholder="asfa" required>
+                            <input class="w-100" type="text" id="loc-trilho" placeholder="Joinville" required>
                         </div>
 
                     </div>
@@ -134,7 +134,7 @@
     <footer>
 
     </footer>
-
+    <script src="../scripts/scriptVoltar.js"></script> 
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>
