@@ -1,3 +1,3 @@
 document.getElementById("voltarhub").onclick = () => {
-    window.location.href = "hub.html"
+    window.location.href = "hub.php"
 }
