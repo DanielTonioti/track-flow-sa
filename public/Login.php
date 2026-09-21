@@ -1,23 +1,53 @@
 ﻿<?php
 session_start();
 include "../infra/conn.php";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $usuario = $_POST['usuario'];
-    $senha = $_POST['senha'];
 
-    $sql = "SELECT * FROM usuarios WHERE usuario = ? AND senha = ?";
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param("ss", $usuario, $senha);
-        $stmt->execute();
-        $resultado = $stmt->get_result();
-        if ($resultado && $resultado->num_rows > 0) {
-            $_SESSION['usuario'] = $usuario;
-            header("Location: hub.php");
-            exit();
-        } else {
-            $erro = "Usuário ou senha inválidos!";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $usuario = trim($_POST['usuario'] ?? '');
+    $senha = trim($_POST['senha'] ?? '');
+
+    if ($usuario !== '' && $senha !== '') {
+        $sql = "SELECT id, nome, email FROM funcionarios WHERE email = ? AND senha = ? LIMIT 1";
+        $stmt = $db->prepare($sql);
+
+        if ($stmt) {
+            $stmt->bind_param("ss", $usuario, $senha);
+            $stmt->execute();
+            $resultado = $stmt->get_result();
+
+            if ($resultado && $resultado->num_rows > 0) {
+                $dados = $resultado->fetch_assoc();
+                $_SESSION['usuario'] = $dados['nome'];
+                $_SESSION['email'] = $dados['email'];
+                header("Location: hub.php");
+                exit();
+            }
+
+            $stmt->close();
+
+            $sqlAdmin = "SELECT id, nome, email FROM administrador WHERE email = ? AND senha = ? LIMIT 1";
+            $stmtAdmin = $db->prepare($sqlAdmin);
+
+            if ($stmtAdmin) {
+                $stmtAdmin->bind_param("ss", $usuario, $senha);
+                $stmtAdmin->execute();
+                $resultadoAdmin = $stmtAdmin->get_result();
+
+                if ($resultadoAdmin && $resultadoAdmin->num_rows > 0) {
+                    $dadosAdmin = $resultadoAdmin->fetch_assoc();
+                    $_SESSION['usuario'] = $dadosAdmin['nome'];
+                    $_SESSION['email'] = $dadosAdmin['email'];
+                    header("Location: hub.php");
+                    exit();
+                }
+
+                $stmtAdmin->close();
+            }
         }
-        $stmt->close();
+
+        $erro = "Usuário ou senha inválidos!";
+    } else {
+        $erro = "Informe email e senha.";
     }
 }
 ?>
