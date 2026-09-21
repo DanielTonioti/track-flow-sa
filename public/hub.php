@@ -553,7 +553,7 @@
                 <p class="mt-2">Excluir sensor</p>
             </button>
         </div>
-        <button id="VoltarLogin" class="btn btn-danger back-buttom"> Voltar </button>
+        
     </main>
     <footer>
 
