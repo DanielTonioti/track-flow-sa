@@ -80,33 +80,46 @@
             </nav>
         </header>
     <main>
-        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
-   <div class="blockcentro titulo-Sensor">
-    <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
-        <h2 class="titulo-Sensor"> Gerenciar trems e sensores </h2>
-    <div class="flex">
-        <div class="table-trems">
-            <table class="table">
-                <tr>
-                    <th>ID</th>
-                    <th>Número</th>
-                    <th>Estação</th>
-                    <th>Tamanho</th>
-                    <th>Ações</th>
-                </tr>
-            </table>
+    <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+    <div class="blockcentro titulo-Sensor">
+        <div class="cores-background p-2 rounded-4 flex" data-background="azure-claro-fundo">
+            <h2 class="titulo-Sensor"> Gerenciar trems e sensores </h2>
         </div>
-   <div>
-            <table class="table table-trilhos">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Tamanho</th>
-                </tr>
-            </table>
-   </div>
+    </div> 
+        <div class="flex blockcentro">
+            <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
+                <div>
+                    <div class="table-trems">
+                        <table class="table">
+                            <tr>
+                                <th>ID</th>
+                                <th>Número</th>
+                                <th>Estação</th>
+                                <th>Tamanho</th>
+                                <th>Ações</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cores-background p-2 rounded-4 blockcentro" data-background="azure-claro-fundo">
+                <div>
+                    <table class="table table-trilhos">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Tamanho</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div> 
+
+   
    <a href="cadastro_trens.php"> Cadastrar trem </a>
    <a href="cadastro_linhas.php"> Cadastrar linha </a>
+   
    </main>
 
     <footer>
