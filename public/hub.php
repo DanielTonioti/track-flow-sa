@@ -513,7 +513,7 @@
         const dadosGraficos = [
             {
                 id: 'chart-velocidade',
-                type: 'ColumnChart',
+                type: 'LineChart',
                 data: [
                     ['Sensor', 'Velocidade média'],
                     ['S.TRM.001', 12],
@@ -522,14 +522,15 @@
                     ['S.TRM.004', 18]
                 ],
                 options: {
-                    title: 'Velocidade média por sensor',
+                    title: 'Temperatura média semanal',
                     backgroundColor: 'transparent',
                     legend: { position: 'none' },
                     hAxis: { textStyle: { color: '#fff' } },
                     vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
                     titleTextStyle: { color: '#fff', fontSize: 18 },
-                    colors: ['#c1ff72'],
+                    colors: ['#67a4ff'],
                     chartArea: { width: '80%', height: '70%' },
+                    pointSize: 5
                 }
             },
             {
