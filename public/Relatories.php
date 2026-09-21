@@ -109,18 +109,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Monitoramento da Rota Norte</td>
-                            <td>01/09/2026 - 07/09/2026</td>
-                            <td>Daniel</td>
-                            <td><a class="btn btn-sm btn-outline-light" href="Relatorie_Info.php">Visualizar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Dados dos sensores</td>
-                            <td>08/09/2026 - 14/09/2026</td>
-                            <td>Equipe TrackFlow</td>
-                            <td><a class="btn btn-sm btn-outline-light" href="Relatorie_Info.php">Visualizar</a></td>
-                        </tr>
+                        <?php foreach ($relatorios as $relatorio): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($relatorio['titulo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><?php echo htmlspecialchars($relatorio['periodo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><?php echo htmlspecialchars($relatorio['responsavel'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><a class="btn btn-sm btn-outline-light" href="Relatorie_Info.php">Visualizar</a></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
