@@ -1,7 +1,7 @@
 ﻿<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
     <div class="container-fluid">
 
-        <a class="navbar-brand  d-flex align-items-center" href="#">
+        <a class="navbar-brand  d-flex align-items-center" href="hub.php">
             <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon ">
             <h2 class="fw-bold cores-color mb-0" data-color="white"> Trackflow </h2>
         </a>
