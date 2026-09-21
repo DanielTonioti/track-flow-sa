@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/icone.ico">
+    <link rel="shortcut icon" href="../assets/logo/icone.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../Styles/style.css">
@@ -11,74 +11,13 @@
 </head>
 
 <body class="cores-background" data-background="azure-escuro-fundo">
-        <header>
-            <nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
-                <!-- http://127.0.0.1:5500/public/hub.html -->
-                <div class="container-fluid">
+    <header>
+        <?php
 
-                    <a class="navbar-brand d-flex align-items-center" href="#">
-                        <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon ">
-                        <h2 class="fw-bold cores-color mb-0" data-color="white"> Trackflow </h2>
-                    </a>
-                    <div class="d-flex">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasDarkNavbar">
-                            <span class=" navbar-toggler-icon"></span>
-                        </button>
-                        <div class="hub-end offcanvas offcanvas-start cores-background" tabindex="-1"
-                            id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel"
-                            data-background="azure-claro-fundo">
-                            <div class="offcanvas-header">
-                                <h3 class="offcanvas-title cores-color" data-color="white"
-                                    id="offcanvasDarkNavbarLabel">
-                                    TrackFlow</h3>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body">
-                                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page"
-                                            href="Admin.php">Funcionários</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page"
-                                            href="Relatories.php">Relatórios</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
-                                    </li>
+        include("components/navbar.php");
 
-                                </ul>
-
-                            </div>
-                        </div>
-
-
-                        <div class="perfil">
-                            <div class="imgCx">
-                                <img src="../assets/icons/User.png" alt="...">
-                            </div>
-                        </div>
-                        <div id="menu_user" class="cores-color menu" data-color="white">
-                            <div>
-                                <p>
-                                    <a href="#">
-                                        Perfil
-                                    </a>
-                                </p>
-                                <p class="Menu_Deslogar">
-                                    <a href="Login.php">
-                                        Deslogar
-                                    </a>
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        ?>
+    </header>
     <main>
         <div class="flex justify-content-center">
             <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
@@ -215,11 +154,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99538-8303
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -236,11 +174,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99025-1026
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -257,11 +194,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99125-0154
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                     <div>
@@ -278,11 +214,10 @@
                                 data-color="white" data-background="azure-claro-fundo">
                                 (47)99195-1900
                             </p>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
+                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                Editar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -294,7 +229,7 @@
             <button
                 class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
                 data-color="white" data-background="azure-claro-fundo" id="admin-button">
-                <p class="my-auto fw-bold mx-3">Adicionar FuncionÃ¡rio</p>
+                <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
             </button>
         </div>
         </div>
@@ -305,7 +240,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuÃ¡rio</h2>
+                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuario</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                 </div>
                 <div class="modal-body">
@@ -323,9 +258,9 @@
                             <input class="form-control" id="SenhaUsuarioModal" type="password">
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="AcessoUsuarioModal">NÃ­vel de acesso</label>
+                            <label class="form-label" for="AcessoUsuarioModal">Nivel de acesso</label>
                             <select class="form-select" id="AcessoUsuarioModal">
-                                <option>FuncionÃ¡rio</option>
+                                <option>Funcionário</option>
                                 <option>Administrador</option>
                             </select>
                         </div>
