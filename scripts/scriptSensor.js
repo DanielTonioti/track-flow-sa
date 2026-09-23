@@ -1,26 +1,26 @@
-const localisation = document.getElementById("localisation");
-const tout = document.getElementById("tout");
+const localizacaoBox = document.getElementById("localizacao-box");
+const tremVinculadoBox = document.getElementById("trem-vinculado-box");
 const trem = document.getElementById("trem");
 const trilho = document.getElementById("trilho");
-const valortipo = document.getElementById("valortipo");
+const valorTipo = document.getElementById("valor-tipo");
 
-function mostrartipo() {
-    const valortiposss = valortipo.value;
-
+function mostrarTipo() {
     if (trem.checked) {
-        tout.classList.remove("hiden");
+        tremVinculadoBox.classList.remove("hiden");
     } else {
-        tout.classList.add("hiden");
-    } if (trilho.checked) {
-        localisation.classList.remove("hiden");
+        tremVinculadoBox.classList.add("hiden");
+    }
+
+    if (trilho.checked) {
+        localizacaoBox.classList.remove("hiden");
     } else {
-        localisation.classList.add("hiden");
+        localizacaoBox.classList.add("hiden");
     }
 }
 
-valortipo.addEventListener("change", mostrartipo);
-trem.addEventListener("change", mostrartipo);
-trilho.addEventListener("change", mostrartipo);
+valorTipo.addEventListener("change", mostrarTipo);
+trem.addEventListener("change", mostrarTipo);
+trilho.addEventListener("change", mostrarTipo);
 
 
 
