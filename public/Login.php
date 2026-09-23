@@ -142,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         </button>
 
                         <p class="userselect toggle fs-5 text-center fw-bold text-light mt-4 cursor-pointer">
-                            <a class="text-light" href="#">
+                            <a class="text-light" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                                 Esqueceu a senha?
                             </a>
                         </p>
