@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmtAdmin->close();
             }
         }
-
+    }
         $erro = "Usuário ou senha inválidos!";
     } else {
         $erro = "Informe email e senha.";
