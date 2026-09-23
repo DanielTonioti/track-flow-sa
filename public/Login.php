@@ -1,7 +1,6 @@
 ﻿<?php
 session_start();
 include "../infra/conn.php";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
 
@@ -19,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $stmt->close();
     }
-}
+
 ?>
 
 <html lang="en">

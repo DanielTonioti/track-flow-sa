@@ -1,10 +1,9 @@
 ﻿<?php
 session_start();
 include "../infra/conn.php";
-$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
-$user = null;
+$id = isset($_GET['id']) ?? $_GET['id'];
 if ($id > 0) {
-    $sql = "SELECT * FROM usuarios WHERE id = ? LIMIT 1";
+    $sql = "SELECT * FROM usuarios WHERE id = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param('i', $id);
         $stmt->execute();
@@ -68,8 +67,8 @@ if ($id > 0) {
                     <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                         Acesso</label>
                     <div>
-                        <input type="radio" name="acesso" id="funcionario" value="1" <?php echo (isset($user['acesso']) && $user['acesso'] == 1) ? 'checked' : ''; ?> required> Funcionario
-                        <input type="radio" name="acesso" id="administrador" value="0" <?php echo (isset($user['acesso']) && $user['acesso'] == 0) ? 'checked' : ''; ?>> Administrador
+                        <input type="radio" name="acesso" id="funcionario" value="1" <?php echo $user['acesso']?> required> Funcionario
+                        <input type="radio" name="acesso" id="administrador" value="0" <?php echo $user['acesso'] ?>> Administrador
                     </div>
                     <div class="ButtonExcluirUsuario">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
