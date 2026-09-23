@@ -44,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-        $erro = "Usuário ou senha inválidos!";
-    } else {
-        $erro = "Informe email e senha.";
-    }
+    $erro = "Usuário ou senha inválidos!";
+} else {
+    $erro = "Informe email e senha.";
+}
 
 ?>
 
@@ -105,7 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php
                         if (isset($erro)) {
                             echo $erro;
-                        };
+                        }
+                        ;
                         ?>
                         <button id="botao-envio" type="submit"
                             class="userselect cores-background w-100 py-1 rounded-pill fs-4 text-light fw-bold login-button border-0 shadow"
