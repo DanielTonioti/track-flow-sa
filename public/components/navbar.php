@@ -30,7 +30,7 @@
                             <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="hub.php">Trilhos e trens</a>
+                            <a class="nav-link active" aria-current="page" href="trens_trilhos.php">Trilhos e trens</a>
                         </li>
                     </ul>
 
