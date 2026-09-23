@@ -14,9 +14,22 @@
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php
-
+        include_once("../infra/conn.php");
         include("components/navbar.php");
+        if (isset($_POST['cadastrar-trem']))
+        {
+        $nome = $_POST['nome'];
+        $modelo = $_POST['modelo'];
 
+        $sql = "INSERT INTO trem (nome, modelo) VALUES (?, ?)";
+        $stmt = $db->prepare($sql);
+
+        $stmt->bind_param("ss", $nome, $modelo);
+        $stmt->execute();
+
+        header("Location: Login.php");
+        exit;
+        }
         ?>
 
     </header>
@@ -29,20 +42,21 @@
             <div class="CadastroTremForm">
                 <div class="CadastroTremFields">
                     <div class="CadastroTremField">
-                        <label class="CadastroTremLabel" for="Numeracao">Numeração: </label>
-                        <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao"
+                        <label class="CadastroTremLabel" for="Numeracao">Nome: </label>
+                        <input class="CadastroTremInput" type="text" id="Numeracao" name="nome"
                         placeholder="Ex: N289T" required>
                     </div>
 
                     <div class="CadastroTremField">
                         <label class="CadastroTremLabel" for="EstacaoOrigem">Modelo: </label>
-                        <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="EstacaoOrigem"
+                        <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="modelo"
                         placeholder="Inicial" required>
                     </div>
                 </div>
-                <input class="CadastroTremButton" type="submit" name="cadastrar-trem">
             </div>
-            
+            <div>
+            <input class="CadastroTremButton" type="submit" name="cadastrar-trem" value="Cadastrar">
+            </div>
         </form>
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>
