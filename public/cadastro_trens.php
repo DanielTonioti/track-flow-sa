@@ -27,21 +27,22 @@
 
         <form method="POST" id="CadastroTremForm" novalidate>
             <div class="CadastroTremForm">
-            <div class="CadastroTremFields">
-                <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="Numeracao">Numeração: </label>
-                    <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao"
+                <div class="CadastroTremFields">
+                    <div class="CadastroTremField">
+                        <label class="CadastroTremLabel" for="Numeracao">Numeração: </label>
+                        <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao"
                         placeholder="Ex: N289T" required>
-                </div>
+                    </div>
 
-                <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="EstacaoOrigem">Modelo: </label>
-                    <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="EstacaoOrigem"
+                    <div class="CadastroTremField">
+                        <label class="CadastroTremLabel" for="EstacaoOrigem">Modelo: </label>
+                        <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="EstacaoOrigem"
                         placeholder="Inicial" required>
+                    </div>
                 </div>
+                <input class="CadastroTremButton" type="submit" name="cadastrar-trem">
             </div>
-            </div>
-            <input class="CadastroTremButton" type="submit" name="cadastrar-trem">
+            
         </form>
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>
