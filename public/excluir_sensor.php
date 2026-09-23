@@ -17,7 +17,6 @@ if (!$id || $id <= 0) {
 }
 
 try {
-    // Verifica se o sensor possui dados registrados.
     $sql = "SELECT id FROM dados_sensor WHERE sensor_id = ? LIMIT 1";
     $stmt = $db->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -31,7 +30,6 @@ try {
         $_SESSION['mensagem'] =
             "Não é possível excluir um sensor com dados registrados.";
     } else {
-        // Exclui apenas o sensor informado.
         $sql = "DELETE FROM sensor WHERE id = ?";
         $stmt = $db->prepare($sql);
         $stmt->bind_param("i", $id);
