@@ -15,19 +15,19 @@
     <head>
         <header>
 
-        <?php 
-         
-         include("components/navbar.php");
-         
-         ?>
-            
-               
+                <?php
+
+                include("components/navbar.php");
+
+                ?>
+
+
         </header>
 
     </head>
     <main>
 
-    
+
 
         <hr class="opacity-100 cores-background hub-main-hr d-flex m-0" data-background="cinza-claro">
         <section class="container-fluid px-3 py-4">
@@ -77,8 +77,8 @@
                     id="sensor001">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRM.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin001">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin001">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor001">
@@ -121,8 +121,8 @@
                     id="sensor002">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRM.002
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin002">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin002">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor002">
@@ -165,8 +165,8 @@
                     id="sensor003">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRM.003
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin003">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin003">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor003">
@@ -209,8 +209,8 @@
                     id="sensor004">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRM.004
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin004">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin004">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor004">
@@ -253,8 +253,8 @@
                     id="sensor005">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRM.005
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin005">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin005">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor005">
@@ -299,8 +299,8 @@
                     id="sensor006">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin006">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin006">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor006">
@@ -335,8 +335,8 @@
                     id="sensor007">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin007">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin007">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor007">
@@ -371,8 +371,8 @@
                     id="sensor008">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin008">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin008">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor008">
@@ -407,8 +407,8 @@
                     id="sensor009">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin009">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin009">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor009">
@@ -443,8 +443,8 @@
                     id="sensor010">
                     <div class="align-items-center d-block cores-color fw-bold" data-color="white">
                         S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page" class="Home-page-arrow"
-                            id="seta-admin010">
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
+                            class="Home-page-arrow" id="seta-admin010">
                     </div>
                 </button>
                 <div class="collapse" id="lista-sensor010">
@@ -490,7 +490,7 @@
                 <p class="mt-2">Excluir sensor</p>
             </button>
         </div>
-        
+
     </main>
     <footer>
 

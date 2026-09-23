@@ -25,7 +25,8 @@
 
         <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Trem</h1>
 
-        <form class="CadastroTremForm" id="CadastroTremForm" novalidate>
+        <form method="POST" id="CadastroTremForm" novalidate>
+            <div class="CadastroTremForm">
             <div class="CadastroTremFields">
                 <div class="CadastroTremField">
                     <label class="CadastroTremLabel" for="Numeracao">Numeração: </label>
@@ -39,10 +40,9 @@
                         placeholder="Inicial" required>
                 </div>
             </div>
+            </div>
+            <input class="CadastroTremButton" type="submit" name="cadastrar-trem">
         </form>
-
-        <button class="CadastroTremButton" type="button">Cadastrar</button>
-
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>
             <div class="CadastroTremListItem" data-trilho="N289T">
