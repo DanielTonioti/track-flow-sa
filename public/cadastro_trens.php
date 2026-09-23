@@ -14,9 +14,22 @@
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php
-
+        include_once("../infra/conn.php");
         include("components/navbar.php");
+        if (isset($_POST['cadastrar-trem']))
+        {
+        $nome = $_POST['nome'];
+        $modelo = $_POST['modelo'];
 
+        $sql = "INSERT INTO trem (nome, modelo) VALUES (?, ?)";
+        $stmt = $db->prepare($sql);
+
+        $stmt->bind_param("ss", $nome, $modelo);
+        $stmt->execute();
+
+        header("Location: Login.php");
+        exit;
+        }
         ?>
 
     </header>
@@ -25,24 +38,26 @@
 
         <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Trem</h1>
 
-        <form class="CadastroTremForm" id="CadastroTremForm" novalidate>
-            <div class="CadastroTremFields">
-                <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="Numeracao">Numeração: </label>
-                    <input class="CadastroTremInput" type="text" id="Numeracao" name="Numeracao"
+        <form method="POST" id="CadastroTremForm" novalidate>
+            <div class="CadastroTremForm">
+                <div class="CadastroTremFields">
+                    <div class="CadastroTremField">
+                        <label class="CadastroTremLabel" for="Numeracao">Nome: </label>
+                        <input class="CadastroTremInput" type="text" id="Numeracao" name="nome"
                         placeholder="Ex: N289T" required>
-                </div>
+                    </div>
 
-                <div class="CadastroTremField">
-                    <label class="CadastroTremLabel" for="EstacaoOrigem">Modelo: </label>
-                    <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="EstacaoOrigem"
+                    <div class="CadastroTremField">
+                        <label class="CadastroTremLabel" for="EstacaoOrigem">Modelo: </label>
+                        <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="modelo"
                         placeholder="Inicial" required>
+                    </div>
                 </div>
             </div>
+            <div>
+            <input class="CadastroTremButton" type="submit" name="cadastrar-trem" value="Cadastrar">
+            </div>
         </form>
-
-        <button class="CadastroTremButton" type="button">Cadastrar</button>
-
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>
             <div class="CadastroTremListItem" data-trilho="N289T">

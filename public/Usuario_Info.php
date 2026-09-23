@@ -1,10 +1,9 @@
 ﻿<?php
 session_start();
 include "../infra/conn.php";
-$id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
-$user = null;
+$id = isset($_GET['id']) ?? $_GET['id'];
 if ($id > 0) {
-    $sql = "SELECT * FROM usuarios WHERE id = ? LIMIT 1";
+    $sql = "SELECT * FROM usuarios WHERE id = ?";
     if ($stmt = $conn->prepare($sql)) {
         $stmt->bind_param('i', $id);
         $stmt->execute();
@@ -68,8 +67,10 @@ if ($id > 0) {
                     <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                         Acesso</label>
                     <div>
-                        <input type="radio" name="acesso" id="funcionario" value="1" <?php echo (isset($user['acesso']) && $user['acesso'] == 1) ? 'checked' : ''; ?> required> Funcionario
-                        <input type="radio" name="acesso" id="administrador" value="0" <?php echo (isset($user['acesso']) && $user['acesso'] == 0) ? 'checked' : ''; ?>> Administrador
+                        <input type="radio" name="acesso" id="funcionario" value="1" <?php echo $user['acesso'] ?>
+                            required> Funcionario
+                        <input type="radio" name="acesso" id="administrador" value="0" <?php echo $user['acesso'] ?>>
+                        Administrador
                     </div>
                     <div class="ButtonExcluirUsuario">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -84,15 +85,15 @@ if ($id > 0) {
             </div>
         </form>
         <form id="deleteForm" action="excluir_usuario.php" method="POST" style="display:none;">
-            <input type="hidden" name="id" value="<?php echo $user['id']?>">
+            <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
         </form>
 
         <!-- initial access value for modal logic -->
-        <input type="hidden" id="initialAcesso" value="<?php echo $user['acesso']?>">
+        <input type="hidden" id="initialAcesso" value="<?php echo $user['acesso'] ?>">
 
         <!-- hidden access-change form -->
         <form id="accessForm" action="atualizar_usuario.php" method="POST" style="display:none;">
-            <input type="hidden" name="id" value="<?php echo $user['id']?>">
+            <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
             <input type="hidden" name="action" value="change_access">
             <input type="hidden" name="acesso" value="">
         </form>
@@ -106,7 +107,7 @@ if ($id > 0) {
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja excluir o usuário:
-                        <strong><?php echo $user['nome']?></strong>?
+                        <strong><?php echo $user['nome'] ?></strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -124,7 +125,7 @@ if ($id > 0) {
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja atualizar os dados do usuário:
-                        <strong><?php echo $user['nome']?></strong>?
+                        <strong><?php echo $user['nome'] ?></strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

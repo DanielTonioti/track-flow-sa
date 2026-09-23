@@ -1,4 +1,4 @@
-﻿<html lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../Styles/style.css">
-    <title>Administradores</title>
+    <title>Excluição de Sensores</title>
 </head>
 
 <body class="cores-background" data-background="azure-escuro-fundo">
@@ -23,16 +23,15 @@
             <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
                 data-background="azure-claro-fundo">
                 <p class="admin-titulo-texto cores-color fw-bold mx-3" data-color="white">
-                    Funcionários
+                    Sensores
                 </p>
             </div>
         </div>
-        <!-- Ãrea dos funcionarios -->
         <div>
             <div class="text-center text-white p-3">
                 <button id="botao-admin" class="btn text-white fw-bold" type="button">
                     <div class="d-flex align-items-center">
-                        Administradores
+                        Sensores trilhos
                         <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
                             class="users-page-arrow" id="seta-admin">
                     </div>
@@ -43,25 +42,20 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    Marlon
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    Marlon@gmail.com
+
                                 </p>
                                 <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    (47)99121-0088
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                    Deletar
                                 </button>
                             </div>
                         </div>
@@ -69,25 +63,20 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    Maria
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    Maria@protonmail.com
+
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    (47)99267-6572
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                    Deletar
                                 </button>
                             </div>
                         </div>
@@ -95,25 +84,20 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    Vanessa
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    Vanessa@gmail.com
+
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    (47)99123-4567
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                    Deletar
                                 </button>
                             </div>
                         </div>
@@ -121,206 +105,129 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    Maicon
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    Maicon@hotmail.com
+
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    (47)99830-3502
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                    Deletar
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <!-- <span>Marlon</span>
-                        <span>Maria</span>
-                        <span>Vanessa</span>
-                        <span>Maicon</span> -->
                 </div>
             </div>
         </div>
         <div class="text-center cores-color p-3" data-color="white">
             <button id="botao-func" class="btn text-white fw-bold" type="button">
-                Funcionários
+                Sensores trens
                 <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin" class="users-page-arrow"
                     id="seta-func">
             </button>
-            <!-- Area funcionarios -->
             <div class="collapse" id="lista-func">
                 <div class="d-flex flex-column mt-2">
                     <div>
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                Marlon2
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                                MarlonAltAccount@gmail.com
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                (47)99538-8303
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                Deletar
                             </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
                         </div>
                     </div>
                     <div>
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                Jequison
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                                jequison123@protonmail.com
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                (47)99025-1026
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                Deletar
                             </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
                         </div>
                     </div>
                     <div>
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                Petroso
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                                Petroso@gmail.com
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                (47)99125-0154
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                Deletar
                             </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
                         </div>
                     </div>
                     <div>
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                Patrique
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                                Patrique@hotmail.com
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                (47)99195-1900
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
+                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
+                                Deletar
                             </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
 
-        <div class="cores-color cores-background centralizar-tabela flex" data-color="White">
-            <button
-                class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
-                data-color="white" data-background="azure-claro-fundo" id="admin-button">
-                <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
-            </button>
-        </div>
-        
+
         </div>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
-    <div class="modal fade" id="ModalEditarUsuario" tabindex="-1" aria-labelledby="TituloModalEditarUsuario"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
-                <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuario</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="NomeUsuarioModal">Nome</label>
-                            <input class="form-control" id="NomeUsuarioModal" type="text" value="Marlon">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="EmailUsuarioModal">E-mail</label>
-                            <input class="form-control" id="EmailUsuarioModal" type="email" value="marlon@email.com">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="SenhaUsuarioModal">Senha</label>
-                            <input class="form-control" id="SenhaUsuarioModal" type="password">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="AcessoUsuarioModal">Nivel de acesso</label>
-                            <select class="form-select" id="AcessoUsuarioModal">
-                                <option>Funcionário</option>
-                                <option>Administrador</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade CadastroTremModal" id="ModalDeletarUsuario" tabindex="-1"
+    <div class="modal fade CadastroTremModal" id="ModalDeletarSensor" tabindex="-1"
         aria-labelledby="TituloModalDeletarSensor" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content CadastroTremModalBox cores-background cores-color" data-background="cinza-claro"
                 data-color="black">
-                <h2 id="TituloModalDeletarSensor">Certeza que deseja<br> excluir dados do funcionario:<br>
+                <h2 id="TituloModalDeletarSensor">Certeza que deseja<br> excluir Sensor:<br>
                     <span>???</span>.
                 </h2>
                 <div class="CadastroTremModalButtons">
@@ -330,21 +237,16 @@
             </div>
         </div>
     </div>
-    <!-- Hidden form to submit sensor deletion to server -->
-    <form id="deleteSensorForm" action="excluir_usuario.php" method="POST" style="display:none;">
+    <form id="deleteSensorForm" action="excluir_sensor.php" method="POST">
         <input type="hidden" name="id" id="deleteSensorId" value="">
     </form>
     <footer>
 
     </footer>
 
-
-
-
-
-    <script src="../scripts/scriptUsersPage.js"></script>
+    <script src="../script/scriptSensorDelete.js"></script>
+    <script src="../scripts/scriptsensorpage.js"></script>
     <script src="../scripts/scriptVoltar.js"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
