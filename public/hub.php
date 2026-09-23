@@ -484,7 +484,7 @@
                 data-background="azure-claro-fundo" data-color="white" id="AddSensor">
                 <p class="mt-2">Adicionar sensor</p>
             </button>
-            <button
+            <button id="excluirsensor"
                 class="cores-background align-items-center rounded-pill justify-content-center cores-color px-3 fw-bold hub-main-sensor-management me-4"
                 data-background="azure-claro-fundo" data-color="white">
                 <p class="mt-2">Excluir sensor</p>
@@ -597,7 +597,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-
+    <script src="../scripts/scriptexcluirsensor.js"></script>
     <script src="../scripts/scriptSair.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>
     <script src="../scripts/scriptHub.js"></script>
