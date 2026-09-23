@@ -1,6 +1,6 @@
 <?php
 include "../infra/conn.php";
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $nome = $_POST['NomeUpdate'];
     $email = $_POST['EmailUpdate'];

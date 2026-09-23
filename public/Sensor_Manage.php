@@ -1,4 +1,7 @@
-﻿<html lang="en">
+﻿<?php
+session_start();
+?>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -26,6 +29,12 @@
     </head>
 
     <main>
+        <?php if (isset($_SESSION['mensagem'])): ?>
+            <p>
+                <?= htmlspecialchars($_SESSION['mensagem'], ENT_QUOTES, 'UTF-8') ?>
+            </p>
+            <?php unset($_SESSION['mensagem']); ?>
+        <?php endif; ?>
         <div class="admin-titulo cores-background mb-5" data-background="azure-claro-fundo">
             <p class="admin-titulo-texto cores-color " data-color="white">
                 Gerenciar Sensores

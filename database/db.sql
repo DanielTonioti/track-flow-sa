@@ -36,3 +36,11 @@ CREATE TABLE IF NOT EXISTS sensor (
     FOREIGN KEY (trem_id) REFERENCES trem(id)
     
 );
+CREATE TABLE IF NOT EXISTS dados_sensor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sensor_id INT NOT NULL,
+    valor DECIMAL(10,2) NOT NULL,
+    data_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sensor_id) REFERENCES sensor(id)
+        ON DELETE RESTRICT
+);
