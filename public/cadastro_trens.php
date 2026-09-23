@@ -30,6 +30,9 @@
         header("Location: Login.php");
         exit;
         }
+
+        $sql = "SELECT id, nome, modelo FROM trem";
+        $resultado = $db->query($sql);
         ?>
 
     </header>
@@ -60,16 +63,20 @@
         </form>
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>
+            <?php while($trem = $resultado->fetch_assoc())
+            { ?>
             <div class="CadastroTremListItem" data-trilho="N289T">
                 <div>
-                    <strong>N289T</strong>
-                    <span>Inicial - 1200 m</span>
+                    <strong><?php echo $trem['nome'] ?></strong>
+                    <span><?php echo $trem['modelo'] ?></span>
+                    <span><?php echo $trem['id'] ?></span>
                 </div>
                 <button class="CadastroTremDeleteButton" type="button" data-bs-toggle="modal"
                     data-bs-target="#ModalExcluirTrilho" data-trilho-nome="N289T">
                     Excluir
                 </button>
             </div>
+            <?php } ?>
         </section>
     </main>
 
