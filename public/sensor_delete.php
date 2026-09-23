@@ -42,15 +42,15 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
@@ -63,15 +63,15 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                 
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
@@ -84,15 +84,15 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                  
+
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                   
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
@@ -105,15 +105,15 @@
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                   
+
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    
+
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
@@ -138,15 +138,15 @@
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                              
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
@@ -158,15 +158,15 @@
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
@@ -178,15 +178,15 @@
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                              
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
@@ -198,15 +198,15 @@
                         <div class="flex centralizar-tabela">
                             <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                                
+
                             </p>
                             <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                 data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-background="azure-claro-fundo">
-                               
+
                             </p>
                             <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
                                 data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
@@ -237,42 +237,16 @@
             </div>
         </div>
     </div>
-    <!-- Hidden form to submit sensor deletion to server -->
-    <form id="deleteSensorForm" action="excluir_sensor.php" method="POST" style="display:none;">
+    <form id="deleteSensorForm" action="excluir_sensor.php" method="POST">
         <input type="hidden" name="id" id="deleteSensorId" value="">
     </form>
     <footer>
 
     </footer>
 
-
-
-
-
+    <script src="../script/scriptSensorDelete.js"></script>
     <script src="../scripts/scriptsensorpage.js"></script>
     <script src="../scripts/scriptVoltar.js"></script>
-    <script>
-        // wire modal confirm to submit hidden delete form
-        (function(){
-            var confirmBtn = document.getElementById('ConfirmarExclusaoSensor');
-            var deleteForm = document.getElementById('deleteSensorForm');
-            var deleteIdInput = document.getElementById('deleteSensorId');
-
-            // when a delete button opens the modal, it should set data-sensor-id on the button
-            document.querySelectorAll('[data-bs-target="#ModalDeletarSensor"]').forEach(function(btn){
-                btn.addEventListener('click', function(e){
-                    var sid = btn.getAttribute('data-sensor-id') || '';
-                    deleteIdInput.value = sid;
-                });
-            });
-
-            if (confirmBtn) {
-                confirmBtn.addEventListener('click', function(){
-                    if (deleteForm) deleteForm.submit();
-                });
-            }
-        })();
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
