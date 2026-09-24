@@ -1,4 +1,15 @@
-﻿<html lang="en">
+﻿<?php
+
+session_start();
+if (!isset($_SESSION['id'])) {
+    header("Location: login.php");
+    exit;
+}
+
+?>
+
+
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -12,19 +23,12 @@
 
 <body class="cores-background " data-background="azure-escuro-fundo">
 
-    <head>
-        <header>
+    <header>
+        <?php
+        include("components/navbar.php");
+        ?>
+    </header>
 
-                <?php
-
-                include("components/navbar.php");
-
-                ?>
-
-
-        </header>
-
-    </head>
     <main>
 
 
@@ -508,7 +512,7 @@
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-        google.charts.load('current', { packages: ['corechart'], language: 'pt-BR' });
+        google.charts.load('current', {packages: ['corechart'], language: 'pt-BR'});
 
         const dadosGraficos = [
             {
@@ -524,12 +528,12 @@
                 options: {
                     title: 'Temperatura média semanal',
                     backgroundColor: 'transparent',
-                    legend: { position: 'none' },
-                    hAxis: { textStyle: { color: '#fff' } },
-                    vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
-                    titleTextStyle: { color: '#fff', fontSize: 18 },
+                    legend: {position: 'none'},
+                    hAxis: {textStyle: {color: '#fff'}},
+                    vAxis: {textStyle: {color: '#fff'}, minValue: 0},
+                    titleTextStyle: {color: '#fff', fontSize: 18},
                     colors: ['#67a4ff'],
-                    chartArea: { width: '80%', height: '70%' },
+                    chartArea: {width: '80%', height: '70%'},
                     pointSize: 5
                 }
             },
@@ -548,12 +552,12 @@
                 options: {
                     title: 'Temperatura média semanal',
                     backgroundColor: 'transparent',
-                    legend: { position: 'none' },
-                    hAxis: { textStyle: { color: '#fff' } },
-                    vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
-                    titleTextStyle: { color: '#fff', fontSize: 18 },
+                    legend: {position: 'none'},
+                    hAxis: {textStyle: {color: '#fff'}},
+                    vAxis: {textStyle: {color: '#fff'}, minValue: 0},
+                    titleTextStyle: {color: '#fff', fontSize: 18},
                     colors: ['#67a4ff'],
-                    chartArea: { width: '80%', height: '70%' },
+                    chartArea: {width: '80%', height: '70%'},
                     pointSize: 5
                 }
             },
@@ -569,16 +573,16 @@
                 options: {
                     title: 'Status dos sensores',
                     backgroundColor: 'transparent',
-                    legend: { textStyle: { color: '#fff' } },
-                    titleTextStyle: { color: '#fff', fontSize: 18 },
+                    legend: {textStyle: {color: '#fff'}},
+                    titleTextStyle: {color: '#fff', fontSize: 18},
                     colors: ['#00bf63', '#ff5757', '#67a4ff'],
-                    chartArea: { width: '80%', height: '70%' },
-                    pieSliceTextStyle: { color: '#fff' }
+                    chartArea: {width: '80%', height: '70%'},
+                    pieSliceTextStyle: {color: '#fff'}
                 }
             }
         ];
 
-        function desenharGrafico({ id, type, data, options }) {
+        function desenharGrafico({id, type, data, options}) {
             const elemento = document.getElementById(id);
             if (!elemento) return;
 
