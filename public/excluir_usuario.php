@@ -8,7 +8,7 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
 
 include "../infra/conn.php";
 
-$id = (int) ($_POST['id'] ?? 0);
+$id = $_POST['id'] ?? 0;
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $id > 0) {
     $sql = "DELETE FROM funcionario WHERE id = ?";
     if ($stmt = $db->prepare($sql)) {
