@@ -27,7 +27,10 @@ if ($_SESSION['cargo'] !== 'admin') {
         <?php
 
         include("components/navbar.php");
-
+        include_once("../infra/conn.php");
+        $sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
+        $resultado = $db->query($sql);
+        $resultado2 = $db->query($sql);
         ?>
     </header>
     <main>
@@ -50,98 +53,21 @@ if ($_SESSION['cargo'] !== 'admin') {
                     </div>
                 </button>
                 <div class="collapse" id="lista-adm">
-                    <div class="d-flex flex-column mt-2">
-                        <div>
-                            <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    Marlon
-                                </p>
-                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-                                    Marlon@gmail.com
-                                </p>
-                                <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    (47)99121-0088
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
-                            </div>
-                        </div>
+                    <?php while($adm = $resultado->fetch_assoc()) {
+                        if ($adm['cargo'] == "admin") { ?>
                         <div>
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    Maria
+                                    <?php echo($adm['nome'] ) ?>
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    Maria@protonmail.com
+                                    <?php echo($adm['email'] ) ?>
                                 </p>
                                 <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    (47)99267-6572
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    Vanessa
-                                </p>
-                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-                                    Vanessa@gmail.com
-                                </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    (47)99123-4567
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    Maicon
-                                </p>
-                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-                                    Maicon@hotmail.com
-                                </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    (47)99830-3502
+                                    <?php echo($adm['telefone'] ) ?>
                                 </p>
                                 <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
@@ -161,120 +87,56 @@ if ($_SESSION['cargo'] !== 'admin') {
                         <span>Vanessa</span>
                         <span>Maicon</span> -->
                 </div>
+                <?php } } ?>
             </div>
         </div>
-        <div class="text-center cores-color p-3" data-color="white">
-            <button id="botao-func" class="btn text-white fw-bold" type="button">
-                Funcionários
-                <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin" class="users-page-arrow"
-                    id="seta-func">
-            </button>
-            <!-- Area funcionarios -->
-            <div class="collapse" id="lista-func">
-                <div class="d-flex flex-column mt-2">
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                Marlon2
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-                                MarlonAltAccount@gmail.com
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                (47)99538-8303
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
-                            </button>
-                            <button
+
+        <div>
+            <div class="text-center text-white p-3">
+                <button id="botao-admin" class="btn text-white fw-bold" type="button">
+                    <div class="d-flex align-items-center">
+                        Operadores
+                        <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
+                            class="users-page-arrow" id="seta-admin">
+                    </div>
+                </button>
+                <div class="collapse" id="lista-adm">
+                    <?php while($user = $resultado2->fetch_assoc()) {
+                        if ($user['cargo'] == "operador") { ?>
+                        <div>
+                            <div class="flex centralizar-tabela">
+                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
+                                    data-color="white" data-background="azure-claro-fundo">
+                                    <?php echo($user['nome'] ) ?>
+                                </p>
+                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
+                                    data-background="azure-claro-fundo">
+                                    <?php echo($user['email'] ) ?>
+                                </p>
+                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
+                                    data-color="white" data-background="azure-claro-fundo">
+                                    <?php echo($user['telefone'] ) ?>
+                                </p>
+                                <button
+                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
+                                    Editar
+                                </button>
+                                <button
                                     class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
                                     data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
                                     deletar
                                 </button>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                Jequison
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-                                jequison123@protonmail.com
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                (47)99025-1026
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
-                            </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                Petroso
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-                                Petroso@gmail.com
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                (47)99125-0154
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
-                            </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                Patrique
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-                                Patrique@hotmail.com
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-                                (47)99195-1900
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                Editar
-                            </button>
-                            <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
-                        </div>
-                    </div>
+                    <!-- <span>Marlon</span>
+                        <span>Maria</span>
+                        <span>Vanessa</span>
+                        <span>Maicon</span> -->
                 </div>
+                <?php } } ?>
             </div>
-        </div>
         </div>
 
         <div class="cores-color cores-background centralizar-tabela flex" data-color="White">
