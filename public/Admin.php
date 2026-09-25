@@ -1,4 +1,16 @@
-﻿<html lang="en">
+﻿<?php 
+include("components/start.php");
+if ($_SESSION['cargo'] !== 'admin') {
+    header('Location: hub.php');
+    exit();
+}
+
+?>
+
+
+
+
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
