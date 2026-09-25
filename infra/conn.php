@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$password = "root";
+$password = "";
 $database = "track_flow_m1";
 
 $db = new mysqli($host, $user, $password, $database);
