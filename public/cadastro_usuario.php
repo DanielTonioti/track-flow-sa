@@ -23,25 +23,26 @@
         $nome = $_POST['nome'];
         $email = $_POST['email'];
         $senha = $_POST['senha'];
+        $telefone = $_POST['telefone'];
         $acesso = $_POST['acesso'];
 
-        $sql = "INSERT INTO funcionario (nome, email, senha, cargo) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO funcionario (nome, email, senha, telefone, cargo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
 
-        $stmt->bind_param("ssss", $nome, $email, $senha, $acesso);
+        $stmt->bind_param("sssss", $nome, $email, $senha, $acesso);
         $stmt->execute();
 
         header("Location: Login.php");
         exit;
         }
 
-        $sql = "SELECT id, nome, email, senha FROM funcionario";
+        $sql = "SELECT id, nome, email, senha, telefone, cargo FROM funcionario";
         $resultado = $db->query($sql);
         ?>
     </header>
 
     <main>
-        <form method="post" id="CadastrarUsuario">
+        <form method="POST" id="CadastrarUsuario">
             <div class="blockcentro titulo-Sensor">
                 <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
                     <h2 class="titulo-Sensor">Cadastrar Usuário</h2>
@@ -56,12 +57,14 @@
                         <input type="email" name="email" required>
                         <label for="senha"> Senha: </label>
                         <input type="password" name="password">
+                        <label for="telefone"> Telefone: </label>
+                        <input type="text" name="telefone">
                         <label for="senha"> Confirmar senha: </label>
                         <input type="password" name="passwordconfirm">
                         <label for="acesso"> Nível de acesso: </label>
                         <div>
-                            <input type="radio" name="acesso" id="funcionario" value=true required> Funcionário
-                            <input type="radio" name="acesso" id="administrador" value=false> Administrador
+                            <input type="radio" name="acesso" id="funcionario" value='funcionario' required> Funcionário
+                            <input type="radio" name="acesso" id="administrador" value='admin'> Administrador
                         </div>
                     </div>
                 </div>
