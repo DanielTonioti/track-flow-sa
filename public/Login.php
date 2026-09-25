@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $funcionario = $stmt->get_result()->fetch_assoc();
         $stmt->close();
 
-        if ($funcionario && $senha === $funcionario["senha"]) {
+        if ($funcionario && password_verify($senha, $funcionario["senha"])) {
             $_SESSION["id"] = $funcionario["id"];
             $_SESSION["usuario"] = $funcionario["nome"];
             $_SESSION["email"] = $funcionario["email"];
