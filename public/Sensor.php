@@ -1,7 +1,14 @@
-﻿<?php
-require_once __DIR__ . '/../infra/conn.php';
+<?php
+session_start();
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header('Location: hub.php');
+    exit();
+}
+
+include '/../infra/conn.php';
 
 $mensagemCadastro = '';
+$mensagemErro = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tipo = $_POST['tipo'] ?? '';
@@ -9,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tremVinculado = trim($_POST['trem_vinculado'] ?? '');
     $localizacao = trim($_POST['localizacao'] ?? '');
 
-    if ($tipo === 'trem' && $tipoDado !== '' && $tremVinculado !== '') {
+    if ($tipo === 'trem' && in_array($tipoDado, ['Velocidade', 'Temperatura', 'Falha'], true)
+        && preg_match('/^[\p{L}\p{N} ._-]{1,100}$/u', $tremVinculado)) {
         $stmtBuscaTrem = $db->prepare('SELECT id FROM trem WHERE nome = ? LIMIT 1');
         if ($stmtBuscaTrem) {
             $stmtBuscaTrem->bind_param('s', $tremVinculado);
@@ -17,25 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $resultadoTrem = $stmtBuscaTrem->get_result();
             $trem = $resultadoTrem->fetch_assoc();
             $stmtBuscaTrem->close();
-
-            if (!$trem) {
-                $stmtNovoTrem = $db->prepare('INSERT INTO trem (nome, modelo) VALUES (?, ?)');
-                if ($stmtNovoTrem) {
-                    $modeloPadrao = 'Sensor';
-                    $stmtNovoTrem->bind_param('ss', $tremVinculado, $modeloPadrao);
-                    $stmtNovoTrem->execute();
-                    $stmtNovoTrem->close();
-                }
-            }
-
-            $stmtBuscaTrem = $db->prepare('SELECT id FROM trem WHERE nome = ? LIMIT 1');
-            if ($stmtBuscaTrem) {
-                $stmtBuscaTrem->bind_param('s', $tremVinculado);
-                $stmtBuscaTrem->execute();
-                $resultadoTrem = $stmtBuscaTrem->get_result();
-                $trem = $resultadoTrem->fetch_assoc();
-                $stmtBuscaTrem->close();
-            }
 
             if (!empty($trem['id'])) {
                 $sql = 'INSERT INTO sensor (nome, tipo, trem_id) VALUES (?, ?, ?)';
@@ -46,8 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->close();
                     $mensagemCadastro = 'Sensor cadastrado com sucesso!';
                 }
+            } else {
+                $mensagemErro = 'Trem não encontrado. Cadastre o trem antes de vincular o sensor.';
             }
         }
+    } elseif ($tipo === 'trem') {
+        $mensagemErro = 'Informe um trem válido e um tipo de dado.';
     }
 
     if ($tipo === 'trilho' && $tipoDado !== '' && $localizacao !== '') {
@@ -94,6 +87,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php echo htmlspecialchars($mensagemCadastro, ENT_QUOTES, 'UTF-8'); ?>
             </div>
         <?php endif; ?>
+        <?php if ($mensagemErro !== ''): ?>
+            <div class="alert alert-danger mx-auto mt-3 w-50 text-center">
+                <?php echo htmlspecialchars($mensagemErro, ENT_QUOTES, 'UTF-8'); ?>
+            </div>
+        <?php endif; ?>
 
         <form id="cadastrar-sensores" method="POST">
             <div class="block-centro titulo-sensor">
@@ -125,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="hiden" id="localizacao-box">
                             <label for="localizacao">Localização</label>
                             <br>
-                            <input class="w-100" type="text" id="localizacao" name="localizacao" placeholder="Joinville" required>
+                            <input class="w-100" type="text" id="localizacao" name="localizacao" placeholder="Joinville">
                         </div>
 
                     </div>
