@@ -16,12 +16,32 @@
         <?php
 
         include("components/navbar.php");
+        include_once("../infra/conn.php");
 
+        if (isset($_POST['CadastrarUsuario']))
+        {
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+        $acesso = $_POST['acesso'];
+
+        $sql = "INSERT INTO funcionario (nome, email, senha, cargo) VALUES (?, ?, ?, ?)";
+        $stmt = $db->prepare($sql);
+
+        $stmt->bind_param("ssss", $nome, $email, $senha, $acesso);
+        $stmt->execute();
+
+        header("Location: Login.php");
+        exit;
+        }
+
+        $sql = "SELECT id, nome, email, senha FROM funcionario";
+        $resultado = $db->query($sql);
         ?>
     </header>
 
     <main>
-        <form id="CadastrarSensor">
+        <form method="post" id="CadastrarUsuario">
             <div class="blockcentro titulo-Sensor">
                 <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
                     <h2 class="titulo-Sensor">Cadastrar Usuário</h2>
