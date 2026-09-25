@@ -1,4 +1,5 @@
-﻿<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
+﻿<?php if (session_status() == PHP_SESSION_NONE) session_start(); ?>
+<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
     <div class="container-fluid">
 
         <a class="navbar-brand  d-flex align-items-center" href="hub.php">
@@ -40,7 +41,18 @@
                 </div>
             </div>
             <div class="d-flex flex-column align-items-end me-2">
-                <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">Visitante</span>
+                <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">
+                    <?php
+                    if (isset($_SESSION['usuario']) && $_SESSION['usuario'] !== '') {
+                        $usuario = $_SESSION['usuario'];
+                        $nome = strpos($usuario, '@') !== false ? strstr($usuario, '@', true) : $usuario;
+                        $nomeExibicao = mb_convert_case($nome, MB_CASE_TITLE, 'UTF-8');
+                        echo 'Olá, ' . htmlspecialchars($nomeExibicao, ENT_QUOTES, 'UTF-8');
+                    } else {
+                        echo 'Visitante';
+                    }
+                    ?>
+                </span>
             </div>
             <div class="perfil">
                 <div class="imgCx">
