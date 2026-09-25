@@ -47,9 +47,7 @@
                         $usuario = $_SESSION['usuario'];
                         $nome = strpos($usuario, '@') !== false ? strstr($usuario, '@', true) : $usuario;
                         $nomeExibicao = mb_convert_case($nome, MB_CASE_TITLE, 'UTF-8');
-                        echo 'Olá, ' . htmlspecialchars($nomeExibicao, ENT_QUOTES, 'UTF-8');
-                    } else {
-                        echo 'Visitante';
+                        echo htmlspecialchars($nomeExibicao, ENT_QUOTES, 'UTF-8');
                     }
                     ?>
                 </span>
