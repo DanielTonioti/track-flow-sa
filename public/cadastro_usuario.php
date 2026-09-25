@@ -22,17 +22,17 @@
         {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
-        $senha = $_POST['senha'];
+        $senha = $_POST['password'];
         $telefone = $_POST['telefone'];
         $acesso = $_POST['acesso'];
 
         $sql = "INSERT INTO funcionario (nome, email, senha, telefone, cargo) VALUES (?, ?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
 
-        $stmt->bind_param("sssss", $nome, $email, $senha, $acesso);
+        $stmt->bind_param("sssss", $nome, $email, $senha, $telefone, $acesso);
         $stmt->execute();
 
-        header("Location: Login.php");
+        header("Location: cadastro_usuario.php");
         exit;
         }
 
@@ -59,8 +59,6 @@
                         <input type="password" name="password">
                         <label for="telefone"> Telefone: </label>
                         <input type="text" name="telefone">
-                        <label for="senha"> Confirmar senha: </label>
-                        <input type="password" name="passwordconfirm">
                         <label for="acesso"> Nível de acesso: </label>
                         <div>
                             <input type="radio" name="acesso" id="funcionario" value='funcionario' required> Funcionário
@@ -69,9 +67,9 @@
                     </div>
                 </div>
                 <br>
-                <input type="submit" value="Cadastrar"
+                <input type="submit" value="Cadastrar" name="CadastrarUsuario"
                     class="border-none-buttom cores-background titulo-Sensor p-2 rounded-3"
-                    data-background="azure-claro-fundo"></button>
+                    data-background="azure-claro-fundo">
             </div>
         </form>
 
