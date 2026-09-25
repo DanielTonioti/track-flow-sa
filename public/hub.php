@@ -1,4 +1,11 @@
-﻿<html lang="en">
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location: Login.php');
+    exit();
+}
+?>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -478,6 +485,7 @@
             </div>
         </div>
         <!-- Area botoes de modificação -->
+        <?php if (($_SESSION['cargo'] ?? '') === 'admin'): ?>
         <div class="justify-content-center align-items-center d-flex mt-5">
             <button
                 class="border-none cores-background me-4 rounded-pill cores-color px-3 fw-bold hub-main-sensor-management"
@@ -490,6 +498,7 @@
                 <p class="mt-2">Excluir sensor</p>
             </button>
         </div>
+        <?php endif; ?>
 
     </main>
     <footer>
@@ -497,7 +506,7 @@
     </footer>
 
     <script>
-        const usuarioLogado = localStorage.getItem("trackflow_nome") || localStorage.getItem("trackflow_user");
+        const usuarioLogado = <?= json_encode($_SESSION['usuario'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
         const nomeFormatado = usuarioLogado.includes("@") ? usuarioLogado.split("@")[0] : usuarioLogado;
         const nomeExibicao = nomeFormatado.charAt(0).toUpperCase() + nomeFormatado.slice(1);
         const elementoUsuario = document.getElementById("usuario-logado");
@@ -597,10 +606,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <?php if (($_SESSION['cargo'] ?? '') === 'admin'): ?>
     <script src="../scripts/scriptexcluirsensor.js"></script>
+    <script src="../scripts/ScriptAdicionar.js"></script>
+    <?php endif; ?>
     <script src="../scripts/scriptNavbar.js"></script>
     <script src="../scripts/scriptHub.js"></script>
-    <script src="../scripts/ScriptAdicionar.js"></script>
 </body>
 
 </html>

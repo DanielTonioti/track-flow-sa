@@ -1,56 +1,36 @@
-﻿<?php
+<?php
 session_start();
 include "../infra/conn.php";
 $erro = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
     $email = trim($_POST["usuario"] ?? "");
     $senha = $_POST["senha"] ?? "";
 
     if ($email === "" || $senha === "") {
-
         $erro = "Informe email e senha.";
-
     } else {
-
         $sql = "SELECT id, nome, email, telefone, cargo, senha FROM funcionario WHERE email = ? LIMIT 1";
-
         $stmt = $db->prepare($sql);
-
-        if (!$stmt) {
-
-            die("Erro ao preparar consulta: " . $db->error);
-
-        }
-
         $stmt->bind_param("s", $email);
-
         $stmt->execute();
 
-        $resultado = $stmt->get_result();
+        $funcionario = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
 
-        if ($resultado->num_rows === 1) {
+        if ($funcionario && $senha === $funcionario["senha"]) {
+            $_SESSION["id"] = $funcionario["id"];
+            $_SESSION["usuario"] = $funcionario["nome"];
+            $_SESSION["email"] = $funcionario["email"];
+            $_SESSION["telefone"] = $funcionario["telefone"];
+            $_SESSION["cargo"] = $funcionario["cargo"];
 
-            $funcionario = $resultado->fetch_assoc();
-
-            if ($senha === $funcionario["senha"]) {
-
-                $_SESSION["id"] = $funcionario["id"];
-                $_SESSION["usuario"] = $funcionario["nome"];
-                $_SESSION["email"] = $funcionario["email"];
-                $_SESSION["telefone"] = $funcionario["telefone"];
-                $_SESSION["cargo"] = $funcionario["cargo"];
-
-                header("Location: hub.php");
-                exit();
-
-            } else {
-                $erro = "email ou senha incorreta.";
-            }
+            header("Location: hub.php");
+            exit();
+        } else {
+            $erro = "Email ou senha incorreta.";
         }
     }
-    $stmt->close();
 }
 ?>
 
