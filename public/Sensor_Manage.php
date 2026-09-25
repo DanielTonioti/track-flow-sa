@@ -42,56 +42,32 @@ session_start();
         </div>
 
         <div class="centralizar-tabela">
-            <div class="flex">
-                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo">
-                    S001
-                </p>
-                <button class=" admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
-                    Remover
-                </button>
-            </div>
-            <div class="flex">
-                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo">
-                    S002
-                </p>
-                <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
-                    Remover
-                </button>
-            </div>
-            <div class="flex">
-                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo">
-                    S003
-                </p>
-                <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
-                    Remover
-                </button>
-            </div>
-            <div class="flex">
-                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo">
-                    S004
-                </p>
-                <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
-                    Remover
-                </button>
-            </div>
-            <div class="flex">
-                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo">
-                    S005
-                </p>
-                <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
-                    data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor">
-                    Remover
-                </button>
-            </div>
+            <?php
+            include_once __DIR__ . '/../infra/conn.php';
+            $sensors = [];
+            $sql = "SELECT id, nome FROM sensor ORDER BY id";
+            if ($stmt = $db->prepare($sql)) {
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    $sensors[] = $row;
+                }
+                $stmt->close();
+            }
+
+            foreach ($sensors as $sensor): ?>
+                <div class="flex">
+                    <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background" data-color="white"
+                        data-background="azure-claro-fundo">
+                        <?= htmlspecialchars($sensor['nome'], ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+                    <button class="admin-tabela-button border-tabela cores-color cores-background" data-color="white"
+                        data-background="vermelho" data-bs-toggle="modal" data-bs-target="#ModalExcluirSensor"
+                        data-sensor-id="<?= htmlspecialchars($sensor['id'], ENT_QUOTES, 'UTF-8') ?>">
+                        Remover
+                    </button>
+                </div>
+            <?php endforeach; ?>
 
             <div class="cores-color cores-background" data-color="White">
                 <button class="admin-adicionar admin-button cores-color cores-background" data-color="white"
