@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($email === "" || $senha === "") {
         $erro = "Informe email e senha.";
     } else {
-        $sql = "SELECT id, nome, email, telefone, cargo, senha FROM funcionario WHERE email = ? LIMIT 1";
+        $sql = "SELECT id, nome, email, telefone, cargo, senha FROM funcionario WHERE email = ?";
         $stmt = $db->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();

@@ -495,7 +495,7 @@ include("components/start.php");
     </footer>
 
     <script>
-        const usuarioLogado = <?= json_encode($_SESSION['usuario'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
+        const usuarioLogado = localStorage.getItem("trackflow_nome") || localStorage.getItem("trackflow_user");
         const nomeFormatado = usuarioLogado.includes("@") ? usuarioLogado.split("@")[0] : usuarioLogado;
         const nomeExibicao = nomeFormatado.charAt(0).toUpperCase() + nomeFormatado.slice(1);
         const elementoUsuario = document.getElementById("usuario-logado");
