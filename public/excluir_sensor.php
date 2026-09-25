@@ -1,23 +1,23 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['usuario'])) {
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
     header("Location: Login.php");
     exit();
 }
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-require_once "../infra/conn.php";
+include "../infra/conn.php";
 
-$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+$id = $_GET['id'];
 
-if (!$id || $id <= 0) {
+if ($id <= 0) {
     header("Location: Sensor_Manage.php");
     exit();
 }
 
 try {
-    $sql = "SELECT id FROM dados_sensor WHERE sensor_id = ? LIMIT 1";
+    $sql = "SELECT id FROM dados_sensor WHERE sensor_id = ?";
     $stmt = $db->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
