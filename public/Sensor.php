@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($tipo === 'trem' && in_array($tipoDado, ['Velocidade', 'Temperatura', 'Falha'], true)
         && preg_match('/^[\p{L}\p{N} ._-]{1,100}$/u', $tremVinculado)) {
-        $stmtBuscaTrem = $db->prepare('SELECT id FROM trem WHERE nome = ? LIMIT 1');
+        $stmtBuscaTrem = $db->prepare('SELECT id FROM trem WHERE nome = ?');
         if ($stmtBuscaTrem) {
             $stmtBuscaTrem->bind_param('s', $tremVinculado);
             $stmtBuscaTrem->execute();
@@ -84,12 +84,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <?php if (!empty($mensagemCadastro)): ?>
             <div class="alert alert-success mx-auto mt-3 w-50 text-center">
-                <?php echo htmlspecialchars($mensagemCadastro, ENT_QUOTES, 'UTF-8'); ?>
+                <?php echo $mensagemCadastro; ?>
             </div>
         <?php endif; ?>
         <?php if ($mensagemErro !== ''): ?>
             <div class="alert alert-danger mx-auto mt-3 w-50 text-center">
-                <?php echo htmlspecialchars($mensagemErro, ENT_QUOTES, 'UTF-8'); ?>
+                <?php echo $mensagemErro; ?>
             </div>
         <?php endif; ?>
 

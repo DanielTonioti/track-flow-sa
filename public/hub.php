@@ -493,17 +493,6 @@ include("components/start.php");
     <footer>
 
     </footer>
-
-    <script>
-        const usuarioLogado = <?= json_encode($_SESSION['usuario'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
-        const nomeFormatado = usuarioLogado.includes("@") ? usuarioLogado.split("@")[0] : usuarioLogado;
-        const nomeExibicao = nomeFormatado.charAt(0).toUpperCase() + nomeFormatado.slice(1);
-        const elementoUsuario = document.getElementById("usuario-logado");
-
-        if (elementoUsuario) {
-            elementoUsuario.textContent = `Olá, ${nomeExibicao}`;
-        }
-    </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         google.charts.load('current', {packages: ['corechart'], language: 'pt-BR'});

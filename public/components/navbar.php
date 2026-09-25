@@ -1,4 +1,5 @@
-﻿<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
+﻿<?php if (session_status() == PHP_SESSION_NONE) session_start(); ?>
+<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
     <div class="container-fluid">
 
         <a class="navbar-brand  d-flex align-items-center" href="hub.php">
@@ -20,11 +21,11 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <?php
-                        if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') {
-                            echo '<li class="nav-item"><a class="nav-link active" aria-current="page" href="admin.php">Funcionarios</a></li>';
-                        }
-                        ?>
+                     
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="admin.php">Funcionarios</a>
+                    </li>
+                      
 
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="relatories.php">Relatórios</a>
@@ -40,7 +41,16 @@
                 </div>
             </div>
             <div class="d-flex flex-column align-items-end me-2">
-                <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">Visitante</span>
+                <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">
+                    <?php
+                    if (isset($_SESSION['usuario']) && $_SESSION['usuario'] !== '') {
+                        $usuario = $_SESSION['usuario'];
+                        $nome = strpos($usuario, '@') !== false ? strstr($usuario, '@', true) : $usuario;
+                        $nomeExibicao = mb_convert_case($nome, MB_CASE_TITLE, 'UTF-8');
+                        echo htmlspecialchars($nomeExibicao, ENT_QUOTES, 'UTF-8');
+                    }
+                    ?>
+                </span>
             </div>
             <div class="perfil">
                 <div class="imgCx">

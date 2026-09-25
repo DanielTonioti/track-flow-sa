@@ -1,9 +1,5 @@
-﻿<?php 
+﻿<?php
 include("components/start.php");
-if ($_SESSION['cargo'] !== 'admin') {
-    header('Location: hub.php');
-    exit();
-}
 
 ?>
 
@@ -69,16 +65,12 @@ if ($_SESSION['cargo'] !== 'admin') {
                                     data-color="white" data-background="azure-claro-fundo">
                                     <?php echo($adm['telefone'] ) ?>
                                 </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
+                                <?php
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
+
+                              
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario"> deletar </button>';
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -146,7 +138,7 @@ if ($_SESSION['cargo'] !== 'admin') {
                 <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
             </button>
         </div>
-        
+
         </div>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>

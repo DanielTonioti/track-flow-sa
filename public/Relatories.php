@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario'])) {
 
 include "../infra/conn.php";
 
-$sensorId = (int) ($_GET['sensor_id'] ?? 0);
+$sensorId = $_GET['sensor_id'] ?? 0;
 $inicio = $_GET['inicio'] ?? '';
 $fim = $_GET['fim'] ?? '';
 $dataInicial = $inicio !== '' ? $inicio : '1000-01-01';
@@ -73,8 +73,8 @@ $stmt->close();
                     <select class="form-select" name="sensor_id" id="sensor_id">
                         <option value="">Todos</option>
                         <?php foreach ($sensores as $sensor): ?>
-                            <option value="<?= (int) $sensor['id'] ?>" <?= $sensorId === (int) $sensor['id'] ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($sensor['nome'], ENT_QUOTES, 'UTF-8') ?>
+                            <option value="<?= $sensor['id'] ?>" <?= $sensorId === $sensor['id'] ? 'selected' : '' ?>>
+                                <?= $sensor['nome'] ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -104,10 +104,10 @@ $stmt->close();
                     <tbody>
                         <?php foreach ($relatorios as $relatorio): ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($relatorio['sensor'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                <td><?php echo htmlspecialchars($relatorio['trem'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                <td><?php echo htmlspecialchars($relatorio['valor'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                <td><?php echo htmlspecialchars($relatorio['data_registro'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                <td><?php echo $relatorio['sensor']; ?></td>
+                                <td><?php echo $relatorio['trem']; ?></td>
+                                <td><?php echo $relatorio['valor']; ?></td>
+                                <td><?php echo $relatorio['data_registro']; ?></td>
                             </tr>
                         <?php endforeach; ?>
                         <?php if (!$relatorios): ?>
