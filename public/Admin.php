@@ -109,16 +109,12 @@ include("components/start.php");
                                     data-color="white" data-background="azure-claro-fundo">
                                     <?php echo($user['telefone'] ) ?>
                                 </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">
-                                    Editar
-                                </button>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">
-                                    deletar
-                                </button>
+                            <?php
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
+
+                              
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario"> deletar </button>';
+                                ?>
                             </div>
                         </div>
                         <?php } } ?>
