@@ -28,14 +28,9 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
         require_once "../infra/conn.php";
 
         $id = $_GET["id"];
-        $sql = "SELECT * FROM funcionario WHERE id = (?)";
-        if($stmt = $db->prepare($sql))
-        {
-        $stmt->bind_param("i", $id);
-        $resultado = $stmt->execute();
-        }
-
-        $user = mysqli_fetch_assoc($resultado);
+        $sql = "SELECT * FROM funcionario WHERE id = $id";
+        $resultado = $db->query($sql);
+        $user =mysqli_fetch_assoc($resultado);
 
         if (isset($_POST['CadastrarUsuario']))
         {
@@ -45,7 +40,7 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
         $telefone = $_POST['telefone'];
         $acesso = $_POST['acesso'];
 
-        $sql = "INSERT INTO funcionario (nome, email, senha, telefone, cargo) VALUES (?, ?, ?, ?, ?)";
+        $sql = "UPDATE funcionario (nome, email, senha, telefone, cargo) WHERE id = $id VALUES (?, ?, ?, ?, ?)";
         $stmt = $db->prepare($sql);
 
         $stmt->bind_param("sssss", $nome, $email, $senha, $telefone, $acesso);
@@ -71,13 +66,13 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
                     <br>
                     <div class="column-sensor" id="tipos">
                         <label for="nome"> Nome: </label>
-                        <input type="text" name="nome" required>
+                        <input type="text" name="nome" value="<?php echo $user['nome']?>" required>
                         <label for="nome"> E-mail: </label>
-                        <input type="email" name="email" required>
+                        <input type="email" name="email"  value="<?php echo $user['email']?>" required>
                         <label for="senha"> Senha: </label>
-                        <input type="password" name="password">
+                        <input type="password" name="password" value="<?php echo $user['senha']?>">
                         <label for="telefone"> Telefone: </label>
-                        <input type="text" name="telefone">
+                        <input type="text" name="telefone" value="<?php echo $user['telefone']?>">
                         <label for="acesso"> Nível de acesso: </label>
                         <div>
                             <input type="radio" name="acesso" id="funcionario" value='funcionario' required> Funcionário
