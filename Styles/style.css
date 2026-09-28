@@ -23,6 +23,10 @@
     --Fonte-lucinda: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.joshua{
+padding: 120px;
+}
+
 .hub-brand {
     display:flex;
     justify-content: start;
