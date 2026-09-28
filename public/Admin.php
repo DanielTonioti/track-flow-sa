@@ -73,13 +73,13 @@ include("components/start.php");
                                 ?>
                             </div>
                         </div>
+                        <?php } } ?>
                     </div>
                     <!-- <span>Marlon</span>
                         <span>Maria</span>
                         <span>Vanessa</span>
                         <span>Maicon</span> -->
                 </div>
-                <?php } } ?>
             </div>
         </div>
 
