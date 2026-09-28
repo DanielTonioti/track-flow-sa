@@ -1,4 +1,9 @@
-﻿<html lang="en">
+﻿<?php
+session_start();
+require_once '../infra/conn.php';
+require_once 'components/start.php';
+?>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">

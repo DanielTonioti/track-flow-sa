@@ -1,6 +1,7 @@
 ﻿<?php
 session_start();
-include "../infra/conn.php";
+require_once "../infra/conn.php";
+require_once "components/start.php";
 $id = isset($_GET['id']) ?? $_GET['id'];
 if ($id > 0) {
     $sql = "SELECT * FROM usuarios WHERE id = ?";
