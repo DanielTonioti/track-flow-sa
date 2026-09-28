@@ -87,7 +87,7 @@ include("components/start.php");
             <div class="text-center text-white p-3">
                 <button id="botao-func" class="btn text-white fw-bold" type="button">
                     <div class="d-flex align-items-center">
-                        Operadores
+                        funcionario
                         <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
                             class="users-page-arrow" id="seta-admin">
                     </div>
@@ -183,7 +183,7 @@ include("components/start.php");
             <div class="modal-content CadastroTremModalBox cores-background cores-color" data-background="cinza-claro"
                 data-color="black">
                 <h2 id="TituloModalDeletarSensor">Certeza que deseja<br> excluir dados do funcionario:<br>
-                    <span>???</span>.
+                    <span><?php echo($user['nome'] ) ?></span>.
                 </h2>
                 <div class="CadastroTremModalButtons">
                     <button type="button" id="ConfirmarExclusaoSensor" data-bs-dismiss="modal">Confirmar</button>
