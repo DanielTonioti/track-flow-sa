@@ -1,3 +1,12 @@
+<?php
+session_start();
+require_once '../infra/conn.php';
+
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header("Location: Login.php");
+    exit();
+}
+?>
 <html lang="en">
 
 <head>
@@ -15,8 +24,8 @@
     <header>
         <?php
 
-        include("components/navbar.php");
-        include_once("../infra/conn.php");
+        include "components/navbar.php";
+        require_once "../infra/conn.php";
 
         if (isset($_POST['CadastrarUsuario']))
         {
