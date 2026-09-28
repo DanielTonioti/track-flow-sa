@@ -1,5 +1,5 @@
 ﻿<?php
-// include("components/start.php");
+include("components/start.php");
 
 ?>
 
