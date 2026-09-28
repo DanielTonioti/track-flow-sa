@@ -111,7 +111,7 @@ include("components/start.php");
                                 if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
 
                               
-                               if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-id="'.$user['id'].'" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">Deletar</button>';
+                               if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="excluir_usuario.php?id='.$user['id'].'">Deletar</a>';
                                 ?>
                             </div>
                         </div>
