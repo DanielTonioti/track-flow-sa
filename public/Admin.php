@@ -1,4 +1,6 @@
 ﻿<?php
+session_start();
+include_once("../infra/conn.php");
 include("components/start.php");
 
 ?>
@@ -23,7 +25,7 @@ include("components/start.php");
         <?php
 
         include("components/navbar.php");
-        include_once("../infra/conn.php");
+      
         $sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
         $resultado = $db->query($sql);
         $resultado2 = $db->query($sql);
