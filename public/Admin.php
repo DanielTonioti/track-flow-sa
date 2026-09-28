@@ -1,5 +1,5 @@
 ﻿<?php
-include("components/start.php");
+// include("components/start.php");
 
 ?>
 
@@ -85,16 +85,16 @@ include("components/start.php");
 
         <div>
             <div class="text-center text-white p-3">
-                <button id="botao-admin" class="btn text-white fw-bold" type="button">
+                <button id="botao-func" class="btn text-white fw-bold" type="button">
                     <div class="d-flex align-items-center">
                         Operadores
                         <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
                             class="users-page-arrow" id="seta-admin">
                     </div>
                 </button>
-                <div class="collapse" id="lista-adm">
+                <div class="collapse" id="lista-func">
                     <?php while($user = $resultado2->fetch_assoc()) {
-                        if ($user['cargo'] == "operador") { ?>
+                        if ($user['cargo'] == "funcionario") { ?>
                         <div>
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
@@ -121,13 +121,13 @@ include("components/start.php");
                                 </button>
                             </div>
                         </div>
+                        <?php } } ?>
                     </div>
                     <!-- <span>Marlon</span>
                         <span>Maria</span>
                         <span>Vanessa</span>
                         <span>Maicon</span> -->
                 </div>
-                <?php } } ?>
             </div>
         </div>
 
