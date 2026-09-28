@@ -12,12 +12,12 @@ CREATE TABLE IF NOT EXISTS funcionario (
 
 INSERT INTO funcionario (nome, email, telefone, cargo, senha)
 VALUES
-('João Silva', 'joao@empresa.com', '(47) 99999-1111', 'funcionario', SHA2('123456',256)),
-('Maria Souza', 'maria@empresa.com', '(47) 99999-2222', 'funcionario', SHA2('123456',256)),
-('Pedro Santos', 'pedro@empresa.com', '(47) 99999-3333', 'funcionario', SHA2('123456',256)),
-('Ana Oliveira', 'ana@empresa.com', '(47) 99999-4444', 'admin', SHA2('123456',256)),
-('Carlos Pereira', 'carlos@empresa.com', '(47) 99999-5555', 'admin', SHA2('123456',256)),
-('Juliana Costa', 'juliana@empresa.com', '(47) 99999-6666', 'admin', SHA2('123456',256));
+('João Silva', 'joao@empresa.com', '(47) 99999-1111', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Maria Souza', 'maria@empresa.com', '(47) 99999-2222', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Pedro Santos', 'pedro@empresa.com', '(47) 99999-3333', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Ana Oliveira', 'ana@empresa.com', '(47) 99999-4444', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Carlos Pereira', 'carlos@empresa.com', '(47) 99999-5555', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Juliana Costa', 'juliana@empresa.com', '(47) 99999-6666', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S');
 
 CREATE TABLE IF NOT EXISTS trem (
     id INT AUTO_INCREMENT PRIMARY KEY,
