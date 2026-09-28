@@ -12,12 +12,12 @@ CREATE TABLE IF NOT EXISTS funcionario (
 
 INSERT INTO funcionario (nome, email, telefone, cargo, senha)
 VALUES
-('João Silva', 'joao@empresa.com', '(47) 99999-1111', 'funcionario', '123456'),
-('Maria Souza', 'maria@empresa.com', '(47) 99999-2222', 'funcionario', '123456'),
-('Pedro Santos', 'pedro@empresa.com', '(47) 99999-3333', 'funcionario', '123456'),
-('Ana Oliveira', 'ana@empresa.com', '(47) 99999-4444', 'admin', '123456'),
-('Carlos Pereira', 'carlos@empresa.com', '(47) 99999-5555', 'admin', '123456'),
-('Juliana Costa', 'juliana@empresa.com', '(47) 99999-6666', 'admin', '123456');
+('João Silva', 'joao@empresa.com', '(47) 99999-1111', 'funcionario', SHA2('123456',256)),
+('Maria Souza', 'maria@empresa.com', '(47) 99999-2222', 'funcionario', SHA2('123456',256)),
+('Pedro Santos', 'pedro@empresa.com', '(47) 99999-3333', 'funcionario', SHA2('123456',256)),
+('Ana Oliveira', 'ana@empresa.com', '(47) 99999-4444', 'admin', SHA2('123456',256)),
+('Carlos Pereira', 'carlos@empresa.com', '(47) 99999-5555', 'admin', SHA2('123456',256)),
+('Juliana Costa', 'juliana@empresa.com', '(47) 99999-6666', 'admin', SHA2('123456',256));
 
 CREATE TABLE IF NOT EXISTS trem (
     id INT AUTO_INCREMENT PRIMARY KEY,

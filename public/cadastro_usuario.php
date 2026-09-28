@@ -22,7 +22,7 @@
         {
         $nome = $_POST['nome'];
         $email = $_POST['email'];
-        $senha = $_POST['password'];
+       $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $telefone = $_POST['telefone'];
         $acesso = $_POST['acesso'];
 
