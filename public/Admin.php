@@ -69,16 +69,12 @@ include("components/start.php");
                                 if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
 
                               
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario"> deletar </button>';
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"  data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario"> deletar </button>';
                                 ?>
                             </div>
                         </div>
                         <?php } } ?>
                     </div>
-                    <!-- <span>Marlon</span>
-                        <span>Maria</span>
-                        <span>Vanessa</span>
-                        <span>Maicon</span> -->
                 </div>
             </div>
         </div>
@@ -113,16 +109,12 @@ include("components/start.php");
                                 if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
 
                               
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario"> deletar </button>';
+                               if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-id="'.$user['id'].'" data-bs-toggle="modal" data-bs-target="#ModalDeletarUsuario">Deletar</button>';
                                 ?>
                             </div>
                         </div>
                         <?php } } ?>
                     </div>
-                    <!-- <span>Marlon</span>
-                        <span>Maria</span>
-                        <span>Vanessa</span>
-                        <span>Maicon</span> -->
                 </div>
             </div>
         </div>
@@ -176,14 +168,13 @@ include("components/start.php");
             </div>
         </div>
     </div>
-
     <div class="modal fade CadastroTremModal" id="ModalDeletarUsuario" tabindex="-1"
         aria-labelledby="TituloModalDeletarSensor" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content CadastroTremModalBox cores-background cores-color" data-background="cinza-claro"
                 data-color="black">
                 <h2 id="TituloModalDeletarSensor">Certeza que deseja<br> excluir dados do funcionario:<br>
-                    <span><?php echo($user['nome'] ) ?></span>.
+                    <span><?= htmlspecialchars($user['nome'] ) ?></span>.
                 </h2>
                 <div class="CadastroTremModalButtons">
                     <button type="button" id="ConfirmarExclusaoSensor" data-bs-dismiss="modal">Confirmar</button>
@@ -192,10 +183,6 @@ include("components/start.php");
             </div>
         </div>
     </div>
-    <!-- Hidden form to submit sensor deletion to server -->
-    <form id="deleteSensorForm" action="excluir_usuario.php" method="POST" style="display:none;">
-        <input type="hidden" name="id" id="deleteSensorId" value="">
-    </form>
     <footer>
 
     </footer>
