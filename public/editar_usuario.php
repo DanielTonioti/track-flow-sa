@@ -28,13 +28,17 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
         require_once "../infra/conn.php";
 
         $erro = "";
-        $id = $_GET["id"];
-        $sql = "SELECT * FROM funcionario WHERE id = $id";
-        $resultado = $db->query($sql);
-        $user =mysqli_fetch_assoc($resultado);
+        if(isset($_GET["id"])){
+
+            $id = $_GET["id"];
+            $sql = "SELECT * FROM funcionario WHERE id = $id";
+            $resultado = $db->query($sql);
+            $user =mysqli_fetch_assoc($resultado);
+
+        }
 
 if (isset($_POST['CadastrarUsuario'])) {
-
+    $id = $_POST['id'];
     $nome = trim($_POST['nome'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $senha = $_POST['password'] ?? '';
@@ -75,7 +79,7 @@ if (isset($_POST['CadastrarUsuario'])) {
             );
 
             if ($stmt->execute()) {
-                header("Location: editar_usuario.php");
+                header("Location: Admin.php");
                 exit();
             } else {
                 $erro = "Erro ao cadastrar o usuário.";
@@ -98,6 +102,7 @@ if (isset($_POST['CadastrarUsuario'])) {
                 <div id="valortipo" class="cores-background p-4 w-25 rounded-4" data-background="azure-claro-fundo">
                     <br>
                     <div class="column-sensor" id="tipos">
+                        <input type="hidden" name="id" value="<?php echo $user['id']?>">
                         <label for="nome"> Nome: </label>
                         <input type="text" name="nome" value="<?php echo $user['nome']?>" required>
                         <label for="nome"> E-mail: </label>
