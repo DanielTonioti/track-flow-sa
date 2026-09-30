@@ -68,10 +68,10 @@ include("components/start.php");
                                     <?php echo($adm['telefone'] ) ?>
                                 </p>
                                 <?php
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="editar_usuario.php?id='.$adm['id'].'">Editar</a>' ;
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
 
                               
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"">Editar</button>';
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" onclick="window.location.href=\'excluir_usuario.php?id=' . $adm['id'] . '\'"">Deletar</button>';
                                 ?>
                             </div>
                         </div>
@@ -111,7 +111,7 @@ include("components/start.php");
                                 if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
 
                               
-                               if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="excluir_usuario.php?id='.$user['id'].'">Deletar</a>';
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" onclick="window.location.href=\'excluir_usuario.php?id=' . $user['id'] . '\'"">Deletar</button>';
                                 ?>
                             </div>
                         </div>
