@@ -4,8 +4,8 @@ require_once "../infra/conn.php";
 require_once "components/start.php";
 $id = isset($_GET['id']) ?? $_GET['id'];
 if ($id > 0) {
-    $sql = "SELECT * FROM usuarios WHERE id = ?";
-    if ($stmt = $conn->prepare($sql)) {
+    $sql = "SELECT * FROM funcionario WHERE id = ?";
+    if ($stmt = $db->prepare($sql)) {
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $res = $stmt->get_result();
@@ -44,7 +44,7 @@ if ($id > 0) {
 
     <main>
         <div class="blockcentro">
-            <h1 class="cores-color" data-color="white">Editar Usuario: Placeholder</h1>
+            <h1 class="cores-color" data-color="white">Editar Usuário: Placeholder</h1>
         </div>
         <form id="updateForm" action="atualizar_usuario.php" method="POST">
             <div class="blockcentro">
@@ -68,9 +68,9 @@ if ($id > 0) {
                     <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                         Acesso</label>
                     <div>
-                        <input type="radio" name="acesso" id="funcionario" value="1" <?php echo $user['acesso'] ?>
+                        <input type="radio" name="acesso" id="funcionario" value="funcionario" <?php echo $user['cargo'] ?>
                             required> Funcionario
-                        <input type="radio" name="acesso" id="administrador" value="0" <?php echo $user['acesso'] ?>>
+                        <input type="radio" name="acesso" id="administrador" value="admin" <?php echo $user['cargo'] ?>>
                         Administrador
                     </div>
                     <div class="ButtonExcluirUsuario">
@@ -90,7 +90,7 @@ if ($id > 0) {
         </form>
 
         <!-- initial access value for modal logic -->
-        <input type="hidden" id="initialAcesso" value="<?php echo $user['acesso'] ?>">
+        <input type="hidden" id="initialAcesso" value="<?php echo $user['cargo'] ?>">
 
         <!-- hidden access-change form -->
         <form id="accessForm" action="atualizar_usuario.php" method="POST" style="display:none;">
