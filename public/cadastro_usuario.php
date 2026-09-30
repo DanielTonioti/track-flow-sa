@@ -106,7 +106,7 @@ $resultado = $db->query($sql);
 
     <main>
 
-        <form method="POST" id="CadastrarUsuario">
+        <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data">
 
             <div class="blockcentro titulo-Sensor">
 
@@ -155,6 +155,8 @@ $resultado = $db->query($sql);
                             <input type="radio" name="acesso" id="funcionario" value="funcionario" <?= (($_POST['acesso'] ?? '') === 'funcionario') ? 'checked' : '' ?> required> Funcionário
                             <input type="radio" name="acesso" id="administrador" value="admin" <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>> Administrador
                         </div>
+                       <label for="avatar" id="avatar-label">Foto de perfil:</label>
+                        <input type="file" id="avatar" name="avatar" accept=".png, .jpg">
                     </div>
                 </div>
                 <br>
