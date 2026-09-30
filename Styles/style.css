@@ -1,3 +1,4 @@
+
 :root {
     /*Cores de fundo*/
     --cor-azure-claro-fundo: #72899b;
@@ -21,6 +22,16 @@
     /*Fontes de texto*/
     --Fonte-padrão: "Pixel";
     --Fonte-lucinda: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Reset básico e compensação para navbar fixa */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding-top: var(--menu-height, 68px);
 }
 
 .hub-brand {
@@ -148,14 +159,19 @@ justify-content: center;
 
 /*Navbar*/
 .menu-nav {
-    position:relative;
-    z-index: 10;
-    display:flex;
+    --menu-height: 10%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
     justify-content: end;
-    padding: 30px;
     align-items: center;
-    background: #ffff;
-    height:10%;
+    padding: 1% 2%;
+    background: #fff;
+    height: var(--menu-height);
+    box-sizing: border-box;
 }
 
 .menu-nav .perfil {
@@ -590,7 +606,7 @@ hr {
 }
 
 .admin-titulo {
-    margin-top: 6%;
+    margin-top: 1rem;
     margin-bottom: 0.5vmin;
     width: 15vmax;
     user-select: none;
