@@ -2,8 +2,11 @@
 session_start();
 require_once "../infra/conn.php";
 require_once "components/start.php";
-$id = isset($_GET['id']) ?? $_GET['id'];
-if ($id > 0) {
+
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$user = null;
+
+if ($id !== false && $id > 0) {
     $sql = "SELECT * FROM funcionario WHERE id = ?";
     if ($stmt = $db->prepare($sql)) {
         $stmt->bind_param('i', $id);
@@ -48,14 +51,14 @@ if ($id > 0) {
         </div>
         <form id="updateForm" action="atualizar_usuario.php" method="POST">
             <div class="blockcentro">
-                <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars((string)($user['id'] ?? '')); ?>">
 
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
                 <input type="text" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="NomeUpdate" value="<?php echo $user['nome'] ?>">
+                    aria-describedby="passwordHelpBlock" name="NomeUpdate" value="<?php echo htmlspecialchars((string)($user['nome'] ?? '')); ?>">
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
                 <input type="email" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="EmailUpdate" value="<?php echo $user['email'] ?>">
+                    aria-describedby="passwordHelpBlock" name="EmailUpdate" value="<?php echo htmlspecialchars((string)($user['email'] ?? '')); ?>">
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
                 <input type="password" id="inputPassword5" class="FormUsuario form-control"
                     aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular" value="">
@@ -68,9 +71,8 @@ if ($id > 0) {
                     <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
                         Acesso</label>
                     <div>
-                        <input type="radio" name="acesso" id="funcionario" value="funcionario" <?php echo $user['cargo'] ?>
-                            required> Funcionario
-                        <input type="radio" name="acesso" id="administrador" value="admin" <?php echo $user['cargo'] ?>>
+                        <input type="radio" name="acesso" id="funcionario" value="funcionario" <?php echo ($user['cargo'] ?? '') === 'funcionario' ? 'checked' : ''; ?> required> Funcionario
+                        <input type="radio" name="acesso" id="administrador" value="admin" <?php echo ($user['cargo'] ?? '') === 'admin' ? 'checked' : ''; ?>>
                         Administrador
                     </div>
                     <div class="ButtonExcluirUsuario">
@@ -108,7 +110,7 @@ if ($id > 0) {
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja excluir o usuário:
-                        <strong><?php echo $user['nome'] ?></strong>?
+                        <strong><?php echo htmlspecialchars((string)($user['nome'] ?? '')); ?></strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -126,7 +128,7 @@ if ($id > 0) {
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja atualizar os dados do usuário:
-                        <strong><?php echo $user['nome'] ?></strong>?
+                        <strong><?php echo htmlspecialchars((string)($user['nome'] ?? '')); ?></strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
