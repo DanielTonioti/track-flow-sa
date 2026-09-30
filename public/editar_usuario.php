@@ -27,6 +27,7 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
         include "components/navbar.php";
         require_once "../infra/conn.php";
 
+        $erro = "1";
         $id = $_GET["id"];
         $sql = "SELECT * FROM funcionario WHERE id = $id";
         $resultado = $db->query($sql);
@@ -40,18 +41,35 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
         $telefone = $_POST['telefone'];
         $acesso = $_POST['acesso'];
 
-        $sql = "UPDATE funcionario (nome, email, senha, telefone, cargo) WHERE id = $id VALUES (?, ?, ?, ?, ?)";
-        $stmt = $db->prepare($sql);
+         if ($nome === "") {
+        $erro = "O nome é obrigatório.";
+    } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
+        $erro = "O nome deve ter entre 3 e 100 caracteres.";
+    } elseif (!preg_match("/^[A-Za-zÀ-ÿ\s]+$/u", $nome)) {
+        $erro = "O nome deve conter apenas letras e espaços.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "Digite um e-mail válido.";
+    } elseif (strlen($senha) < 6) {
+        $erro = "A senha deve ter pelo menos 6 caracteres.";
+    } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
+        $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
+    } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
+        $erro = "Selecione um nível de acesso válido.";
+    }
+
+    if ($erro === "") {
+        
+        $sqlupdate = "UPDATE funcionario SET nome = '?', email = '?', senha = '?', telefone = '?', cargo = '?' WHERE id = $id";
+        if($stmt = $db->prepare($sqlupdate)){
 
         $stmt->bind_param("sssss", $nome, $email, $senha, $telefone, $acesso);
         $stmt->execute();
+        }
 
         header("Location: cadastro_usuario.php");
         exit;
         }
-
-        $sql = "SELECT id, nome, email, senha, telefone, cargo FROM funcionario";
-        $resultado = $db->query($sql);
+        }
         ?>
     </header>
 
@@ -70,7 +88,7 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
                         <label for="nome"> E-mail: </label>
                         <input type="email" name="email"  value="<?php echo $user['email']?>" required>
                         <label for="senha"> Senha: </label>
-                        <input type="password" name="password" value="<?php echo $user['senha']?>">
+                        <input type="password" name="password" required>
                         <label for="telefone"> Telefone: </label>
                         <input type="text" name="telefone" value="<?php echo $user['telefone']?>">
                         <label for="acesso"> Nível de acesso: </label>
