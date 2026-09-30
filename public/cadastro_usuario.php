@@ -69,7 +69,7 @@ if (isset($_POST['CadastrarUsuario'])) {
         // Mover arquivo se não houver erros no upload
         if ($erro === "") {
             $caminho = "../Assets/images/uploads/";
-            $novoNome = date("d-m-Y_H-i-s") . "_" . uniqid() . "." . $extensao;
+            $novoNome = date("d-m-Y_H-i-s") . "." . $extensao;
             $destino = $caminho . $novoNome;
 
             if (move_uploaded_file($nomeTemporario, $destino)) {
