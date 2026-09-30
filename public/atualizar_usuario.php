@@ -1,5 +1,6 @@
 <?php
 include "../infra/conn.php";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
     $nome = $_POST['NomeUpdate'];
@@ -9,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($id > 0) {
         $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, acesso = ? WHERE id = ?";
-        if ($stmt = $conn->prepare($sql)) {
+        if ($stmt = $db->prepare($sql)) {
             $stmt->bind_param('sssis', $nome, $email, $senha, $acesso, $id);
             $stmt->execute();
             $stmt->close();
