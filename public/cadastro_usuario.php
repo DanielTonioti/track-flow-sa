@@ -11,12 +11,16 @@ $erro = "";
 
 if (isset($_POST['CadastrarUsuario'])) {
 
-    $nome = trim($_POST['nome'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $senha = $_POST['password'] ?? '';
+    $erro = ""; // Inicializa a variável de erro
+    
+    $nome     = trim($_POST['nome'] ?? '');
+    $email    = trim($_POST['email'] ?? '');
+    $senha    = $_POST['password'] ?? '';
     $telefone = trim($_POST['telefone'] ?? '');
-    $acesso = $_POST['acesso'] ?? '';
+    $acesso   = $_POST['acesso'] ?? '';
+    $caminhoAvatar = null; // Valor padrão caso não envie foto
 
+    // 1. Validações dos Campos de Texto
     if ($nome === "") {
         $erro = "O nome é obrigatório.";
     } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
@@ -33,42 +37,74 @@ if (isset($_POST['CadastrarUsuario'])) {
         $erro = "Selecione um nível de acesso válido.";
     }
 
+    // 2. Validação e Upload do Avatar (apenas se os dados anteriores estiverem válidos)
+    if ($erro === "" && !empty($_FILES['avatar']['name']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK) {
+
+        $nomeAvatar     = $_FILES['avatar']['name'];
+        $nomeTemporario = $_FILES['avatar']['tmp_name'];
+        $tamanho        = $_FILES['avatar']['size'];
+
+        // Tamanho máximo (5MB)
+        if ($tamanho > (1024 * 1024 * 5)) {
+            $erro = "Seu arquivo excede o tamanho máximo permitido (5MB).";
+        }
+
+        // Extensão
+        $extensao = strtolower(pathinfo($nomeAvatar, PATHINFO_EXTENSION));
+        $arquivosPermitidos = ["png", "jpg", "jpeg"];
+        if (!in_array($extensao, $arquivosPermitidos)) {
+            $erro = "Extensão de arquivo não permitida. Use PNG, JPG ou JPEG.";
+        }
+
+        // Tipo MIME real
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $tipoMime = finfo_file($finfo, $nomeTemporario);
+        finfo_close($finfo);
+
+        $typesPermitidos = ["image/png", "image/jpeg", "image/jpg"];
+        if (!in_array($tipoMime, $typesPermitidos)) {
+            $erro = "Tipo de arquivo inválido ou corrompido.";
+        }
+
+        // Mover arquivo se não houver erros no upload
+        if ($erro === "") {
+            $caminho = "../Assets/images/uploads/";
+            $novoNome = date("d-m-Y_H-i-s") . "_" . uniqid() . "." . $extensao;
+            $destino = $caminho . $novoNome;
+
+            if (move_uploaded_file($nomeTemporario, $destino)) {
+                $caminhoAvatar = $destino; // Salva o caminho para gravar no banco
+            } else {
+                $erro = "Erro ao mover a imagem para o servidor.";
+            }
+        }
+    }
+
+    // 3. Processamento no Banco de Dados
     if ($erro === "") {
 
+        // Verifica se o e-mail já existe
         $sql = "SELECT id FROM funcionario WHERE email = ?";
         $stmt = $db->prepare($sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();
-
         $resultadoEmail = $stmt->get_result();
 
         if ($resultadoEmail->num_rows > 0) {
-
             $erro = "Este e-mail já está cadastrado.";
-
         } else {
-
+            // Insere o funcionário incluindo o avatar
             $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-            $sql = "INSERT INTO funcionario 
-                    (nome, email, senha, telefone, cargo) 
-                    VALUES (?, ?, ?, ?, ?)";
-
+            $sql = "INSERT INTO funcionario (nome, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?)";
+            
             $stmt = $db->prepare($sql);
-            $stmt->bind_param(
-                "sssss",
-                $nome,
-                $email,
-                $senhaHash,
-                $telefone,
-                $acesso
-            );
+            $stmt->bind_param("ssssss", $nome, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
 
             if ($stmt->execute()) {
-                header("Location: cadastro_usuario.php");
+                header("Location: cadastro_usuario.php?sucesso=1");
                 exit();
             } else {
-                $erro = "Erro ao cadastrar o usuário.";
+                $erro = "Erro ao cadastrar o usuário no banco de dados.";
             }
         }
 
@@ -155,8 +191,9 @@ $resultado = $db->query($sql);
                             <input type="radio" name="acesso" id="funcionario" value="funcionario" <?= (($_POST['acesso'] ?? '') === 'funcionario') ? 'checked' : '' ?> required> Funcionário
                             <input type="radio" name="acesso" id="administrador" value="admin" <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>> Administrador
                         </div>
-                       <label for="avatar" id="avatar-label">Foto de perfil:</label>
-                        <input type="file" id="avatar" name="avatar" accept=".png, .jpg">
+                        <label for="avatar" id="avatar-label">Foto de perfil:</label>
+                        <input type="file" id="avatar" name="avatar"
+                            value="<?= htmlspecialchars($_POST['avatar'] ?? '') ?>" accept=".png, .jpg, .jpeg" required>
                     </div>
                 </div>
                 <br>
