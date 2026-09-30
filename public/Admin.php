@@ -4,10 +4,6 @@ include_once("../infra/conn.php");
 include("components/start.php");
 
 ?>
-
-
-
-
 <html lang="en">
 
 <head>
@@ -105,7 +101,7 @@ include("components/start.php");
                                     <?php echo($user['telefone'] ) ?>
                                 </p>
                             <?php
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo ' <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button>';
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="Usuario_Info.php?id='.$user['id'].'" class= "text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button></a>';
 
                               
                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="excluir_usuario.php?id='.$user['id'].'" class= "text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Deletar</button></a>';
