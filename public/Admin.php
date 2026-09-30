@@ -130,59 +130,6 @@ include("components/start.php");
         </div>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
-    <div class="modal fade" id="ModalEditarUsuario" tabindex="-1" aria-labelledby="TituloModalEditarUsuario"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content cores-background cores-color" data-background="cinza-claro" data-color="black">
-                <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="TituloModalEditarUsuario">Editar usuario</h2>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="NomeUsuarioModal">Nome</label>
-                            <input class="form-control" id="NomeUsuarioModal" type="text" value="Marlon">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="EmailUsuarioModal">E-mail</label>
-                            <input class="form-control" id="EmailUsuarioModal" type="email" value="marlon@email.com">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="SenhaUsuarioModal">Senha</label>
-                            <input class="form-control" id="SenhaUsuarioModal" type="password">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="AcessoUsuarioModal">Nivel de acesso</label>
-                            <select class="form-select" id="AcessoUsuarioModal">
-                                <option>Funcionário</option>
-                                <option>Administrador</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade CadastroTremModal" id="ModalDeletarUsuario" tabindex="-1"
-        aria-labelledby="TituloModalDeletarSensor" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content CadastroTremModalBox cores-background cores-color" data-background="cinza-claro"
-                data-color="black">
-                <h2 id="TituloModalDeletarSensor">Certeza que deseja<br> excluir dados do funcionario:<br>
-                    <span><?= htmlspecialchars($user['nome'] ) ?></span>.
-                </h2>
-                <div class="CadastroTremModalButtons">
-                    <button type="button" id="ConfirmarExclusaoSensor" data-bs-dismiss="modal">Confirmar</button>
-                    <button type="button" data-bs-dismiss="modal">voltar</button>
-                </div>
-            </div>
-        </div>
-    </div>
     <footer>
 
     </footer>
