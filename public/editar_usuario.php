@@ -27,21 +27,25 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
         include "components/navbar.php";
         require_once "../infra/conn.php";
 
-        $erro = "1";
-        $id = $_GET["id"];
-        $sql = "SELECT * FROM funcionario WHERE id = $id";
-        $resultado = $db->query($sql);
-        $user =mysqli_fetch_assoc($resultado);
+        $erro = "";
+        if(isset($_GET["id"])){
 
-        if (isset($_POST['CadastrarUsuario']))
-        {
-        $nome = $_POST['nome'];
-        $email = $_POST['email'];
-        $senha = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $telefone = $_POST['telefone'];
-        $acesso = $_POST['acesso'];
+            $id = $_GET["id"];
+            $sql = "SELECT * FROM funcionario WHERE id = $id";
+            $resultado = $db->query($sql);
+            $user =mysqli_fetch_assoc($resultado);
 
-         if ($nome === "") {
+        }
+
+if (isset($_POST['CadastrarUsuario'])) {
+    $id = $_POST['id'];
+    $nome = trim($_POST['nome'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $senha = $_POST['password'] ?? '';
+    $telefone = trim($_POST['telefone'] ?? '');
+    $acesso = $_POST['acesso'] ?? '';
+
+    if ($nome === "") {
         $erro = "O nome é obrigatório.";
     } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
         $erro = "O nome deve ter entre 3 e 100 caracteres.";
@@ -58,18 +62,33 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
     }
 
     if ($erro === "") {
-        
-        $sqlupdate = "UPDATE funcionario SET nome = '?', email = '?', senha = '?', telefone = '?', cargo = '?' WHERE id = $id";
-        if($stmt = $db->prepare($sqlupdate)){
 
-        $stmt->bind_param("sssss", $nome, $email, $senha, $telefone, $acesso);
-        $stmt->execute();
+
+            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+            $sql = "UPDATE funcionario SET nome = ?, email = ?, senha = ?, telefone = ?, cargo = ? WHERE id = $id;";
+
+            $stmt = $db->prepare($sql);
+            $stmt->bind_param(
+                "sssss",
+                $nome,
+                $email,
+                $senhaHash,
+                $telefone,
+                $acesso
+            );
+
+            if ($stmt->execute()) {
+                header("Location: Admin.php");
+                exit();
+            } else {
+                $erro = "Erro ao cadastrar o usuário.";
+            }
+            $stmt->close();
         }
 
-        header("Location: cadastro_usuario.php");
-        exit;
-        }
-        }
+    }
+
         ?>
     </header>
 
@@ -83,6 +102,7 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
                 <div id="valortipo" class="cores-background p-4 w-25 rounded-4" data-background="azure-claro-fundo">
                     <br>
                     <div class="column-sensor" id="tipos">
+                        <input type="hidden" name="id" value="<?php echo $user['id']?>">
                         <label for="nome"> Nome: </label>
                         <input type="text" name="nome" value="<?php echo $user['nome']?>" required>
                         <label for="nome"> E-mail: </label>
@@ -102,8 +122,16 @@ if (($_SESSION['cargo'] ?? '') !== 'admin') {
                 <input type="submit" value="Salvar" name="CadastrarUsuario"
                     class="border-none-buttom cores-background titulo-Sensor p-2 rounded-3"
                     data-background="azure-claro-fundo">
+                     <?php if ($erro !== "") { ?>
+
+                    <div class="alert alert-danger mt-3">
+                        <?= htmlspecialchars($erro) ?>
+                    </div>
+
+                <?php } ?>
             </div>
         </form>
+       
 
 
         <script src="../scripts/"></script>
