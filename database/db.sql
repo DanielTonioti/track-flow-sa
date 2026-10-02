@@ -7,7 +7,9 @@ CREATE TABLE IF NOT EXISTS funcionario (
     email VARCHAR(100) NOT NULL UNIQUE,
     telefone VARCHAR(15) NOT NULL,
     cargo ENUM('funcionario','admin') DEFAULT 'funcionario' NOT NULL,
-    senha VARCHAR(255) NOT NULL
+    senha VARCHAR(255) NOT NULL,
+    avatar Varchar(255) NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO funcionario (nome, email, telefone, cargo, senha)
