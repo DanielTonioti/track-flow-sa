@@ -64,7 +64,7 @@ include("components/start.php");
                                     <?php echo($adm['telefone'] ) ?>
                                 </p>
                                 <?php
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="editar_usuario.php?id='.$adm['id'].'" class="text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"">Editar</button></a>' ;
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="Usuario_Info.php?id='.$adm['id'].'" class="text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"">Editar</button></a>' ;
                                 ?>
                             </div>
                         </div>
