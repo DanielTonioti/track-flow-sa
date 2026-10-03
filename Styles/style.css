@@ -30,10 +30,6 @@ html, body {
     padding: 0;
 }
 
-body {
-    padding-top: var(--menu-height, 68px);
-}
-
 .hub-brand {
     display:flex;
     justify-content: start;
