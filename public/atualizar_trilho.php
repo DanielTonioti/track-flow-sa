@@ -22,7 +22,7 @@ if ($id <= 0) {
 }
 
 $sql = "UPDATE trilho SET nome = ?, localizacao = ? WHERE id = ?";
-if ($stmt = $conn->prepare($sql)) {
+if ($stmt = $db->prepare($sql)) {
     $stmt->bind_param('ssi', $nome, $localizacao, $id);
     $stmt->execute();
     $stmt->close();
