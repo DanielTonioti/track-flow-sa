@@ -2,6 +2,10 @@
 session_start();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header("Location: Login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -28,12 +32,6 @@ require_once 'components/start.php';
     <main class="CadastroTremPage">
 
         <h1 class="CadastroTremTitle cores-color" data-color="white">Cadastrar Linha</h1>
-
-        <?php if ($message !== ''): ?>
-            <div class="alert alert-<?php echo htmlspecialchars($messageType, ENT_QUOTES, 'UTF-8'); ?> mt-3">
-                <?php echo htmlspecialchars($message, ENT_QUOTES, 'UTF-8'); ?>
-            </div>
-        <?php endif; ?>
 
         <form class="CadastroTremForm" id="CadastroTremForm" method="POST" novalidate>
             <div class="CadastroTremFields">

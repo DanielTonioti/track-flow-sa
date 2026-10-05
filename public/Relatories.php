@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
-    header('Location: Login.php');
-    exit();
-}
+require_once 'components/start.php';
 
 include "../infra/conn.php";
 

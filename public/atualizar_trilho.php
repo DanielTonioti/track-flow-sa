@@ -1,4 +1,12 @@
 <?php
+session_start();
+require_once 'components/start.php';
+
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header("Location: Login.php");
+    exit();
+}
+
 include "../infra/conn.php";
 if (!isset($conn) && isset($db)) {
     $conn = $db;
@@ -14,7 +22,7 @@ if ($id <= 0) {
 }
 
 $sql = "UPDATE trilho SET nome = ?, localizacao = ? WHERE id = ?";
-if ($stmt = $conn->prepare($sql)) {
+if ($stmt = $db->prepare($sql)) {
     $stmt->bind_param('ssi', $nome, $localizacao, $id);
     $stmt->execute();
     $stmt->close();

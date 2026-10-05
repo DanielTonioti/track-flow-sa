@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'components/start.php';
 
 if (($_SESSION['cargo'] ?? '') !== 'admin') {
     header("Location: Login.php");

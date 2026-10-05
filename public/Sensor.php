@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (($_SESSION['cargo'] ?? '') !== 'admin') {
-    header('Location: hub.php');
-    exit();
-}
+require_once 'components/start.php';
 
 include '/../infra/conn.php';
 
