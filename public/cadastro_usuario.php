@@ -182,7 +182,7 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
         </form>
         <button id="voltaradmin" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
-    <script src="../scripts/scriptvoltarAdmin.js"></script>
+    <script src="../scripts/scriptVoltar.js"></script>
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>

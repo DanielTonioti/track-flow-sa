@@ -153,7 +153,7 @@ if (isset($_POST['CadastrarUsuario'])) {
 
     </footer>
 
-    <script src="../scripts/scriptvoltarAdmin.js"></script>
+    <script src="../scripts/scriptVoltar.js"></script>
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>
