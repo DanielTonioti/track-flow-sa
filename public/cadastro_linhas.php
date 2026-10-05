@@ -2,6 +2,10 @@
 session_start();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header("Location: Login.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">

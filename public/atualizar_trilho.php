@@ -1,4 +1,12 @@
 <?php
+session_start();
+require_once 'components/start.php';
+
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header("Location: Login.php");
+    exit();
+}
+
 include "../infra/conn.php";
 if (!isset($conn) && isset($db)) {
     $conn = $db;

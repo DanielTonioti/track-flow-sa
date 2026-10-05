@@ -1,5 +1,11 @@
 <?php
+session_start();
+require_once 'components/start.php';
 include "../infra/conn.php";
+if (($_SESSION['cargo'] ?? '') !== 'admin') {
+    header("Location: Login.php");
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
