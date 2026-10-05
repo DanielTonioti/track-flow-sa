@@ -59,12 +59,18 @@ include("components/start.php");
                                     data-background="azure-claro-fundo">
                                     <?php echo($adm['email'] ) ?>
                                 </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
+                                <p class="border-tabela admin-tabela px-1 cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
                                     <?php echo($adm['telefone'] ) ?>
                                 </p>
                                 <?php
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="editar_usuario.php?id='.$adm['id'].'" class="text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"">Editar</button></a>' ;
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="Usuario_Info.php?id='.$adm['id'].'" class="text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"">Editar</button></a>' ;
+                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') {
+                                    echo '<form method="POST" action="excluir_usuario.php" class="d-inline">';
+                                    echo '<input type="hidden" name="id" value="'.$adm['id'].'">';
+                                    echo '<button type="submit" class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white">Deletar</button>';
+                                    echo '</form>';
+                                }
                                 ?>
                             </div>
                         </div>
@@ -96,7 +102,7 @@ include("components/start.php");
                                     data-background="azure-claro-fundo">
                                     <?php echo($user['email'] ) ?>
                                 </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
+                                <p class="border-tabela admin-tabela px-1 cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
                                     <?php echo($user['telefone'] ) ?>
                                 </p>
