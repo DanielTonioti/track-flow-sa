@@ -4,7 +4,6 @@ require_once "../infra/conn.php";
 require_once "components/start.php";
 ?>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +13,7 @@ require_once "components/start.php";
     <link rel="stylesheet" href="../styles/style.css">
     <title> Página Inicial </title>
 </head>
-
 <body class="cores-background " data-background="azure-escuro-fundo">
-
     <header>
         <?php
         include("components/navbar.php");

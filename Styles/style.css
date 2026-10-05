@@ -156,11 +156,11 @@ justify-content: center;
 /*Navbar*/
 .menu-nav {
     --menu-height: 10%;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 9999;
+    margin: 0;
     display: flex;
     justify-content: end;
     align-items: center;
