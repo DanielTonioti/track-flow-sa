@@ -89,6 +89,8 @@ if (isset($_POST['CadastrarUsuario'])) {
 
     }
 
+    
+
         ?>
     </header>
 
@@ -131,7 +133,12 @@ if (isset($_POST['CadastrarUsuario'])) {
                 <?php } ?>
             </div>
         </form>
-       
+        <form method="POST" action="excluir_usuario.php?id=<?php echo $user['id'] ?>" id="excluirUsuario" class="d-inline">
+        <div class="blockcentro titulo-Sensor">
+        <input type="hidden" name="id_excluir" value=" <?php echo $user['id'] ?>">
+        <button type="submit" class="btn btn-danger border-tabela p-1 w-auto"> Deletar </button>
+        <div class="blockcentro titulo-Sensor">
+        </form>
 
 
         <script src="../scripts/"></script>
