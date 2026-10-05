@@ -2,7 +2,9 @@
 session_start();
 include_once("../infra/conn.php");
 include("components/start.php");
-
+$sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
+$resultado = $db->query($sql);
+$resultado2 = $db->query($sql);
 ?>
 <html lang="en">
 
@@ -21,10 +23,8 @@ include("components/start.php");
         <?php
 
         include("components/navbar.php");
-      
-        $sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
-        $resultado = $db->query($sql);
-        $resultado2 = $db->query($sql);
+
+
         ?>
     </header>
     <main>
@@ -36,92 +36,137 @@ include("components/start.php");
                 </p>
             </div>
         </div>
-        <!-- Ãrea dos funcionarios -->
+        <!-- Area dos funcionarios -->
         <div>
             <div class="text-center text-white p-3">
-                <button id="botao-admin" class="btn text-white fw-bold" type="button">
+
+                <button id="botao-admin" data-bs-toggle="collapse" role="button"
+                    class="btn text-white fw-bold" type="button">
+
                     <div class="d-flex align-items-center">
                         Administradores
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
+
+                        <img src="../assets/icons/seta-para-baixo.png" alt="Seta para baixo dos administradores"
                             class="users-page-arrow" id="seta-admin">
                     </div>
+
                 </button>
+
                 <div class="collapse" id="lista-adm">
-                    <?php while($adm = $resultado->fetch_assoc()) {
+
+                    <?php while ($adm = $resultado->fetch_assoc()) {
+
                         if ($adm['cargo'] == "admin") { ?>
-                        <div>
+
                             <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
+
+                                <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    <?php echo($adm['nome'] ) ?>
+                                    <?php echo htmlspecialchars($adm['nome']); ?>
                                 </p>
+
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    <?php echo($adm['email'] ) ?>
+                                    <?php echo htmlspecialchars($adm['email']); ?>
                                 </p>
-                                <p class="border-tabela admin-tabela px-1 cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    <?php echo($adm['telefone'] ) ?>
+
+                                <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
+                                    data-background="azure-claro-fundo">
+                                    <?php echo htmlspecialchars($adm['telefone']); ?>
                                 </p>
-                                <?php
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="editar_usuario.php?id='.$adm['id'].'" class="text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white"">Editar</button></a>' ;
-                                ?>
+
+                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
+
+                                    <a href="editar_usuario.php?id=<?= $adm['id'] ?>" class="text-decoration-none">
+
+                                        <button class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                            data-color="white" data-background="azure-claro-fundo">
+                                            Editar
+                                        </button>
+
+                                    </a>
+
+                                <?php } ?>
+
                             </div>
-                        </div>
-                        <?php } } ?>
-                    </div>
+
+                        <?php }
+                    } ?>
+
                 </div>
             </div>
         </div>
 
         <div>
             <div class="text-center text-white p-3">
-                <button id="botao-func" class="btn text-white fw-bold" type="button">
-                    <div class="d-flex align-items-center">
-                        funcionario
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
-                            class="users-page-arrow" id="seta-admin">
+
+                <button id="botao-func" data-bs-toggle="collapse" role="button"  
+                    class="btn text-white fw-bold" type="button">
+
+                    <div class="d-flex align-items-center">Funcionários
+                        <img src="../assets/icons/seta-para-baixo.png" alt="Seta para baixo dos funcionários"
+                            class="users-page-arrow" id="seta-func">
                     </div>
+
                 </button>
+
                 <div class="collapse" id="lista-func">
-                    <?php while($user = $resultado2->fetch_assoc()) {
+
+                    <?php while ($user = $resultado2->fetch_assoc()) {
+
                         if ($user['cargo'] == "funcionario") { ?>
-                        <div>
+
                             <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
+
+                                <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-                                    <?php echo($user['nome'] ) ?>
+                                    <?php echo htmlspecialchars($user['nome']); ?>
                                 </p>
+
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-                                    <?php echo($user['email'] ) ?>
+                                    <?php echo htmlspecialchars($user['email']); ?>
                                 </p>
-                                <p class="border-tabela admin-tabela px-1 cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-                                    <?php echo($user['telefone'] ) ?>
+
+                                <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
+                                    data-background="azure-claro-fundo">
+                                    <?php echo htmlspecialchars($user['telefone']); ?>
                                 </p>
-                            <?php
-                                if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<a href="editar_usuario.php?id='.$user['id'].'" class= "text-decoration-none"><button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background" data-color="white" data-bs-toggle="modal" data-bs-target="#ModalEditarUsuario">Editar</button></a>';
-                                ?>
+
+                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
+
+                                    <a href="editar_usuario.php?id=<?= $user['id'] ?>" class="text-decoration-none">
+
+                                        <button class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                            data-color="white" data-background="azure-claro-fundo">
+                                            Editar
+                                        </button>
+
+                                    </a>
+
+                                <?php } ?>
+
                             </div>
-                        </div>
-                        <?php } } ?>
-                    </div>
+
+                        <?php }
+                    } ?>
+
                 </div>
             </div>
-        
-        
-            <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<div class="cores-color cores-background centralizar-tabela flex" data-color="White"><button class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center" data-color="white" data-background="azure-claro-fundo" id="admin-button">Adicionar Funcionario</button> </div>' ?>
+        </div>
 
+
+        <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
+            <div class="cores-color cores-background centralizar-tabela flex" data-color="white">
+                <button
+                    class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
+                    data-color="white" data-background="azure-claro-fundo" id="admin-button">
+                    Adicionar Funcionário
+                </button>
+            </div>
+        <?php } ?>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
-    <footer>
-
-    </footer>
-
-
-
-
 
     <script src="../scripts/scriptUsersPage.js"></script>
     <script src="../scripts/scriptVoltar.js"></script>
