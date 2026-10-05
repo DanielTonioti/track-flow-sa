@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once 'components/start.php';
 include "../infra/conn.php";
 $erro = "";
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
