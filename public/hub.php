@@ -4,6 +4,7 @@ require_once "../infra/conn.php";
 require_once "components/start.php";
 ?>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@ require_once "components/start.php";
     <link rel="stylesheet" href="../styles/style.css">
     <title> Página Inicial </title>
 </head>
+
 <body class="cores-background " data-background="azure-escuro-fundo">
     <header>
         <?php
@@ -25,7 +27,7 @@ require_once "components/start.php";
 
 
         <hr class="opacity-100 cores-background hub-main-hr d-flex m-0" data-background="cinza-claro">
-        <section class="container-fluid px-3 py-4">
+        <section class="container-fluid px-3 py-4 coinblock">
             <div class="d-flex justify-content-between align-items-center mb-3 px-2">
                 <h2 class="text-white mb-0">Relatórios em destaque</h2>
                 <div class="hub-carousel-controls">
@@ -36,7 +38,8 @@ require_once "components/start.php";
                 </div>
             </div>
 
-            <div id="hubCarousel" class="carousel slide" data-bs-ride="false">
+
+            <div id="hubCarousel" class="carousel slide " data-bs-ride="False">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="hub-chart-panel">
@@ -474,18 +477,18 @@ require_once "components/start.php";
         </div>
         <!-- Area botoes de modificação -->
         <?php if (($_SESSION['cargo'] ?? '') === 'admin'): ?>
-        <div class="justify-content-center align-items-center d-flex mt-5">
-            <button
-                class="border-none cores-background me-4 rounded-pill cores-color px-3 fw-bold hub-main-sensor-management"
-                data-background="azure-claro-fundo" data-color="white" id="AddSensor">
-                <p class="mt-2">Adicionar sensor</p>
-            </button>
-            <button id="excluirsensor"
-                class="cores-background align-items-center rounded-pill justify-content-center cores-color px-3 fw-bold hub-main-sensor-management me-4"
-                data-background="azure-claro-fundo" data-color="white">
-                <p class="mt-2">Excluir sensor</p>
-            </button>
-        </div>
+            <div class="justify-content-center align-items-center d-flex mt-5">
+                <button
+                    class="border-none cores-background me-4 rounded-pill cores-color px-3 fw-bold hub-main-sensor-management"
+                    data-background="azure-claro-fundo" data-color="white" id="AddSensor">
+                    <p class="mt-2">Adicionar sensor</p>
+                </button>
+                <button id="excluirsensor"
+                    class="cores-background align-items-center rounded-pill justify-content-center cores-color px-3 fw-bold hub-main-sensor-management me-4"
+                    data-background="azure-claro-fundo" data-color="white">
+                    <p class="mt-2">Excluir sensor</p>
+                </button>
+            </div>
         <?php endif; ?>
 
     </main>
@@ -494,7 +497,7 @@ require_once "components/start.php";
     </footer>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
-        google.charts.load('current', {packages: ['corechart'], language: 'pt-BR'});
+        google.charts.load('current', { packages: ['corechart'], language: 'pt-BR' });
 
         const dadosGraficos = [
             {
@@ -510,12 +513,12 @@ require_once "components/start.php";
                 options: {
                     title: 'Temperatura média semanal',
                     backgroundColor: 'transparent',
-                    legend: {position: 'none'},
-                    hAxis: {textStyle: {color: '#fff'}},
-                    vAxis: {textStyle: {color: '#fff'}, minValue: 0},
-                    titleTextStyle: {color: '#fff', fontSize: 18},
+                    legend: { position: 'none' },
+                    hAxis: { textStyle: { color: '#fff' } },
+                    vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
+                    titleTextStyle: { color: '#fff', fontSize: 18 },
                     colors: ['#67a4ff'],
-                    chartArea: {width: '80%', height: '70%'},
+                    chartArea: {width: '85%',height: '70%'},
                     pointSize: 5
                 }
             },
@@ -534,12 +537,12 @@ require_once "components/start.php";
                 options: {
                     title: 'Temperatura média semanal',
                     backgroundColor: 'transparent',
-                    legend: {position: 'none'},
-                    hAxis: {textStyle: {color: '#fff'}},
-                    vAxis: {textStyle: {color: '#fff'}, minValue: 0},
-                    titleTextStyle: {color: '#fff', fontSize: 18},
+                    legend: { position: 'none' },
+                    hAxis: { textStyle: { color: '#fff' } },
+                    vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
+                    titleTextStyle: { color: '#fff', fontSize: 18 },
                     colors: ['#67a4ff'],
-                    chartArea: {width: '80%', height: '70%'},
+                    chartArea: {width: '85%',height: '70%'},
                     pointSize: 5
                 }
             },
@@ -555,37 +558,63 @@ require_once "components/start.php";
                 options: {
                     title: 'Status dos sensores',
                     backgroundColor: 'transparent',
-                    legend: {textStyle: {color: '#fff'}},
-                    titleTextStyle: {color: '#fff', fontSize: 18},
+                    legend: { textStyle: { color: '#fff' } },
+                    titleTextStyle: { color: '#fff', fontSize: 18 },
                     colors: ['#00bf63', '#ff5757', '#67a4ff'],
-                    chartArea: {width: '80%', height: '70%'},
-                    pieSliceTextStyle: {color: '#fff'}
+                    chartArea: {width: '85%',height: '70%'},
+                    pieSliceTextStyle: { color: '#fff' }
                 }
             }
         ];
 
-        function desenharGrafico({id, type, data, options}) {
-            const elemento = document.getElementById(id);
-            if (!elemento) return;
+        function desenharGrafico({ id, type, data, options }) {
+    const elemento = document.getElementById(id);
 
-            const tabela = google.visualization.arrayToDataTable(data);
-            const chart = new google.visualization[type](elemento);
-            chart.draw(tabela, options);
+    if (!elemento) return;
+
+    const tabela = google.visualization.arrayToDataTable(data);
+    const chart = new google.visualization[type](elemento);
+
+    chart.draw(tabela, {
+        ...options,
+        width: elemento.clientWidth,
+        height: 350
+    });
+}
+
+google.charts.setOnLoadCallback(() => {
+
+    dadosGraficos.forEach(desenharGrafico);
+
+    window.addEventListener('resize', () => {
+        dadosGraficos.forEach(desenharGrafico);
+    });
+
+    const carousel = document.getElementById('hubCarousel');
+
+    carousel.addEventListener('slid.bs.carousel', () => {
+        const slideAtivo = carousel.querySelector('.carousel-item.active');
+
+        if (!slideAtivo) return;
+
+        const grafico = slideAtivo.querySelector('.hub-chart');
+
+        if (!grafico) return;
+
+        const dados = dadosGraficos.find(item => item.id === grafico.id);
+
+        if (dados) {
+            desenharGrafico(dados);
         }
-
-        google.charts.setOnLoadCallback(() => {
-            dadosGraficos.forEach(desenharGrafico);
-            window.addEventListener('resize', () => {
-                dadosGraficos.forEach(desenharGrafico);
-            });
-        });
+    });
+});
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <?php if (($_SESSION['cargo'] ?? '') === 'admin'): ?>
-    <script src="../scripts/scriptexcluirsensor.js"></script>
-    <script src="../scripts/ScriptAdicionar.js"></script>
+        <script src="../scripts/scriptexcluirsensor.js"></script>
+        <script src="../scripts/ScriptAdicionar.js"></script>
     <?php endif; ?>
     <script src="../scripts/scriptNavbar.js"></script>
     <script src="../scripts/scriptHub.js"></script>

@@ -123,17 +123,10 @@ include("components/start.php");
                     </div>
                 </div>
             </div>
-        </div>
+        
+        
+            <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') echo '<div class="cores-color cores-background centralizar-tabela flex" data-color="White"><button class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center" data-color="white" data-background="azure-claro-fundo" id="admin-button">Adicionar Funcionario</button> </div>' ?>
 
-        <div class="cores-color cores-background centralizar-tabela flex" data-color="White">
-            <button
-                class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
-                data-color="white" data-background="azure-claro-fundo" id="admin-button">
-                <p class="my-auto fw-bold mx-3">Adicionar Funcionário</p>
-            </button>
-        </div>
-
-        </div>
         <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
     </main>
     <footer>

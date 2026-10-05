@@ -155,19 +155,8 @@ justify-content: center;
 
 /*Navbar*/
 .menu-nav {
-    --menu-height: 10%;
     position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin: 0;
-    display: flex;
-    justify-content: end;
-    align-items: center;
     padding: 1% 2%;
-    background: #fff;
-    height: var(--menu-height);
-    box-sizing: border-box;
 }
 
 .menu-nav .perfil {
@@ -192,9 +181,10 @@ justify-content: center;
     top:0;
     left:0;
     object-fit: cover;
-
 }
-
+#hubCarousel {
+    z-index: -10;
+}
  .menu-nav .menu {
     height:91%;
     position: absolute;
@@ -202,12 +192,14 @@ justify-content: center;
     right:0;
     top: 110%;
     width:10%;
+    z-index: 289;
     background: var(--cor-cinza-claro);
     user-select:none;
     box-shadow:0 50px 50px rgba(0,0,0,.1);
     opacity: 0;
     visibility: hidden;
     transition: .5s;
+    
 }
 
 .menu-nav .menu.ativo {
@@ -227,18 +219,20 @@ justify-content: center;
     z-index:-2;
     transform: rotate(45deg);
 }
-.menu-nav .menu div {   
-    list-style:none;
-}
+
 .menu-nav .menu div p {
     margin-bottom: 1%;
     padding:15px 20px;
     background:var(--cor-cinza-claro-botoes);
     transition: .5s;
+    
 }
-
 .menu-nav .menu div .Menu_Deslogar:hover {
  background: #9e5b5b;
+}
+.menu-nav .menu div .Menu_Deslogar a:hover {
+ background: #9e5b5b;
+ cursor: pointer;
 }
 .menu-nav .menu div p:hover {
     background: #646464;
