@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once '../infra/conn.php';
 require_once 'components/start.php';

@@ -1,4 +1,4 @@
-﻿<?php if (session_status() == PHP_SESSION_NONE) session_start(); ?>
+<?php if (session_status() == PHP_SESSION_NONE) session_start(); ?>
 <nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
     <div class="container-fluid">
 
