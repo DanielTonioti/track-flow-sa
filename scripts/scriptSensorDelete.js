@@ -1,3 +1,4 @@
+// Totalmente inutil pois não tem mas modal
 function excluirSensor() {
     const confirmar = document.getElementById('ConfirmarExclusaoSensor');
     const formulario = document.getElementById('deleteSensorForm');

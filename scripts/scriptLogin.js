@@ -1,5 +1,5 @@
+// Isso é realmente inutil pois o php já faz isso
 document.getElementById("form-login").addEventListener("submit", function (e) {
-
     let usuario = document.getElementById("usuario-email").value.trim();
     let senha = document.getElementById("usuario-senha").value;
 

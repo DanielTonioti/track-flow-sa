@@ -1,8 +1,7 @@
-
+// Muito possivelmente é inutil esse script
 let currentSensor;
 let currentList;
 let currentArrow;
-// Buckle your seats, the following code is ulfiltered ASS
 const botaoSensor001 = document.getElementById("sensor001");
 const botaoSensor002 = document.getElementById("sensor002");
 const botaoSensor003 = document.getElementById("sensor003");

@@ -168,7 +168,7 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
                             Administrador
                         </div>
                         <label for="avatar" id="avatar-label">Foto de perfil:</label>
-                        <input type="file" id="avatar" name="avatar" accept=".png, .jpg, .jpeg" required>
+                        <input type="file" id="avatar" name="avatar" accept=".png, .jpg, .jpeg">
                     </div>
                 </div>
                 <br>

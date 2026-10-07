@@ -512,7 +512,7 @@ require_once "components/start.php";
                     ['S.TRM.004', 18]
                 ],
                 options: {
-                    title: 'Temperatura média semanal',
+                    title: 'Velocidade média semanal',
                     backgroundColor: 'transparent',
                     legend: { position: 'none' },
                     hAxis: { textStyle: { color: '#fff' } },
