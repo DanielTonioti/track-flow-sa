@@ -17,48 +17,12 @@ CREATE TABLE
 INSERT INTO
     funcionario (nome, email, telefone, cargo, senha)
 VALUES
-    (
-        'João Silva',
-        'joao@empresa.com',
-        '(47) 99999-1111',
-        'funcionario',
-        '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'
-    ),
-    (
-        'Maria Souza',
-        'maria@empresa.com',
-        '(47) 99999-2222',
-        'funcionario',
-        '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'
-    ),
-    (
-        'Pedro Santos',
-        'pedro@empresa.com',
-        '(47) 99999-3333',
-        'funcionario',
-        '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'
-    ),
-    (
-        'Ana Oliveira',
-        'ana@empresa.com',
-        '(47) 99999-4444',
-        'admin',
-        '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'
-    ),
-    (
-        'Carlos Pereira',
-        'carlos@empresa.com',
-        '(47) 99999-5555',
-        'admin',
-        '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'
-    ),
-    (
-        'Juliana Costa',
-        'juliana@empresa.com',
-        '(47) 99999-6666',
-        'admin',
-        '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'
-    );
+('João Silva', 'joao@empresa.com', '47999991111', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Maria Souza', 'maria@empresa.com', '47999992222', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Pedro Santos', 'pedro@empresa.com', '47999993333', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Ana Oliveira', 'ana@empresa.com', '47999994444', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Carlos Pereira', 'carlos@empresa.com', '47999995555', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Juliana Costa', 'juliana@empresa.com', '47999996666', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S');
 
 CREATE TABLE
     IF NOT EXISTS trem (
@@ -74,14 +38,15 @@ CREATE TABLE
         localizacao VARCHAR(100) NOT NULL
     );
 
-CREATE TABLE
-    IF NOT EXISTS sensor (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(100) NOT NULL,
-        tipo VARCHAR(50) NOT NULL,
-        trem_id INT NOT NULL,
-        FOREIGN KEY (trem_id) REFERENCES trem (id)
-    );
+CREATE TABLE IF NOT EXISTS sensor (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    trem_id INT NULL,
+    trilho_id INT NULL,
+    FOREIGN KEY (trem_id) REFERENCES trem(id),
+    FOREIGN KEY (trilho_id) REFERENCES trilho(id)
+);
 
 CREATE TABLE
     IF NOT EXISTS dados_sensor (
