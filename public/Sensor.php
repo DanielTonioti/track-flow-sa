@@ -40,7 +40,7 @@ if (isset($_POST['CadastrarSensor'])) {
         }
     } elseif ($tipo === 'trem') {
         $mensagemErro = 'Informe um trem válido e um tipo de dado.';
-    } */
+    }
 
     if ($tipo === 'trilho') {
         $sql = 'INSERT INTO trilho (tipo, nome) VALUES (?, ?)';
