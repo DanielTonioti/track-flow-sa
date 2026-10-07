@@ -519,7 +519,7 @@ require_once "components/start.php";
                     vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
                     titleTextStyle: { color: '#fff', fontSize: 18 },
                     colors: ['#67a4ff'],
-                    chartArea: {width: '85%',height: '70%'},
+                    chartArea: { width: '85%', height: '70%' },
                     pointSize: 5
                 }
             },
@@ -543,7 +543,7 @@ require_once "components/start.php";
                     vAxis: { textStyle: { color: '#fff' }, minValue: 0 },
                     titleTextStyle: { color: '#fff', fontSize: 18 },
                     colors: ['#67a4ff'],
-                    chartArea: {width: '85%',height: '70%'},
+                    chartArea: { width: '85%', height: '70%' },
                     pointSize: 5
                 }
             },
@@ -562,53 +562,53 @@ require_once "components/start.php";
                     legend: { textStyle: { color: '#fff' } },
                     titleTextStyle: { color: '#fff', fontSize: 18 },
                     colors: ['#00bf63', '#ff5757', '#67a4ff'],
-                    chartArea: {width: '85%',height: '70%'},
+                    chartArea: { width: '85%', height: '70%' },
                     pieSliceTextStyle: { color: '#fff' }
                 }
             }
         ];
 
         function desenharGrafico({ id, type, data, options }) {
-    const elemento = document.getElementById(id);
+            const elemento = document.getElementById(id);
 
-    if (!elemento) return;
+            if (!elemento) return;
 
-    const tabela = google.visualization.arrayToDataTable(data);
-    const chart = new google.visualization[type](elemento);
+            const tabela = google.visualization.arrayToDataTable(data);
+            const chart = new google.visualization[type](elemento);
 
-    chart.draw(tabela, {
-        ...options,
-        width: elemento.clientWidth,
-        height: 350
-    });
-}
-
-google.charts.setOnLoadCallback(() => {
-
-    dadosGraficos.forEach(desenharGrafico);
-
-    window.addEventListener('resize', () => {
-        dadosGraficos.forEach(desenharGrafico);
-    });
-
-    const carousel = document.getElementById('hubCarousel');
-
-    carousel.addEventListener('slid.bs.carousel', () => {
-        const slideAtivo = carousel.querySelector('.carousel-item.active');
-
-        if (!slideAtivo) return;
-
-        const grafico = slideAtivo.querySelector('.hub-chart');
-
-        if (!grafico) return;
-
-        const dados = dadosGraficos.find(item => item.id === grafico.id);
-
-        if (dados) {
-            desenharGrafico(dados);
+            chart.draw(tabela, {
+                ...options,
+                width: elemento.clientWidth,
+                height: 350
+            });
         }
-    });
-});
+
+        google.charts.setOnLoadCallback(() => {
+
+            dadosGraficos.forEach(desenharGrafico);
+
+            window.addEventListener('resize', () => {
+                dadosGraficos.forEach(desenharGrafico);
+            });
+
+            const carousel = document.getElementById('hubCarousel');
+
+            carousel.addEventListener('slid.bs.carousel', () => {
+                const slideAtivo = carousel.querySelector('.carousel-item.active');
+
+                if (!slideAtivo) return;
+
+                const grafico = slideAtivo.querySelector('.hub-chart');
+
+                if (!grafico) return;
+
+                const dados = dadosGraficos.find(item => item.id === grafico.id);
+
+                if (dados) {
+                    desenharGrafico(dados);
+                }
+            });
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

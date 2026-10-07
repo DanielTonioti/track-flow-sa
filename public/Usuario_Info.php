@@ -52,17 +52,20 @@ if ($id !== false && $id > 0) {
         </div>
         <form id="updateForm" action="atualizar_usuario.php" method="POST">
             <div class="blockcentro">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars((string)($user['id'] ?? '')); ?>">
+                <input type="hidden" name="id" value="<?php echo htmlspecialchars((string) ($user['id'] ?? '')); ?>">
 
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
                 <input type="text" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="NomeUpdate" value="<?php echo htmlspecialchars((string)($user['nome'] ?? '')); ?>">
+                    aria-describedby="passwordHelpBlock" name="NomeUpdate"
+                    value="<?php echo htmlspecialchars((string) ($user['nome'] ?? '')); ?>">
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
                 <input type="email" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="EmailUpdate" value="<?php echo htmlspecialchars((string)($user['email'] ?? '')); ?>">
+                    aria-describedby="passwordHelpBlock" name="EmailUpdate"
+                    value="<?php echo htmlspecialchars((string) ($user['email'] ?? '')); ?>">
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">Telefone</label>
                 <input type="text" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="TelefoneUpdate" value="<?php echo htmlspecialchars((string)($user['telefone'] ?? '')); ?>">
+                    aria-describedby="passwordHelpBlock" name="TelefoneUpdate"
+                    value="<?php echo htmlspecialchars((string) ($user['telefone'] ?? '')); ?>">
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
                 <input type="password" id="inputPassword5" class="FormUsuario form-control"
                     aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular" value="">
@@ -114,7 +117,7 @@ if ($id !== false && $id > 0) {
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja excluir o usuário:
-                        <strong><?php echo htmlspecialchars((string)($user['nome'] ?? '')); ?></strong>?
+                        <strong><?php echo htmlspecialchars((string) ($user['nome'] ?? '')); ?></strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -132,7 +135,7 @@ if ($id !== false && $id > 0) {
                     </div>
                     <div class="modal-body">
                         Tem certeza que deseja atualizar os dados do usuário:
-                        <strong><?php echo htmlspecialchars((string)($user['nome'] ?? '')); ?></strong>?
+                        <strong><?php echo htmlspecialchars((string) ($user['nome'] ?? '')); ?></strong>?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -145,7 +148,7 @@ if ($id !== false && $id > 0) {
 
 
 
-        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+        <?php include("components/back_button.php"); ?>
     </main>
     <footer>
 
