@@ -26,68 +26,86 @@ redirecionarSeNaoAdmin();
         require_once "../infra/conn.php";
 
         $erro = "";
-        if(isset($_GET["id"])){
+        $user = null;
+        if (isset($_GET["id"])) {
 
             $id = $_GET["id"];
-            $sql = "SELECT * FROM funcionario WHERE id = $id";
-            $resultado = $db->query($sql);
-            $user =mysqli_fetch_assoc($resultado);
-
-        }
-
-if (isset($_POST['CadastrarUsuario'])) {
-    $id = $_POST['id'];
-    $nome = trim($_POST['nome'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $senha = $_POST['password'] ?? '';
-    $telefone = trim($_POST['telefone'] ?? '');
-    $acesso = $_POST['acesso'] ?? '';
-
-    if ($nome === "") {
-        $erro = "O nome é obrigatório.";
-    } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
-        $erro = "O nome deve ter entre 3 e 100 caracteres.";
-    } elseif (!preg_match("/^[A-Za-zÀ-ÿ\s]+$/u", $nome)) {
-        $erro = "O nome deve conter apenas letras e espaços.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $erro = "Digite um e-mail válido.";
-    } elseif (strlen($senha) < 6) {
-        $erro = "A senha deve ter pelo menos 6 caracteres.";
-    } elseif (!preg_match("/^[0-9]{14,15}$/", $telefone)) {
-        $erro = "O telefone deve conter apenas números e ter 14 ou 15 dígitos.";
-    } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
-        $erro = "Selecione um nível de acesso válido.";
-    }
-
-    if ($erro === "") {
-
-
-            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-            $sql = "UPDATE funcionario SET nome = ?, email = ?, senha = ?, telefone = ?, cargo = ? WHERE id = $id;";
-
-            $stmt = $db->prepare($sql);
-            $stmt->bind_param(
-                "sssss",
-                $nome,
-                $email,
-                $senhaHash,
-                $telefone,
-                $acesso
-            );
-
-            if ($stmt->execute()) {
-                header("Location: Admin.php");
-                exit();
-            } else {
-                $erro = "Erro ao cadastrar o usuário.";
+            $sql = "SELECT * FROM funcionario WHERE id = ?";
+            if ($stmt = $db->prepare($sql)) {
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $resultado = $stmt->get_result();
+                $user = $resultado->fetch_assoc();
+                $stmt->close();
             }
-            $stmt->close();
+
         }
 
-    }
+        if (isset($_POST['CadastrarUsuario'])) {
+            $id = $_POST['id'];
+            $nome = trim($_POST['nome'] ?? '');
+            $email = trim($_POST['email'] ?? '');
+            $senha = $_POST['password'] ?? '';
+            $telefone = trim($_POST['telefone'] ?? '');
+            $acesso = $_POST['acesso'] ?? '';
 
-    
+            if ($nome === "") {
+                $erro = "O nome é obrigatório.";
+            } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
+                $erro = "O nome deve ter entre 3 e 100 caracteres.";
+            } elseif (!preg_match("/^[A-Za-zÀ-ÿ\s]+$/u", $nome)) {
+                $erro = "O nome deve conter apenas letras e espaços.";
+            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $erro = "Digite um e-mail válido.";
+            } elseif (strlen($senha) < 6) {
+                $erro = "A senha deve ter pelo menos 6 caracteres.";
+            } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
+                $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
+            } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
+                $erro = "Selecione um nível de acesso válido.";
+            }
+
+            if ($erro === "") {
+
+
+                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+                $sql = "UPDATE funcionario SET nome = ?, email = ?, senha = ?, telefone = ?, cargo = ? WHERE id = ?";
+
+                $stmt = $db->prepare($sql);
+                $stmt->bind_param(
+                    "sssssi",
+                    $nome,
+                    $email,
+                    $senhaHash,
+                    $telefone,
+                    $acesso,
+                    $id
+                );
+
+                if ($stmt->execute()) {
+                    if ($_SESSION['id'] === $id) {
+                        $_SESSION['usuario'] = $nome;
+                        $_SESSION['email'] = $email;
+                        $_SESSION['telefone'] = $telefone;
+                        $_SESSION['cargo'] = $acesso;
+
+                        if ($acesso !== 'admin') {
+                            header("Location: hub.php");
+                            exit();
+                        }
+                    }
+                    header("Location: Admin.php");
+                    exit();
+                } else {
+                    $erro = "Erro ao cadastrar o usuário.";
+                }
+                $stmt->close();
+            }
+
+        }
+
+
 
         ?>
     </header>
@@ -102,15 +120,15 @@ if (isset($_POST['CadastrarUsuario'])) {
                 <div id="valortipo" class="cores-background p-4 w-25 rounded-4" data-background="azure-claro-fundo">
                     <br>
                     <div class="column-sensor" id="tipos">
-                        <input type="hidden" name="id" value="<?php echo $user['id']?>">
+                        <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
                         <label for="nome"> Nome: </label>
-                        <input type="text" name="nome" value="<?php echo $user['nome']?>" required>
+                        <input type="text" name="nome" value="<?php echo $user['nome'] ?>" required>
                         <label for="nome"> E-mail: </label>
-                        <input type="email" name="email"  value="<?php echo $user['email']?>" required>
+                        <input type="email" name="email" value="<?php echo $user['email'] ?>" required>
                         <label for="senha"> Senha: </label>
                         <input type="password" name="password" required>
                         <label for="telefone"> Telefone: </label>
-                        <input type="text" name="telefone" value="<?php echo $user['telefone']?>">
+                        <input type="text" name="telefone" value="<?php echo $user['telefone'] ?>">
                         <label for="acesso"> Nível de acesso: </label>
                         <div>
                             <input type="radio" name="acesso" id="funcionario" value='funcionario' required> Funcionário
@@ -122,7 +140,7 @@ if (isset($_POST['CadastrarUsuario'])) {
                 <input type="submit" value="Salvar" name="CadastrarUsuario"
                     class="border-none-buttom cores-background titulo-Sensor p-2 rounded-3"
                     data-background="azure-claro-fundo">
-                     <?php if ($erro !== "") { ?>
+                <?php if ($erro !== "") { ?>
 
                     <div class="alert alert-danger mt-3">
                         <?= htmlspecialchars($erro) ?>
@@ -131,11 +149,13 @@ if (isset($_POST['CadastrarUsuario'])) {
                 <?php } ?>
             </div>
         </form>
-        <form method="POST" action="excluir_usuario.php?id=<?php echo $user['id'] ?>" id="excluirUsuario" class="d-inline" onsubmit="return confirm('Deseja mesmo obliterar esse usuário?');">
-        <div class="blockcentro titulo-Sensor">
-        <input type="hidden" name="id_excluir" value=" <?php echo $user['id'] ?>">
-        <button type="submit" id="botaoExcluirUsuario" class="btn btn-danger border-tabela p-1 w-auto"> Deletar </button>
-        <div class="blockcentro titulo-Sensor">
+        <form method="POST" action="excluir_usuario.php?id=<?php echo $user['id'] ?>" id="excluirUsuario"
+            class="d-inline" onsubmit="return confirm('Deseja mesmo excluir esse usuário?');">
+            <div class="blockcentro titulo-Sensor">
+                <input type="hidden" name="id_excluir" value=" <?php echo $user['id'] ?>">
+                <button type="submit" id="botaoExcluirUsuario" class="btn btn-danger border-tabela p-1 w-auto"> Deletar
+                </button>
+                <div class="blockcentro titulo-Sensor">
         </form>
 
 

@@ -22,19 +22,18 @@ redirecionarSeNaoAdmin();
         <?php
         include_once("../infra/conn.php");
         include("components/navbar.php");
-        if (isset($_POST['cadastrar-trem']))
-        {
-        $nome = $_POST['nome'];
-        $modelo = $_POST['modelo'];
+        if (isset($_POST['cadastrar-trem'])) {
+            $nome = $_POST['nome'];
+            $modelo = $_POST['modelo'];
 
-        $sql = "INSERT INTO trem (nome, modelo) VALUES (?, ?)";
-        $stmt = $db->prepare($sql);
+            $sql = "INSERT INTO trem (nome, modelo) VALUES (?, ?)";
+            $stmt = $db->prepare($sql);
 
-        $stmt->bind_param("ss", $nome, $modelo);
-        $stmt->execute();
+            $stmt->bind_param("ss", $nome, $modelo);
+            $stmt->execute();
 
-        header("Location: Login.php");
-        exit;
+            header("Location: Login.php");
+            exit;
         }
 
         $sql = "SELECT id, nome, modelo FROM trem";
@@ -52,36 +51,35 @@ redirecionarSeNaoAdmin();
                 <div class="CadastroTremFields">
                     <div class="CadastroTremField">
                         <label class="CadastroTremLabel" for="Numeracao">Nome: </label>
-                        <input class="CadastroTremInput" type="text" id="Numeracao" name="nome"
-                        placeholder="Ex: N289T" required>
+                        <input class="CadastroTremInput" type="text" id="Numeracao" name="nome" placeholder="Ex: N289T"
+                            required>
                     </div>
 
                     <div class="CadastroTremField">
                         <label class="CadastroTremLabel" for="EstacaoOrigem">Modelo: </label>
                         <input class="CadastroTremInput" type="text" id="EstacaoOrigem" name="modelo"
-                        placeholder="Inicial" required>
+                            placeholder="Inicial" required>
                     </div>
                 </div>
             </div>
             <div>
-            <input class="CadastroTremButton" type="submit" name="cadastrar-trem" value="Cadastrar">
+                <input class="CadastroTremButton" type="submit" name="cadastrar-trem" value="Cadastrar">
             </div>
         </form>
         <section class="CadastroTremList cores-color" data-color="white" aria-labelledby="TituloTrilhosCadastrados">
             <h2 id="TituloTrilhosCadastrados" class="CadastroTremListTitle">Trilhos cadastrados</h2>
-            <?php while($trem = $resultado->fetch_assoc())
-            { ?>
-            <div class="CadastroTremListItem" data-trilho="N289T">
-                <div>
-                    <strong><?php echo $trem['nome'] ?></strong>
-                    <span><?php echo $trem['modelo'] ?></span>
-                    <span><?php echo $trem['id'] ?></span>
+            <?php while ($trem = $resultado->fetch_assoc()) { ?>
+                <div class="CadastroTremListItem" data-trilho="N289T">
+                    <div>
+                        <strong><?php echo $trem['nome'] ?></strong>
+                        <span><?php echo $trem['modelo'] ?></span>
+                        <span><?php echo $trem['id'] ?></span>
+                    </div>
+                    <button class="CadastroTremDeleteButton" type="button" data-bs-toggle="modal"
+                        data-bs-target="#ModalExcluirTrilho" data-trilho-nome="N289T">
+                        Excluir
+                    </button>
                 </div>
-                <button class="CadastroTremDeleteButton" type="button" data-bs-toggle="modal"
-                    data-bs-target="#ModalExcluirTrilho" data-trilho-nome="N289T">
-                    Excluir
-                </button>
-            </div>
             <?php } ?>
         </section>
     </main>

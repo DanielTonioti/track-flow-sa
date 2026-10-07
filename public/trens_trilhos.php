@@ -26,10 +26,10 @@ require_once '../infra/conn.php';
         ?>
     </header>
     <main>
-        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+        <?php include("components/back_button.php"); ?>
         <div class="blockcentro titulo-Sensor">
             <div class="cores-background p-2 rounded-4 flex" data-background="azure-claro-fundo">
-                <h2 class="titulo-Sensor"> Gerenciar trems e sensores </h2>
+                <h2 class="titulo-Sensor"> Gerenciar trens e sensores </h2>
             </div>
         </div>
         <div class="blockcentro">

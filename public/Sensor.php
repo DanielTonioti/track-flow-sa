@@ -13,8 +13,10 @@ if (isset($_POST['CadastrarSensor'])) {
     $tremVinculado = trim($_POST['trem_vinculado'] ?? '');
     $localizacao = trim($_POST['localizacao'] ?? '');
 
-    /* if ($tipo === 'trem' && in_array($tipoDado, ['Velocidade', 'Temperatura', 'Falha'], true)
-        && preg_match('/^[\p{L}\p{N} ._-]{1,100}$/u', $tremVinculado)) {
+    if (
+        $tipo === 'trem' && in_array($tipoDado, ['Velocidade', 'Temperatura', 'Falha'], true)
+        && preg_match('/^[\p{L}\p{N} ._-]{1,100}$/u', $tremVinculado)
+    ) {
         $stmtBuscaTrem = $db->prepare('SELECT id FROM trem WHERE nome = ?');
         if ($stmtBuscaTrem) {
             $stmtBuscaTrem->bind_param('s', $tremVinculado);
@@ -115,13 +117,15 @@ if (isset($_POST['CadastrarSensor'])) {
                         <div class="hiden" id="trem-vinculado-box">
                             <label for="trem-vinculado">Trem vinculado</label>
                             <br>
-                            <input class="w-100" type="text" id="trem-vinculado" name="trem_vinculado" placeholder="Ex: S.TRM.1" required>
+                            <input class="w-100" type="text" id="trem-vinculado" name="trem_vinculado"
+                                placeholder="Ex: S.TRM.1" required>
                         </div>
 
                         <div class="hiden" id="localizacao-box">
                             <label for="localizacao">Localização</label>
                             <br>
-                            <input class="w-100" type="text" id="localizacao" name="localizacao" placeholder="Joinville">
+                            <input class="w-100" type="text" id="localizacao" name="localizacao"
+                                placeholder="Joinville">
                         </div>
 
                     </div>

@@ -18,6 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->execute();
                     $stmt->close();
                 }
+
+                if ($_SESSION['id'] === $id) {
+                    $_SESSION['cargo'] = $acesso;
+                    if ($acesso !== 'admin') {
+                        header('Location: hub.php');
+                        exit();
+                    }
+                }
             }
             header('Location: Usuario_Info.php?id=' . $id);
             exit();
@@ -44,6 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $stmt->bind_param('ssssi', $nome, $email, $telefone, $acesso, $id);
                     $stmt->execute();
                     $stmt->close();
+                }
+            }
+
+            if ($_SESSION['id'] === $id) {
+                $_SESSION['usuario'] = $nome;
+                $_SESSION['email'] = $email;
+                $_SESSION['telefone'] = $telefone;
+                $_SESSION['cargo'] = $acesso;
+
+                if ($acesso !== 'admin') {
+                    header('Location: hub.php');
+                    exit();
                 }
             }
         }
