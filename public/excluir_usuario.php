@@ -6,14 +6,14 @@ require_once '../infra/conn.php';
 redirecionarSeNaoAdmin();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id = isset($_POST['id_excluir']);
+    $id = isset($_POST['id_excluir']) ? (int) $_POST['id_excluir'] : 0;
 
     if ($id <= 0) {
         header("Location: Admin.php");
         exit();
     }
 
-    $idSessao = $_SESSION['id'];
+    $idSessao = (int) ($_SESSION['id'] ?? 0);
 
     $sql = "DELETE FROM funcionario WHERE id = ?";
     if ($stmt = $db->prepare($sql)) {
