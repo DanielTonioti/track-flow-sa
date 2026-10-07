@@ -42,12 +42,11 @@ if (isset($_POST['CadastrarUsuario'])) {
     }
 
     // 2. Validação do avatar (ainda sem mover o arquivo)
-    if ($erro === "") {
-        if (!$arquivo || $arquivo['error'] !== UPLOAD_ERR_OK) {
-            $erro = "A foto de perfil é obrigatória.";
-        } elseif ($arquivo['size'] > 5 * 1024 * 1024) {
+    
+        if ($arquivo['size'] > 5 * 1024 * 1024) {
             $erro = "Seu arquivo excede o tamanho máximo permitido (5MB).";
-        } else {
+        }
+        else {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $tipoMime = $finfo->file($arquivo['tmp_name']);
 
@@ -58,7 +57,7 @@ if (isset($_POST['CadastrarUsuario'])) {
                 $erro = "Tipo de arquivo inválido ou corrompido. Use PNG ou JPG.";
             }
         }
-    }
+    
 
     // 3. Banco de dados + upload (o arquivo só é movido depois de validar tudo)
     if ($erro === "") {
