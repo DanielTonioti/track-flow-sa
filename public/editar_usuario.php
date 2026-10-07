@@ -53,8 +53,8 @@ if (isset($_POST['CadastrarUsuario'])) {
         $erro = "Digite um e-mail válido.";
     } elseif (strlen($senha) < 6) {
         $erro = "A senha deve ter pelo menos 6 caracteres.";
-    } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
-        $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
+    } elseif (!preg_match("/^[0-9]{14,15}$/", $telefone)) {
+        $erro = "O telefone deve conter apenas números e ter 14 ou 15 dígitos.";
     } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
         $erro = "Selecione um nível de acesso válido.";
     }
@@ -131,7 +131,7 @@ if (isset($_POST['CadastrarUsuario'])) {
                 <?php } ?>
             </div>
         </form>
-        <form method="POST" action="excluir_usuario.php?id=<?php echo $user['id'] ?>" id="excluirUsuario" class="d-inline" onsubmit="return confirm('Are you sure you want to submit this form?');">
+        <form method="POST" action="excluir_usuario.php?id=<?php echo $user['id'] ?>" id="excluirUsuario" class="d-inline" onsubmit="return confirm('Deseja mesmo obliterar esse usuário?');">
         <div class="blockcentro titulo-Sensor">
         <input type="hidden" name="id_excluir" value=" <?php echo $user['id'] ?>">
         <button type="submit" id="botaoExcluirUsuario" class="btn btn-danger border-tabela p-1 w-auto"> Deletar </button>
