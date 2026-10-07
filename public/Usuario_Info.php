@@ -1,7 +1,8 @@
-<?php
+﻿<?php
 session_start();
 require_once "../infra/conn.php";
 require_once "components/start.php";
+redirecionarSeNaoAdmin();
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $user = null;
@@ -59,6 +60,9 @@ if ($id !== false && $id > 0) {
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
                 <input type="email" id="inputPassword5" class="FormUsuario form-control"
                     aria-describedby="passwordHelpBlock" name="EmailUpdate" value="<?php echo htmlspecialchars((string)($user['email'] ?? '')); ?>">
+                <label for="inputPassword5" class="cores-color form-label" data-color="white">Telefone</label>
+                <input type="text" id="inputPassword5" class="FormUsuario form-control"
+                    aria-describedby="passwordHelpBlock" name="TelefoneUpdate" value="<?php echo htmlspecialchars((string)($user['telefone'] ?? '')); ?>">
                 <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
                 <input type="password" id="inputPassword5" class="FormUsuario form-control"
                     aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular" value="">
@@ -88,7 +92,7 @@ if ($id !== false && $id > 0) {
             </div>
         </form>
         <form id="deleteForm" action="excluir_usuario.php" method="POST" style="display:none;">
-            <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
+            <input type="hidden" name="id_excluir" value="<?php echo $user['id'] ?>">
         </form>
 
         <!-- initial access value for modal logic -->
