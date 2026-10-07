@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form id="cadastrar-sensores" method="POST">
-            <div class="block-centro titulo-sensor">
+            <div class="blockcentro titulo-sensor">
                 <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
                     <h2 class="titulo-sensor">Cadastrar Sensor</h2>
                 </div>
