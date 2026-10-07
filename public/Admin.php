@@ -169,7 +169,7 @@ $resultado2 = $stmt2->get_result();
                 </button>
             </div>
         <?php } ?>
-        <?php include("components/back_button.php"); ?>
+        <?php include("components/back-button-hub.php"); ?>
     </main>
 
     <script src="../scripts/scriptUsersPage.js"></script>
