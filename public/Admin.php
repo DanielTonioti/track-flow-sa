@@ -3,12 +3,8 @@ session_start();
 include_once("../infra/conn.php");
 include("components/start.php");
 $sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
-$stmt = $db->prepare($sql);
-$stmt->execute();
-$resultado = $stmt->get_result();
-$stmt2 = $db->prepare($sql);
-$stmt2->execute();
-$resultado2 = $stmt2->get_result();
+$resultado = $db->query($sql);
+$resultado2 = $db->query($sql);
 ?>
 <html lang="en">
 
@@ -44,8 +40,8 @@ $resultado2 = $stmt2->get_result();
         <div>
             <div class="text-center text-white p-3">
 
-                <button id="botao-admin" data-bs-toggle="collapse" role="button" class="btn text-white fw-bold"
-                    type="button">
+                <button id="botao-admin" data-bs-toggle="collapse" role="button"
+                    class="btn text-white fw-bold" type="button">
 
                     <div class="d-flex align-items-center">
                         Administradores
@@ -104,8 +100,8 @@ $resultado2 = $stmt2->get_result();
         <div>
             <div class="text-center text-white p-3">
 
-                <button id="botao-func" data-bs-toggle="collapse" role="button" class="btn text-white fw-bold"
-                    type="button">
+                <button id="botao-func" data-bs-toggle="collapse" role="button"  
+                    class="btn text-white fw-bold" type="button">
 
                     <div class="d-flex align-items-center">Funcionários
                         <img src="../assets/icons/seta-para-baixo.png" alt="Seta para baixo dos funcionários"

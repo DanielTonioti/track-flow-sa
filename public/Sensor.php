@@ -7,7 +7,7 @@ include '../infra/conn.php';
 $mensagemCadastro = '';
 $mensagemErro = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if (isset($_POST['CadastrarSensor'])) {
     $tipo = $_POST['tipo'] ?? '';
     $tipoDado = $_POST['tipo_dado'] ?? '';
     $tremVinculado = trim($_POST['trem_vinculado'] ?? '');
@@ -42,14 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mensagemErro = 'Informe um trem válido e um tipo de dado.';
     }
 
-    if ($tipo === 'trilho' && $tipoDado !== '' && $localizacao !== '') {
-        $sql = 'INSERT INTO trilho (nome, localizacao) VALUES (?, ?)';
+    if ($tipo === 'trilho') {
+        $sql = 'INSERT INTO trilho (tipo, nome) VALUES (?, ?)';
         $stmt = $db->prepare($sql);
         if ($stmt) {
-            $stmt->bind_param('ss', $tremVinculado, $localizacao);
+            $stmt->bind_param('ss', $tipoDado, $localizacao);
             $stmt->execute();
             $stmt->close();
             $mensagemCadastro = 'Trilho cadastrado com sucesso!';
+            
         }
     }
 }
@@ -92,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         <?php endif; ?>
 
-        <form id="cadastrar-sensores" method="POST">
+        <form id="CadastrarSensor" method="POST">
             <div class="blockcentro titulo-sensor">
                 <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
                     <h2 class="titulo-sensor">Cadastrar Sensor</h2>
@@ -131,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <br>
                 <button type="submit" class="border-none-buttom cores-background titulo-sensor p-2 rounded-3"
-                    data-background="azure-claro-fundo">Cadastrar</button>
+                    data-background="azure-claro-fundo" name="CadastrarSensor">Cadastrar</button>
             </div>
         </form>
 

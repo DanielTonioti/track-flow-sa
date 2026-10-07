@@ -150,7 +150,7 @@ redirecionarSeNaoAdmin();
             </div>
         </form>
         <form method="POST" action="excluir_usuario.php?id=<?php echo $user['id'] ?>" id="excluirUsuario"
-            class="d-inline" onsubmit="return confirm('Are you sure you want to submit this form?');">
+            class="d-inline" onsubmit="return confirm('Deseja mesmo excluir esse usuário?');">
             <div class="blockcentro titulo-Sensor">
                 <input type="hidden" name="id_excluir" value=" <?php echo $user['id'] ?>">
                 <button type="submit" id="botaoExcluirUsuario" class="btn btn-danger border-tabela p-1 w-auto"> Deletar

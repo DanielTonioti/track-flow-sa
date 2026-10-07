@@ -1,6 +1,5 @@
-
 :root {
-    /*Cores de fundo*/
+    /* Cores de fundo */
     --cor-azure-claro-fundo: #72899b;
     --cor-azure-escuro-fundo: #526d82;
     --cor-cinza-claro: #c9cace;
@@ -9,99 +8,128 @@
     --cor-azul-apagado: #6b7280;
     --cor-verde-escuro: #108b50;
     --cor-azure-apagado: #65869f;
-    /*cor de letra*/
-    --cor-letra: white;
-    --cor-black: black;
-    /*cores normais*/
+
+
+    /* Cores de texto */
+    --cor-letra: #ffffff;
+    --cor-black: #000000;
+
+
+    /* Cores de destaque e botões */
     --cor-lime-green: #c1ff72;
     --cor-azul-real: #5271ff;
-    /*cores de botões*/
     --cor-cinza-claro-botoes: #adadad;
     --cor-verde: #00bf63;
     --cor-vermelho: #ff5757;
-    /*Fontes de texto*/
-    --Fonte-padrão: "Pixel";
-    --Fonte-lucinda: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+
+    /* Tipografia */
+    --Fonte-padrao: "Pixel", sans-serif;
+    --Fonte-lucinda: 'Lucida Sans', Geneva, Verdana, sans-serif;
 }
 
-/* Reset básico e compensação para navbar fixa */
-html, body {
+
+/* ==========================================================================
+   Base e Reset
+   ========================================================================== */
+@font-face {
+    font-family: "Pixel";
+    src: url("../assets/fonts/LeagueSpartan-VariableFont_wght.ttf");
+}
+
+
+* {
+    font-family: var(--Fonte-padrao);
+    box-sizing: border-box;
+}
+
+
+body {
     margin: 0;
     padding: 0;
 }
 
-.hub-brand {
-    display:flex;
-    justify-content: start;
-}
-.hub-end {
-    display:flex;
-    justify-content: end;
+
+/* ==========================================================================
+   Sistema de Temas Dinâmicos (Data Attributes)
+   ========================================================================== */
+.cores-color {
+    color: var(--cor-color, inherit);
 }
 
-.hub-icon {
-   max-height: 3rem;
-   width: auto;
 
+.cores-background {
+    background-color: var(--cor-background, transparent);
 }
- 
-.hub-user {
+
+
+/* Paleta de Texto */
+[data-color="black"]      { --cor-color: var(--cor-black); }
+[data-color="lime-green"] { --cor-color: var(--cor-lime-green); }
+[data-color="white"],
+[data-color="White"]      { --cor-color: var(--cor-letra); }
+
+
+/* Paleta de Fundo */
+[data-background="azul-real"]           { --cor-background: var(--cor-azul-real); }
+[data-background="azure-escuro-fundo"]  { --cor-background: var(--cor-azure-escuro-fundo); }
+[data-background="azure-claro-fundo"]   { --cor-background: var(--cor-azure-claro-fundo); }
+[data-background="cinza-claro-botoes"]  { --cor-background: var(--cor-cinza-claro-botoes); }
+[data-background="cinza-claro"]         { --cor-background: var(--cor-cinza-claro); }
+[data-background="verde"]               { --cor-background: var(--cor-verde); }
+[data-background="vermelho"]            { --cor-background: var(--cor-vermelho); }
+[data-background="azul-vivido"]         { --cor-background: var(--cor-azul-vivido); }
+[data-background="azul-pastel"]         { --cor-background: var(--cor-azul-pastel); }
+[data-background="azul-apagado"]        { --cor-background: var(--cor-azul-apagado); }
+[data-background="verde-escuro"]        { --cor-background: var(--cor-verde-escuro); }
+[data-background="azure-apagado"]       { --cor-background: var(--cor-azure-apagado); }
+
+
+/* ==========================================================================
+   Utilitários Abrangentes (Compatibilidade e Extensões do Bootstrap)
+   ========================================================================== */
+.userselect {
+    user-select: none;
+}
+
+
+.cursor-pointer {
     cursor: pointer;
-    display:flex;
-   width: 2.5rem;
-   height: 2.5rem;
-   margin-left: 1rem;
-   justify-content:end;
+    user-select: none;
 }
 
 
-/* Index */
-.index-titulo-pag {
-    font-family: var(--Fonte-Lucinda);
-    font-size: 5rem;
-
+.border-none,
+.border-none-buttom {
+    border: none !important;
 }
 
-/* Login */
-.c-login-slogan-pag {
-    font-family: var(--Fonte-Padrão);
-    font-size: 110%;
-    width: 59.9%;
-    height: 100%;
+
+.hiden {
+    display: none !important;
 }
 
-.c-login-separacao {
-    width: 0.2%;
-    height: 100%;
+
+.flex,
+.centralizar-tabela,
+.center-sensor {
+    display: flex;
 }
 
-.c-login-area {
-    width: 39.9%;
-    height: 100%;
+
+.centralizar-tabela,
+.center-sensor {
+    justify-content: center;
 }
 
-.login-img {
-    width: auto;
-    height: 30vh;
+
+.column-sensor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.login-button {
-    padding: 0.5%;
-    border: none;
-}
 
-.login-tamanho-titulo-slogan {
-    font-size: 2.8vw;
-    font-weight: bold;
-}
-
-.login-tamanho-titulo-login {
-    margin-top: 22%;
-    font-size: 300%;
-    font-weight: bold;
-}
-
-/* Usuario_Info */
 .blockcentro {
     display: flex;
     flex-direction: column;
@@ -109,165 +137,329 @@ html, body {
     padding: 20px;
 }
 
-.Dangerzone {
-    border: var(--cor-vermelho) solid 0.2vh;
-    width: 60%;
-    margin: auto;
-    padding: 20px;
-}
 
-.ButtonExcluirUsuario {
-    margin-top: 5%;
-}
-
-.FormUsuario {
-    width: 30%;
-}
-
-.FormUsuarioDanger {
-    width: 54%;
-}
-
-.ReportFormPanel {
-    max-width: 48rem;
-}
-
-/* Sensor */
-.titulo-Sensor {
-    color: white;
-}
-.column-sensor {
-justify-content: center;
-flex-direction: column;
-display: flex;
-}
-.hiden{
-    display: none;
-}
-.center-sensor {
-display: flex;
-justify-content: center;
-}
-.border-none-buttom{
-    border: none;
+/* Ícones de Seta Colapsáveis Unificados */
+.home-page-arrow,
+.Home-page-arrow,
+.users-page-arrow {
+    width: 1.5vmin;
+    height: 1.5vmin;
+    margin-left: 0.5vmax;
+    transition: transform 0.2s ease;
 }
 
 
-/*Navbar*/
+/* Botão Flutuante de Voltar */
+.back-buttom {
+    position: absolute;
+    padding: 18px;
+    font-family: var(--Fonte-lucinda);
+    font-size: 1vw;
+    top: 85%;
+    left: 2%;
+}
+
+
+/* ==========================================================================
+   Navbar & Menu do Usuário
+   ========================================================================== */
 .menu-nav {
     position: sticky;
     padding: 1% 2%;
 }
 
+
+.hub-icon {
+    max-height: 3rem;
+    width: auto;
+}
+
+
 .menu-nav .perfil {
-    cursor:pointer;
+    cursor: pointer;
     user-select: none;
 }
 
+
 .menu-nav .perfil .imgCx {
-    position:relative;
-    margin-left:2vh;
-    width:50px;
-    height:50px;
-    background: rgb(146, 146, 146);
+    position: relative;
+    margin-left: 2vh;
+    width: 50px;
+    height: 50px;
+    background: #929292;
     border-radius: 50%;
     overflow: hidden;
 }
 
+
 .menu-nav .imgCx img {
-    position:absolute;
-    width:100%;
+    position: absolute;
+    width: 100%;
     height: 100%;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     object-fit: cover;
 }
-#hubCarousel {
-    z-index: -10;
-}
- .menu-nav .menu {
-    height:91%;
+
+
+.menu-nav .menu {
     position: absolute;
-    z-index: 10;
-    right:0;
+    right: 0;
     top: 110%;
-    width:10%;
+    width: 10rem;
+    max-width: 90vw;
     z-index: 289;
     background: var(--cor-cinza-claro);
-    user-select:none;
-    box-shadow:0 50px 50px rgba(0,0,0,.1);
+    user-select: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     opacity: 0;
     visibility: hidden;
-    transition: .5s;
-    
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
+
 .menu-nav .menu.ativo {
-    margin-right:1%;
+    margin-right: 1%;
     opacity: 1;
     visibility: visible;
 }
+
+
 .menu-nav .menu::before {
     content: '';
-    opacity: 1;
     position: absolute;
-    top:-8px;
-    right:35px;
-    height:20px;
+    top: -8px;
+    right: 35px;
+    height: 20px;
     width: 20px;
     background: var(--cor-cinza-claro-botoes);
-    z-index:-2;
+    z-index: -1;
     transform: rotate(45deg);
 }
 
+
 .menu-nav .menu div p {
     margin-bottom: 1%;
-    padding:15px 20px;
-    background:var(--cor-cinza-claro-botoes);
-    transition: .5s;
-    
+    padding: 12px 16px;
+    background: var(--cor-cinza-claro-botoes);
+    transition: background-color 0.2s ease;
 }
-.menu-nav .menu div .Menu_Deslogar:hover {
- background: #9e5b5b;
-}
-.menu-nav .menu div .Menu_Deslogar a:hover {
- background: #9e5b5b;
- cursor: pointer;
-}
+
+
 .menu-nav .menu div p:hover {
     background: #646464;
-    transition: 0s;
-    height:auto;
-} 
+}
+
+
+.menu-nav .menu div .Menu_Deslogar:hover,
+.menu-nav .menu div .Menu_Deslogar a:hover {
+    background: #9e5b5b;
+    cursor: pointer;
+}
+
+
 .menu-nav .menu div p a {
     text-decoration: none;
-    display:flex;
-    align-items:center;
-    justify-content:start;
-    color: #ffffff;
-   
-}
-.menu-nav .menu div p a ion-icon {
-    font-size:1.12rem;
-    color: #999;
-}
-.hub-end {
     display: flex;
-    justify-content: end;
+    align-items: center;
+    color: #ffffff;
 }
-/* Hub */
 
 
-.hub-main-sensor-management{
+/* ==========================================================================
+   Tabelas Customizadas (Admin, Sensores e Relatórios)
+   ========================================================================== */
+/* Base comum para células e botões */
+.admin-tabela,
+.admin-tabela-button,
+.relatorio-info-tabela,
+.relatorio-tempo-tabela {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin-bottom: 0;
+}
+
+
+.admin-tabela {
+    width: 20vmax;
+    height: 5vmin;
+}
+
+
+.admin-tabela-button {
+    width: 8vmax;
+    height: 5vmin;
+}
+
+
+.relatorio-info-tabela {
+    width: 500px;
+    height: 40px;
+    gap: 1px;
+}
+
+
+.relatorio-tempo-tabela {
+    width: 120px;
+    height: 40px;
+    gap: 1px;
+}
+
+
+.border-tabela {
+    border: 2px solid #000000;
+}
+
+
+.tabela-texto {
+    font-size: 2.8vmin;
+}
+
+
+.grid-element {
+    width: 12.99vmax;
+    height: 5vh;
+    margin: 0 24px 6px;
+}
+
+
+.admin-titulo {
+    margin-top: 1rem;
+    margin-bottom: 0.5vmin;
+    width: 15vmax;
+    user-select: none;
+}
+
+
+.admin-titulo-texto {
+    text-align: center;
+    user-select: none;
+}
+
+
+.admin-button {
+    height: 2.5vmax;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+/* ==========================================================================
+   Hub e Gráficos
+   ========================================================================== */
+.hub-main-sensor-management {
     border: none;
     margin-top: 1vh;
 }
-.hub-brand {
-    display: flex;
-    justify-content: start;
+
+
+.hub-main-hr {
+    height: 0.25vh;
 }
 
-/* Cadastro de trem */
+
+.hub-carousel-controls {
+    display: flex;
+    gap: 0.6rem;
+}
+
+
+.hub-chart-panel {
+    width: min(100%, 1100px);
+    min-height: 360px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem 1rem;
+    border-radius: 1.5rem;
+    background: rgba(82, 109, 130, 0.7);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
+}
+
+
+.hub-chart-header {
+    margin-bottom: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    color: #ffffff;
+    font-size: 1.08rem;
+    font-weight: 700;
+}
+
+
+.hub-chart {
+    width: 100%;
+    min-height: 290px;
+}
+
+
+/* ==========================================================================
+   Login & Index
+   ========================================================================== */
+.index-titulo-pag {
+    font-size: clamp(2rem, 5vw, 5rem);
+}
+
+
+.login-img {
+    width: auto;
+    height: 30vh;
+}
+
+
+.login-button {
+    padding: 0.5%;
+    border: none;
+}
+
+
+.login-tamanho-titulo-slogan {
+    font-size: clamp(1.5rem, 2.8vw, 2.8rem);
+    font-weight: bold;
+}
+
+
+/* ==========================================================================
+   Formulários (Usuários, Sensores e Relatórios)
+   ========================================================================== */
+.DangerZone,
+.Dangerzone {
+    border: 0.2vh solid var(--cor-vermelho);
+    width: 60%;
+    margin: auto;
+    padding: 20px;
+}
+
+
+.ButtonExcluirUsuario {
+    margin-top: 5%;
+}
+
+
+.FormUsuario {
+    width: 30%;
+}
+
+
+.ReportFormPanel {
+    max-width: 48rem;
+}
+
+
+.titulo-Sensor,
+.titulo-sensor {
+    color: #ffffff;
+}
+
+
+.table-trems {
+    margin-right: 2rem;
+}
+
+
+/* ==========================================================================
+   Cadastro de Trens e Linhas
+   ========================================================================== */
 .CadastroTremPage {
     min-height: calc(100vh - 7rem);
     display: flex;
@@ -276,6 +468,7 @@ justify-content: center;
     justify-content: center;
     padding: 0.5rem 1.5rem 1.5rem;
 }
+
 
 .CadastroTremTitle {
     width: min(22rem, 100%);
@@ -288,21 +481,36 @@ justify-content: center;
     line-height: 1.2;
 }
 
-.CadastroTremForm {
+
+.CadastroTremForm,
+.CadastroTremList {
     width: min(48rem, 100%);
-    padding: 1rem 1.15rem 1.2rem;
-    border-radius: 2.25rem;
+    padding: 1rem 1.2rem;
     background: var(--cor-azure-claro-fundo);
 }
+
+
+.CadastroTremForm {
+    border-radius: 2.25rem;
+}
+
+
+.CadastroTremList {
+    margin-top: 1.5rem;
+    border-radius: 1.5rem;
+}
+
 
 .CadastroTremFields {
     width: min(20.5rem, 100%);
     margin: 0 auto;
 }
 
+
 .CadastroTremField {
     margin-bottom: 1rem;
 }
+
 
 .CadastroTremLabel {
     display: block;
@@ -310,6 +518,7 @@ justify-content: center;
     color: var(--cor-letra);
     font-size: clamp(1.1rem, 2.5vw, 1.35rem);
 }
+
 
 .CadastroTremInput {
     width: 100%;
@@ -323,18 +532,17 @@ justify-content: center;
     font-size: 0.85rem;
 }
 
+
 .CadastroTremInput::placeholder {
     color: rgba(255, 255, 255, 0.55);
 }
+
 
 .CadastroTremInput:focus {
     border-color: var(--cor-letra);
     box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.2);
 }
 
-.CadastroTremInput:invalid:not(:placeholder-shown) {
-    border-color: var(--cor-vermelho);
-}
 
 .CadastroTremButton {
     width: 10.5rem;
@@ -349,23 +557,18 @@ justify-content: center;
     cursor: pointer;
 }
 
+
 .CadastroTremButton:hover,
 .CadastroTremButton:focus-visible {
     background: var(--cor-azure-apagado);
 }
 
-.CadastroTremList {
-    width: min(48rem, 100%);
-    margin-top: 1.5rem;
-    padding: 1rem 1.2rem;
-    border-radius: 1.5rem;
-    background: var(--cor-azure-claro-fundo);
-}
 
 .CadastroTremListTitle {
     margin: 0 0 0.75rem;
     font-size: 1.15rem;
 }
+
 
 .CadastroTremListItem {
     display: flex;
@@ -376,6 +579,7 @@ justify-content: center;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+
 .CadastroTremListItem span {
     display: block;
     color: var(--cor-letra);
@@ -383,17 +587,21 @@ justify-content: center;
     font-size: 0.85rem;
 }
 
+
 .CadastroTremDeleteButton {
     padding: 0.3rem 0.7rem;
     border: 1px solid var(--cor-vermelho);
     border-radius: 0.4rem;
     background: transparent;
     font-size: 0.8rem;
+    cursor: pointer;
 }
 
-.CadastroTremDeleteButton:hover{
+
+.CadastroTremDeleteButton:hover {
     background: var(--cor-vermelho);
 }
+
 
 .CadastroTremModalBox {
     padding: 3.3rem 2.5rem 2rem;
@@ -402,11 +610,6 @@ justify-content: center;
     text-align: center;
 }
 
-.CadastroTremModalBox h2 {
-    margin: 0;
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    line-height: 1.25;
-}
 
 .CadastroTremModalButtons {
     display: flex;
@@ -415,6 +618,7 @@ justify-content: center;
     margin-top: 4.2rem;
 }
 
+
 .CadastroTremModalButtons button {
     min-width: 7.2rem;
     padding: 0.8rem 0.45rem;
@@ -422,35 +626,37 @@ justify-content: center;
     border-radius: 0.7rem;
     font-size: 1.25rem;
     font-weight: 700;
+    cursor: pointer;
 }
+
 
 .CadastroTremModalButtons button:first-child {
     background: var(--cor-vermelho);
 }
 
+
 .CadastroTremModalButtons button:last-child {
     background: var(--cor-verde);
 }
+
 
 .CadastroTremModalButtons button:hover,
 .CadastroTremModalButtons button:focus-visible {
     filter: brightness(0.92);
 }
 
+
 @media (max-width: 600px) {
     .CadastroTremPage {
         padding: 0.75rem 1rem 1.5rem;
     }
-
     .CadastroTremForm {
         padding: 1.2rem 1rem 1.5rem;
         border-radius: 1.75rem;
     }
-
     .CadastroTremButton {
         margin-top: 2rem;
     }
-
     .CadastroTremList {
         margin-top: 1.2rem;
     }
@@ -458,379 +664,3 @@ justify-content: center;
 
 
 
-.hub-icon {
-    max-height: 3rem;
-    width: auto;
-
-}
-.home-page-arrow{
-    width: 1.5vmin;
-    height: 1.5vmin;
-    margin-left: 0.1vmax;
-}
-
-
-hr {
-    border: none;
-    border-top: 0.5vw solid var(--cor-letra);
-    margin: 0;
-
-}
-
-.hub-main-graphics {
-    display: flex;
-    width: 100vw;
-    height: 20vh;
-}
-
-.hub-carousel-controls {
-    display: flex;
-    gap: 0.6rem;
-}
-
-.hub-chart-panel {
-    width: min(100%, 1100px);
-    min-height: 360px;
-    margin: 0 auto;
-    padding: 1.25rem 1.5rem 1rem;
-    border-radius: 1.5rem;
-    background: rgba(82, 109, 130, 0.7);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.22);
-}
-
-.hub-chart-header {
-    margin-bottom: 0.8rem;
-    padding: 0.2rem 0.5rem;
-    color: #fff;
-    font-size: 1.08rem;
-    font-weight: 700;
-}
-
-.hub-chart {
-    width: 100%;
-    min-height: 290px;
-}
-
-.hub-tamanho-titulo-slogan {
-    font-size: 200%;
-    font-weight: bold;
-}
-
-.hub-main-content-aligment {
-    align-content: center;
-}
-
-.buttom {
-
-    width: 20%;
-    display: flex;
-}
-
-.hub-buttom {
-    align-content: center;
-    font-family: var(--Fonte-Lucinda);
-    color: var(--cor-letra);
-    font-size: 80%;
-}
-
-.centralizer {
-    align-content: center;
-}
-
-.hub-header-title-aligment {
-    position: flex;
-
-}
-
-.name {
-    font-size: 100%;
-}
-
-.icon {
-    width: 100%;
-    height: 100%;
-    background-color: var(--cor-letra);
-    padding: 1.5%;
-    border-radius: 14%;
-}
-
-.hub-header-icon {
-    width: auto;
-    height: 70%;
-}
-
-.hub-header-user {
-    width: auto;
-    height: 50%;
-}
-
-.hub-header-height {
-    height: 20%;
-}
-
-.hub-greetings-user {
-    font-size: 322%;
-    margin-top: 5%;
-}
-.hub-main-hr{
-    height: 0.25vh;
-}
-
-/*users page*/
-.users-page-arrow {
-    width: 2vmin;
-    height: 2vmin;
-    margin-left: 1vmax;
-}
-
-.admin-button {
-    height: 2.5vmax;
-    border: none;
-    cursor: pointer;
-    user-select: none;
-}
-
-.admin-titulo-texto {
-    text-align: center;
-    user-select: none;
-}
-
-.admin-titulo {
-    margin-top: 1rem;
-    margin-bottom: 0.5vmin;
-    width: 15vmax;
-    user-select: none;
-}
-
-.admin-tabela {
-    width: 20vmax;
-    height: 5vmin;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    user-select: none;
-    margin-bottom: 0px;
-
-}
-
-.centralizar-tabela {
-    justify-content: center;
-}
-
-.admin-tabela-button {
-    width: 8vmax;
-    height: 5vmin;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    user-select: none;
-    margin-bottom: 0px;
-}
-
-.tabela-texto {
-    font-size: 2.8vmin;
-}
-
-.border-tabela {
-    border: 2px solid rgb(0, 0, 0);
-}
-
-.flex {
-    display: flex;
-}
-
-/*RelatorioInfo*/
-.relatorio-info-tabela {
-    width: 500px;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    user-select: none;
-    margin-bottom: 0px;
-    gap: 1px;
-}
-
-.relatorio-tempo-tabela {
-    width: 120px;
-    height: 40px;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    user-select: none;
-    margin-bottom: 0px;
-    gap: 1px;
-}
-
-/*Logo/icon*/
-.ajust-icon-logo {
-    width: 40%;
-    height: 40%;
-}
-
-.ajust-icon-menu {
-    width: 40%;
-    height: 40%;
-    margin: 40%;
-}
-
-.header {
-    width: 100%;
-    height: 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-}
-
-.header {
-    width: 100%;
-    height: 5%;
-    background-color: var(--cor-fundo-claro);
-
-}
-
-.header-buttom {
-    width: 20%;
-
-}
-
-/*Universais*/
-.userselect {
-    user-select: none;
-}
-
-* {
-    font-family: var(--Fonte-Padrão);
-}
-
-@font-face {
-    font-family: "Pixel";
-    src: url(../assets/fonts/LeagueSpartan-VariableFont_wght.ttf);
-}
-
-.class001 {
-    /* Conserta posição do botão de voltar */
-    position: relative;
-    top: 48px;
-}
-
-.full-size {
-    width: 100%;
-    height: 100%;
-}
-
-.cursor-pointer {
-    cursor: pointer;
-    user-select: none;
-}
-
-/* d-flex flex-column align-items-center justify-content-center */
-/* Se não sabe como centralizar uma div usa isso ^ */
-/* Cores */
-.back-buttom {
-    position: absolute;
-    padding: 18px;
-    font-family: var(--Fonte-Lucinda);
-    font-size: 1vw;
-    top: 85%;
-    left: 2%;
-}
-
-.grid-element {
-    width: 12.99vmax;
-    height: 5vh;
-    margin-left: 24px;
-    margin-right: 24px;
-    margin-bottom: 6px;
-}
-
-
-.cores-color {
-    color: var(--cor-color);
-}
-
-.cores-background {
-    background-color: var(--cor-background);
-    background-image: url();
-}
-
-.titlecenter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1.5rem 1.5rem;
-}
-
-.table-trems{
-    margin-right: 2rem;
-}
-
-.centro {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-}
-
-/* Cores Color */
-[data-color="black"] {
-    --cor-color: var(--cor-black);
-}
-
-[data-color="lime-green"] {
-    --cor-color: var(--cor-lime-green);
-}
-
-[data-color="white"] {
-    --cor-color: var(--cor-letra);
-}
-
-/* Cores Background */
-[data-background="azul-real"] {
-    --cor-background: var(--cor-azul-real);
-}
-
-[data-background="azure-escuro-fundo"] {
-    --cor-background: var(--cor-azure-escuro-fundo);
-}
-
-[data-background="azure-claro-fundo"] {
-    --cor-background: var(--cor-azure-claro-fundo);
-}
-
-[data-background="cinza-claro-botoes"] {
-    --cor-background: var(--cor-cinza-claro-botoes);
-}
-
-[data-background="cinza-claro"] {
-    --cor-background: var(--cor-cinza-claro);
-}
-
-[data-background="verde"] {
-    --cor-background: var(--cor-verde);
-}
-
-[data-background="vermelho"] {
-    --cor-background: var(--cor-vermelho);
-}
-
-[data-background="azul-vivido"] {
-    --cor-background: var(--cor-azul-vivido);
-}
-
-[data-background="azul-pastel"] {
-    --cor-background: var(--cor-azul-pastel);
-}
-
-[data-background="azul-apagado"] {
-    --cor-background: var(--cor-azul-apagado);
-}
-
-[data-background="verde-escuro"] {
-    --cor-background: var(--cor-verde-escuro);
-}
-
-[data-background="azure-apagado"] {
-    --cor-background: var(--cor-azure-apagado);
-}
