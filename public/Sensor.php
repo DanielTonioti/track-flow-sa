@@ -2,7 +2,7 @@
 session_start();
 require_once 'components/start.php';
 
-include '/../infra/conn.php';
+include '../infra/conn.php';
 
 $mensagemCadastro = '';
 $mensagemErro = '';

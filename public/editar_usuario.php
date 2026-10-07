@@ -3,10 +3,7 @@ session_start();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
 
-if (($_SESSION['cargo'] ?? '') !== 'admin') {
-    header("Location: Login.php");
-    exit();
-}
+redirecionarSeNaoAdmin();
 ?>
 <html lang="en">
 

@@ -2,10 +2,7 @@
 session_start();
 require_once 'components/start.php';
 
-if (($_SESSION['cargo'] ?? '') !== 'admin') {
-    header("Location: Login.php");
-    exit();
-}
+redirecionarSeNaoAdmin();
 
 include "../infra/conn.php";
 if (!isset($conn) && isset($db)) {
