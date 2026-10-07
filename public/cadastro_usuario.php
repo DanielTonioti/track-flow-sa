@@ -42,7 +42,6 @@ if (isset($_POST['CadastrarUsuario'])) {
     }
 
     // 2. Validação do avatar (ainda sem mover o arquivo)
-    
         if ($arquivo['size'] > 5 * 1024 * 1024) {
             $erro = "Seu arquivo excede o tamanho máximo permitido (5MB).";
         }
@@ -50,10 +49,8 @@ if (isset($_POST['CadastrarUsuario'])) {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $tipoMime = $finfo->file($arquivo['tmp_name']);
 
-            if (
-                !isset($extensoesPermitidas[$tipoMime]) ||
-                getimagesize($arquivo['tmp_name']) === false
-            ) {
+            if (!isset($extensoesPermitidas[$tipoMime]) || getimagesize($arquivo['tmp_name']) === false) 
+            {
                 $erro = "Tipo de arquivo inválido ou corrompido. Use PNG ou JPG.";
             }
         }
