@@ -2,10 +2,7 @@
 session_start();
 require_once 'components/start.php';
 
-if (($_SESSION['cargo'] ?? '') !== 'admin') {
-    header("Location: Login.php");
-    exit();
-}
+redirecionarSeNaoAdmin();
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 include "../infra/conn.php";
