@@ -26,7 +26,7 @@ require_once '../infra/conn.php';
         ?>
     </header>
     <main>
-        <?php include("components/back_button.php"); ?>
+        <?php include("components/back-button-hub.php"); ?>
         <div class="blockcentro titulo-Sensor">
             <div class="cores-background p-2 rounded-4 flex" data-background="azure-claro-fundo">
                 <h2 class="titulo-Sensor"> Gerenciar trens e sensores </h2>

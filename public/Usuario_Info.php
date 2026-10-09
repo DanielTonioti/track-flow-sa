@@ -148,7 +148,7 @@ if ($id !== false && $id > 0) {
 
 
 
-        <?php include("components/back_button.php"); ?>
+        <?php include("components/back-button-hub.php"); ?>
     </main>
     <footer>
 

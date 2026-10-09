@@ -24,9 +24,6 @@ require_once "components/start.php";
     </header>
 
     <main>
-
-
-
         <hr class="opacity-100 cores-background hub-main-hr d-flex m-0" data-background="cinza-claro">
         <section class="container-fluid px-3 py-4 coinblock">
             <div class="d-flex justify-content-between align-items-center mb-3 px-2">

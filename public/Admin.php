@@ -165,7 +165,7 @@ $resultado2 = $db->query($sql);
                 </button>
             </div>
         <?php } ?>
-        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+        <?php include("components/back-button-hub.php"); ?>
     </main>
 
     <script src="../scripts/scriptUsersPage.js"></script>
