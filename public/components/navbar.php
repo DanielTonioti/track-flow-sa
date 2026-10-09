@@ -23,6 +23,8 @@ if (!empty($_SESSION["avatar"])) {
     }
 }
 
+$usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
+
 ?>
 
 <nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
@@ -68,9 +70,11 @@ if (!empty($_SESSION["avatar"])) {
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="trens_trilhos.php">Trilhos e trens</a>
-                        </li>
+                        <?php if ($usuarioEhAdmin): ?>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="trens_trilhos.php">Trilhos e trens</a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
 
