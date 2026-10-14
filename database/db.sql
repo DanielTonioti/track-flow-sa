@@ -28,7 +28,22 @@ CREATE TABLE
     IF NOT EXISTS trem (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
-        modelo VARCHAR(50) NOT NULL
+        modelo VARCHAR(50) NOT NULL,
+        responsavel_usuario_id INT NULL,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (responsavel_usuario_id) REFERENCES funcionario(id) ON DELETE SET NULL
+    );
+
+CREATE TABLE
+    IF NOT EXISTS rota (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        descricao TEXT NOT NULL,
+        distancia_km DECIMAL(8, 2) NOT NULL,
+        tempo_previsto_min INT NOT NULL,
+        trem_id INT NOT NULL,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (trem_id) REFERENCES trem(id) ON DELETE RESTRICT
     );
 
 CREATE TABLE
