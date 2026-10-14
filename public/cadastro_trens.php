@@ -6,42 +6,41 @@ redirecionarSeNaoAdmin();
 
 $erro = '';
 $sucesso = false;
+$responsavelId = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar-trem'])) {
     $nome = trim($_POST['nome'] ?? '');
     $modelo = trim($_POST['modelo'] ?? '');
-    $responsavelId = filter_input(INPUT_POST, 'responsavel_usuario_id', FILTER_VALIDATE_INT);
+    $responsavelId = $_POST['responsavel_usuario_id'] ?? '';
 
     if ($nome === '') {
         $erro = 'O nome do trem é obrigatório.';
-    } elseif (mb_strlen($nome) < 2 || mb_strlen($nome) > 100) {
+    } elseif (strlen($nome) < 2 || strlen($nome) > 100) {
         $erro = 'O nome do trem deve ter entre 2 e 100 caracteres.';
     } elseif ($modelo === '') {
         $erro = 'O modelo do trem é obrigatório.';
-    } elseif (mb_strlen($modelo) < 2 || mb_strlen($modelo) > 50) {
+    } elseif (strlen($modelo) < 2 || strlen($modelo) > 50) {
         $erro = 'O modelo do trem deve ter entre 2 e 50 caracteres.';
-    } elseif ($responsavelId !== false && $responsavelId > 0) {
-        $stmt = $db->prepare('SELECT id FROM funcionario WHERE id = ?');
-        $stmt->bind_param('i', $responsavelId);
-        $stmt->execute();
-        if ($stmt->get_result()->num_rows === 0) {
-            $erro = 'O usuário responsável informado não existe.';
-        }
-        $stmt->close();
-    } elseif ($responsavelId === false && (isset($_POST['responsavel_usuario_id']) && $_POST['responsavel_usuario_id'] !== '')) {
-        $erro = 'Selecione um usuário responsável válido.';
+    } elseif ($responsavelId !== '' && (!is_numeric($responsavelId) || (int) $responsavelId <= 0)) {
+        $erro = 'Selecione um responsável válido.';
     }
 
     if ($erro === '') {
-        $stmt = $db->prepare('INSERT INTO trem (nome, modelo, responsavel_usuario_id) VALUES (?, ?, ?)');
-        $valorResponsavel = ($responsavelId !== false && $responsavelId > 0) ? $responsavelId : null;
-        $stmt->bind_param('ssi', $nome, $modelo, $valorResponsavel);
+        $responsavel = $responsavelId !== '' ? (int) $responsavelId : null;
+
+        if ($responsavel === null) {
+            $stmt = $db->prepare('INSERT INTO trem (nome, modelo, responsavel_usuario_id) VALUES (?, ?, NULL)');
+            $stmt->bind_param('ss', $nome, $modelo);
+        } else {
+            $stmt = $db->prepare('INSERT INTO trem (nome, modelo, responsavel_usuario_id) VALUES (?, ?, ?)');
+            $stmt->bind_param('ssi', $nome, $modelo, $responsavel);
+        }
 
         if ($stmt->execute()) {
             $sucesso = true;
             $nome = '';
             $modelo = '';
-            $responsavelId = null;
+            $responsavelId = '';
         } else {
             $erro = 'Erro ao cadastrar o trem.';
         }
@@ -73,11 +72,11 @@ $trens = $db->query(
 
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
-        <?php include("components/navbar.php"); ?>
+        <?php include 'components/navbar.php'; ?>
     </header>
 
     <main class="container py-4">
-        <?php include("components/back-button-hub.php"); ?>
+        <?php include 'components/back-button-hub.php'; ?>
 
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
@@ -110,11 +109,11 @@ $trens = $db->query(
                 </div>
 
                 <div class="mb-3">
-                    <label for="responsavel_usuario_id" class="form-label text-white">Usuário responsável</label>
+                    <label for="responsavel_usuario_id" class="form-label text-white">Responsável</label>
                     <select id="responsavel_usuario_id" name="responsavel_usuario_id" class="form-select">
                         <option value="">Sem responsável</option>
                         <?php while ($usuario = $usuarios->fetch_assoc()): ?>
-                            <option value="<?= (int) $usuario['id'] ?>" <?= ((string) ($responsavelId ?? '') === (string) $usuario['id']) ? 'selected' : '' ?>>
+                            <option value="<?= (int) $usuario['id'] ?>" <?= ($responsavelId !== '' && (string) $responsavelId === (string) $usuario['id']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8') ?>)
                             </option>
                         <?php endwhile; ?>
@@ -136,7 +135,6 @@ $trens = $db->query(
                                 <th>Nome</th>
                                 <th>Modelo</th>
                                 <th>Responsável</th>
-                                <th>Criado em</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -148,7 +146,6 @@ $trens = $db->query(
                                         <td><?= htmlspecialchars((string) ($trem['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td><?= htmlspecialchars((string) ($trem['modelo'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td><?= htmlspecialchars((string) ($trem['responsavel_nome'] ?? 'Sem responsável'), ENT_QUOTES, 'UTF-8') ?></td>
-                                        <td><?= htmlspecialchars((string) ($trem['criado_em'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td>
                                             <a href="editar_trem.php?id=<?= (int) $trem['id'] ?>" class="btn btn-sm btn-warning me-2">Editar</a>
                                             <form action="excluir_trem.php" method="POST" class="d-inline">
@@ -160,7 +157,7 @@ $trens = $db->query(
                                 <?php endwhile; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="6" class="text-center">Nenhum trem cadastrado.</td>
+                                    <td colspan="5" class="text-center">Nenhum trem cadastrado.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

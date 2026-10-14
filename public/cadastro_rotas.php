@@ -12,29 +12,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar-rota'])) {
     $descricao = trim($_POST['descricao'] ?? '');
     $distancia = trim($_POST['distancia_km'] ?? '');
     $tempo = trim($_POST['tempo_previsto_min'] ?? '');
-    $tremId = filter_input(INPUT_POST, 'trem_id', FILTER_VALIDATE_INT);
+    $tremId = $_POST['trem_id'] ?? '';
 
     if ($nome === '') {
         $erro = 'O nome da rota é obrigatório.';
-    } elseif (mb_strlen($nome) < 2 || mb_strlen($nome) > 100) {
+    } elseif (strlen($nome) < 2 || strlen($nome) > 100) {
         $erro = 'O nome da rota deve ter entre 2 e 100 caracteres.';
     } elseif ($descricao === '') {
         $erro = 'A descrição da rota é obrigatória.';
-    } elseif (mb_strlen($descricao) < 5 || mb_strlen($descricao) > 500) {
+    } elseif (strlen($descricao) < 5 || strlen($descricao) > 500) {
         $erro = 'A descrição da rota deve ter entre 5 e 500 caracteres.';
     } elseif (!is_numeric($distancia) || (float) $distancia <= 0) {
-        $erro = 'A distância deve ser um número maior que zero.';
-    } elseif (!ctype_digit((string) $tempo) || (int) $tempo <= 0) {
-        $erro = 'O tempo previsto deve ser um número inteiro maior que zero.';
-    } elseif ($tremId === false || $tremId <= 0) {
-        $erro = 'Selecione um trem válido para vincular a rota.';
-    } else {
+        $erro = 'A distância deve ser maior que zero.';
+    } elseif (!ctype_digit((string) $tempo) || $tempo <= 0) {
+        $erro = 'O tempo previsto deve ser um número maior que zero.';
+    } elseif ($tremId === '' || !is_numeric($tremId) || $tremId <= 0) {
+        $erro = 'Selecione um trem válido.';
+    }
+
+    if ($erro === '') {
+        $tremId = (int) $tremId;
         $checkTrem = $db->prepare('SELECT id FROM trem WHERE id = ?');
         $checkTrem->bind_param('i', $tremId);
         $checkTrem->execute();
+
         if ($checkTrem->get_result()->num_rows === 0) {
-            $erro = 'O trem selecionado não existe.';
+            $erro = 'Esse trem não existe.';
         }
+
         $checkTrem->close();
     }
 
@@ -71,9 +76,9 @@ $rotas = $db->query(
     <title>Cadastrar Rota</title>
 </head>
 <body class="cores-background" data-background="azure-escuro-fundo">
-    <header><?php include "components/navbar.php"; ?></header>
+    <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <?php include "components/back-button-hub.php"; ?>
+        <?php include 'components/back-button-hub.php'; ?>
 
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
@@ -145,7 +150,6 @@ $rotas = $db->query(
                                 <th>Distância</th>
                                 <th>Tempo</th>
                                 <th>Trem</th>
-                                <th>Criação</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -159,7 +163,6 @@ $rotas = $db->query(
                                         <td><?= htmlspecialchars((string) ($rota['distancia_km'] ?? ''), ENT_QUOTES, 'UTF-8') ?> km</td>
                                         <td><?= htmlspecialchars((string) ($rota['tempo_previsto_min'] ?? ''), ENT_QUOTES, 'UTF-8') ?> min</td>
                                         <td><?= htmlspecialchars((string) ($rota['trem_nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
-                                        <td><?= htmlspecialchars((string) ($rota['criado_em'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td>
                                             <a href="editar_rota.php?id=<?= (int) $rota['id'] ?>" class="btn btn-sm btn-warning me-2">Editar</a>
                                             <form action="excluir_rota.php" method="POST" class="d-inline">
@@ -171,7 +174,7 @@ $rotas = $db->query(
                                 <?php endwhile; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="8" class="text-center">Nenhuma rota cadastrada.</td>
+                                    <td colspan="7" class="text-center">Nenhuma rota cadastrada.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

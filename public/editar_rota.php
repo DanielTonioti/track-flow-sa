@@ -23,34 +23,40 @@ if (!$rota) {
 
 $erro = '';
 $sucesso = false;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar-rota'])) {
     $nome = trim($_POST['nome'] ?? '');
     $descricao = trim($_POST['descricao'] ?? '');
     $distancia = trim($_POST['distancia_km'] ?? '');
     $tempo = trim($_POST['tempo_previsto_min'] ?? '');
-    $tremId = filter_input(INPUT_POST, 'trem_id', FILTER_VALIDATE_INT);
+    $tremId = $_POST['trem_id'] ?? '';
 
     if ($nome === '') {
         $erro = 'O nome da rota é obrigatório.';
-    } elseif (mb_strlen($nome) < 2 || mb_strlen($nome) > 100) {
+    } elseif (strlen($nome) < 2 || strlen($nome) > 100) {
         $erro = 'O nome da rota deve ter entre 2 e 100 caracteres.';
     } elseif ($descricao === '') {
         $erro = 'A descrição da rota é obrigatória.';
-    } elseif (mb_strlen($descricao) < 5 || mb_strlen($descricao) > 500) {
+    } elseif (strlen($descricao) < 5 || strlen($descricao) > 500) {
         $erro = 'A descrição da rota deve ter entre 5 e 500 caracteres.';
     } elseif (!is_numeric($distancia) || (float) $distancia <= 0) {
-        $erro = 'A distância deve ser um número maior que zero.';
-    } elseif (!ctype_digit((string) $tempo) || (int) $tempo <= 0) {
-        $erro = 'O tempo previsto deve ser um número inteiro maior que zero.';
-    } elseif ($tremId === false || $tremId <= 0) {
-        $erro = 'Selecione um trem válido para vincular a rota.';
-    } else {
+        $erro = 'A distância deve ser maior que zero.';
+    } elseif (!ctype_digit((string) $tempo) || $tempo <= 0) {
+        $erro = 'O tempo previsto deve ser um número maior que zero.';
+    } elseif ($tremId === '' || !is_numeric($tremId) || $tremId <= 0) {
+        $erro = 'Selecione um trem válido.';
+    }
+
+    if ($erro === '') {
+        $tremId = (int) $tremId;
         $checkTrem = $db->prepare('SELECT id FROM trem WHERE id = ?');
         $checkTrem->bind_param('i', $tremId);
         $checkTrem->execute();
+
         if ($checkTrem->get_result()->num_rows === 0) {
-            $erro = 'O trem selecionado não existe.';
+            $erro = 'Esse trem não existe.';
         }
+
         $checkTrem->close();
     }
 
@@ -86,9 +92,9 @@ $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
     <title>Editar Rota</title>
 </head>
 <body class="cores-background" data-background="azure-escuro-fundo">
-    <header><?php include "components/navbar.php"; ?></header>
+    <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <?php include "components/back-button-hub.php"; ?>
+        <?php include 'components/back-button-hub.php'; ?>
 
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">

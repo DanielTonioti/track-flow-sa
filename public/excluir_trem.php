@@ -9,20 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-if ($id === false || $id <= 0) {
+$id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+if ($id <= 0) {
     header('Location: cadastro_trens.php');
-    exit;
-}
-
-$checkRota = $db->prepare('SELECT id FROM rota WHERE trem_id = ? LIMIT 1');
-$checkRota->bind_param('i', $id);
-$checkRota->execute();
-$possuiRota = $checkRota->get_result()->fetch_assoc();
-$checkRota->close();
-
-if ($possuiRota) {
-    header('Location: cadastro_trens.php?erro=' . urlencode('Não é possível excluir este trem porque ele está vinculado a uma rota.')); 
     exit;
 }
 
@@ -31,5 +20,5 @@ $stmt->bind_param('i', $id);
 $stmt->execute();
 $stmt->close();
 
-header('Location: cadastro_trens.php?sucesso=1');
+header('Location: cadastro_trens.php');
 exit;

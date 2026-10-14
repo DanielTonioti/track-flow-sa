@@ -12,6 +12,7 @@ if ($id === false || $id <= 0) {
 
 $erro = '';
 $sucesso = false;
+$responsavelId = '';
 
 $stmt = $db->prepare('SELECT id, nome, modelo, responsavel_usuario_id FROM trem WHERE id = ?');
 $stmt->bind_param('i', $id);
@@ -27,37 +28,47 @@ if (!$trem) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar-trem'])) {
     $nome = trim($_POST['nome'] ?? '');
     $modelo = trim($_POST['modelo'] ?? '');
-    $responsavelId = filter_input(INPUT_POST, 'responsavel_usuario_id', FILTER_VALIDATE_INT);
+    $responsavelId = $_POST['responsavel_usuario_id'] ?? '';
 
     if ($nome === '') {
         $erro = 'O nome do trem é obrigatório.';
-    } elseif (mb_strlen($nome) < 2 || mb_strlen($nome) > 100) {
+    } elseif (strlen($nome) < 2 || strlen($nome) > 100) {
         $erro = 'O nome do trem deve ter entre 2 e 100 caracteres.';
     } elseif ($modelo === '') {
         $erro = 'O modelo do trem é obrigatório.';
-    } elseif (mb_strlen($modelo) < 2 || mb_strlen($modelo) > 50) {
+    } elseif (strlen($modelo) < 2 || strlen($modelo) > 50) {
         $erro = 'O modelo do trem deve ter entre 2 e 50 caracteres.';
-    } elseif ($responsavelId !== false && $responsavelId > 0) {
-        $check = $db->prepare('SELECT id FROM funcionario WHERE id = ?');
-        $check->bind_param('i', $responsavelId);
-        $check->execute();
-        if ($check->get_result()->num_rows === 0) {
-            $erro = 'O usuário responsável informado não existe.';
-        }
-        $check->close();
-    } elseif ($responsavelId === false && (isset($_POST['responsavel_usuario_id']) && $_POST['responsavel_usuario_id'] !== '')) {
-        $erro = 'Selecione um usuário responsável válido.';
+    } elseif ($responsavelId !== '' && (!is_numeric($responsavelId) || (int) $responsavelId <= 0)) {
+        $erro = 'Selecione um responsável válido.';
     }
 
     if ($erro === '') {
-        $valorResponsavel = ($responsavelId !== false && $responsavelId > 0) ? $responsavelId : null;
-        $update = $db->prepare('UPDATE trem SET nome = ?, modelo = ?, responsavel_usuario_id = ? WHERE id = ?');
-        $update->bind_param('ssii', $nome, $modelo, $valorResponsavel, $id);
+        $responsavel = $responsavelId !== '' ? (int) $responsavelId : null;
+
+        if ($responsavel !== null) {
+            $check = $db->prepare('SELECT id FROM funcionario WHERE id = ?');
+            $check->bind_param('i', $responsavel);
+            $check->execute();
+            if ($check->get_result()->num_rows === 0) {
+                $erro = 'Esse funcionário não existe.';
+            }
+            $check->close();
+        }
+    }
+
+    if ($erro === '') {
+        if ($responsavel === null) {
+            $update = $db->prepare('UPDATE trem SET nome = ?, modelo = ?, responsavel_usuario_id = NULL WHERE id = ?');
+            $update->bind_param('ssi', $nome, $modelo, $id);
+        } else {
+            $update = $db->prepare('UPDATE trem SET nome = ?, modelo = ?, responsavel_usuario_id = ? WHERE id = ?');
+            $update->bind_param('ssii', $nome, $modelo, $responsavel, $id);
+        }
 
         if ($update->execute()) {
             $trem['nome'] = $nome;
             $trem['modelo'] = $modelo;
-            $trem['responsavel_usuario_id'] = $valorResponsavel;
+            $trem['responsavel_usuario_id'] = $responsavel;
             $sucesso = true;
         } else {
             $erro = 'Erro ao atualizar o trem.';
@@ -80,9 +91,9 @@ $usuarios = $db->query('SELECT id, nome, cargo FROM funcionario ORDER BY nome AS
     <title>Editar Trem</title>
 </head>
 <body class="cores-background" data-background="azure-escuro-fundo">
-    <header><?php include "components/navbar.php"; ?></header>
+    <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <?php include "components/back-button-hub.php"; ?>
+        <?php include 'components/back-button-hub.php'; ?>
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h1 class="titulo-Sensor mb-0">Editar Trem</h1>
@@ -114,7 +125,7 @@ $usuarios = $db->query('SELECT id, nome, cargo FROM funcionario ORDER BY nome AS
                 </div>
 
                 <div class="mb-3">
-                    <label for="responsavel_usuario_id" class="form-label text-white">Usuário responsável</label>
+                    <label for="responsavel_usuario_id" class="form-label text-white">Responsável</label>
                     <select id="responsavel_usuario_id" name="responsavel_usuario_id" class="form-select">
                         <option value="">Sem responsável</option>
                         <?php while ($usuario = $usuarios->fetch_assoc()): ?>

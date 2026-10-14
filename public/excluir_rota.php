@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-if ($id === false || $id <= 0) {
+$id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+if ($id <= 0) {
     header('Location: cadastro_rotas.php');
     exit;
 }
@@ -20,5 +20,5 @@ $stmt->bind_param('i', $id);
 $stmt->execute();
 $stmt->close();
 
-header('Location: cadastro_rotas.php?sucesso=1');
+header('Location: cadastro_rotas.php');
 exit;
