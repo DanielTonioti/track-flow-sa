@@ -29,7 +29,7 @@ CREATE TABLE
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         modelo VARCHAR(50) NOT NULL,
-        responsavel_usuario_id INT NULL,
+        responsavel_usuario_id INT NOT NULL,
         criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (responsavel_usuario_id) REFERENCES funcionario(id) ON DELETE SET NULL
     );
