@@ -58,12 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar-rota'])) {
 }
 
 $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
-$rotas = $db->query(
-    "SELECT r.*, t.nome AS trem_nome
-     FROM rota r
-     INNER JOIN trem t ON t.id = r.trem_id
-     ORDER BY r.id DESC"
-);
+$rotas = $db->query("SELECT rota.*, trem.nome FROM rota INNER JOIN trem ON trem.id = rota.trem_id ORDER BY rota.id DESC");
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
