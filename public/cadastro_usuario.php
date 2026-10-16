@@ -16,12 +16,12 @@ $extensoesPermitidas = [
 
 if (isset($_POST['CadastrarUsuario'])) {
 
-    $nome     = trim($_POST['nome'] ?? '');
-    $email    = trim($_POST['email'] ?? '');
-    $senha    = $_POST['password'] ?? '';
+    $nome = trim($_POST['nome'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $senha = $_POST['password'] ?? '';
     $telefone = trim($_POST['telefone'] ?? '');
-    $acesso   = $_POST['acesso'] ?? '';
-    $arquivo  = $_FILES['avatar'] ?? null;
+    $acesso = $_POST['acesso'] ?? '';
+    $arquivo = $_FILES['avatar'] ?? null;
     $tipoMime = '';
 
     // 1. Validação dos campos de texto
@@ -42,6 +42,7 @@ if (isset($_POST['CadastrarUsuario'])) {
     }
 
     // 2. Validação do avatar (ainda sem mover o arquivo)
+    if (!$arquivo === " ") {
         if ($arquivo['size'] > 5 * 1024 * 1024) {
             $erro = "Seu arquivo excede o tamanho máximo permitido (5MB).";
         }
@@ -54,7 +55,7 @@ if (isset($_POST['CadastrarUsuario'])) {
                 $erro = "Tipo de arquivo inválido ou corrompido. Use PNG ou JPG.";
             }
         }
-    
+    }
 
     // 3. Banco de dados + upload (o arquivo só é movido depois de validar tudo)
     if ($erro === "") {
@@ -64,42 +65,41 @@ if (isset($_POST['CadastrarUsuario'])) {
         $stmt->execute();
         $existe = $stmt->get_result()->num_rows > 0;
         $stmt->close();
-
+   
         if ($existe) {
             $erro = "Este e-mail já está cadastrado.";
-        } else {
-            $pastaFisica = __DIR__ . "/../assets/images/uploads/";
+        } 
+        else {
+                if(!$arquivo === " ") {
 
-            if (!is_dir($pastaFisica)) {
-                mkdir($pastaFisica, 0755, true);
-            }
+                    $pastaFisica = __DIR__ . "/../assets/images/uploads/";
 
-            $novoNome = bin2hex(random_bytes(16)) . "." . $extensoesPermitidas[$tipoMime];
-            $destino  = $pastaFisica . $novoNome;
+                    if (!is_dir($pastaFisica)) {
+                    mkdir($pastaFisica, 0755, true);
+                    }
 
-            if (!move_uploaded_file($arquivo['tmp_name'], $destino)) {
+                    $novoNome = bin2hex(random_bytes(16)) . "." . $extensoesPermitidas[$tipoMime];
+                    $destino  = $pastaFisica . $novoNome;
+
+                    if (!move_uploaded_file($arquivo['tmp_name'], $destino)) {
                 $erro = "Erro ao mover a imagem para o servidor.";
-            } else {
-                // Caminho salvo no banco (sem "../" e sempre minúsculo)
-                $caminhoAvatar = "assets/images/uploads/" . $novoNome;
-                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-                $stmt = $db->prepare(
-                    "INSERT INTO funcionario (nome, email, senha, telefone, cargo, avatar)
-                     VALUES (?, ?, ?, ?, ?, ?)"
-                );
-                $stmt->bind_param("ssssss", $nome, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
-
-                if ($stmt->execute()) {
-                    $stmt->close();
-                    header("Location: cadastro_usuario.php?sucesso=1");
-                    exit();
+                    } else {
+                        $caminhoAvatar = "assets/images/uploads/" . $novoNome;
+                        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+                    }
                 }
+               $stmt = $db->prepare("INSERT INTO funcionario (nome, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?)");
+                        $stmt->bind_param("ssssss", $nome, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
+
+                        if ($stmt->execute()) {
+                        $stmt->close();
+                        header("Location: cadastro_usuario.php?sucesso=1");
+                        exit();
+                        }
 
                 $stmt->close();
-                unlink($destino); // desfaz o upload se o banco falhar
+                unlink($destino);
                 $erro = "Erro ao cadastrar o usuário no banco de dados.";
-            }
         }
     }
 }
