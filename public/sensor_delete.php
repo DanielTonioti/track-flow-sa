@@ -4,8 +4,39 @@ require_once '../infra/conn.php';
 require_once 'components/start.php';
 redirecionarSeNaoAdmin();
 
+// Token CSRF: o excluir_sensor.php precisa conferir este valor (veja a explicação na conversa)
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+function escapar_html($valor): string
+{
+    return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
+}
+
+$sensores = [
+    ['id' => 1, 'tipo' => 'trem', 'codigo' => 'S.TRM.001', 'status' => 'Funcionando'],
+    ['id' => 2, 'tipo' => 'trem', 'codigo' => 'S.TRM.002', 'status' => 'Funcionando'],
+    ['id' => 3, 'tipo' => 'trem', 'codigo' => 'S.TRM.003', 'status' => 'Funcionando'],
+    ['id' => 4, 'tipo' => 'trem', 'codigo' => 'S.TRM.004', 'status' => 'Funcionando'],
+    ['id' => 5, 'tipo' => 'trem', 'codigo' => 'S.TRM.005', 'status' => 'Não Funcionando'],
+    ['id' => 6, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.001', 'status' => 'Funcionando'],
+    ['id' => 7, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.002', 'status' => 'Funcionando'],
+    ['id' => 8, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.003', 'status' => 'Funcionando'],
+    ['id' => 9, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.004', 'status' => 'Funcionando'],
+    ['id' => 10, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.005', 'status' => 'Funcionando'],
+];
+
+// Ordem das seções na tela: trilhos primeiro, depois trens
+$secoes = ['trilho' => 'Sensores trilhos', 'trem' => 'Sensores trens'];
+
+$porTipo = ['trilho' => [], 'trem' => []];
+foreach ($sensores as $sensor) {
+    $porTipo[$sensor['tipo']][] = $sensor;
+}
 ?>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -14,15 +45,13 @@ redirecionarSeNaoAdmin();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../Styles/style.css">
-    <title>Excluição de Sensores</title>
+    <title>Exclusão de Sensores</title>
 </head>
 
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php
-
         include("components/navbar.php");
-
         ?>
     </header>
     <main>
@@ -34,229 +63,63 @@ redirecionarSeNaoAdmin();
                 </p>
             </div>
         </div>
-        <div>
-            <div class="text-center text-white p-3">
-                <button id="botao-admin" class="btn text-white fw-bold" type="button">
-                    <div class="d-flex align-items-center">
-                        Sensores trilhos
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin"
-                            class="users-page-arrow" id="seta-admin">
-                    </div>
+
+        <?php foreach ($secoes as $tipo => $titulo):
+            $listaId = 'lista-' . $tipo;
+            ?>
+            <div class="text-center cores-color p-3" data-color="white">
+                <button class="btn text-white fw-bold" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#<?= $listaId ?>" aria-expanded="false" aria-controls="<?= $listaId ?>">
+                    <span class="d-flex align-items-center">
+                        <?= escapar_html($titulo) ?>
+                        <img src="../assets/icons/seta-para-baixo.png" alt="" class="users-page-arrow">
+                    </span>
                 </button>
-                <div class="collapse" id="lista-adm">
+
+                <div class="collapse" id="<?= $listaId ?>">
                     <div class="d-flex flex-column mt-2">
-                        <div>
+                        <?php if (empty($porTipo[$tipo])): ?>
+                            <p>Nenhum sensor cadastrado.</p>
+                        <?php endif; ?>
+
+                        <?php foreach ($porTipo[$tipo] as $sensor): ?>
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
                                     data-color="white" data-background="azure-claro-fundo">
-
+                                    <?= escapar_html($sensor['codigo']) ?>
                                 </p>
                                 <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
-
+                                    <?= escapar_html($sensor['status']) ?>
                                 </p>
-                                <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                    Deletar
-                                </button>
+                                <form action="excluir_sensor.php" method="POST" class="d-inline"
+                                    onsubmit="return confirm('Excluir este sensor?');">
+                                    <input type="hidden" name="id" value="<?= (int) $sensor['id'] ?>">
+                                    <input type="hidden" name="csrf_token"
+                                        value="<?= escapar_html($_SESSION['csrf_token']) ?>">
+                                    <button type="submit"
+                                        class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
+                                        data-color="white">
+                                        Deletar
+                                    </button>
+                                </form>
                             </div>
-                        </div>
-                        <div>
-                            <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-
-                                </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                    Deletar
-                                </button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-
-                                </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                    Deletar
-                                </button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex centralizar-tabela">
-                                <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-
-                                </p>
-                                <p class="border-tabela admin-tabela px-1 w-auto cores-color cores-background"
-                                    data-color="white" data-background="azure-claro-fundo">
-
-                                </p>
-                                <button
-                                    class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                    data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                    Deletar
-                                </button>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="text-center cores-color p-3" data-color="white">
-            <button id="botao-func" class="btn text-white fw-bold" type="button">
-                Sensores trens
-                <img src="../assets/icons/seta-para-baixo.png" alt="seta-para-baixo do admin" class="users-page-arrow"
-                    id="seta-func">
-            </button>
-            <div class="collapse" id="lista-func">
-                <div class="d-flex flex-column mt-2">
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
+        <?php endforeach; ?>
 
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                Deletar
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                Deletar
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                Deletar
-                            </button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex centralizar-tabela">
-                            <p class="border-tabela admin-tabela  tabela-texto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela cores-color cores-background" data-color="white"
-                                data-background="azure-claro-fundo">
-
-                            </p>
-                            <p class="border-tabela admin-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-background="azure-claro-fundo">
-
-                            </p>
-                            <button class=" admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                data-color="white" data-bs-toggle="modal" data-bs-target="#ModalDeletarSensor">
-                                Deletar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        </div>
-        <button id="voltarhub" class="btn btn-danger back-buttom"> Voltar </button>
+        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
     </main>
-    <div class="modal fade CadastroTremModal" id="ModalDeletarSensor" tabindex="-1"
-        aria-labelledby="TituloModalDeletarSensor" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content CadastroTremModalBox cores-background cores-color" data-background="cinza-claro"
-                data-color="black">
-                <h2 id="TituloModalDeletarSensor">Certeza que deseja<br> excluir Sensor:<br>
-                    <span>???</span>.
-                </h2>
-                <div class="CadastroTremModalButtons">
-                    <button type="button" id="ConfirmarExclusaoSensor" data-bs-dismiss="modal">Confirmar</button>
-                    <button type="button" data-bs-dismiss="modal">voltar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <form id="deleteSensorForm" action="excluir_sensor.php" method="POST">
-        <input type="hidden" name="id" id="deleteSensorId" value="">
-    </form>
     <footer>
 
     </footer>
 
-    <script src="../script/scriptSensorDelete.js"></script>
-    <script src="../scripts/scriptsensorpage.js"></script>
-    <script src="../scripts/scriptVoltar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
 </body>
 
 </html>

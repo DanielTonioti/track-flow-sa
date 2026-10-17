@@ -8,18 +8,46 @@ if (session_status() === PHP_SESSION_NONE) {
 $avatarPadrao = "../assets/icons/User.png";
 $avatar = $avatarPadrao;
 
-// Usa o avatar cadastrado só se o arquivo realmente existir
-if (!empty($_SESSION["avatar"])) {
+// Esta navbar está em public/components/, então a raiz fica 2 níveis acima.
+$raizProjeto = realpath(__DIR__ . "/../..");
+$pastaAssets = realpath(__DIR__ . "/../../assets");
 
-    // Normaliza: remove "../" e padroniza a pasta (caso existam dados antigos)
-    $caminho = str_replace("../", "", $_SESSION["avatar"]);
-    $caminho = preg_replace('#^Assets/#', 'assets/', $caminho);
+if (!empty($_SESSION["avatar"]) && $raizProjeto !== false && $pastaAssets !== false) {
+    $valorAvatar = str_replace("\\", "/", trim((string) $_SESSION["avatar"]));
+    $caminhoRelativo = preg_replace('#^(?:\.\./)+#', '', $valorAvatar);
+    $caminhoRelativo = preg_replace('#^Assets/#i', 'assets/', $caminhoRelativo);
+    $candidatosAvatar = [];
 
-    // Esta navbar está em pages/components/, então a raiz fica 2 níveis acima
-    $arquivoFisico = __DIR__ . "/../../" . $caminho;
+    if (preg_match('#^(?:[A-Za-z]:/|/)#', $valorAvatar)) {
+        $candidatosAvatar[] = $valorAvatar;
+    } elseif (strpos($caminhoRelativo, 'assets/') === 0) {
+        $candidatosAvatar[] = $raizProjeto . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $caminhoRelativo);
+    } elseif (strpos($caminhoRelativo, '/') === false && $caminhoRelativo !== '') {
+        $candidatosAvatar[] = $pastaAssets . DIRECTORY_SEPARATOR . 'images'
+            . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $caminhoRelativo;
+    } elseif ($caminhoRelativo !== '') {
+        $candidatosAvatar[] = $pastaAssets . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $caminhoRelativo);
+    }
 
-    if (is_file($arquivoFisico)) {
-        $avatar = "../" . $caminho;
+    $prefixoAssets = rtrim($pastaAssets, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+    foreach ($candidatosAvatar as $candidatoAvatar) {
+        $arquivoFisico = realpath($candidatoAvatar);
+        if ($arquivoFisico === false || !is_file($arquivoFisico)) {
+            continue;
+        }
+
+        $comparacaoPrefixo = DIRECTORY_SEPARATOR === '\\'
+            ? strncasecmp($arquivoFisico, $prefixoAssets, strlen($prefixoAssets))
+            : strncmp($arquivoFisico, $prefixoAssets, strlen($prefixoAssets));
+
+        if ($comparacaoPrefixo === 0) {
+            $caminhoDentroAssets = substr($arquivoFisico, strlen($prefixoAssets));
+            $avatar = "../assets/" . str_replace(DIRECTORY_SEPARATOR, "/", $caminhoDentroAssets);
+            break;
+        }
     }
 }
 
@@ -56,16 +84,16 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                         TrackFlow
                     </h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
+                        aria-label="Fechar"></button>
                 </div>
 
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="admin.php">Funcionarios</a>
+                            <a class="nav-link active" aria-current="page" href="Admin.php">Funcionários</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="relatories.php">Relatórios</a>
+                            <a class="nav-link active" aria-current="page" href="Relatories.php">Relatórios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>

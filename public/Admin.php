@@ -6,7 +6,7 @@ $sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
 $resultado = $db->query($sql);
 $resultado2 = $db->query($sql);
 ?>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -40,8 +40,8 @@ $resultado2 = $db->query($sql);
         <div>
             <div class="text-center text-white p-3">
 
-                <button id="botao-admin" data-bs-toggle="collapse" role="button"
-                    class="btn text-white fw-bold" type="button">
+                <button id="botao-admin" data-bs-toggle="collapse" role="button" class="btn text-white fw-bold"
+                    type="button">
 
                     <div class="d-flex align-items-center">
                         Administradores
@@ -77,13 +77,10 @@ $resultado2 = $db->query($sql);
 
                                 <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
 
-                                    <a href="editar_usuario.php?id=<?= $adm['id'] ?>" class="text-decoration-none">
-
-                                        <button class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                            data-color="white" data-background="azure-claro-fundo">
-                                            Editar
-                                        </button>
-
+                                    <a href="editar_usuario.php?id=<?= (int) $adm['id'] ?>"
+                                        class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background d-inline-block text-decoration-none"
+                                        data-color="white" data-background="azure-claro-fundo">
+                                        Editar
                                     </a>
 
                                 <?php } ?>
@@ -100,8 +97,8 @@ $resultado2 = $db->query($sql);
         <div>
             <div class="text-center text-white p-3">
 
-                <button id="botao-func" data-bs-toggle="collapse" role="button"  
-                    class="btn text-white fw-bold" type="button">
+                <button id="botao-func" data-bs-toggle="collapse" role="button" class="btn text-white fw-bold"
+                    type="button">
 
                     <div class="d-flex align-items-center">Funcionários
                         <img src="../assets/icons/seta-para-baixo.png" alt="Seta para baixo dos funcionários"
@@ -135,13 +132,10 @@ $resultado2 = $db->query($sql);
 
                                 <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
 
-                                    <a href="editar_usuario.php?id=<?= $user['id'] ?>" class="text-decoration-none">
-
-                                        <button class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background"
-                                            data-color="white" data-background="azure-claro-fundo">
-                                            Editar
-                                        </button>
-
+                                    <a href="editar_usuario.php?id=<?= (int) $user['id'] ?>"
+                                        class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background d-inline-block text-decoration-none"
+                                        data-color="white" data-background="azure-claro-fundo">
+                                        Editar
                                     </a>
 
                                 <?php } ?>
@@ -158,22 +152,21 @@ $resultado2 = $db->query($sql);
 
         <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
             <div class="cores-color cores-background centralizar-tabela flex" data-color="white">
-                <button
-                    class="admin-button cores-color cores-background rounded-pill mt-1 align-items-center justify-content-center text-center"
+                <a href="cadastro_usuario.php"
+                    class="admin-button cores-color cores-background rounded-pill mt-1 d-inline-block text-decoration-none text-center"
                     data-color="white" data-background="azure-claro-fundo" id="admin-button">
                     Adicionar Funcionário
-                </button>
+                </a>
             </div>
         <?php } ?>
-        <?php include("components/back-button-hub.php"); ?>
+        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
     </main>
 
     <script src="../scripts/scriptUsersPage.js"></script>
-    <script src="../scripts/scriptVoltar.js"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
 </body>
 
 </html>

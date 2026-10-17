@@ -3,8 +3,35 @@ session_start();
 
 require_once "../infra/conn.php";
 require_once "components/start.php";
+
+function escapar_html($valor): string
+{
+    return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
+}
+
+// Dados de exemplo (os mesmos que estavam fixos no HTML).
+// Quando a tabela de sensores existir, troque este array por uma consulta ao banco.
+$sensores = [
+    ['id' => 1, 'tipo' => 'trem', 'codigo' => 'S.TRM.001', 'velocidade' => 12, 'temperatura' => 56, 'status' => 'Funcionando'],
+    ['id' => 2, 'tipo' => 'trem', 'codigo' => 'S.TRM.002', 'velocidade' => 26, 'temperatura' => 45, 'status' => 'Funcionando'],
+    ['id' => 3, 'tipo' => 'trem', 'codigo' => 'S.TRM.003', 'velocidade' => 14, 'temperatura' => 24, 'status' => 'Funcionando'],
+    ['id' => 4, 'tipo' => 'trem', 'codigo' => 'S.TRM.004', 'velocidade' => 1670, 'temperatura' => 5400, 'status' => 'Funcionando'],
+    ['id' => 5, 'tipo' => 'trem', 'codigo' => 'S.TRM.005', 'velocidade' => 0, 'temperatura' => 12, 'status' => 'Não Funcionando'],
+    ['id' => 6, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.001', 'temperatura' => 21, 'status' => 'Funcionando'],
+    ['id' => 7, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.002', 'temperatura' => 19, 'status' => 'Funcionando'],
+    ['id' => 8, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.003', 'temperatura' => 23, 'status' => 'Funcionando'],
+    ['id' => 9, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.004', 'temperatura' => 17, 'status' => 'Funcionando'],
+    ['id' => 10, 'tipo' => 'trilho', 'codigo' => 'S.TRLH.005', 'temperatura' => 29, 'status' => 'Funcionando'],
+];
+
+// Uma coluna para trens e outra para trilhos
+$colunas = ['trem' => [], 'trilho' => []];
+foreach ($sensores as $sensor) {
+    $colunas[$sensor['tipo']][] = $sensor;
+}
 ?>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -12,11 +39,11 @@ require_once "components/start.php";
     <link rel="shortcut icon" href="../assets/logo/icone.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../styles/style.css">
-    <title> Página Inicial </title>
+    <link rel="stylesheet" href="../Styles/style.css">
+    <title>Página Inicial</title>
 </head>
 
-<body class="cores-background " data-background="azure-escuro-fundo">
+<body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php
         include("components/navbar.php");
@@ -36,8 +63,7 @@ require_once "components/start.php";
                 </div>
             </div>
 
-
-            <div id="hubCarousel" class="carousel slide " data-bs-ride="False">
+            <div id="hubCarousel" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="hub-chart-panel">
@@ -66,433 +92,75 @@ require_once "components/start.php";
                 </div>
             </div>
         </section>
+
         <!-- Area sensores -->
         <div class="flex centralizar-tabela mt-4 cores-color" data-color="white">
-            <div class="d-flex flex-column">
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor001">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRM.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin001">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor001">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Velocidade média:</p>
-                                <p>12 km/h</p>
+            <?php foreach ($colunas as $lista): ?>
+                <div class="d-flex flex-column">
+                    <?php foreach ($lista as $sensor):
+                        $id = (int) $sensor['id'];
+
+                        $linhas = [];
+                        if (isset($sensor['velocidade'])) {
+                            $linhas['Velocidade média:'] = $sensor['velocidade'] . ' km/h';
+                        }
+                        $linhas['Temperatura média:'] = $sensor['temperatura'] . ' C°';
+                        $linhas['Status médio:'] = $sensor['status'];
+                        ?>
+                        <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
+                            type="button" data-bs-toggle="collapse" data-bs-target="#lista-sensor<?= $id ?>"
+                            aria-expanded="false" aria-controls="lista-sensor<?= $id ?>">
+                            <span class="d-block align-items-center cores-color fw-bold" data-color="white">
+                                <?= escapar_html($sensor['codigo']) ?>
+                                <img src="../assets/icons/seta-para-baixo.png" alt="" class="Home-page-arrow">
+                            </span>
+                        </button>
+
+                        <div class="collapse" id="lista-sensor<?= $id ?>">
+                            <div class="d-flex flex-column">
+                                <?php foreach ($linhas as $rotulo => $valor): ?>
+                                    <div class="border-tabela grid-element cores-background justify-content-center align-items-center rounded-2 fw-bold"
+                                        data-background="verde-escuro">
+                                        <div class="justify-content-center align-items-center mt-2 d-flex">
+                                            <p class="text-center me-1"><?= escapar_html($rotulo) ?></p>
+                                            <p><?= escapar_html($valor) ?></p>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
+                                <a href="detalhes_sensor.php?id=<?= $id ?>"
+                                    class="border-tabela grid-element cores-background d-flex justify-content-center align-items-center rounded-2 fw-bold text-reset text-decoration-none"
+                                    data-background="azul-pastel">
+                                    <span class="mt-2">Detalhes</span>
+                                </a>
                             </div>
                         </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p> 56 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p> Funcionando </p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor002">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRM.002
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin002">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor002">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Velocidade média:</p>
-                                <p>26 km/h</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>45 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor003">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRM.003
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin003">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor003">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Velocidade média:</p>
-                                <p>14 km/h</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>24 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor004">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRM.004
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin004">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor004">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Velocidade média:</p>
-                                <p>1670 km/h</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>5400 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor005">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRM.005
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin005">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor005">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Velocidade média:</p>
-                                <p>0 km/h</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>12 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Não Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="d-flex flex-column">
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor006">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin006">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor006">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>21 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor007">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin007">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor007">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>19 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor008">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin008">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor008">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>23 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor009">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin009">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor009">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>17 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="border-tabela grid-element cores-background rounded-2" data-background="verde"
-                    id="sensor010">
-                    <div class="align-items-center d-block cores-color fw-bold" data-color="white">
-                        S.TRLH.001
-                        <img src="../assets/icons/seta-para-baixo.png" alt="seta lista home page"
-                            class="Home-page-arrow" id="seta-admin010">
-                    </div>
-                </button>
-                <div class="collapse" id="lista-sensor010">
-                    <div class="d-flex flex-column">
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Temperatura média:</p>
-                                <p>29 C°</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="verde-escuro">
-                            <div class="justify-content-center align-items-center mt-2 d-flex">
-                                <p class="text-center me-1">
-                                    Status médio:</p>
-                                <p>Funcionando</p>
-                            </div>
-                        </div>
-                        <div class="border-tabela grid-element cores-background justify-content-center align-items-center cores-background rounded-2 fw-bold"
-                            data-background="azul-pastel">
-                            <div class="justify-content-center align-items-center mt-2 d-flex cursor-pointer"
-                                id="detalhes-sensor">
-                                <p class="text-center me-1">
-                                    Detalhes</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
+
         <!-- Area botoes de modificação -->
         <?php if (($_SESSION['cargo'] ?? '') === 'admin'): ?>
             <div class="justify-content-center align-items-center d-flex mt-5">
-                <button
-                    class="border-none cores-background me-4 rounded-pill cores-color px-3 fw-bold hub-main-sensor-management"
+                <a href="Sensor.php"
+                    class="border-none cores-background me-4 rounded-pill cores-color px-3 py-2 fw-bold hub-main-sensor-management d-inline-block text-decoration-none"
                     data-background="azure-claro-fundo" data-color="white" id="AddSensor">
-                    <p class="mt-2">Adicionar sensor</p>
-                </button>
-                <button id="excluirsensor"
-                    class="cores-background align-items-center rounded-pill justify-content-center cores-color px-3 fw-bold hub-main-sensor-management me-4"
+                    Adicionar sensor
+                </a>
+                <a href="sensor_delete.php" id="excluirsensor"
+                    class="border-none cores-background me-0 rounded-pill cores-color px-3 py-2 fw-bold hub-main-sensor-management d-inline-block text-decoration-none"
                     data-background="azure-claro-fundo" data-color="white">
-                    <p class="mt-2">Excluir sensor</p>
-                </button>
+                    Excluir sensor
+                </a>
             </div>
         <?php endif; ?>
-
     </main>
+
     <footer>
 
     </footer>
+
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         google.charts.load('current', { packages: ['corechart'], language: 'pt-BR' });
@@ -610,12 +278,7 @@ require_once "components/start.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <?php if (($_SESSION['cargo'] ?? '') === 'admin'): ?>
-        <script src="../scripts/scriptexcluirsensor.js"></script>
-        <script src="../scripts/ScriptAdicionar.js"></script>
-    <?php endif; ?>
     <script src="../scripts/scriptNavbar.js"></script>
-    <script src="../scripts/scriptHub.js"></script>
 </body>
 
 </html>

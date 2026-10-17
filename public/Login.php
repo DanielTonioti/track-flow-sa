@@ -121,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             data-background="azul-real">
                             Entrar
                         </button>
-                        <p class="userselect toggle fs-5 text-center fw-bold text-light mt-4 cursor-pointer">
+                        <p class="userselect toggle fs-5 text-center fw-bold text-light mt-4">
                             <a class="text-light" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                                 Esqueceu a senha?
                             </a>

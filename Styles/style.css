@@ -150,14 +150,7 @@ body {
 
 
 /* Botão Flutuante de Voltar */
-.back-buttom {
-    position: absolute;
-    padding: 18px;
-    font-family: var(--Fonte-lucinda);
-    font-size: 1vw;
-    top: 85%;
-    left: 2%;
-}
+
 
 
 /* ==========================================================================
@@ -356,6 +349,8 @@ body {
     margin-top: 1vh;
 }
 
+.Home-page-arrow { transition: transform .3s; }
+[aria-expanded="true"] .Home-page-arrow { transform: rotate(180deg); }
 
 .hub-main-hr {
     height: 0.25vh;
@@ -667,6 +662,3 @@ body {
         margin-top: 1.2rem;
     }
 }
-
-
-

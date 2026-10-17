@@ -94,8 +94,7 @@ $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <?php include 'components/back-button-hub.php'; ?>
-
+        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h1 class="titulo-Sensor mb-0">Editar Rota</h1>
@@ -153,5 +152,9 @@ $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
             </div>
         </form>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/scriptNavbar.js"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -23,14 +23,14 @@
         <div class="d-flex flex-column align-items-center justify-content-center vh-100">
             <img src="Assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="img-login-page">
             <p class="index-titulo-pag">Bem vindo ao site TrackFlow</p>
-            <button type="submit" class="btn btn-light fs-3 shadow" id="index-button"> Ir para o login </button>
+            <a href="public/Login.php" type="submit" class="btn btn-light fs-3 shadow" id="index-button"> Ir para o login </a>
         </div>
     </main>
 
     <footer>
 
     </footer>
-    <script src="scripts/scriptIndex.js"> </script>
+
 </body>
 
 </html>
