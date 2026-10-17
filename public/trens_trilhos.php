@@ -37,7 +37,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
         <?php include("components/navbar.php"); ?>
     </header>
     <main class="container py-4">
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+       
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h2 class="titulo-Sensor mb-0">Trens e rotas</h2>
@@ -127,8 +127,9 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                 </div>
             </div>
         </div>
+         
     </main>
-
+<a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
