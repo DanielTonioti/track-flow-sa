@@ -158,17 +158,17 @@ redirecionarSeNaoAdmin();
                 <div class="blockcentro titulo-Sensor">
         </form>
 
-        <a href="Admin.php" class="btn btn-danger back-buttom">Voltar</a>
+       
         <script src="../scripts/"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
             crossorigin="anonymous"></script>
-
+   
     </main>
     <footer>
 
     </footer>
-
+  <a href="Admin.php" class="btn btn-danger back-buttom">Voltar</a>
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/confirmar_exclusao_usuario.js"></script>

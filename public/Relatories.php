@@ -115,8 +115,9 @@ $stmt->close();
             </div>
         </section>
 
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+        
     </main>
+    <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>

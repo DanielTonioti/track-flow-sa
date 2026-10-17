@@ -245,8 +245,7 @@ body {
 }
 
 
-.menu-nav .menu div .Menu_Deslogar:hover,
-.menu-nav .menu div .Menu_Deslogar a:hover {
+.menu-nav .menu div .Menu_Deslogar:hover {
     background: #9e5b5b;
     cursor: pointer;
 }
