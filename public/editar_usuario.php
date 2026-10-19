@@ -4,6 +4,88 @@ require_once 'components/start.php';
 require_once '../infra/conn.php';
 
 redirecionarSeNaoAdmin();
+
+$erro = "";
+$user = null;
+
+if (isset($_GET["id"])) {
+    $id = (int) $_GET["id"];
+    $sql = "SELECT * FROM funcionario WHERE id = ?";
+    if ($stmt = $db->prepare($sql)) {
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+        $user = $resultado->fetch_assoc();
+        $stmt->close();
+    }
+}
+
+if (isset($_POST['CadastrarUsuario'])) {
+    $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+    $nome = trim($_POST['nome'] ?? '');
+    $email = trim($_POST['email'] ?? '');
+    $senha = $_POST['password'] ?? '';
+    $telefone = trim($_POST['telefone'] ?? '');
+    $acesso = $_POST['acesso'] ?? '';
+
+    if ($id <= 0) {
+        $erro = "Usuário inválido.";
+    } elseif ($nome === "") {
+        $erro = "O nome é obrigatório.";
+    } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
+        $erro = "O nome deve ter entre 3 e 100 caracteres.";
+    } elseif (!preg_match("/^[A-Za-zÀ-ÿ\s]+$/u", $nome)) {
+        $erro = "O nome deve conter apenas letras e espaços.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $erro = "Digite um e-mail válido.";
+    } elseif (strlen($senha) < 6) {
+        $erro = "A senha deve ter pelo menos 6 caracteres.";
+    } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
+        $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
+    } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
+        $erro = "Selecione um nível de acesso válido.";
+    }
+
+    if ($erro === "") {
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
+        $sql = "UPDATE funcionario SET nome = ?, email = ?, senha = ?, telefone = ?, cargo = ? WHERE id = ?";
+        $stmt = $db->prepare($sql);
+
+        if ($stmt === false) {
+            $erro = "Erro ao preparar a atualização do usuário.";
+        } else {
+            $stmt->bind_param(
+                "sssssi",
+                $nome,
+                $email,
+                $senhaHash,
+                $telefone,
+                $acesso,
+                $id
+            );
+
+            if ($stmt->execute()) {
+                if ((int) ($_SESSION['id'] ?? 0) === $id) {
+                    $_SESSION['usuario'] = $nome;
+                    $_SESSION['email'] = $email;
+                    $_SESSION['telefone'] = $telefone;
+                    $_SESSION['cargo'] = $acesso;
+
+                    if ($acesso !== 'admin') {
+                        header("Location: hub.php");
+                        exit();
+                    }
+                }
+                header("Location: Admin.php");
+                exit();
+            } else {
+                $erro = "Erro ao cadastrar o usuário.";
+            }
+            $stmt->close();
+        }
+    }
+}
 ?>
 <html lang="pt-BR">
 
@@ -20,99 +102,7 @@ redirecionarSeNaoAdmin();
 <body class="cores-background " data-background="azure-escuro-fundo" class=" cores-background "
     data-background="azure-escuro-fundo">
     <header>
-        <?php
-
-        include "components/navbar.php";
-        require_once "../infra/conn.php";
-
-        $erro = "";
-        $user = null;
-        if (isset($_GET["id"])) {
-
-            $id = $_GET["id"];
-            $sql = "SELECT * FROM funcionario WHERE id = ?";
-            if ($stmt = $db->prepare($sql)) {
-                $stmt->bind_param('i', $id);
-                $stmt->execute();
-                $resultado = $stmt->get_result();
-                $user = $resultado->fetch_assoc();
-                $stmt->close();
-            }
-
-        }
-
-        if (isset($_POST['CadastrarUsuario'])) {
-            $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
-            $nome = trim($_POST['nome'] ?? '');
-            $email = trim($_POST['email'] ?? '');
-            $senha = $_POST['password'] ?? '';
-            $telefone = trim($_POST['telefone'] ?? '');
-            $acesso = $_POST['acesso'] ?? '';
-
-            if ($id <= 0) {
-                $erro = "Usuário inválido.";
-            } elseif ($nome === "") {
-                $erro = "O nome é obrigatório.";
-            } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
-                $erro = "O nome deve ter entre 3 e 100 caracteres.";
-            } elseif (!preg_match("/^[A-Za-zÀ-ÿ\s]+$/u", $nome)) {
-                $erro = "O nome deve conter apenas letras e espaços.";
-            } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $erro = "Digite um e-mail válido.";
-            } elseif (strlen($senha) < 6) {
-                $erro = "A senha deve ter pelo menos 6 caracteres.";
-            } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
-                $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
-            } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
-                $erro = "Selecione um nível de acesso válido.";
-            }
-
-            if ($erro === "") {
-                $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-
-                $sql = "UPDATE funcionario SET nome = ?, email = ?, senha = ?, telefone = ?, cargo = ? WHERE id = ?";
-                $stmt = $db->prepare($sql);
-
-                if ($stmt === false) {
-                    $erro = "Erro ao preparar a atualização do usuário.";
-                } else {
-                    $stmt->bind_param(
-                        "sssssi",
-                        $nome,
-                        $email,
-                        $senhaHash,
-                        $telefone,
-                        $acesso,
-                        $id
-                    );
-
-                    if ($stmt->execute()) {
-                        if ((int) ($_SESSION['id'] ?? 0) === $id) {
-                            $_SESSION['usuario'] = $nome;
-                            $_SESSION['email'] = $email;
-                            $_SESSION['telefone'] = $telefone;
-                            $_SESSION['cargo'] = $acesso;
-
-                            if ($acesso !== 'admin') {
-                                header("Location: hub.php");
-                                exit();
-                            }
-                        }
-                        header("Location: Admin.php");
-                        exit();
-                    } else {
-                        $erro = "Erro ao cadastrar o usuário.";
-                    }
-                    $stmt->close();
-                }
-            }
-
-        }
-
-
-
-        ?>
-    </header>
+        <?php include "components/navbar.php"; ?>
 
     <main>
         <form method="POST" id="CadastrarUsuario">
