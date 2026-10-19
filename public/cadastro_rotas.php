@@ -73,7 +73,7 @@ $rotas = $db->query("SELECT id, nome, descricao, distancia_km, tempo_previsto_mi
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+        <a href="trens_trilhos.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h1 class="titulo-Sensor mb-0">Cadastrar Rota</h1>
