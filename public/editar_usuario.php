@@ -103,7 +103,7 @@ if (isset($_POST['CadastrarUsuario'])) {
     data-background="azure-escuro-fundo">
     <header>
         <?php include "components/navbar.php"; ?>
-
+    </header>
     <main>
         <form method="POST" id="CadastrarUsuario">
             <div class="blockcentro titulo-Sensor">
