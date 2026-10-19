@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar-rota'])) {
 }
 
 $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
-$rotas = $db->query("SELECT rota.*, trem.nome FROM rota INNER JOIN trem ON trem.id = rota.trem_id ORDER BY rota.id DESC");
+$rotas = $db->query("SELECT id, nome, descricao, distancia_km, tempo_previsto_min, trem_id FROM rota");
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -73,7 +73,7 @@ $rotas = $db->query("SELECT rota.*, trem.nome FROM rota INNER JOIN trem ON trem.
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+        <a href="trens_trilhos.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h1 class="titulo-Sensor mb-0">Cadastrar Rota</h1>
@@ -149,14 +149,19 @@ $rotas = $db->query("SELECT rota.*, trem.nome FROM rota INNER JOIN trem ON trem.
                         </thead>
                         <tbody>
                             <?php if ($rotas && $rotas->num_rows > 0): ?>
-                                <?php while ($rota = $rotas->fetch_assoc()): ?>
+                                <?php while ($rota = $rotas->fetch_assoc()): 
+                                    $id = $rota['trem_id'];
+                                    $query_nome_trem = $db->query("SELECT nome FROM trem WHERE id = $id");
+                                    while ($row = $query_nome_trem->fetch_assoc()) {
+                                    $nome_trem = $row['nome']; // Esse código foi a maior gambiarra da história
+                                    } ?>
                                     <tr>
                                         <td><?= (int) $rota['id'] ?></td>
                                         <td><?= htmlspecialchars((string) ($rota['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td><?= htmlspecialchars((string) ($rota['descricao'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td><?= htmlspecialchars((string) ($rota['distancia_km'] ?? ''), ENT_QUOTES, 'UTF-8') ?> km</td>
                                         <td><?= htmlspecialchars((string) ($rota['tempo_previsto_min'] ?? ''), ENT_QUOTES, 'UTF-8') ?> min</td>
-                                        <td><?= htmlspecialchars((string) ($rota['trem_nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
+                                        <td><?= htmlspecialchars((string) ($nome_trem ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                         <td>
                                             <a href="editar_rota.php?id=<?= (int) $rota['id'] ?>" class="btn btn-sm btn-warning me-2">Editar</a>
                                             <form action="excluir_rota.php" method="POST" class="d-inline">

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 include_once("../infra/conn.php");
 include("components/start.php");
@@ -28,10 +28,10 @@ $resultado2 = $db->query($sql);
         ?>
     </header>
     <main>
-        <div class="flex justify-content-center">
-            <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
+        <div class="d-flex justify-content-center">
+            <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill py-2"
                 data-background="azure-claro-fundo">
-                <p class="admin-titulo-texto cores-color fw-bold mx-3" data-color="white">
+                <p class="admin-titulo-texto cores-color fw-bold m-0" data-color="white">
                     Funcionários
                 </p>
             </div>
@@ -43,7 +43,7 @@ $resultado2 = $db->query($sql);
                 <button id="botao-admin" data-bs-toggle="collapse" role="button" class="btn text-white fw-bold"
                     type="button">
 
-                    <div class="d-flex align-items-center">
+                    <div class="d-flex align-items-center justify-content-center">
                         Administradores
 
                         <img src="../assets/icons/seta-para-baixo.png" alt="Seta para baixo dos administradores"
@@ -100,7 +100,7 @@ $resultado2 = $db->query($sql);
                 <button id="botao-func" data-bs-toggle="collapse" role="button" class="btn text-white fw-bold"
                     type="button">
 
-                    <div class="d-flex align-items-center">Funcionários
+                    <div class="d-flex align-items-center justify-content-center">Funcionários
                         <img src="../assets/icons/seta-para-baixo.png" alt="Seta para baixo dos funcionários"
                             class="users-page-arrow" id="seta-func">
                     </div>
@@ -151,9 +151,9 @@ $resultado2 = $db->query($sql);
 
 
         <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
-            <div class="cores-color cores-background centralizar-tabela flex" data-color="white">
+            <div class="cores-color cores-background d-flex justify-content-center" data-color="white">
                 <a href="cadastro_usuario.php"
-                    class="admin-button cores-color cores-background rounded-pill mt-1 d-inline-block text-decoration-none text-center"
+                    class="admin-button cores-color cores-background rounded-pill mt-1 d-flex justify-content-center align-items-center text-decoration-none px-4"
                     data-color="white" data-background="azure-claro-fundo" id="admin-button">
                     Adicionar Funcionário
                 </a>

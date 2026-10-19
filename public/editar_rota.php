@@ -94,7 +94,7 @@ $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header><?php include 'components/navbar.php'; ?></header>
     <main class="container py-4">
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+        <a href="cadastro_rotas.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h1 class="titulo-Sensor mb-0">Editar Rota</h1>
