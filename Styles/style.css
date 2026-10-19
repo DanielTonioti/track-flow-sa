@@ -104,6 +104,12 @@ body {
     border: none !important;
 }
 
+.back-buttom{
+    position: fixed;
+    bottom: 5%;
+    left: 2%;
+}
+
 
 .hiden {
     display: none !important;
