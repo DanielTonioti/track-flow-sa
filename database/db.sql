@@ -35,7 +35,8 @@ CREATE TABLE
     IF NOT EXISTS trilho (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
-        localizacao VARCHAR(100) NOT NULL
+        localizacao VARCHAR(100) NOT NULL,
+        tipo varchar(50) NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS sensor (

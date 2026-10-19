@@ -42,14 +42,16 @@ redirecionarSeNaoAdmin();
         }
 
         if (isset($_POST['CadastrarUsuario'])) {
-            $id = $_POST['id'];
+            $id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
             $nome = trim($_POST['nome'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $senha = $_POST['password'] ?? '';
             $telefone = trim($_POST['telefone'] ?? '');
             $acesso = $_POST['acesso'] ?? '';
 
-            if ($nome === "") {
+            if ($id <= 0) {
+                $erro = "Usuário inválido.";
+            } elseif ($nome === "") {
                 $erro = "O nome é obrigatório.";
             } elseif (strlen($nome) < 3 || strlen($nome) > 100) {
                 $erro = "O nome deve ter entre 3 e 100 caracteres.";
@@ -66,41 +68,43 @@ redirecionarSeNaoAdmin();
             }
 
             if ($erro === "") {
-
-
                 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
                 $sql = "UPDATE funcionario SET nome = ?, email = ?, senha = ?, telefone = ?, cargo = ? WHERE id = ?";
-
                 $stmt = $db->prepare($sql);
-                $stmt->bind_param(
-                    "sssssi",
-                    $nome,
-                    $email,
-                    $senhaHash,
-                    $telefone,
-                    $acesso,
-                    $id
-                );
 
-                if ($stmt->execute()) {
-                    if ($_SESSION['id'] === $id) {
-                        $_SESSION['usuario'] = $nome;
-                        $_SESSION['email'] = $email;
-                        $_SESSION['telefone'] = $telefone;
-                        $_SESSION['cargo'] = $acesso;
-
-                        if ($acesso !== 'admin') {
-                            header("Location: hub.php");
-                            exit();
-                        }
-                    }
-                    header("Location: Admin.php");
-                    exit();
+                if ($stmt === false) {
+                    $erro = "Erro ao preparar a atualização do usuário.";
                 } else {
-                    $erro = "Erro ao cadastrar o usuário.";
+                    $stmt->bind_param(
+                        "sssssi",
+                        $nome,
+                        $email,
+                        $senhaHash,
+                        $telefone,
+                        $acesso,
+                        $id
+                    );
+
+                    if ($stmt->execute()) {
+                        if ((int) ($_SESSION['id'] ?? 0) === $id) {
+                            $_SESSION['usuario'] = $nome;
+                            $_SESSION['email'] = $email;
+                            $_SESSION['telefone'] = $telefone;
+                            $_SESSION['cargo'] = $acesso;
+
+                            if ($acesso !== 'admin') {
+                                header("Location: hub.php");
+                                exit();
+                            }
+                        }
+                        header("Location: Admin.php");
+                        exit();
+                    } else {
+                        $erro = "Erro ao cadastrar o usuário.";
+                    }
+                    $stmt->close();
                 }
-                $stmt->close();
             }
 
         }
@@ -174,7 +178,7 @@ redirecionarSeNaoAdmin();
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/scriptNavbar.js"></script>
-    <script src="../scripts/confirmar_exclusao_usuario.js"></script>
+    <script src="../scripts/scriptVoltar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
