@@ -110,7 +110,7 @@ $trens = $db->query(
                 <div class="mb-3">
                     <label for="responsavel_usuario_id" class="form-label text-white">Responsável</label>
                     <select id="responsavel_usuario_id" name="responsavel_usuario_id" class="form-select">
-                        <option value="">Sem responsável</option>
+                        <option value="Sem responsável">Sem responsável</option>
                         <?php while ($usuario = $usuarios->fetch_assoc()): ?>
                             <option value="<?= (int) $usuario['id'] ?>" <?= ($responsavelId !== '' && (string) $responsavelId === (string) $usuario['id']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8') ?>)
