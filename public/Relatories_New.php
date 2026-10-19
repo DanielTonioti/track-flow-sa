@@ -28,7 +28,7 @@ require_once 'components/start.php';
     </header>
 
     <main class="container py-4">
-        <a href="trens_trilhos.php" class="btn btn-danger back-buttom">Voltar</a>
+        <a href="Relatories.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="ReportFormPanel mx-auto cores-background rounded-4 p-4 p-md-5" data-background="azure-claro-fundo">
             <h1 class="text-white mb-4">Novo relatario</h1>
             <form>
