@@ -50,7 +50,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h3 class="mb-0">Trens</h3>
                         <?php if ($usuarioEhAdmin): ?>
-                            <a href="cadastro_trens.php" class="btn btn-sm btn-primary">Cadastrar trem</a>
+                            <a href="cadastro_trens.php" class="btn btn-sm btn-primary">Gerenciar trens</a>
                         <?php endif; ?>
                     </div>
 
@@ -90,7 +90,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h3 class="mb-0">Rotas</h3>
                         <?php if ($usuarioEhAdmin): ?>
-                            <a href="cadastro_rotas.php" class="btn btn-sm btn-primary">Cadastrar rota</a>
+                            <a href="cadastro_rotas.php" class="btn btn-sm btn-primary">Gerenciar rotas</a>
                         <?php endif; ?>
                     </div>
 
