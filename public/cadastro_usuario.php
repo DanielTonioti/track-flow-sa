@@ -70,6 +70,7 @@ if (isset($_POST['CadastrarUsuario'])) {
             $erro = "Este e-mail já está cadastrado.";
         } 
         else {
+            $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
                 if(!$arquivo === " ") {
 
                     $pastaFisica = __DIR__ . "/../assets/images/uploads/";
@@ -85,7 +86,6 @@ if (isset($_POST['CadastrarUsuario'])) {
                 $erro = "Erro ao mover a imagem para o servidor.";
                     } else {
                         $caminhoAvatar = "assets/images/uploads/" . $novoNome;
-                        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
                     }
                 }
                $stmt = $db->prepare("INSERT INTO funcionario (nome, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?)");
