@@ -1,0 +1,24 @@
+<?php
+session_start();
+require_once '../infra/conn.php';
+require_once 'components/start.php';
+redirecionarSeNaoAdmin();
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: cadastro_trens.php');
+    exit;
+}
+
+$id = isset($_POST['id']) ? (int) $_POST['id'] : 0;
+if ($id <= 0) {
+    header('Location: cadastro_trens.php');
+    exit;
+}
+
+$stmt = $db->prepare('DELETE FROM trem WHERE id = ?');
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$stmt->close();
+
+header('Location: cadastro_trens.php');
+exit;

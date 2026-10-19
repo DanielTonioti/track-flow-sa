@@ -2,8 +2,7 @@ CREATE DATABASE IF NOT EXISTS track_flow_m1;
 
 USE track_flow_m1;
 
-CREATE TABLE
-    IF NOT EXISTS funcionario (
+CREATE TABLE IF NOT EXISTS funcionario (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
@@ -24,15 +23,27 @@ VALUES
 ('Carlos Pereira', 'carlos@empresa.com', '47999995555', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
 ('Juliana Costa', 'juliana@empresa.com', '47999996666', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S');
 
-CREATE TABLE
-    IF NOT EXISTS trem (
+CREATE TABLE IF NOT EXISTS trem (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
-        modelo VARCHAR(50) NOT NULL
+        modelo VARCHAR(50) NOT NULL,
+        responsavel_usuario_id INT NOT NULL,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (responsavel_usuario_id) REFERENCES funcionario(id)
     );
 
-CREATE TABLE
-    IF NOT EXISTS trilho (
+CREATE TABLE IF NOT EXISTS rota (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        descricao TEXT NOT NULL,
+        distancia_km DECIMAL(8, 2) NOT NULL,
+        tempo_previsto_min INT NOT NULL,
+        trem_id INT NOT NULL,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (trem_id) REFERENCES trem(id) ON DELETE RESTRICT
+    );
+
+CREATE TABLE IF NOT EXISTS trilho (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
         localizacao VARCHAR(100) NOT NULL,
@@ -49,8 +60,7 @@ CREATE TABLE IF NOT EXISTS sensor (
     FOREIGN KEY (trilho_id) REFERENCES trilho(id)
 );
 
-CREATE TABLE
-    IF NOT EXISTS dados_sensor (
+CREATE TABLE IF NOT EXISTS dados_sensor (
         id INT AUTO_INCREMENT PRIMARY KEY,
         sensor_id INT NOT NULL,
         valor DECIMAL(10, 2) NOT NULL,
