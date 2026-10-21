@@ -10,7 +10,7 @@ $sucesso = isset($_GET['sucesso']);
 
 // Extensão definida pelo MIME real do arquivo (não pelo nome enviado)
 $extensoesPermitidas = [
-    'image/png'  => 'png',
+    'image/png' => 'png',
     'image/jpeg' => 'jpg',
 ];
 
@@ -23,6 +23,7 @@ if (isset($_POST['CadastrarUsuario'])) {
     $acesso = $_POST['acesso'] ?? '';
     $arquivo = $_FILES['avatar'] ?? null;
     $tipoMime = '';
+    $caminhoAvatar = null;
 
     // 1. Validação dos campos de texto
     if ($nome === "") {
@@ -42,16 +43,21 @@ if (isset($_POST['CadastrarUsuario'])) {
     }
 
     // 2. Validação do avatar (ainda sem mover o arquivo)
-    if (!$arquivo === " ") {
-        if ($arquivo['size'] > 5 * 1024 * 1024) {
+    if ($arquivo !== null && $arquivo['error'] !== UPLOAD_ERR_NO_FILE) {
+
+        if ($arquivo['error'] !== UPLOAD_ERR_OK) {
+            $erro = "Erro no envio da imagem.";
+
+        } elseif ($arquivo['size'] > 5 * 1024 * 1024) {
             $erro = "Seu arquivo excede o tamanho máximo permitido (5MB).";
-        }
-        else {
+
+        } else {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $tipoMime = $finfo->file($arquivo['tmp_name']);
 
-            if (!isset($extensoesPermitidas[$tipoMime]) || getimagesize($arquivo['tmp_name']) === false) 
-            {
+            if (
+                !isset($extensoesPermitidas[$tipoMime]) || getimagesize($arquivo['tmp_name']) === false
+            ) {
                 $erro = "Tipo de arquivo inválido ou corrompido. Use PNG ou JPG.";
             }
         }
@@ -65,45 +71,62 @@ if (isset($_POST['CadastrarUsuario'])) {
         $stmt->execute();
         $existe = $stmt->get_result()->num_rows > 0;
         $stmt->close();
-   
+
         if ($existe) {
             $erro = "Este e-mail já está cadastrado.";
-        } 
-        else {
+        } else {
             $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
-                if(!$arquivo === " ") {
+            $caminhoAvatar = null;
+            $destino = null;
 
-                    $pastaFisica = __DIR__ . "/../assets/images/uploads/";
+            // Upload somente se uma imagem foi enviada
+            if (
+                $arquivo !== null && $arquivo['error'] === UPLOAD_ERR_OK
+            ) {
+                $pastaFisica = __DIR__ . "/../assets/images/uploads/";
 
-                    if (!is_dir($pastaFisica)) {
-                    mkdir($pastaFisica, 0755, true);
-                    }
-
+                if (
+                    !is_dir($pastaFisica) && !mkdir($pastaFisica, 0755, true)
+                ) {
+                    $erro = "Não foi possível criar a pasta de imagens.";
+                } else {
                     $novoNome = bin2hex(random_bytes(16)) . "." . $extensoesPermitidas[$tipoMime];
-                    $destino  = $pastaFisica . $novoNome;
+
+                    $destino = $pastaFisica . $novoNome;
 
                     if (!move_uploaded_file($arquivo['tmp_name'], $destino)) {
-                $erro = "Erro ao mover a imagem para o servidor.";
+                        $erro = "Erro ao mover a imagem para o servidor.";
                     } else {
                         $caminhoAvatar = "assets/images/uploads/" . $novoNome;
                     }
                 }
-               $stmt = $db->prepare("INSERT INTO funcionario (nome, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?)");
-                        $stmt->bind_param("ssssss", $nome, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
+            }
 
-                        if ($stmt->execute()) {
-                        $stmt->close();
-                        header("Location: cadastro_usuario.php?sucesso=1");
-                        exit();
-                        }
+            // Cadastra somente se o upload não apresentou erro
+            if ($erro === "") {
 
+                $stmt = $db->prepare("INSERT INTO funcionario(nome, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?)");
+
+                $stmt->bind_param("ssssss", $nome, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
+
+                if ($stmt->execute()) {
+                    $stmt->close();
+
+                    header("Location: cadastro_usuario.php?sucesso=1");
+                    exit();
+                }
+
+                $erro = "Erro ao cadastrar o usuário no banco de dados: " . $stmt->error;
                 $stmt->close();
-                unlink($destino);
-                $erro = "Erro ao cadastrar o usuário no banco de dados.";
+
+                // Remove a imagem se o cadastro no banco falhar
+                if ($destino !== null && file_exists($destino)) {
+                    unlink($destino);
+                }
+            }
         }
     }
 }
-
 $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionario");
 ?>
 <!DOCTYPE html>
