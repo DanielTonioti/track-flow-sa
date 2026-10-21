@@ -167,7 +167,9 @@ body {
     z-index: 1100;
     padding: 1% 2%;
 }
-
+.nav-nome {
+    margin-left:1.2rem;
+}
 
 .hub-icon {
     max-height: 3rem;
@@ -183,7 +185,7 @@ body {
 
 .menu-nav .perfil .imgCx {
     position: relative;
-    margin-left: 2vh;
+    margin-left: 0vh;
     width: 50px;
     height: 50px;
     background: #929292;

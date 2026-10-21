@@ -109,8 +109,8 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
             </div>
 
             <!-- NOME DO USUÁRIO -->
-            <div class="d-flex flex-column align-items-end me-2">
-                <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">
+            <div class="d-flex align-items-center justify-content-center me-2">
+                <span id="usuario-logado" class="nav-nome cores-color small fw-bold" data-color="white">
                     <?php
                     if (!empty($_SESSION["usuario"])) {
                         echo htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, "UTF-8");

@@ -128,7 +128,7 @@ foreach ($sensores as $sensor) {
                                     </div>
                                 <?php endforeach; ?>
 
-                                <a href="detalhes_sensor.php?id=<?= $id ?>"
+                                <a href="#"
                                     class="border-tabela grid-element cores-background d-flex justify-content-center align-items-center rounded-2 fw-bold text-reset text-decoration-none"
                                     data-background="azul-pastel">
                                     <span class="mt-2">Detalhes</span>
