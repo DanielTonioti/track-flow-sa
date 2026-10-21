@@ -441,7 +441,12 @@ body {
     padding: 20px;
 }
 
-
+.WIP {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
 .ButtonExcluirUsuario {
     margin-top: 5%;
 }
