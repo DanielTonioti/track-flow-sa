@@ -105,7 +105,6 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                         <?php endif; ?>
                     </ul>
                 </div>
-
             </div>
 
             <!-- NOME DO USUÁRIO -->
@@ -134,9 +133,6 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                     <p class="Menu_Deslogar"><a href="logout.php">Deslogar</a></p>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </nav>
