@@ -65,17 +65,11 @@ $resultado2 = $db->query($sql);
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($adm['email']); ?>
                                 </p>
-
+                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
                                 <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($adm['telefone']); ?>
                                 </p>
-                                <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
-                                    data-background="azure-claro-fundo">
-                                       <?php echo htmlspecialchars($adm['cep']); ?>
-                                </p>
-                                 
-                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
 
                                     <a href="editar_usuario.php?id=<?= (int) $adm['id'] ?>"
                                         class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background d-inline-block text-decoration-none"
@@ -124,14 +118,11 @@ $resultado2 = $db->query($sql);
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($user['email']); ?>
                                 </p>
-
+                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
                                 <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($user['telefone']); ?>
                                 </p>
-
-                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
-
                                     <a href="editar_usuario.php?id=<?= (int) $user['id'] ?>"
                                         class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background d-inline-block text-decoration-none"
                                         data-color="white" data-background="azure-claro-fundo">

@@ -2,6 +2,7 @@
 session_start();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
+redirecionarSeNaoAdmin();
 
 $trens = $db->query(
     "SELECT t.*, f.nome AS responsavel_nome

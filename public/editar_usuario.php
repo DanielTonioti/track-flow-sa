@@ -7,6 +7,8 @@ redirecionarSeNaoAdmin();
 
 $erro = "";
 $user = null;
+$excluir_erro = isset($_GET['excluir_erro']);
+if ($excluir_erro){$erro = "Não foi possível excluir usuário: Há algum trem cadastrado no nome dele(a).";}
 
 if (isset($_GET["id"])) {
     $id = (int) $_GET["id"];
