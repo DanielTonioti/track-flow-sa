@@ -22,6 +22,11 @@ if (isset($_POST['CadastrarUsuario'])) {
     $telefone = trim($_POST['telefone'] ?? '');
     $acesso = $_POST['acesso'] ?? '';
     $arquivo = $_FILES['avatar'] ?? null;
+    $cep = trim($_POST['cep'] ?? '');
+    $cidade = trim($_POST['cidade'] ?? '');
+    $rua = trim($_POST['rua'] ?? '');
+    $bairro = trim($_POST['bairro'] ?? '');
+    $uf = trim($_POST['uf'] ?? '');
     $tipoMime = '';
     $caminhoAvatar = null;
 
@@ -38,7 +43,24 @@ if (isset($_POST['CadastrarUsuario'])) {
         $erro = "A senha deve ter pelo menos 6 caracteres.";
     } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
         $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
-    } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
+    }
+    elseif ($cep === '') {
+        $erro = "CEP é obrigatorio.";
+    } 
+    elseif ($cidade === '') {
+         $erro = "cidade é obrigatorio.";
+    }
+    elseif ($rua === '') {
+         $erro = "rua é obrigatorio.";
+    } 
+    elseif ($bairro === '') {
+         $erro = "bairro é obrigatorio.";
+    }
+    elseif ($uf === '') {
+         $erro = "estado é obrigatorio.";
+    }
+    
+     elseif ($acesso !== "funcionario" && $acesso !== "admin") {
         $erro = "Selecione um nível de acesso válido.";
     }
 
@@ -105,9 +127,9 @@ if (isset($_POST['CadastrarUsuario'])) {
             // Cadastra somente se o upload não apresentou erro
             if ($erro === "") {
 
-                $stmt = $db->prepare("INSERT INTO funcionario(nome, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt = $db->prepare("INSERT INTO funcionario(nome, cep, cidade, rua, bairro, uf, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-                $stmt->bind_param("ssssss", $nome, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
+                $stmt->bind_param("sdsssssssss", $nome, $cep, $cidade, $rua, $bairro, $uf, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
 
                 if ($stmt->execute()) {
                     $stmt->close();
@@ -131,6 +153,7 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -140,6 +163,7 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
     <link rel="stylesheet" href="../Styles/style.css">
     <title>Cadastrar Usuário</title>
 </head>
+
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php include "components/navbar.php"; ?>
@@ -177,13 +201,22 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
                         <input type="text" name="telefone" id="telefone" minlength="10" maxlength="11"
                             pattern="[0-9]{10,11}" placeholder="Ex: 47999999999"
                             value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>" required>
+                        <label>Cep:
+                            <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
+                                onblur="pesquisacep(this.value);" /></label><br />
+                        <label>Rua:
+                            <input name="rua" type="text" id="rua" size="60" /></label><br />
+                        <label>Bairro:
+                            <input name="bairro" type="text" id="bairro" size="40" /></label><br />
+                        <label>Cidade:
+                            <input name="cidade" type="text" id="cidade" size="40" /></label><br />
+                        <label>Estado:
+                            <input name="uf" type="text" id="uf" size="2" /></label><br />
                         <label for="acesso">Nível de acesso:</label>
                         <div>
-                            <input type="radio" name="acesso" id="funcionario" value="funcionario"
-                                <?= (($_POST['acesso'] ?? '') === 'funcionario') ? 'checked' : '' ?> required>
+                            <input type="radio" name="acesso" id="funcionario" value="funcionario" <?= (($_POST['acesso'] ?? '') === 'funcionario') ? 'checked' : '' ?> required>
                             Funcionário
-                            <input type="radio" name="acesso" id="administrador" value="admin"
-                                <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>>
+                            <input type="radio" name="acesso" id="administrador" value="admin" <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>>
                             Administrador
                         </div>
                         <label for="avatar" id="avatar-label">Foto de perfil:</label>
@@ -198,10 +231,14 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
         </form>
         <a href="Admin.php" class="btn btn-danger back-buttom">Voltar</a>
     </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/script_cep.js"></script>
     <script src="../scripts/scriptSensor.js"></script>
     <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/script_navbar.js"></script>
 
 </body>
+
 </html>

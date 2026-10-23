@@ -53,7 +53,7 @@ $resultado2 = $db->query($sql);
                     <?php while ($adm = $resultado->fetch_assoc()) {
 
                         if ($adm['cargo'] == "admin") { ?>
-
+                           
                             <div class="flex centralizar-tabela">
 
                                 <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
@@ -70,7 +70,11 @@ $resultado2 = $db->query($sql);
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($adm['telefone']); ?>
                                 </p>
-
+                                <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
+                                    data-background="azure-claro-fundo">
+                                       <?php echo htmlspecialchars($adm['cep']); ?>
+                                </p>
+                                 
                                 <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
 
                                     <a href="editar_usuario.php?id=<?= (int) $adm['id'] ?>"

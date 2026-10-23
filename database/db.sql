@@ -5,6 +5,13 @@ USE track_flow_m1;
 CREATE TABLE IF NOT EXISTS funcionario (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
+        cep INT NOT NULL,
+        rua VARCHAR(255) NOT NULL,
+        bairro VARCHAR(255) NOT NULL,
+        cidade VARCHAR(255) NOT NULL,
+        uf VARCHAR(255) NOT NULL,
+        latitude DECIMAL(10,7) NULL,
+        longitude DECIMAL(10,7) NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         telefone VARCHAR(15) NOT NULL,
         cargo ENUM ('funcionario', 'admin') DEFAULT 'funcionario' NOT NULL,
