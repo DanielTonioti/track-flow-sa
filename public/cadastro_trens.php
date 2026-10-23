@@ -7,6 +7,8 @@ redirecionarSeNaoAdmin();
 $erro = '';
 $sucesso = false;
 $responsavelId = '';
+$excluir_erro = isset($_GET['excluir_erro']);
+if ($excluir_erro){$erro = "Não foi possível excluir trem: Há alguma rota dependente de sua existência";}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar-trem'])) {
     $nome = trim($_POST['nome'] ?? '');
