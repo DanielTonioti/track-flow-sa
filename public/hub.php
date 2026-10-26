@@ -8,7 +8,69 @@ function escapar_html($valor): string
 {
     return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
 }
+$id = (int) $_SESSION['id'];
+// Buscar as coordenadas do funcionário logado
+$stmt = $db->prepare(" SELECT cidade, uf, latitude, longitude FROM funcionario WHERE id = ?");
 
+$stmt->bind_param("i", $id);
+$stmt->execute();
+
+$funcionario = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+
+
+$cidade = $funcionario['cidade'];
+$uf = $funcionario['uf'];
+
+$url = "https://api.open-meteo.com/v1/forecast?" .
+    http_build_query([
+        'latitude' => $funcionario['latitude'],
+        'longitude' => $funcionario['longitude'],
+        'current' => 'temperature_2m,relative_humidity_2m,weather_code',
+        'timezone' => 'auto'
+    ]);
+
+$resposta = @file_get_contents($url);
+
+if ($resposta === false) {
+    exit('Não foi possível consultar o clima agora.');
+}
+
+$dados = json_decode($resposta, true);
+
+if (!isset($dados['current'])) {
+    exit('A API não retornou os dados meteorológicos.');
+}
+
+$atual = $dados['current'];
+$temperatura = $atual['temperature_2m'];
+$umidade = $atual['relative_humidity_2m'];
+$codigo = (int) $atual['weather_code'];
+
+// Traduzir os códigos meteorológicos mais comuns
+$condicoes = [
+    0 => 'Céu limpo',
+    1 => 'Predominantemente limpo',
+    2 => 'Parcialmente nublado',
+    3 => 'Nublado',
+    45 => 'Neblina',
+    48 => 'Neblina com geada',
+    51 => 'Garoa leve',
+    53 => 'Garoa moderada',
+    55 => 'Garoa intensa',
+    61 => 'Chuva leve',
+    63 => 'Chuva moderada',
+    65 => 'Chuva intensa',
+    71 => 'Neve leve',
+    73 => 'Neve moderada',
+    75 => 'Neve intensa',
+    80 => 'Pancadas de chuva leves',
+    81 => 'Pancadas de chuva moderadas',
+    82 => 'Pancadas de chuva fortes',
+    95 => 'Trovoadas'
+];
+
+$descricao = $condicoes[$codigo] ?? 'Condição meteorológica variável';
 // Dados de exemplo (os mesmos que estavam fixos no HTML).
 // Quando a tabela de sensores existir, troque este array por uma consulta ao banco.
 $sensores = [
@@ -48,6 +110,20 @@ foreach ($sensores as $sensor) {
         <?php
         include("components/navbar.php");
         ?>
+        <div class="clima">
+    <h2>Clima em <?= htmlspecialchars($cidade) ?> - <?= htmlspecialchars($uf) ?></h2>
+
+    <div class="temperatura">
+        <?= htmlspecialchars((string) $temperatura) ?> °C
+    </div>
+
+    <p><?= htmlspecialchars($descricao) ?></p>
+
+    <p class="detalhe">
+        Umidade do ar: <?= htmlspecialchars((string) $umidade) ?>%
+    </p>
+
+</div>
     </header>
 
     <main>
@@ -128,7 +204,7 @@ foreach ($sensores as $sensor) {
                                     </div>
                                 <?php endforeach; ?>
 
-                                <a href="detalhes_sensor.php?id=<?= $id ?>"
+                                <a href="#"
                                     class="border-tabela grid-element cores-background d-flex justify-content-center align-items-center rounded-2 fw-bold text-reset text-decoration-none"
                                     data-background="azul-pastel">
                                     <span class="mt-2">Detalhes</span>
@@ -278,7 +354,7 @@ foreach ($sensores as $sensor) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>

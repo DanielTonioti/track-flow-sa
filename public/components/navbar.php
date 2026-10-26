@@ -105,12 +105,11 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                         <?php endif; ?>
                     </ul>
                 </div>
-
             </div>
 
             <!-- NOME DO USUÁRIO -->
-            <div class="d-flex flex-column align-items-end me-2">
-                <span id="usuario-logado" class="cores-color small fw-bold" data-color="white">
+            <div class="d-flex align-items-center justify-content-center me-2">
+                <span id="usuario-logado" class="nav-nome cores-color small fw-bold" data-color="white">
                     <?php
                     if (!empty($_SESSION["usuario"])) {
                         echo htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, "UTF-8");
@@ -134,9 +133,6 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                     <p class="Menu_Deslogar"><a href="logout.php">Deslogar</a></p>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </nav>

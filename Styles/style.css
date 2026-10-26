@@ -48,7 +48,26 @@ body {
     margin: 0;
     padding: 0;
 }
+.clima {
+            max-width: 380px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px #0001;
+            text-align: center;
+        }
 
+        .temperatura {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .detalhe {
+            color: #555;
+            margin: 12px 0;
+        }
 
 /* ==========================================================================
    Sistema de Temas Dinâmicos (Data Attributes)
@@ -167,7 +186,9 @@ body {
     z-index: 1100;
     padding: 1% 2%;
 }
-
+.nav-nome {
+    margin-left:1.2rem;
+}
 
 .hub-icon {
     max-height: 3rem;
@@ -183,7 +204,7 @@ body {
 
 .menu-nav .perfil .imgCx {
     position: relative;
-    margin-left: 2vh;
+    margin-left: 0vh;
     width: 50px;
     height: 50px;
     background: #929292;
@@ -439,7 +460,12 @@ body {
     padding: 20px;
 }
 
-
+.WIP {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
 .ButtonExcluirUsuario {
     margin-top: 5%;
 }
@@ -671,7 +697,32 @@ body {
     }
 }
 
-:root {
+.center-profile{
+    justify-content: center;
+    align-items: center;
+}
+
+.GlowButton{
+    display: inline-block; padding: 15px 30px;
+    font-size: 24px; font-weight: bold;
+    color: #3d3e64; text-decoration: uppercase;
+    text-decoration: none;
+    background-color: transparent;
+    border: 3px solid #3d3e64;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(41, 43, 59, 0.5), 0 0 20px
+    rgba(43, 44, 59, 0.3), 0 0 30px rgba(45, 46, 63, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.GlowButton:hover{
+    color: #fff;
+    box-shadow: 0 0 20px rgba(36, 40, 77, 0.5), 0 0 20px
+    rgba(58, 60, 78, 0.3), 0 0 30px rgba(66, 66, 105, 0.2);
+    background-color: #40435a;
+}
+
     --ferro-bg-deep: #081220;
     --ferro-bg-surface: #0d1b2e;
     --ferro-bg-elevated: rgba(15, 31, 52, 0.92);
