@@ -2,7 +2,6 @@
 session_start();
 require_once "../infra/conn.php";
 require_once "components/start.php";
-redirecionarSeNaoAdmin();
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 $user = null;
@@ -17,6 +16,53 @@ if ($id !== false && $id > 0) {
         $stmt->close();
     }
 }
+
+$avatarPadrao = "../assets/icons/User.png";
+$avatar = $avatarPadrao;
+
+// Esta navbar está em public/components/, então a raiz fica 2 níveis acima.
+$raizProjeto = realpath(__DIR__ . "/../..");
+$pastaAssets = realpath(__DIR__ . "/../../assets");
+
+if (!empty($_SESSION["avatar"]) && $raizProjeto !== false && $pastaAssets !== false) {
+    $valorAvatar = str_replace("\\", "/", trim((string) $_SESSION["avatar"]));
+    $caminhoRelativo = preg_replace('#^(?:\.\./)+#', '', $valorAvatar);
+    $caminhoRelativo = preg_replace('#^Assets/#i', 'assets/', $caminhoRelativo);
+    $candidatosAvatar = [];
+
+    if (preg_match('#^(?:[A-Za-z]:/|/)#', $valorAvatar)) {
+        $candidatosAvatar[] = $valorAvatar;
+    } elseif (strpos($caminhoRelativo, 'assets/') === 0) {
+        $candidatosAvatar[] = $raizProjeto . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $caminhoRelativo);
+    } elseif (strpos($caminhoRelativo, '/') === false && $caminhoRelativo !== '') {
+        $candidatosAvatar[] = $pastaAssets . DIRECTORY_SEPARATOR . 'images'
+            . DIRECTORY_SEPARATOR . 'uploads' . DIRECTORY_SEPARATOR . $caminhoRelativo;
+    } elseif ($caminhoRelativo !== '') {
+        $candidatosAvatar[] = $pastaAssets . DIRECTORY_SEPARATOR
+            . str_replace('/', DIRECTORY_SEPARATOR, $caminhoRelativo);
+    }
+
+    $prefixoAssets = rtrim($pastaAssets, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+
+    foreach ($candidatosAvatar as $candidatoAvatar) {
+        $arquivoFisico = realpath($candidatoAvatar);
+        if ($arquivoFisico === false || !is_file($arquivoFisico)) {
+            continue;
+        }
+
+        $comparacaoPrefixo = DIRECTORY_SEPARATOR === '\\'
+            ? strncasecmp($arquivoFisico, $prefixoAssets, strlen($prefixoAssets))
+            : strncmp($arquivoFisico, $prefixoAssets, strlen($prefixoAssets));
+
+        if ($comparacaoPrefixo === 0) {
+            $caminhoDentroAssets = substr($arquivoFisico, strlen($prefixoAssets));
+            $avatar = "../assets/" . str_replace(DIRECTORY_SEPARATOR, "/", $caminhoDentroAssets);
+            break;
+        }
+    }
+}
+
 ?>
 <html lang="pt-BR">
 
@@ -46,102 +92,26 @@ if ($id !== false && $id > 0) {
 
     </head>
 
-    <main>
-        <div class="blockcentro">
-            <h1 class="cores-color" data-color="white">Editar Usuário: Placeholder</h1>
-        </div>
-        <form id="updateForm" action="atualizar_usuario.php" method="POST">
-            <div class="blockcentro">
-                <input type="hidden" name="id" value="<?php echo htmlspecialchars((string) ($user['id'] ?? '')); ?>">
-
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Name</label>
-                <input type="text" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="NomeUpdate"
-                    value="<?php echo htmlspecialchars((string) ($user['nome'] ?? '')); ?>">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">E-mail</label>
-                <input type="email" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="EmailUpdate"
-                    value="<?php echo htmlspecialchars((string) ($user['email'] ?? '')); ?>">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Telefone</label>
-                <input type="text" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="TelefoneUpdate"
-                    value="<?php echo htmlspecialchars((string) ($user['telefone'] ?? '')); ?>">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Senha</label>
-                <input type="password" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="PasswordUpdateRegular" value="">
-                <label for="inputPassword5" class="cores-color form-label" data-color="white">Confirmar Senha</label>
-                <input type="password" id="inputPassword5" class="FormUsuario form-control"
-                    aria-describedby="passwordHelpBlock" name="PasswordUpdateConfirm" value="">
-            </div>
-            <div class="DangerZone">
-                <div class="blockcentro">
-                    <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de Acesso</label>
-                    <div>
-                        <input type="radio" name="acesso" id="funcionario" value="funcionario" <?php echo ($user['cargo'] ?? '') === 'funcionario' ? 'checked' : ''; ?> required> Funcionario
-                        <input type="radio" name="acesso" id="administrador" value="admin" <?php echo ($user['cargo'] ?? '') === 'admin' ? 'checked' : ''; ?>>
-                        Administrador
-                    </div>
-                    <div class="ButtonExcluirUsuario">
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Excluir Usuario</button>
-                    </div>
-                </div>
-            </div>
-            <div class="blockcentro">
-                <button type="button" class="btn cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo" data-bs-toggle="modal" data-bs-target="#updateModal">Atualizar usuario</button>
-            </div>
-        </form>
-        <form id="deleteForm" action="excluir_usuario.php" method="POST" style="display:none;">
-            <input type="hidden" name="id_excluir" value="<?php echo $user['id'] ?>">
-        </form>
-
-        <!-- initial access value for modal logic -->
-        <input type="hidden" id="initialAcesso" value="<?php echo $user['cargo'] ?>">
-
-        <!-- hidden access-change form -->
-        <form id="accessForm" action="atualizar_usuario.php" method="POST" style="display:none;">
-            <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
-            <input type="hidden" name="action" value="change_access">
-            <input type="hidden" name="acesso" value="">
-        </form>
-
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Confirmar exclusão</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Tem certeza que deseja excluir o usuário:
-                        <strong><?php echo htmlspecialchars((string) ($user['nome'] ?? '')); ?></strong>?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" id="confirmDelete" class="btn btn-danger">Excluir</button>
-                    </div>
-                </div>
+    <main class="container py-4">
+        <div class="text-center mb-4">
+            <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
+                <h2 class="titulo-Sensor mb-0"> Seu perfil </h2>
             </div>
         </div>
-        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Confirmar alteração</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Tem certeza que deseja atualizar os dados do usuário:
-                        <strong><?php echo htmlspecialchars((string) ($user['nome'] ?? '')); ?></strong>?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" id="confirmUpdate" class="btn btn-primary">Confirmar</button>
-                    </div>
+        <div class="center-profile flex">
+            <div> 
+                <div class="perfil">
+                <div class="imgCx">
+                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Avatar do usuário"
+                        onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
                 </div>
             </div>
+            </div>
+            <div>
+                <h2 class="cores-color" data-color="white"> <?php echo $_SESSION["usuario"]; ?> </h1>
+            </div>
         </div>
-
+        
 
 
         <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
