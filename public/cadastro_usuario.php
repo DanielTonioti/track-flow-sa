@@ -43,11 +43,15 @@ if (isset($_POST['CadastrarUsuario'])) {
         $erro = "A senha deve ter pelo menos 6 caracteres.";
     } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
         $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
-    }
-    elseif ($cep === '') {
-        $erro = "CEP é obrigatorio.";
-    } 
-    elseif ($cidade === '') {
+    
+    } elseif ($cep === '') {
+    $erro = "CEP é obrigatório.";
+    } elseif (!preg_match('/^[0-9]+$/', $cep)) {
+    $erro = "O CEP deve conter apenas números.";
+    } elseif (strlen($cep) !== 8) 
+    {
+    $erro = "O CEP deve conter exatamente 8 números."; 
+    } elseif ($cidade === '') {
          $erro = "cidade é obrigatorio.";
     }
     elseif ($rua === '') {
@@ -201,9 +205,9 @@ $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionari
                         <input type="text" name="telefone" id="telefone" minlength="10" maxlength="11"
                             pattern="[0-9]{10,11}" placeholder="Ex: 47999999999"
                             value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>" required>
-                        <label>Cep:
-                            <input name="cep" type="text" id="cep" value="" size="10" maxlength="9"
-                                onblur="pesquisacep(this.value);" /></label><br />
+                       <label for="cep">CEP:</label>
+    <input type="text" name="cep" id="cep" maxlength="8" minlength="8" pattern="[0-9]{8}" inputmode="numeric" value="<?= htmlspecialchars($user['cep'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onblur="pesquisacep(this.value);"
+    title="Digite o CEP com exatamente 8 números, sem pontos ou traços." required>
                         <label>Rua:
                             <input name="rua" type="text" id="rua" size="60" /></label><br />
                         <label>Bairro:
