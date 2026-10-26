@@ -726,5 +726,586 @@ body {
     rgba(58, 60, 78, 0.3), 0 0 30px rgba(66, 66, 105, 0.2);
     background-color: #40435a;
 }
+:root{
+    --ferro-bg-deep: #081220;
+    --ferro-bg-surface: #0d1b2e;
+    --ferro-bg-elevated: rgba(15, 31, 52, 0.92);
+    --ferro-steel-300: #b8c7d9;
+    --ferro-steel-100: #f4f7fa;
+    --ferro-cyan: #00d4ff;
+    --ferro-volt: #c1ff72;
+    --ferro-amber: #f59e0b;
+    --ferro-danger: #ef4444;
+    --ferro-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ferro-border: rgba(255, 255, 255, 0.12);
+}
+
+html:has(.ferrorama-landing) {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
+    overflow-x: clip;
+}
+
+.ferrorama-landing,
+.ferrorama-landing * {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.ferrorama-landing {
+    background-color: var(--ferro-bg-deep);
+    background-image: none;
+    color: var(--ferro-steel-100);
+    overflow-x: clip;
+    position: relative;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.ferrorama-landing h1,
+.ferrorama-landing h2,
+.ferrorama-landing h3,
+.ferrorama-landing h4,
+.ferrorama-landing .brand-font,
+.ferrorama-landing .brand-font * {
+    font-family: 'League Spartan', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+/* Canvas 3D WebGL de Viadutos e Trens no Fundo */
+.webgl-trains-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 0;
+    pointer-events: none;
+    display: block;
+}
+
+.ferrorama-landing header {
+    position: relative;
+    z-index: 1050;
+}
+
+.ferrorama-landing main,
+.ferrorama-landing footer {
+    position: relative;
+    z-index: 1;
+}
+
+.ferrorama-landing a:focus-visible,
+.ferrorama-landing button:focus-visible {
+    outline: 2px solid var(--ferro-volt) !important;
+    outline-offset: 3px;
+}
 
 
+   /* Barra Superior - Index*/
+.navbar-canva {
+    z-index: 1050;
+    pointer-events: auto;
+    background-color: rgba(8, 18, 32, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    transition: background-color 0.25s ease, padding 0.25s ease, box-shadow 0.25s ease;
+}
+
+.navbar-canva.navbar-scrolled {
+    background-color: #081220;
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.navbar-brand-logo {
+    width: 36px;
+    height: 36px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+}
+
+.nav-link-canva {
+    color: rgba(255, 255, 255, 0.82) !important;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.45rem 0.9rem !important;
+    border-radius: 0.5rem;
+    transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.nav-link-canva:hover,
+.nav-link-canva:focus-visible,
+.nav-link-canva.active {
+    color: #ffffff !important;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-nav-login {
+    background-color: var(--ferro-volt);
+    color: #081220;
+    font-weight: 700;
+    font-size: 0.92rem;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-nav-login:hover,
+.btn-nav-login:focus-visible {
+    background-color: #d4ff9e;
+    color: #081220;
+    transform: translateY(-1px);
+}
+
+
+   /* Hero Section & Botões */
+.hero-canva {
+    padding-top: 7.8rem;
+    padding-bottom: 4.5rem;
+}
+
+.hero-canva-title {
+    font-size: clamp(2.15rem, 1.4rem + 3.4vw, 3.85rem);
+    line-height: 1.06;
+    font-weight: 800;
+    overflow-wrap: break-word;
+    text-shadow: 0 4px 18px rgba(8, 18, 32, 0.9);
+}
+
+.hero-canva-subtitle {
+    background-color: var(--ferro-bg-elevated);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.15rem;
+    padding: 1rem 1.5rem;
+    color: var(--ferro-steel-100);
+    font-size: clamp(1.05rem, 0.95rem + 0.45vw, 1.25rem);
+    max-width: 44rem;
+    line-height: 1.55;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.38);
+}
+
+.btn-canva-primary {
+    background-color: var(--ferro-volt);
+    color: #081220;
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-canva-primary:hover,
+.btn-canva-primary:focus-visible {
+    background-color: #d4ff9e;
+    color: #081220;
+    transform: translateY(-2px);
+}
+
+.btn-canva-secondary {
+    background-color: var(--ferro-bg-elevated);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 1px solid var(--ferro-border);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-canva-secondary:hover,
+.btn-canva-secondary:focus-visible {
+    background-color: #162a42;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Pílulas de Categoria na Hero */
+.canva-pill-tab {
+    background-color: rgba(15, 31, 52, 0.85);
+    color: var(--ferro-steel-300);
+    border: 1px solid var(--ferro-border);
+    border-radius: 50rem;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.canva-pill-tab:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.canva-pill-tab.active {
+    background-color: #ffffff;
+    color: #081220;
+    border-color: #ffffff;
+}
+
+/* Vitrine Central */
+.canva-showcase-stage {
+    background-color: var(--ferro-bg-elevated);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+    transition: opacity 0.2s ease, transform 0.22s var(--ferro-ease);
+}
+
+.canva-kicker {
+    background-color: rgba(193, 255, 114, 0.15);
+    color: var(--ferro-volt);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50rem;
+}
+
+.canva-mini-tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.8rem;
+    border-radius: 50rem;
+}
+
+.canva-ui-preview {
+    background-color: #0a1628;
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.15rem;
+    padding: 1.25rem;
+}
+
+.canva-sensor-tile {
+    background-color: #112238;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.9rem;
+    padding: 1rem;
+    height: 100%;
+}
+
+.canva-status-dot,
+.canva-status-pill {
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 50rem;
+    display: inline-block;
+}
+
+.status-ok {
+    background-color: rgba(34, 197, 94, 0.18);
+    color: #86efac;
+}
+
+.status-warn {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+}
+
+.status-danger-pill {
+    background-color: rgba(239, 68, 68, 0.22);
+    color: #fca5a5;
+}
+
+.scenario-btn {
+    border: 1px solid var(--ferro-border);
+    background-color: #112238;
+    color: var(--ferro-steel-300);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.35rem 0.8rem;
+    border-radius: 50rem;
+    transition: all 0.18s ease;
+}
+
+.scenario-btn:hover {
+    color: #ffffff;
+}
+
+.scenario-btn.active {
+    background-color: var(--ferro-volt);
+    border-color: var(--ferro-volt);
+    color: #081220;
+}
+
+.telemetry-progress {
+    height: 7px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50rem;
+    overflow: hidden;
+}
+
+.telemetry-progress .progress-bar {
+    transition: width 0.45s var(--ferro-ease), background-color 0.3s ease;
+}
+
+.telemetry-bar-54 { width: 54%; }
+.telemetry-bar-32 { width: 32%; }
+
+/*Bento Grid (Blocos Visuais)*/
+.section-padding {
+    padding: 5rem 0;
+    position: relative;
+}
+
+.section-surface-solid {
+    background-color: rgba(11, 24, 42, 0.84);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid var(--ferro-border);
+    border-bottom: 1px solid var(--ferro-border);
+}
+
+.section-header-title {
+    font-size: clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.12;
+}
+
+.canva-section-header-box {
+    background-color: var(--ferro-bg-elevated);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.35rem;
+    padding: 1.75rem 2rem;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+}
+
+.bento-card {
+    border-radius: 1.5rem;
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+}
+
+.bento-slate {
+    background-color: #162a42;
+}
+
+.bento-azure {
+    background-color: #3b5870;
+}
+
+.bento-green {
+    background-color: #135d3b;
+}
+
+.bento-navy {
+    background-color: #112034;
+}
+
+.bento-visual-box {
+    background-color: rgba(8, 18, 32, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.1rem 1.25rem;
+}
+
+/* Cards de Sensores, Benefícios e Banner Final */
+.canva-feature-card {
+    background-color: #12243b;
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.35rem;
+    padding: 1.75rem;
+    height: 100%;
+    cursor: pointer;
+    transition: background-color 0.22s ease, border-color 0.22s ease, transform 0.22s var(--ferro-ease);
+}
+
+.canva-feature-card:hover,
+.canva-feature-card.sensor-card-selected {
+    background-color: #19314f;
+    border-color: var(--ferro-volt);
+}
+
+.canva-card-pill {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50rem;
+}
+
+.canva-feature-card.sensor-card-selected .canva-card-pill {
+    background-color: var(--ferro-volt);
+    color: #081220;
+}
+
+.canva-detail-strip {
+    background-color: #102036;
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.35rem;
+    padding: 1.75rem;
+    transition: opacity 0.2s ease;
+}
+
+.canva-detail-item {
+    background-color: #0a1628;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.95rem;
+    padding: 1rem;
+    height: 100%;
+}
+
+.canva-benefit-card {
+    background-color: #12243b;
+    border: 1px solid var(--ferro-border);
+    border-radius: 1.35rem;
+    padding: 1.75rem;
+    height: 100%;
+}
+
+.canva-benefit-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--ferro-volt);
+    color: #081220;
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.canva-cta-banner {
+    background-color: #3b5870;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 1.75rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
+}
+
+/* Scroll Reveal */
+.js-ready .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s var(--ferro-ease), transform 0.55s var(--ferro-ease);
+}
+
+.js-ready .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+/* Footer */
+.footer-ferrorama {
+    background-color: #060d18;
+    border-top: 1px solid var(--ferro-border);
+    color: var(--ferro-steel-300);
+}
+
+.footer-link {
+    color: var(--ferro-steel-300);
+    text-decoration: none;
+    transition: color 0.18s ease;
+}
+
+.footer-link:hover,
+.footer-link:focus-visible {
+    color: #ffffff;
+}
+
+.text-steel {
+    color: var(--ferro-steel-300);
+}
+
+.text-volt {
+    color: var(--ferro-volt);
+}
+
+/* Responsividade do Index */
+@media (max-width: 991.98px) {
+    .hero-canva {
+        padding-top: 6.5rem;
+        padding-bottom: 3.5rem;
+    }
+
+    .section-padding {
+        padding: 3.75rem 0;
+    }
+
+    .navbar-canva .navbar-collapse {
+        background-color: #0d1b2e;
+        border: 1px solid var(--ferro-border);
+        border-radius: 1rem;
+        padding: 1rem;
+        margin-top: 0.75rem;
+    }
+
+    .btn-nav-login {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-canva {
+        padding-top: 5.6rem;
+        padding-bottom: 2.5rem;
+    }
+
+    .section-padding {
+        padding: 2.85rem 0;
+    }
+
+    .canva-showcase-stage,
+    .canva-section-header-box,
+    .bento-card,
+    .canva-feature-card,
+    .canva-detail-strip,
+    .canva-benefit-card {
+        padding: 1.35rem;
+        border-radius: 1.15rem;
+    }
+
+    .canva-pill-tab {
+        flex: 1 1 calc(50% - 0.5rem);
+        text-align: center;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.82rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html:has(.ferrorama-landing) {
+        scroll-behavior: auto;
+    }
+    .ferrorama-landing *,
+    .ferrorama-landing *::before,
+    .ferrorama-landing *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .js-ready .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+}
