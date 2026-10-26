@@ -704,8 +704,14 @@ body {
 
 .image-profile{
     border-radius: 50%;
+    width: 20rem;
+    height: 20rem;
+    background-color: #929292;
 }
 
+.left-space{
+    padding-left: 10%;
+}
 .GlowButton{
     display: inline-block; padding: 15px 30px;
     font-size: 24px; font-weight: bold;

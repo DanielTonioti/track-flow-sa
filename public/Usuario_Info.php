@@ -103,8 +103,15 @@ if (!empty($_SESSION["avatar"]) && $raizProjeto !== false && $pastaAssets !== fa
             <img class="image-profile" src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Avatar do usuário"
                         onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
         </div>     
-            <div>
-                <h2 class="cores-color" data-color="white"> <?php echo $_SESSION["usuario"]; ?> </h1>
+            <div class="left-space">
+                <h2 class="cores-color" data-color="white"> Nome: <?php echo $_SESSION["usuario"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> Email: <?php echo $_SESSION["email"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> Telefone: <?php echo $_SESSION["telefone"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> Cargo: <?php echo $_SESSION["cargo"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> Cidade: <?php echo $_SESSION["cidade"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> Bairro: <?php echo $_SESSION["bairro"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> Rua: <?php echo $_SESSION["rua"]; ?> </h2>
+                <h2 class="cores-color" data-color="white"> UF: <?php echo $_SESSION["uf"]; ?> </h2>
             </div>
         </div>
         
@@ -119,8 +126,6 @@ if (!empty($_SESSION["avatar"]) && $raizProjeto !== false && $pastaAssets !== fa
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script src="../scripts/scriptUsuarioInfo.js"></script>
-
 </body>
 
 </html>
