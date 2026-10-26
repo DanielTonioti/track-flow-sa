@@ -722,7 +722,7 @@ body {
     rgba(58, 60, 78, 0.3), 0 0 30px rgba(66, 66, 105, 0.2);
     background-color: #40435a;
 }
-
+:root{
     --ferro-bg-deep: #081220;
     --ferro-bg-surface: #0d1b2e;
     --ferro-bg-elevated: rgba(15, 31, 52, 0.92);
