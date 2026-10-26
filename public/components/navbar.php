@@ -129,7 +129,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
             <!-- MENU DO USUÁRIO -->
             <div id="menu_user" class="cores-color menu" data-color="white">
                 <div>
-                    <p><a href="Usuario_Info">Perfil</a></p>
+                    <p><a href="Usuario_Info.php">Perfil</a></p>
                     <p class="Menu_Deslogar"><a href="logout.php">Deslogar</a></p>
                 </div>
             </div>
