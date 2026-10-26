@@ -134,7 +134,7 @@ if (isset($_POST['CadastrarUsuario'])) {
                 if ($stmt->execute()) {
                     $stmt->close();
 
-                    header("Location: cadastro_usuario.php?sucesso=1");
+                    header("Location: latitude.php");
                     exit();
                 }
 

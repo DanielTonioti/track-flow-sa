@@ -48,7 +48,26 @@ body {
     margin: 0;
     padding: 0;
 }
+.clima {
+            max-width: 380px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px #0001;
+            text-align: center;
+        }
 
+        .temperatura {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .detalhe {
+            color: #555;
+            margin: 12px 0;
+        }
 
 /* ==========================================================================
    Sistema de Temas Dinâmicos (Data Attributes)
