@@ -75,23 +75,20 @@ if ($id !== false && $id > 0) {
             </div>
             <div class="DangerZone">
                 <div class="blockcentro">
-                    <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de
-                        Acesso</label>
+                    <label for="inputPassword5" class="cores-color  form-label" data-color="white">Nivel de Acesso</label>
                     <div>
                         <input type="radio" name="acesso" id="funcionario" value="funcionario" <?php echo ($user['cargo'] ?? '') === 'funcionario' ? 'checked' : ''; ?> required> Funcionario
                         <input type="radio" name="acesso" id="administrador" value="admin" <?php echo ($user['cargo'] ?? '') === 'admin' ? 'checked' : ''; ?>>
                         Administrador
                     </div>
                     <div class="ButtonExcluirUsuario">
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#deleteModal">Excluir Usuario</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Excluir Usuario</button>
                     </div>
                 </div>
             </div>
             <div class="blockcentro">
                 <button type="button" class="btn cores-color cores-background" data-color="white"
-                    data-background="azure-claro-fundo" data-bs-toggle="modal" data-bs-target="#updateModal">Atualizar
-                    usuario</button>
+                    data-background="azure-claro-fundo" data-bs-toggle="modal" data-bs-target="#updateModal">Atualizar usuario</button>
             </div>
         </form>
         <form id="deleteForm" action="excluir_usuario.php" method="POST" style="display:none;">
@@ -155,7 +152,7 @@ if ($id !== false && $id > 0) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_navbar.js"></script>
     <script src="../scripts/scriptUsuarioInfo.js"></script>
 
 </body>

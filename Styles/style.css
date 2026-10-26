@@ -48,7 +48,26 @@ body {
     margin: 0;
     padding: 0;
 }
+.clima {
+            max-width: 380px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px #0001;
+            text-align: center;
+        }
 
+        .temperatura {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .detalhe {
+            color: #555;
+            margin: 12px 0;
+        }
 
 /* ==========================================================================
    Sistema de Temas Dinâmicos (Data Attributes)
@@ -167,7 +186,9 @@ body {
     z-index: 1100;
     padding: 1% 2%;
 }
-
+.nav-nome {
+    margin-left:1.2rem;
+}
 
 .hub-icon {
     max-height: 3rem;
@@ -183,7 +204,7 @@ body {
 
 .menu-nav .perfil .imgCx {
     position: relative;
-    margin-left: 2vh;
+    margin-left: 0vh;
     width: 50px;
     height: 50px;
     background: #929292;
@@ -439,7 +460,12 @@ body {
     padding: 20px;
 }
 
-
+.WIP {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+}
 .ButtonExcluirUsuario {
     margin-top: 5%;
 }

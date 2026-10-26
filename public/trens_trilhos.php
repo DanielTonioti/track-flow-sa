@@ -2,6 +2,7 @@
 session_start();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
+redirecionarSeNaoAdmin();
 
 $trens = $db->query(
     "SELECT t.*, f.nome AS responsavel_nome
@@ -50,7 +51,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h3 class="mb-0">Trens</h3>
                         <?php if ($usuarioEhAdmin): ?>
-                            <a href="cadastro_trens.php" class="btn btn-sm btn-primary">Cadastrar trem</a>
+                            <a href="cadastro_trens.php" class="btn btn-sm btn-primary">Gerenciar trens</a>
                         <?php endif; ?>
                     </div>
 
@@ -90,7 +91,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h3 class="mb-0">Rotas</h3>
                         <?php if ($usuarioEhAdmin): ?>
-                            <a href="cadastro_rotas.php" class="btn btn-sm btn-primary">Cadastrar rota</a>
+                            <a href="cadastro_rotas.php" class="btn btn-sm btn-primary">Gerenciar rotas</a>
                         <?php endif; ?>
                     </div>
 
@@ -133,7 +134,7 @@ $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>
