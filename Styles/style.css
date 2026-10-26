@@ -677,3 +677,8 @@ body {
         margin-top: 1.2rem;
     }
 }
+
+.center-profile{
+    justify-content: center;
+    align-items: center;
+}
