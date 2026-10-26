@@ -82,7 +82,7 @@ if (isset($_POST['CadastrarSensor'])) {
     </header>
 
     <main>
-        <?php if (!empty($mensagemCadastro)): ?>
+      <!--   <?php if (!empty($mensagemCadastro)): ?>  
             <div class="alert alert-success mx-auto mt-3 w-50 text-center">
                 <?php echo $mensagemCadastro; ?>
             </div>
@@ -105,6 +105,7 @@ if (isset($_POST['CadastrarSensor'])) {
                         <input type="radio" name="tipo" id="trilho" value="trilho"> Trilho
                     </div>
                     <br>
+        --> <h1 class="text-white mb-0 WIP">Pagina em andamento(WIP)</h1><!--
                     <div class="column-sensor" id="tipos">
                         <label for="tipo-dado">Tipo de Dado</label>
                         <select name="tipo_dado" id="tipo-dado" required>
@@ -141,8 +142,9 @@ if (isset($_POST['CadastrarSensor'])) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
             crossorigin="anonymous"></script>
-
+  -->
         <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+  
     </main>
     <footer>
 

@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
     }
-    header('Location: Usuario_Info.php?id=' . $id);
+    header('Location: usuario_info.php?id=' . $id);
     exit();
 }
 header('Location: Admin.php');

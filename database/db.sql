@@ -5,6 +5,13 @@ USE track_flow_m1;
 CREATE TABLE IF NOT EXISTS funcionario (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
+        cep INT NOT NULL,
+        rua VARCHAR(255) NOT NULL,
+        bairro VARCHAR(255) NOT NULL,
+        cidade VARCHAR(255) NOT NULL,
+        uf VARCHAR(255) NOT NULL,
+        latitude DECIMAL(10,7) NULL,
+        longitude DECIMAL(10,7) NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
         telefone VARCHAR(15) NOT NULL,
         cargo ENUM ('funcionario', 'admin') DEFAULT 'funcionario' NOT NULL,
@@ -14,14 +21,14 @@ CREATE TABLE IF NOT EXISTS funcionario (
     );
 
 INSERT INTO
-    funcionario (nome, email, telefone, cargo, senha)
+    funcionario (nome,cep,rua,bairro,cidade,uf, email, telefone, cargo, senha)
 VALUES
-('João Silva', 'joao@empresa.com', '47999991111', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
-('Maria Souza', 'maria@empresa.com', '47999992222', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
-('Pedro Santos', 'pedro@empresa.com', '47999993333', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
-('Ana Oliveira', 'ana@empresa.com', '47999994444', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
-('Carlos Pereira', 'carlos@empresa.com', '47999995555', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
-('Juliana Costa', 'juliana@empresa.com', '47999996666', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S');
+('João Silva',89223002,'Avenida Santos Dumont','Bom Retiro','Joinville','SC', 'joao@empresa.com', '47999991111', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Maria Souza',89223002,'Avenida Santos Dumont','Bom Retiro','Joinville','SC', 'maria@empresa.com', '47999992222', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Pedro Santos',89223002,'Avenida Santos Dumont','Bom Retiro','Joinville','SC', 'pedro@empresa.com', '47999993333', 'funcionario', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Ana Oliveira',89223002,'Avenida Santos Dumont','Bom Retiro','Joinville','SC', 'ana@empresa.com', '47999994444', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Carlos Pereira',89223002,'Avenida Santos Dumont','Bom Retiro','Joinville','SC', 'carlos@empresa.com', '47999995555', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S'),
+('Juliana Costa',89223002,'Avenida Santos Dumont','Bom Retiro','Joinville','SC', 'juliana@empresa.com', '47999996666', 'admin', '$2y$10$1nzwL9jhbExwj86.JclqhuJ.OlAFKLZMt/P9Pb5FTou3EQAR7Vf5S');
 
 CREATE TABLE IF NOT EXISTS trem (
         id INT AUTO_INCREMENT PRIMARY KEY,

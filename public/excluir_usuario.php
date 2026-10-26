@@ -6,7 +6,20 @@ require_once '../infra/conn.php';
 redirecionarSeNaoAdmin();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $id = isset($_POST['id_excluir']) ? (int) $_POST['id_excluir'] : 0;
+    $cancel = 0;
+    $sql2 = "SELECT * FROM trem WHERE responsavel_usuario_id = $id";
+    $result = mysqli_query($db, $sql2);
+    while ($joshua = $result->fetch_assoc())
+        {
+        if (isset($joshua['id']));
+        {
+        $cancel = 1;
+        }
+        }
+    
+    echo $cancel;
 
     if ($id <= 0) {
         header("Location: Admin.php");
@@ -14,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $idSessao = (int) ($_SESSION['id'] ?? 0);
+
+    if ($cancel == 0){
 
     $sql = "DELETE FROM funcionario WHERE id = ?";
     if ($stmt = $db->prepare($sql)) {
@@ -28,9 +43,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: Login.php");
         exit();
     }
-
     header("Location: Admin.php");
     exit();
+    }
+    else
+    {
+    header("Location: editar_usuario.php?id=" . $id . "&excluir_erro=1");
+    exit();
+    }
+    
 }
 
 ?>

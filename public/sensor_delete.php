@@ -55,7 +55,7 @@ foreach ($sensores as $sensor) {
         ?>
     </header>
     <main>
-        <div class="flex justify-content-center">
+        <!-- <div class="flex justify-content-center">
             <div class="admin-titulo d-flex justify-content-center align-items-center cores-background rounded-pill"
                 data-background="azure-claro-fundo">
                 <p class="admin-titulo-texto cores-color fw-bold mx-3" data-color="white">
@@ -63,7 +63,7 @@ foreach ($sensores as $sensor) {
                 </p>
             </div>
         </div>
-
+        --><h1 class="text-white mb-0 WIP">Pagina em andamento(WIP) <!--
         <?php foreach ($secoes as $tipo => $titulo):
             $listaId = 'lista-' . $tipo;
             ?>
@@ -75,13 +75,13 @@ foreach ($sensores as $sensor) {
                         <img src="../assets/icons/seta-para-baixo.png" alt="" class="users-page-arrow">
                     </span>
                 </button>
-
+                
                 <div class="collapse" id="<?= $listaId ?>">
                     <div class="d-flex flex-column mt-2">
                         <?php if (empty($porTipo[$tipo])): ?>
                             <p>Nenhum sensor cadastrado.</p>
                         <?php endif; ?>
-
+                        
                         <?php foreach ($porTipo[$tipo] as $sensor): ?>
                             <div class="flex centralizar-tabela">
                                 <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
@@ -109,7 +109,7 @@ foreach ($sensores as $sensor) {
                 </div>
             </div>
         <?php endforeach; ?>
-
+                        -->
         <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
     </main>
     <footer>

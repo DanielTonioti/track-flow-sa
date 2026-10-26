@@ -12,8 +12,7 @@ $resultado2 = $db->query($sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/logo/icone.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../Styles/style.css">
     <title>Administradores</title>
 </head>
@@ -21,10 +20,7 @@ $resultado2 = $db->query($sql);
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php
-
         include("components/navbar.php");
-
-
         ?>
     </header>
     <main>
@@ -57,7 +53,7 @@ $resultado2 = $db->query($sql);
                     <?php while ($adm = $resultado->fetch_assoc()) {
 
                         if ($adm['cargo'] == "admin") { ?>
-
+                           
                             <div class="flex centralizar-tabela">
 
                                 <p class="border-tabela admin-tabela tabela-texto cores-color cores-background"
@@ -69,13 +65,11 @@ $resultado2 = $db->query($sql);
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($adm['email']); ?>
                                 </p>
-
+                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
                                 <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($adm['telefone']); ?>
                                 </p>
-
-                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
 
                                     <a href="editar_usuario.php?id=<?= (int) $adm['id'] ?>"
                                         class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background d-inline-block text-decoration-none"
@@ -124,14 +118,11 @@ $resultado2 = $db->query($sql);
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($user['email']); ?>
                                 </p>
-
+                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
                                 <p class="border-tabela admin-tabela px-1 cores-color cores-background" data-color="white"
                                     data-background="azure-claro-fundo">
                                     <?php echo htmlspecialchars($user['telefone']); ?>
                                 </p>
-
-                                <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
-
                                     <a href="editar_usuario.php?id=<?= (int) $user['id'] ?>"
                                         class="admin-tabela-button border-tabela p-1 w-auto cores-color cores-background d-inline-block text-decoration-none"
                                         data-color="white" data-background="azure-claro-fundo">
@@ -161,12 +152,9 @@ $resultado2 = $db->query($sql);
         <?php } ?>
         <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
     </main>
-
-    <script src="../scripts/scriptUsersPage.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_user_page.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>

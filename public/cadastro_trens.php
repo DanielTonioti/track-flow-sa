@@ -7,6 +7,8 @@ redirecionarSeNaoAdmin();
 $erro = '';
 $sucesso = false;
 $responsavelId = '';
+$excluir_erro = isset($_GET['excluir_erro']);
+if ($excluir_erro){$erro = "Não foi possível excluir trem: Há alguma rota dependente de sua existência";}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cadastrar-trem'])) {
     $nome = trim($_POST['nome'] ?? '');
@@ -76,7 +78,7 @@ $trens = $db->query(
     </header>
 
     <main class="container py-4">
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
+        <a href="trens_trilhos.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="text-center mb-4">
             <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
                 <h1 class="titulo-Sensor mb-0">Cadastrar Trem</h1>
@@ -110,7 +112,7 @@ $trens = $db->query(
                 <div class="mb-3">
                     <label for="responsavel_usuario_id" class="form-label text-white">Responsável</label>
                     <select id="responsavel_usuario_id" name="responsavel_usuario_id" class="form-select">
-                        <option value="">Sem responsável</option>
+                        <option value="Sem responsável">Sem responsável</option>
                         <?php while ($usuario = $usuarios->fetch_assoc()): ?>
                             <option value="<?= (int) $usuario['id'] ?>" <?= ($responsavelId !== '' && (string) $responsavelId === (string) $usuario['id']) ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8') ?>)
@@ -166,10 +168,8 @@ $trens = $db->query(
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>

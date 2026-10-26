@@ -28,6 +28,7 @@ require_once 'components/start.php';
     </header>
 
     <main class="container py-4">
+        <a href="Relatories.php" class="btn btn-danger back-buttom">Voltar</a>
         <div class="ReportFormPanel mx-auto cores-background rounded-4 p-4 p-md-5" data-background="azure-claro-fundo">
             <h1 class="text-white mb-4">Novo relatario</h1>
             <form>
@@ -66,7 +67,7 @@ require_once 'components/start.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>

@@ -20,9 +20,7 @@ redirecionarSeNaoAdmin();
 <body class="cores-background" data-background="azure-escuro-fundo">
     <header>
         <?php
-
         include("components/navbar.php");
-
         ?>
     </header>
 
@@ -80,7 +78,7 @@ redirecionarSeNaoAdmin();
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>
