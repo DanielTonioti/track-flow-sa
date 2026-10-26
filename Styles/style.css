@@ -702,6 +702,10 @@ body {
     align-items: center;
 }
 
+.image-profile{
+    border-radius: 50%;
+}
+
 .GlowButton{
     display: inline-block; padding: 15px 30px;
     font-size: 24px; font-weight: bold;

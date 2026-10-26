@@ -18,8 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $cancel = 1;
         }
         }
-    
-    echo $cancel;
 
     if ($id <= 0) {
         header("Location: Admin.php");

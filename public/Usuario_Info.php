@@ -99,14 +99,10 @@ if (!empty($_SESSION["avatar"]) && $raizProjeto !== false && $pastaAssets !== fa
             </div>
         </div>
         <div class="center-profile flex">
-            <div> 
-                <div class="perfil">
-                <div class="imgCx">
-                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Avatar do usuário"
+        <div>
+            <img class="image-profile" src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Avatar do usuário"
                         onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
-                </div>
-            </div>
-            </div>
+        </div>     
             <div>
                 <h2 class="cores-color" data-color="white"> <?php echo $_SESSION["usuario"]; ?> </h1>
             </div>
