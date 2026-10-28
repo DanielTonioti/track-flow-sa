@@ -1,86 +1,101 @@
 :root {
-    /* Cores de fundo */
-    --cor-azure-claro-fundo: #72899b;
-    --cor-azure-escuro-fundo: #526d82;
-    --cor-cinza-claro: #c9cace;
-    --cor-azul-pastel: #67a4ff;
+    color-scheme: dark;
+
+    /* Cores Oficiais TrackFlow - Paleta Original e Index */
+    --cor-azure-escuro-fundo: #081220; /* Fundo base escuro profundo */
+    --cor-azure-claro-fundo: #0d1b2e;  /* Superfície de cards e painéis */
+    --cor-cinza-claro: #162a42;        /* Contêineres secundários e divisores */
+    --cor-cinza-claro-botoes: #1e2f47;
+    --cor-azul-real: #5271ff;          /* Azul primário da identidade */
+    --cor-azul-pastel: #67a4ff;        /* Azul de destaque suave / links */
     --cor-azul-vivido: #0066ff;
     --cor-azul-apagado: #6b7280;
+    --cor-azure-apagado: #3b5870;
+    --cor-lime-green: #c1ff72;         /* Volt / destaque vibrante */
+    --cor-verde: #00bf63;              /* Status OK / Sucesso */
     --cor-verde-escuro: #108b50;
-    --cor-azure-apagado: #65869f;
-
-
-    /* Cores de texto */
-    --cor-letra: #ffffff;
+    --cor-vermelho: #ff5757;           /* Alerta / Perigo / Excluir */
+    --cor-letra: #f4f7fa;              /* Texto principal de alto contraste */
+    --cor-letra-muted: #b8c7d9;        /* Texto secundário */
     --cor-black: #000000;
 
+    /* Tipografia Técnica */
+    --Fonte-padrao: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --Fonte-titulo: "League Spartan", system-ui, sans-serif;
+    --Fonte-mono: "JetBrains Mono", monospace;
+    --Fonte-lucinda: "Lucida Sans", Geneva, Verdana, sans-serif;
 
-    /* Cores de destaque e botões */
-    --cor-lime-green: #c1ff72;
-    --cor-azul-real: #5271ff;
-    --cor-cinza-claro-botoes: #adadad;
-    --cor-verde: #00bf63;
-    --cor-vermelho: #ff5757;
+    /* Compatibilidade Landing / Index */
+    --ferro-bg-deep: #081220;
+    --ferro-bg-surface: #0d1b2e;
+    --ferro-bg-elevated: #12243b;
+    --ferro-steel-300: #b8c7d9;
+    --ferro-steel-100: #f4f7fa;
+    --ferro-volt: #c1ff72;
+    --ferro-amber: #f59e0b;
+    --ferro-danger: #ff5757;
+    --ferro-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --ferro-border: rgba(255, 255, 255, 0.12);
 
-
-    /* Tipografia */
-    --Fonte-padrao: "Pixel", sans-serif;
-    --Fonte-lucinda: 'Lucida Sans', Geneva, Verdana, sans-serif;
+    /* Bootstrap 5 Native Dark Mode Tokens */
+    --bs-body-bg: #081220;
+    --bs-body-color: #f4f7fa;
+    --bs-emphasis-color: #ffffff;
+    --bs-secondary-color: #b8c7d9;
+    --bs-border-color: rgba(255, 255, 255, 0.12);
+    --bs-card-bg: #0d1b2e;
+    --bs-card-border-color: rgba(255, 255, 255, 0.1);
+    --bs-tertiary-bg: #12243b;
+    --bs-primary: #5271ff;
+    --bs-primary-rgb: 82, 113, 255;
+    --bs-info: #67a4ff;
+    --bs-info-rgb: 103, 164, 255;
+    --bs-success: #00bf63;
+    --bs-success-rgb: 0, 191, 99;
+    --bs-danger: #ff5757;
+    --bs-danger-rgb: 255, 87, 87;
+    --bs-dark: #081220;
+    --bs-dark-rgb: 8, 18, 32;
 }
 
-
 /* ==========================================================================
-   Base e Reset
+   Base e Reset Global Dark
    ========================================================================== */
 @font-face {
     font-family: "Pixel";
     src: url("../assets/fonts/LeagueSpartan-VariableFont_wght.ttf");
 }
 
-
 * {
     font-family: var(--Fonte-padrao);
     box-sizing: border-box;
 }
 
+html {
+    color-scheme: dark;
+    background-color: #081220 !important;
+}
 
 body {
     margin: 0;
     padding: 0;
+    background-color: #081220 !important;
+    color: #f4f7fa !important;
+    font-family: var(--Fonte-padrao);
+    min-height: 100vh;
 }
-.clima {
-            max-width: 380px;
-            margin: auto;
-            padding: 25px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px #0001;
-            text-align: center;
-        }
-
-        .temperatura {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-
-        .detalhe {
-            color: #555;
-            margin: 12px 0;
-        }
 
 /* ==========================================================================
    Sistema de Temas Dinâmicos (Data Attributes)
    ========================================================================== */
 .cores-color {
-    color: var(--cor-color, inherit);
+    color: var(--cor-color, #f4f7fa) !important;
 }
-
 
 .cores-background {
-    background-color: var(--cor-background, transparent);
+    background-color: var(--cor-background, #0d1b2e) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
-
 
 /* Paleta de Texto */
 [data-color="black"]      { --cor-color: var(--cor-black); }
@@ -732,19 +747,6 @@ body {
     rgba(58, 60, 78, 0.3), 0 0 30px rgba(66, 66, 105, 0.2);
     background-color: #40435a;
 }
-:root{
-    --ferro-bg-deep: #081220;
-    --ferro-bg-surface: #0d1b2e;
-    --ferro-bg-elevated: rgba(15, 31, 52, 0.92);
-    --ferro-steel-300: #b8c7d9;
-    --ferro-steel-100: #f4f7fa;
-    --ferro-cyan: #00d4ff;
-    --ferro-volt: #c1ff72;
-    --ferro-amber: #f59e0b;
-    --ferro-danger: #ef4444;
-    --ferro-ease: cubic-bezier(0.16, 1, 0.3, 1);
-    --ferro-border: rgba(255, 255, 255, 0.12);
-}
 
 html:has(.ferrorama-landing) {
     color-scheme: dark;
@@ -1313,5 +1315,392 @@ html:has(.ferrorama-landing) {
     .js-ready .reveal-on-scroll {
         opacity: 1;
         transform: none;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   Identidade Visual Unificada TrackFlow (Cores Oficiais Fieis ao Projeto)
+   ========================================================================== */
+.brand-font {
+    font-family: 'League Spartan', system-ui, sans-serif !important;
+    letter-spacing: -0.02em;
+}
+
+.mono-font {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace !important;
+    letter-spacing: 0.02em;
+}
+
+.text-blue,
+.text-azul-real {
+    color: #5271ff !important;
+}
+
+.text-blue-pastel,
+.text-cyan {
+    color: #67a4ff !important;
+}
+
+.text-volt {
+    color: #c1ff72 !important;
+}
+
+.text-steel {
+    color: #b8c7d9 !important;
+}
+
+/* Barra de Navegacao Superior Oficial */
+.menu-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    background-color: rgba(8, 18, 32, 0.95) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 0.65rem 1.5rem;
+}
+
+.nav-nome {
+    margin-left: 0.75rem;
+}
+
+.hub-icon {
+    max-height: 2.3rem;
+    width: auto;
+}
+
+.menu-nav .perfil {
+    cursor: pointer;
+    user-select: none;
+}
+
+.menu-nav .perfil .imgCx {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    background: #112238;
+    border: 1px solid rgba(82, 113, 255, 0.4);
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.menu-nav .perfil:hover .imgCx {
+    border-color: #5271ff;
+    transform: scale(1.05);
+}
+
+.menu-nav .imgCx img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+
+/* Menu Dropdown do Usuario */
+.menu-nav .menu {
+    position: absolute;
+    right: 0;
+    top: 115%;
+    width: 11.5rem;
+    max-width: 90vw;
+    z-index: 1040;
+    background: #0d1b2e;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    user-select: none;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    transform: translateY(-8px);
+}
+
+.menu-nav .menu.ativo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-nav .menu::before {
+    display: none !important;
+}
+
+.menu-nav .menu div p {
+    margin-bottom: 0;
+    padding: 11px 16px;
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background-color 0.18s ease;
+}
+
+.menu-nav .menu div p:last-child {
+    border-bottom: none;
+}
+
+.menu-nav .menu div p:hover {
+    background: rgba(82, 113, 255, 0.14) !important;
+}
+
+.menu-nav .menu div .Menu_Deslogar:hover {
+    background: rgba(239, 68, 68, 0.2) !important;
+}
+
+.menu-nav .menu div p a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: #f4f7fa;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+/* Menu Lateral Offcanvas Oficial (Ancorado no Viewport 100vh) */
+.trackflow-offcanvas {
+    background-color: #0d1b2e !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #f4f7fa !important;
+    max-width: 320px;
+    z-index: 1060 !important;
+}
+
+.trackflow-offcanvas .nav-link {
+    color: #b8c7d9 !important;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.65rem;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.trackflow-offcanvas .nav-link:hover {
+    color: #ffffff !important;
+    background-color: rgba(82, 113, 255, 0.12) !important;
+}
+
+.trackflow-offcanvas .nav-link.active {
+    color: #ffffff !important;
+    background-color: rgba(82, 113, 255, 0.2) !important;
+    border-color: rgba(82, 113, 255, 0.4) !important;
+    font-weight: 700;
+}
+
+/* Tabelas e Caixas de Admin / Sensores */
+.admin-titulo {
+    background-color: #0d1b2e !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.border-tabela {
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    background-color: #0d1b2e !important;
+}
+
+.admin-tabela {
+    background-color: #0d1b2e !important;
+    color: #f4f7fa !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.5rem;
+}
+
+.admin-tabela-button {
+    background-color: #112238 !important;
+    border: 1px solid rgba(82, 113, 255, 0.4) !important;
+    color: #67a4ff !important;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.admin-tabela-button:hover {
+    background-color: #5271ff !important;
+    color: #ffffff !important;
+}
+
+/* Formularios Modernos Dark Mode */
+.form-control,
+.form-select {
+    background-color: rgba(8, 18, 32, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #f4f7fa !important;
+    border-radius: 0.65rem !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #081220 !important;
+    border-color: #5271ff !important;
+    box-shadow: 0 0 0 0.25rem rgba(82, 113, 255, 0.25) !important;
+    color: #ffffff !important;
+}
+
+.table-dark {
+    --bs-table-bg: #0d1b2e !important;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.02) !important;
+    --bs-table-hover-bg: rgba(82, 113, 255, 0.08) !important;
+    --bs-table-border-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.85rem;
+    overflow: hidden;
+}
+
+/* Botoes com as cores fieis do projeto (Azul Real & Volt) */
+.btn-blue,
+.btn-cyan {
+    background-color: #5271ff !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-blue:hover,
+.btn-blue:focus-visible,
+.btn-cyan:hover,
+.btn-cyan:focus-visible {
+    background-color: #415de6 !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(82, 113, 255, 0.35);
+}
+
+.btn-outline-blue,
+.btn-outline-cyan {
+    background-color: transparent !important;
+    color: #67a4ff !important;
+    border: 1px solid rgba(82, 113, 255, 0.45) !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-outline-blue:hover,
+.btn-outline-blue:focus-visible,
+.btn-outline-cyan:hover,
+.btn-outline-cyan:focus-visible {
+    background: rgba(82, 113, 255, 0.15) !important;
+    border-color: #67a4ff !important;
+    color: #ffffff !important;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Campos de Formulário e Controles Universais em Dark Mode
+   ========================================================================== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="file"],
+select,
+textarea,
+.form-control,
+.form-select {
+    background-color: rgba(13, 27, 46, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: #f4f7fa !important;
+    border-radius: 0.65rem !important;
+    padding: 0.55rem 0.85rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="file"]:focus,
+select:focus,
+textarea:focus,
+.form-control:focus,
+.form-select:focus {
+    background-color: #0d1b2e !important;
+    border-color: #5271ff !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 0 0.2rem rgba(82, 113, 255, 0.25) !important;
+    outline: none;
+}
+
+label,
+.form-label {
+    color: #f4f7fa !important;
+    font-weight: 500;
+}
+
+.form-floating label {
+    color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.form-floating .form-control:focus ~ label,
+.form-floating .form-control:not(:placeholder-shown) ~ label {
+    color: #67a4ff !important;
+}
+
+/* Ajustes de Layout para Cadastros */
+#valortipo,
+#valor-tipo {
+    width: min(600px, 95%) !important;
+    margin: 0 auto;
+}
+
+.column-sensor {
+    gap: 0.6rem;
+}
+
+.column-sensor label {
+    margin-top: 0.4rem;
+    font-weight: 600;
+}
+
+/* Layout Login */
+.wrap {
+    flex: 1 1 50%;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #081220;
+    position: relative;
+    padding: 2.5rem;
+}
+
+#bubble {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Perfil do Usuário */
+.center-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-azure-claro-fundo);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.25rem;
+    padding: 2.5rem;
+    max-width: 860px;
+    margin: 0 auto;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+    .center-profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    .left-space {
+        padding-left: 0 !important;
     }
 }

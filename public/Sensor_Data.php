@@ -3,7 +3,7 @@ session_start();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
 ?>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">

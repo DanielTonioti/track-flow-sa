@@ -271,7 +271,7 @@ if (isset($_POST['CadastrarUsuario'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">

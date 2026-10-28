@@ -6,7 +6,7 @@ $sql = "SELECT id, nome, email, telefone, cargo FROM funcionario";
 $resultado = $db->query($sql);
 $resultado2 = $db->query($sql);
 ?>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@ $resultado2 = $db->query($sql);
     <link rel="shortcut icon" href="../assets/logo/icone.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Administradores</title>
 </head>
 
@@ -142,10 +143,11 @@ $resultado2 = $db->query($sql);
 
 
         <?php if (isset($_SESSION['cargo']) && $_SESSION['cargo'] === 'admin') { ?>
-            <div class="cores-color cores-background d-flex justify-content-center" data-color="white">
+            <div class="d-flex justify-content-center my-3">
                 <a href="cadastro_usuario.php"
-                    class="admin-button cores-color cores-background rounded-pill mt-1 d-flex justify-content-center align-items-center text-decoration-none px-4"
-                    data-color="white" data-background="azure-claro-fundo" id="admin-button">
+                    class="btn btn-primary rounded-pill px-4 py-2 fw-bold d-flex align-items-center gap-2 shadow"
+                    id="admin-button">
+                    <i class="bi bi-person-plus-fill"></i>
                     Adicionar Funcionário
                 </a>
             </div>

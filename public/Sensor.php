@@ -56,7 +56,7 @@ if (isset($_POST['CadastrarSensor'])) {
 }
 ?>
 
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -68,8 +68,7 @@ if (isset($_POST['CadastrarSensor'])) {
     <title>Sensor</title>
 </head>
 
-<body class="cores-background " data-background="azure-escuro-fundo" class=" cores-background "
-    data-background="azure-escuro-fundo">
+<body class="cores-background" data-background="azure-escuro-fundo">
     <header>
 
         <?php

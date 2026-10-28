@@ -156,7 +156,7 @@ if (isset($_POST['CadastrarUsuario'])) {
 $resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionario");
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">

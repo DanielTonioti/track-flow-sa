@@ -61,7 +61,7 @@ $trens = $db->query('SELECT id, nome, modelo FROM trem ORDER BY nome ASC');
 $rotas = $db->query("SELECT id, nome, descricao, distancia_km, tempo_previsto_min, trem_id FROM rota");
 ?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
