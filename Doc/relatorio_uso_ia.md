@@ -111,3 +111,93 @@
 ## 8. Reflexão sobre as contribuições e limitações da ferramenta durante o desenvolvimento
 - **Contribuições**: Grande rapidez na geração e integração do cliente assíncrono da API climática; facilidade de unificação de temas e atributos Bootstrap em dezenas de arquivos simultâneos; eficiência no diagnóstico de bugs de renderização via CLI.
 - **Limitações**: Risco de "alucinação visual" com introdução de cores e gradientes desnecessários se não houver rejeição explícita do time; necessidade de conferência estrita de expressões regulares para evitar remoção acidental de blocos vitais de folhas de estilo compartilhadas.
+
+
+---
+
+# Parte 3: Refatoração Mission Control (Data-Terminal) do Hub CCO e Alta Densidade Operacional (28/10/2026)
+
+## 1. Ferramenta ou agente de IA utilizado
+- **Ferramenta**: Google Antigravity / Gemini (modelos Gemini 3.8 / 4 Pro e Flash).
+- **Ambiente**: Integrado diretamente ao ambiente de desenvolvimento (IDE), operando com terminal PowerShell para testes locais de sintaxe e renderização PHP CLI, e espelhamento em tempo real com o servidor Apache/MySQL do XAMPP local (`C:\xampp\htdocs\track-flow-sa`).
+
+## 2. Objetivo de cada utilização
+- **Refatoração com Heurísticas Avançadas de UX (`taste-skill` e `ui-ux-pro-max`)**: Minha meta foi transformar a interface do Hub CCO (`public/hub.php`) em um ambiente genuíno de sala de controle de missão ferroviária seguindo o padrão `data-terminal` / Dark Ops, eliminando o aspecto de "dashboard web genérico" (sombras difusas de IA, cards inchados, bordas luminosas e gradientes decorativos) em favor de superfícies flat, linhas técnicas de 1px e contraste estrito.
+- **Eliminação do Carrossel de Gráficos Críticos**: Vetei o uso de slides de carrossel (`#hubCarousel`) para dados vitais de telemetria. Em um Centro de Controle Operacional ferroviário, parâmetros como velocidade e sobreaquecimento de rolamento não podem ficar ocultos em rotação; por isso, exigi a exibição simultânea em grid balanceado (`1fr 1fr 1fr`) da velocidade média por composição, monitoramento térmico contínuo e disponibilidade da malha.
+- **Remoção de Banners e KPIs Redundantes**: Exigi a eliminação de elementos puramente decorativos (badges de topo, subtítulos e rodapés técnicos sem função prática) e, na sequência, ordenei a remoção completa da faixa horizontal de KPIs secundários, desobstruindo a visão do operador e garantindo foco imediato nos dados de campo.
+- **Compactação e Alta Densidade na Matriz de Sensores**: Instruí a IA a aumentar a densidade de informação da tabela de sensores (pitch de linha ~36px), eliminar textos redundantes repetitivos (como o termo "Via Permanente" replicado em todas as linhas) substituindo-os por marcos operacionais reais (*Curva Sul*, *Junta de Dilatação*, *AMV*, *Túnel da Serra*), além de acoplar o alerta de emergência como um ticker tático horizontal de 1 linha diretamente no cabeçalho da matriz.
+- **Acessibilidade e Engenharia Resiliente**: Estabeleci como premissa a garantia de alvos de toque mínimos de 44x44px nos controles interativos, contraste de texto &ge; 4.5:1 (WCAG 2.2 AAA sobre fundo `#060d17`), eliminação de caracteres corrompidos (mojibake) e preservação estrita de sessões PHP autenticadas, checagem de privilégio `$ehAdmin`, consultas SQL nativas e do cliente assíncrono Open-Meteo (`scriptClima.js`).
+
+## 3. Principais instruções ou prompts fornecidos
+1. `"retira esses caras"`
+   *(Instrução inicial de higienização visual acompanhada de 4 capturas de tela indicando com precisão os alvos de remoção: a badge decorativa do CCO no topo, o subtítulo de sessão, o rodapé técnico em hairline e o bloco lateral de alerta com os 4 KPIs em grade com ícones circulares).*
+2. `"LEIA E EXECUTE OBRIGATORIAMENTE AS INSTRUÇÕES DESTES DOIS ARQUIVOS ANTES DE QUALQUER RESPOSTA:
+1. C:\Users\danit\.gemini\config\skills\taste-skill\references\app-screens.md
+2. C:\Users\danit\.gemini\config\skills\ui-ux-pro-max\SKILL.md
+
+Você atuará aplicando as regras desses dois manuais para analisar e reescrever o arquivo:
+C:\Users\danit\OneDrive\Desktop\track-flow-sa\public\hub.php (TrackFlow - Centro de Controle Operacional Ferroviário).
+
+---
+
+### REGRAS DAS SKILLS APLICADAS AO HUB.PHP:
+
+1. Diretriz de App Screens (taste-skill - Estilo data-terminal / Dark Ops):
+   - Cor apenas no dado, nunca no chrome: Máximo de 3% a 5% de pixels coloridos. Nada de cards com sombras difusas, bordas brilhantes ou gradientes de IA.
+   - Zero Carrossel para Gráficos Críticos: Em um CCO ferroviário, velocidade e anomalia térmica não podem ficar ocultas em slides. Exiba os gráficos em grid balanceado com linhas nítidas e escala visível.
+   - KPIs são tipografia, não "tiles com ícone em círculo colorido": Valores grandes em JetBrains Mono com números tabulares (tnum), rótulo semântico e unidades legíveis.
+   - Linguagem de Operação Real: Nada de rótulos genéricos ("Status", "Item"). Use termos ferroviários reais ("Composição", "Sensor de Via", "Delta Térmico", "Limite Crítico Excedido").
+
+2. Diretriz de Design System & A11y (ui-ux-pro-max):
+   - Contraste estrito de 4.5:1+ sobre o fundo dark #081220 / #0d1726.
+   - Touch targets mínimos de 44x44px para botões e controles.
+   - Eliminação de qualquer caractere quebrado (mojibake/UTF-8 como "") nos textos e status.
+   - Alertas visuais semânticos com pulso sutil para sensores em falha ou temperatura >= 85°C.
+
+3. Garantia de Engenharia (100% de Preservação):
+   - Mantenha a sessão PHP, checagem $ehAdmin, includes (start.php, conn.php) e consultas SQL.
+   - Mantenha a chamada resiliente à API Open-Meteo, os atributos data-lat, data-lon, data-local e os IDs de integração com ../scripts/scriptClima.js e ../scripts/script_navbar.js.
+
+---
+
+### EXECUÇÃO:
+1. Etapa 1: Faça uma auditoria cirúrgica e técnica apontando tudo o que viola as regras de app-screens.md e ui-ux-pro-max no hub.php atual.
+2. Etapa 2: Entregue o código COMPLETO e pronto para produção do hub.php, sem cortes, sem placeholders e com estética impecável de sala de controle de missão."`
+3. `"tira a linha toda da primeira imagem e compacta a tabela da segunda imagem, utilizando as skills de antes"`
+   *(Instrução de refinamento de densidade acompanhada de 2 capturas de tela: a primeira exigindo a remoção definitiva da linha horizontal de 4 cards de KPI remanescentes, e a segunda determinando a compactação máxima da tabela de sensores com redução de margens internas, eliminação de redundâncias e conversão do alerta térmico em ticker tático horizontal de 1 linha).*
+
+## 4. Trechos, arquivos ou funcionalidades produzidos com auxílio da IA
+- **`public/hub.php`**: Reescrita e compactação completa da interface operacional:
+  - Cabeçalho técnico integrado com identificação do operador, data formatada e estação meteorológica Open-Meteo dispostos lado a lado.
+  - Grid operacional de telemetria com 3 gráficos renderizados simultaneamente em visual flat dark (Google Charts: Velocidade por Composição, Monitoramento Térmico contínuo com threshold crítico de 85 °C e Disponibilidade Geral da Malha).
+  - Matriz de sensores de alta densidade dividida em duas colunas técnicas (Sensores Embarcados/Truques vs. Sensores de Via) com tipografia tabular `JetBrains Mono` (`tnum`) e marcadores semânticos de status.
+  - Ticker tático de anomalia acoplado no topo da matriz operacional, com pulso sutil na cor de perigo (`#ff5757`) indicando rolamentos ou trechos fora dos limites nominais.
+  - Folha de estilo CSS enxuta no padrão `data-terminal` (orçamento de cor restrito ao dado com < 5% de pixels cromáticos, eliminação de sombras difusas e bordas sutis de 1px).
+- **`Doc/relatorio_uso_ia.md`**: Registro formal e minucioso de toda a arquitetura de prompts, diretrizes de engenharia e decisões de design tomadas no projeto.
+
+## 5. Alterações realizadas pela equipe no conteúdo gerado
+- **Veto ao Carrossel de Gráficos**: Rejeitei a ideia de manter gráficos operacionais sob carrossel de navegação, obrigando a IA a implementar uma grade simultânea que mantém todas as métricas críticas visíveis no mesmo campo de visão.
+- **Eliminação Total da Faixa de KPIs**: Exigi a retirada completa da linha de 4 cards de KPI secundários, pois disputavam atenção visual desnecessariamente com a matriz de sensores e os gráficos em tempo real.
+- **Imposição de Densidade e Nomenclatura Ferroviária Real**: Recusei os espaçamentos folgados tradicionais de templates web comuns e corrigi textos repetitivos, inserindo terminologias reais de operação (*Truque Dianteiro*, *Mancal Traseiro*, *AMV Pátio de Manobras*, *Junta de Dilatação*).
+- **Supervisão Rígida de Versionamento**: Vetei terminantemente que a ferramenta realizasse `git commit` ou push por conta própria, garantindo que todo o diff e integridade fossem inspecionados por mim antes de qualquer entrega.
+
+## 6. Testes executados para verificar o funcionamento e a qualidade do resultado
+- **Validação de Sintaxe PHP CLI**: Executei `php -l public/hub.php` no terminal, assegurando que o código não continha erros de sintaxe ou avisos de compilação.
+- **Teste de Renderização Local**: Realizei baterias de execução em terminal simulando sessões ativas (`admin` e `funcionario`), comprovando a renderização limpa do HTML completo (62 KB) com todos os blocos funcionais presentes.
+- **Verificação de Hash SHA-256**: Validei via script de hash que o arquivo presente no workspace estava 100% idêntico ao espelhado no diretório de publicação do XAMPP (`C:\xampp\htdocs\track-flow-sa`).
+- **Inspeção Visual e Responsiva**: Testei o comportamento visual da aplicação no navegador Google Chrome com recarregamento forçado (Ctrl + F5), checando contraste, alinhamento dos 3 gráficos e responsividade em monitores de trabalho.
+
+## 7. Problemas identificados e como foram corrigidos
+- **Deleção acidental de blocos funcionais por Regex da IA**:
+  - *Causa*: Durante uma tentativa automatizada de retirar a antiga faixa de alertas, a IA empregou uma expressão regular ampla demais que apagou linhas do widget de clima e das chamadas do Google Charts.
+  - *Correção*: Intervi prontamente, reverti a alteração via `git checkout` para o commit estável e exigi que as alterações fossem feitas de forma cirúrgica com blocos ancorados e conferência imediata de integridade.
+- **Tabela de sensores excessivamente alta com rolagem desnecessária**:
+  - *Causa*: O template gerado inicialmente mantinha o padding padrão espaçoso do Bootstrap e um banner de anomalia alto que ocupava mais de 120px verticais.
+  - *Correção*: Determinei a redução do padding das células para `0.35rem`, transformei o banner em um ticker tático horizontal de apenas 1 linha e compactei as fontes de dados para 12px.
+- **Repetição de texto redundante na coluna de via**:
+  - *Causa*: A tabela apresentava o texto estático "Via Permanente" repetido em todas as linhas.
+  - *Correção*: Substituí a coluna por pontos quilométricos e marcos operacionais reais do traçado da malha (*KM 12+400 Curva Sul*, *KM 22+100 AMV*, etc.).
+
+## 8. Reflexão sobre as contribuições e limitações da ferramenta durante o desenvolvimento
+- **Contribuições**: A ferramenta acelerou significativamente a aplicação de heurísticas complexas de design de alta densidade (`data-terminal` e WCAG 2.2 AAA), além de gerar configurações refinadas para o Google Charts com fundo transparente e cores semânticas bem dosadas. Também foi extremamente ágil na simulação de testes de renderização via CLI.
+- **Limitações**: Se deixada sem supervisão rigorosa, a IA tende a propor designs genéricos ("estilo SaaS comercial") com espaçamento excessivo e gráficos escondidos em carrossel, além de apresentar riscos sérios de perda de código ao usar comandos automatizados de substituição de texto. A orientação assertiva do desenvolvedor, a especificação detalhada de requisitos e a validação constante foram indispensáveis para que o resultado final atingisse o nível de excelência exigido por um sistema de missão crítica.
