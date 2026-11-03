@@ -79,9 +79,9 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
             <div>
                 <nav class="ops-breadcrumb" aria-label="Breadcrumb">
                     <a href="hub.php">Dashboard</a>
-                    <span class="ops-breadcrumb-sep">//</span>
+                    <span class="ops-breadcrumb-sep">/</span>
                     <a href="trens_trilhos.php">Trens e Rotas</a>
-                    <span class="ops-breadcrumb-sep">//</span>
+                    <span class="ops-breadcrumb-sep">/</span>
                     <span>Trilhos e Linhas</span>
                 </nav>
                 <h1 class="ops-page-title">Via Permanente — Trilhos e Linhas</h1>
@@ -122,7 +122,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
 
         <div class="row g-3 align-items-start">
 
-            <!-- FORMULÁRIO DE CADASTRO -->
             <div class="col-12 col-lg-5">
                 <form id="CadastroTremForm" method="POST" class="ops-panel">
                     <input type="hidden" name="acao" value="cadastrar_trilho">
@@ -136,7 +135,7 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                     <div class="ops-panel-body">
                         <div class="mb-3">
                             <label class="ops-label" for="Numeracao">Código / Nome do trilho <span class="ops-required" aria-hidden="true">*</span></label>
-                            <input class="ops-input mono-font" type="text" id="Numeracao" name="Numeracao" maxlength="100" placeholder="Ex.: TRLH-N289T // KM 12+400" required>
+                            <input class="ops-input mono-font" type="text" id="Numeracao" name="Numeracao" maxlength="100" placeholder="Ex.: TRLH-N289T - KM 12" required>
                         </div>
 
                         <div class="mb-3">
@@ -163,7 +162,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                 </form>
             </div>
 
-            <!-- LISTAGEM DE TRILHOS CADASTRADOS -->
             <div class="col-12 col-lg-7">
                 <section class="ops-panel" aria-labelledby="TituloTrilhosCadastrados">
                     <div class="ops-panel-header">
@@ -180,7 +178,7 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Segmento // Especificação</th>
+                                    <th scope="col">Trilho / Especificação</th>
                                     <th scope="col">Localização</th>
                                     <th scope="col" class="text-end">Ações</th>
                                 </tr>
@@ -246,7 +244,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
 
     </main>
 
-    <!-- MODAL EDITAR TRILHO (Usa atualizar_trilho.php) -->
     <div class="modal fade ops-modal" id="ModalEditarTrilho" tabindex="-1" aria-labelledby="TituloModalEditarTrilho" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <form action="atualizar_trilho.php" method="POST" class="modal-content">
@@ -273,7 +270,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
         </div>
     </div>
 
-    <!-- MODAL EXCLUIR TRILHO -->
     <div class="modal fade ops-modal" id="ModalExcluirTrilho" tabindex="-1" aria-labelledby="TituloModalExcluirTrilho" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

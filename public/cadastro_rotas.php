@@ -108,9 +108,9 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
             <div>
                 <nav class="ops-breadcrumb" aria-label="Breadcrumb">
                     <a href="hub.php">Dashboard</a>
-                    <span class="ops-breadcrumb-sep">//</span>
+                    <span class="ops-breadcrumb-sep">/</span>
                     <a href="trens_trilhos.php">Trens e Rotas</a>
-                    <span class="ops-breadcrumb-sep">//</span>
+                    <span class="ops-breadcrumb-sep">/</span>
                     <span>Gerenciar Rotas</span>
                 </nav>
                 <h1 class="ops-page-title">Cadastro e Programação de Rotas</h1>
@@ -166,12 +166,11 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
         <div class="row g-3 align-items-start">
 
-            <!-- COLUNA ESQUERDA: FORMULÁRIO DE ROTA -->
             <div class="col-12 col-lg-5">
                 <form method="POST" class="ops-panel">
                     <div class="ops-panel-header">
                         <h2 class="ops-panel-title">
-                            <i class="bi bi-signpost-2 text-volt" aria-hidden="true"></i>Nova Rota Operacional
+                            <i class="bi bi-signpost-2 text-volt" aria-hidden="true"></i>Nova Rota
                         </h2>
                     </div>
 
@@ -190,7 +189,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                         </div>
 
                         <div class="mb-3">
-                            <label for="descricao" class="ops-label">Descrição operacional <span class="ops-required" aria-hidden="true">*</span></label>
+                            <label for="descricao" class="ops-label">Descrição da rota <span class="ops-required" aria-hidden="true">*</span></label>
                             <textarea
                                 id="descricao"
                                 name="descricao"
@@ -256,7 +255,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                 </form>
             </div>
 
-            <!-- COLUNA DIREITA: LISTAGEM DE ROTAS -->
             <div class="col-12 col-lg-7">
                 <section class="ops-panel" aria-labelledby="titulo-lista-rotas">
                     <div class="ops-panel-header">
@@ -273,7 +271,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Itinerário // Trem</th>
+                                    <th scope="col">Rota / Trem</th>
                                     <th scope="col" class="text-end">Distância</th>
                                     <th scope="col" class="text-end">Tempo</th>
                                     <th scope="col" class="text-end">Ações</th>
@@ -344,6 +342,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
         </div>
 
     </main>
+
     <div class="modal fade ops-modal" id="modalExcluirRota" tabindex="-1" aria-labelledby="modalExcluirRotaLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

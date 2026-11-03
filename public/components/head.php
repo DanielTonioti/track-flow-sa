@@ -1,12 +1,12 @@
 <?php
 
 $tituloPagina = isset($pageTitle) && trim((string) $pageTitle) !== ''
-    ? trim((string) $pageTitle) . ' — TrackFlow'
-    : 'TrackFlow — Monitoramento Ferroviário';
+    ? trim((string) $pageTitle) . ' - TrackFlow'
+    : 'TrackFlow';
 
 $descricaoPagina = isset($pageDescription) && trim((string) $pageDescription) !== ''
     ? trim((string) $pageDescription)
-    : 'TrackFlow — Sistema de monitoramento ferroviário, telemetria de sensores, gestão de frota, rotas e equipe operacional.';
+    : 'TrackFlow - Sistema de monitoramento ferroviário.';
 
 $caminhoCssFisico = realpath(__DIR__ . '/../../Styles/style.css');
 $versaoCss = $caminhoCssFisico ? filemtime($caminhoCssFisico) : '2026';
@@ -23,10 +23,8 @@ $versaoCss = $caminhoCssFisico ? filemtime($caminhoCssFisico) : '2026';
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=League+Spartan:wght@700;800&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap 5.3.8 & Bootstrap Icons 1.11.3 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Estilos Globais TrackFlow -->
     <link rel="stylesheet" href="../Styles/style.css?v=<?= htmlspecialchars((string) $versaoCss, ENT_QUOTES, 'UTF-8') ?>">
