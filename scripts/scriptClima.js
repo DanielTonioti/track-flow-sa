@@ -23,34 +23,34 @@
         const code = Number(codigo);
 
         const mapaWMO = {
-            0:  { texto: "Céu Limpo", icone: "☀️", severo: false },
-            1:  { texto: "Predominantemente Limpo", icone: "🌤️", severo: false },
-            2:  { texto: "Parcialmente Nublado", icone: "⛅", severo: false },
-            3:  { texto: "Nublado", icone: "☁️", severo: false },
-            45: { texto: "Nevoeiro", icone: "🌫️", severo: false },
-            48: { texto: "Nevoeiro com Geada", icone: "🌫️", severo: false },
-            51: { texto: "Garoa Leve", icone: "🌦️", severo: false },
-            53: { texto: "Garoa Moderada", icone: "🌦️", severo: false },
-            55: { texto: "Garoa Densa", icone: "🌧️", severo: false },
-            56: { texto: "Garoa Congelante", icone: "🌧️", severo: false },
-            57: { texto: "Garoa Congelante", icone: "🌧️", severo: false },
-            61: { texto: "Chuva Leve", icone: "🌧️", severo: false },
-            63: { texto: "Chuva Moderada", icone: "🌧️", severo: false },
-            65: { texto: "Chuva Forte", icone: "🌧️", severo: false },
-            66: { texto: "Chuva Congelante", icone: "🌧️", severo: false },
-            67: { texto: "Chuva Congelante", icone: "🌧️", severo: false },
-            71: { texto: "Neve Leve", icone: "❄️", severo: false },
-            73: { texto: "Neve Moderada", icone: "❄️", severo: false },
-            75: { texto: "Neve Forte", icone: "❄️", severo: false },
-            77: { texto: "Grãos de Neve", icone: "❄️", severo: false },
-            80: { texto: "Pancadas Leves", icone: "🌦️", severo: false },
-            81: { texto: "Pancadas de Chuva", icone: "🌧️", severo: false },
-            82: { texto: "Pancadas Fortes", icone: "⛈️", severo: false },
-            85: { texto: "Pancadas de Neve", icone: "❄️", severo: false },
-            86: { texto: "Neve Intensa", icone: "❄️", severo: false },
-            95: { texto: "Tempestade", icone: "⛈️", severo: true },
-            96: { texto: "Tempestade com Granizo", icone: "⛈️", severo: true },
-            99: { texto: "Tempestade Severa", icone: "⛈️", severo: true }
+            0:  { texto: "Céu Limpo", iconeClasse: "bi-sun-fill text-warning", severo: false },
+            1:  { texto: "Predominantemente Limpo", iconeClasse: "bi-cloud-sun-fill text-warning", severo: false },
+            2:  { texto: "Parcialmente Nublado", iconeClasse: "bi-cloud-sun text-cyan", severo: false },
+            3:  { texto: "Nublado", iconeClasse: "bi-clouds-fill text-steel", severo: false },
+            45: { texto: "Nevoeiro na Via", iconeClasse: "bi-cloud-haze2-fill text-steel", severo: false },
+            48: { texto: "Nevoeiro com Geada", iconeClasse: "bi-cloud-haze2-fill text-cyan", severo: false },
+            51: { texto: "Garoa Leve", iconeClasse: "bi-cloud-drizzle-fill text-cyan", severo: false },
+            53: { texto: "Garoa Moderada", iconeClasse: "bi-cloud-drizzle-fill text-cyan", severo: false },
+            55: { texto: "Garoa Densa", iconeClasse: "bi-cloud-rain-fill text-cyan", severo: false },
+            56: { texto: "Garoa Congelante", iconeClasse: "bi-cloud-sleet-fill text-cyan", severo: false },
+            57: { texto: "Garoa Congelante", iconeClasse: "bi-cloud-sleet-fill text-cyan", severo: false },
+            61: { texto: "Chuva Leve", iconeClasse: "bi-cloud-rain text-cyan", severo: false },
+            63: { texto: "Chuva Moderada", iconeClasse: "bi-cloud-rain-fill text-cyan", severo: false },
+            65: { texto: "Chuva Forte", iconeClasse: "bi-cloud-rain-heavy-fill text-warning", severo: false },
+            66: { texto: "Chuva Congelante", iconeClasse: "bi-cloud-sleet-fill text-cyan", severo: false },
+            67: { texto: "Chuva Congelante", iconeClasse: "bi-cloud-sleet-fill text-cyan", severo: false },
+            71: { texto: "Neve Leve", iconeClasse: "bi-snow text-white", severo: false },
+            73: { texto: "Neve Moderada", iconeClasse: "bi-snow2 text-white", severo: false },
+            75: { texto: "Neve Forte", iconeClasse: "bi-snow3 text-white", severo: false },
+            77: { texto: "Grãos de Neve", iconeClasse: "bi-snow text-white", severo: false },
+            80: { texto: "Pancadas Leves", iconeClasse: "bi-cloud-drizzle text-cyan", severo: false },
+            81: { texto: "Pancadas de Chuva", iconeClasse: "bi-cloud-rain-fill text-cyan", severo: false },
+            82: { texto: "Pancadas Fortes", iconeClasse: "bi-cloud-rain-heavy-fill text-warning", severo: false },
+            85: { texto: "Pancadas de Neve", iconeClasse: "bi-snow2 text-white", severo: false },
+            86: { texto: "Neve Intensa", iconeClasse: "bi-snow3 text-white", severo: false },
+            95: { texto: "Tempestade Elétrica", iconeClasse: "bi-cloud-lightning-rain-fill text-danger", severo: true },
+            96: { texto: "Tempestade com Granizo", iconeClasse: "bi-cloud-hail-fill text-danger", severo: true },
+            99: { texto: "Tempestade Severa", iconeClasse: "bi-cloud-lightning-rain-fill text-danger", severo: true }
         };
 
         if (Object.prototype.hasOwnProperty.call(mapaWMO, code)) {
@@ -58,19 +58,19 @@
         }
 
         if (code >= 50 && code <= 69) {
-            return { texto: "Chuva", icone: "🌧️", severo: false };
+            return { texto: "Chuva", iconeClasse: "bi-cloud-rain-fill text-cyan", severo: false };
         }
         if (code >= 70 && code <= 79) {
-            return { texto: "Neve", icone: "❄️", severo: false };
+            return { texto: "Neve", iconeClasse: "bi-snow text-white", severo: false };
         }
         if (code >= 80 && code <= 89) {
-            return { texto: "Pancadas de Chuva", icone: "🌧️", severo: false };
+            return { texto: "Pancadas de Chuva", iconeClasse: "bi-cloud-rain-heavy-fill text-cyan", severo: false };
         }
         if (code >= 90 && code <= 99) {
-            return { texto: "Tempestade", icone: "⛈️", severo: true };
+            return { texto: "Tempestade", iconeClasse: "bi-cloud-lightning-rain-fill text-danger", severo: true };
         }
 
-        return { texto: "Tempo Estável", icone: "⛅", severo: false };
+        return { texto: "Tempo Estável", iconeClasse: "bi-cloud-sun text-cyan", severo: false };
     }
 
     /**
@@ -175,7 +175,7 @@
                 elUmidade.textContent = `${umidade}%`;
             }
             if (elIcone) {
-                elIcone.textContent = info.icone;
+                elIcone.innerHTML = `<i class="bi ${info.iconeClasse}" aria-hidden="true"></i>`;
             }
             if (elCondicao) {
                 elCondicao.textContent = info.texto;
