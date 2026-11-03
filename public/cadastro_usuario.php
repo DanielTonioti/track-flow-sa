@@ -26,7 +26,7 @@ if (isset($_POST['CadastrarUsuario'])) {
     $cidade = trim($_POST['cidade'] ?? '');
     $rua = trim($_POST['rua'] ?? '');
     $bairro = trim($_POST['bairro'] ?? '');
-    $uf = trim($_POST['uf'] ?? '');
+    $uf = strtoupper(trim($_POST['uf'] ?? ''));
     $tipoMime = '';
     $caminhoAvatar = null;
 
@@ -43,39 +43,32 @@ if (isset($_POST['CadastrarUsuario'])) {
         $erro = "A senha deve ter pelo menos 6 caracteres.";
     } elseif (!preg_match("/^[0-9]{10,11}$/", $telefone)) {
         $erro = "O telefone deve conter apenas números e ter 10 ou 11 dígitos.";
-    
     } elseif ($cep === '') {
-    $erro = "CEP é obrigatório.";
+        $erro = "O CEP é obrigatório.";
     } elseif (!preg_match('/^[0-9]+$/', $cep)) {
-    $erro = "O CEP deve conter apenas números.";
-    } elseif (strlen($cep) !== 8) 
-    {
-    $erro = "O CEP deve conter exatamente 8 números."; 
+        $erro = "O CEP deve conter apenas números.";
+    } elseif (strlen($cep) !== 8) {
+        $erro = "O CEP deve conter exatamente 8 números.";
     } elseif ($cidade === '') {
-         $erro = "cidade é obrigatorio.";
-    }
-    elseif ($rua === '') {
-         $erro = "rua é obrigatorio.";
-    } 
-    elseif ($bairro === '') {
-         $erro = "bairro é obrigatorio.";
-    }
-    elseif ($uf === '') {
-         $erro = "estado é obrigatorio.";
-    }
-    
-     elseif ($acesso !== "funcionario" && $acesso !== "admin") {
+        $erro = "A cidade é obrigatória.";
+    } elseif ($rua === '') {
+        $erro = "A rua é obrigatória.";
+    } elseif ($bairro === '') {
+        $erro = "O bairro é obrigatório.";
+    } elseif ($uf === '') {
+        $erro = "O estado (UF) é obrigatório.";
+    } elseif ($acesso !== "funcionario" && $acesso !== "admin") {
         $erro = "Selecione um nível de acesso válido.";
     }
 
     // 2. Validação do avatar (ainda sem mover o arquivo)
-    if ($arquivo !== null && $arquivo['error'] !== UPLOAD_ERR_NO_FILE) {
+    if ($erro === "" && $arquivo !== null && $arquivo['error'] !== UPLOAD_ERR_NO_FILE) {
 
         if ($arquivo['error'] !== UPLOAD_ERR_OK) {
             $erro = "Erro no envio da imagem.";
 
         } elseif ($arquivo['size'] > 5 * 1024 * 1024) {
-            $erro = "Seu arquivo excede o tamanho máximo permitido (5MB).";
+            $erro = "Seu arquivo excede o tamanho máximo permitido (5 MB).";
 
         } else {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
@@ -133,7 +126,7 @@ if (isset($_POST['CadastrarUsuario'])) {
 
                 $stmt = $db->prepare("INSERT INTO funcionario(nome, cep, cidade, rua, bairro, uf, email, senha, telefone, cargo, avatar) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-                $stmt->bind_param("sdsssssssss", $nome, $cep, $cidade, $rua, $bairro, $uf, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
+                $stmt->bind_param("sssssssssss", $nome, $cep, $cidade, $rua, $bairro, $uf, $email, $senhaHash, $telefone, $acesso, $caminhoAvatar);
 
                 if ($stmt->execute()) {
                     $stmt->close();
@@ -153,96 +146,299 @@ if (isset($_POST['CadastrarUsuario'])) {
         }
     }
 }
-$resultado = $db->query("SELECT id, nome, email, telefone, cargo FROM funcionario");
+
+$pageTitle = 'Cadastrar Funcionário';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/logo/icone.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Styles/style.css">
-    <title>Cadastrar Usuário</title>
+    <?php include 'components/head.php'; ?>
 </head>
 
-<body class="cores-background" data-background="azure-escuro-fundo">
+<body class="ops-app-body">
     <header>
         <?php include "components/navbar.php"; ?>
     </header>
-    <main>
-        <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data">
-            <div class="blockcentro titulo-Sensor">
-                <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
-                    <h2 class="titulo-Sensor">Cadastrar Usuário</h2>
+
+    <main class="ops-shell" style="max-width: 960px;">
+
+        <div class="ops-page-header">
+            <div>
+                <nav class="ops-breadcrumb" aria-label="Breadcrumb">
+                    <a href="hub.php">Dashboard</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <a href="Admin.php">Funcionários</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <span>Novo Cadastro</span>
+                </nav>
+                <h1 class="ops-page-title">Cadastrar Funcionário</h1>
+                <p class="ops-page-subtitle">
+                    Registre um novo operador ou administrador com geolocalização automática de estação base.
+                </p>
+            </div>
+
+            <div class="ops-header-actions">
+                <a href="Admin.php" class="ops-btn ops-btn-ghost">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar para Equipe
+                </a>
+            </div>
+        </div>
+
+        <?php if ($erro !== ""): ?>
+            <div class="ops-alert ops-alert-danger" role="alert">
+                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
+                <div>
+                    <strong class="d-block">Revise os dados informados</strong>
+                    <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
-                <?php if ($erro !== "") { ?>
-                    <div class="alert alert-danger mt-3">
-                        <?= htmlspecialchars($erro) ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if ($sucesso): ?>
+            <div class="ops-alert ops-alert-success" role="status">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
+                    <div>
+                        <strong class="d-block">Funcionário cadastrado com sucesso</strong>
+                        <span>Os dados do funcionário foram salvos no banco de dados.</span>
                     </div>
-                <?php } ?>
-                <?php if ($sucesso) { ?>
-                    <div class="alert alert-success mt-3">
-                        Usuário cadastrado com sucesso!
+                    <a href="Admin.php" class="ops-btn ops-btn-sm">Ver Quadro de Equipe</a>
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data" class="ops-panel">
+            <div class="ops-panel-body p-3 p-md-4">
+
+                <div class="ops-form-section-title">
+                    <i class="bi bi-person-vcard" aria-hidden="true"></i>Dados Pessoais e Acesso
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-md-6">
+                        <label class="ops-label" for="nome">Nome completo <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input"
+                            name="nome"
+                            id="nome"
+                            minlength="3"
+                            maxlength="100"
+                            pattern="[A-Za-zÀ-ÿ\s]+"
+                            placeholder="Ex.: Mariana Souza"
+                            value="<?= htmlspecialchars($_POST['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                        <span class="ops-help">Apenas letras e espaços (3 a 100 caracteres).</span>
                     </div>
-                <?php } ?>
-                <br>
-                <div id="valortipo" class="cores-background p-4 w-25 rounded-4" data-background="azure-claro-fundo">
-                    <br>
-                    <div class="column-sensor" id="tipos">
-                        <label for="nome">Nome:</label>
-                        <input type="text" name="nome" id="nome" minlength="3" maxlength="100" pattern="[A-Za-zÀ-ÿ\s]+"
-                            value="<?= htmlspecialchars($_POST['nome'] ?? '') ?>" required>
-                        <label for="email">E-mail:</label>
-                        <input type="email" name="email" id="email" maxlength="100"
-                            value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
-                        <label for="senha">Senha:</label>
-                        <input type="password" name="password" id="senha" minlength="6" maxlength="255"
-                            placeholder="Mínimo de 6 caracteres" required>
-                        <label for="telefone">Telefone:</label>
-                        <input type="text" name="telefone" id="telefone" minlength="10" maxlength="11"
-                            pattern="[0-9]{10,11}" placeholder="Ex: 47999999999"
-                            value="<?= htmlspecialchars($_POST['telefone'] ?? '') ?>" required>
-                       <label for="cep">CEP:</label>
-    <input type="text" name="cep" id="cep" maxlength="8" minlength="8" pattern="[0-9]{8}" inputmode="numeric" value="<?= htmlspecialchars($user['cep'] ?? '', ENT_QUOTES, 'UTF-8') ?>" onblur="pesquisacep(this.value);"
-    title="Digite o CEP com exatamente 8 números, sem pontos ou traços." required>
-                        <label>Rua:
-                            <input name="rua" type="text" id="rua" size="60" /></label><br />
-                        <label>Bairro:
-                            <input name="bairro" type="text" id="bairro" size="40" /></label><br />
-                        <label>Cidade:
-                            <input name="cidade" type="text" id="cidade" size="40" /></label><br />
-                        <label>Estado:
-                            <input name="uf" type="text" id="uf" size="2" /></label><br />
-                        <label for="acesso">Nível de acesso:</label>
-                        <div>
-                            <input type="radio" name="acesso" id="funcionario" value="funcionario" <?= (($_POST['acesso'] ?? '') === 'funcionario') ? 'checked' : '' ?> required>
-                            Funcionário
-                            <input type="radio" name="acesso" id="administrador" value="admin" <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>>
-                            Administrador
+
+                    <div class="col-12 col-md-6">
+                        <label class="ops-label" for="email">E-mail corporativo <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="email"
+                            class="ops-input"
+                            name="email"
+                            id="email"
+                            maxlength="100"
+                            placeholder="mariana.souza@trackflow.com.br"
+                            value="<?= htmlspecialchars($_POST['email'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="ops-label" for="senha">Senha inicial <span class="ops-required" aria-hidden="true">*</span></label>
+                        <div class="ops-password-wrap">
+                            <input
+                                type="password"
+                                class="ops-input"
+                                name="password"
+                                id="senha"
+                                minlength="6"
+                                maxlength="255"
+                                placeholder="Mínimo de 6 caracteres"
+                                required>
+                            <button type="button" class="ops-password-toggle" id="btn-toggle-senha-cad" aria-label="Mostrar senha">
+                                <i class="bi bi-eye" aria-hidden="true"></i>
+                            </button>
                         </div>
-                        <label for="avatar" id="avatar-label">Foto de perfil:</label>
-                        <input type="file" id="avatar" name="avatar" accept=".png, .jpg, .jpeg">
+                        <span class="ops-help">Armazenada com criptografia segura (hash bcrypt).</span>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="ops-label" for="telefone">Telefone com DDD <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input mono-font"
+                            name="telefone"
+                            id="telefone"
+                            minlength="10"
+                            maxlength="11"
+                            inputmode="numeric"
+                            pattern="[0-9]{10,11}"
+                            placeholder="47999999999"
+                            value="<?= htmlspecialchars($_POST['telefone'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                        <span class="ops-help">Somente números, 10 ou 11 dígitos sem traços.</span>
                     </div>
                 </div>
-                <br>
-                <input type="submit" value="Cadastrar" name="CadastrarUsuario"
-                    class="border-none-buttom cores-background titulo-Sensor p-2 rounded-3"
-                    data-background="azure-claro-fundo">
+
+                <div class="ops-form-section-title">
+                    <i class="bi bi-geo-alt" aria-hidden="true"></i>Endereço
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-12 col-sm-5 col-md-4">
+                        <label class="ops-label" for="cep">CEP <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input mono-font"
+                            name="cep"
+                            id="cep"
+                            maxlength="8"
+                            minlength="8"
+                            pattern="[0-9]{8}"
+                            inputmode="numeric"
+                            placeholder="89201000"
+                            value="<?= htmlspecialchars($_POST['cep'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            onblur="pesquisacep(this.value);"
+                            aria-describedby="cep-help cep-feedback"
+                            required>
+                        <span id="cep-help" class="ops-help">8 dígitos numéricos (autopreenche rua e cidade).</span>
+                        <span id="cep-feedback" class="ops-help d-none" role="status" aria-live="polite"></span>
+                    </div>
+
+                    <div class="col-8 col-sm-5 col-md-6">
+                        <label class="ops-label" for="cidade">Cidade <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input"
+                            name="cidade"
+                            id="cidade"
+                            placeholder="Joinville"
+                            value="<?= htmlspecialchars($_POST['cidade'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                    </div>
+
+                    <div class="col-4 col-sm-2 col-md-2">
+                        <label class="ops-label" for="uf">UF <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input mono-font text-uppercase"
+                            name="uf"
+                            id="uf"
+                            maxlength="2"
+                            placeholder="SC"
+                            value="<?= htmlspecialchars($_POST['uf'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                    </div>
+
+                    <div class="col-12 col-md-7">
+                        <label class="ops-label" for="rua">Rua / Logradouro <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input"
+                            name="rua"
+                            id="rua"
+                            placeholder="Rua XV de Novembro"
+                            value="<?= htmlspecialchars($_POST['rua'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <label class="ops-label" for="bairro">Bairro <span class="ops-required" aria-hidden="true">*</span></label>
+                        <input
+                            type="text"
+                            class="ops-input"
+                            name="bairro"
+                            id="bairro"
+                            placeholder="Centro"
+                            value="<?= htmlspecialchars($_POST['bairro'] ?? '', ENT_QUOTES, 'UTF-8') ?>"
+                            required>
+                    </div>
+                </div>
+
+                <div class="ops-form-section-title">
+                    <i class="bi bi-shield-lock" aria-hidden="true"></i>Cargo e Foto de Perfil
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-12 col-md-7">
+                        <span class="ops-label">Nível de acesso <span class="ops-required" aria-hidden="true">*</span></span>
+                        <div class="ops-radio-grid">
+                            <label class="ops-radio-card" for="funcionario">
+                                <input
+                                    type="radio"
+                                    name="acesso"
+                                    id="funcionario"
+                                    value="funcionario"
+                                    <?= (($_POST['acesso'] ?? 'funcionario') === 'funcionario') ? 'checked' : '' ?>
+                                    required>
+                                <span>
+                                    <strong class="d-block text-white small">Funcionário / Operador</strong>
+                                    <span class="text-steel" style="font-size: 0.76rem;">Acesso ao painel, sensores e relatórios.</span>
+                                </span>
+                            </label>
+
+                            <label class="ops-radio-card" for="administrador">
+                                <input
+                                    type="radio"
+                                    name="acesso"
+                                    id="administrador"
+                                    value="admin"
+                                    <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>>
+                                <span>
+                                    <strong class="d-block text-white small">Administrador</strong>
+                                    <span class="text-steel" style="font-size: 0.76rem;">Gestão completa de equipe, trens, rotas e sensores.</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-5">
+                        <label class="ops-label" for="avatar" id="avatar-label">Foto de perfil (opcional)</label>
+                        <input
+                            type="file"
+                            class="ops-input"
+                            id="avatar"
+                            name="avatar"
+                            accept=".png,.jpg,.jpeg,image/png,image/jpeg"
+                            aria-describedby="avatar-help">
+                        <span id="avatar-help" class="ops-help">Formatos PNG ou JPG (tamanho máximo: 5 MB).</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ops-panel-footer">
+                <a href="Admin.php" class="ops-btn ops-btn-ghost">Cancelar</a>
+                <button type="submit" name="CadastrarUsuario" value="Cadastrar" class="ops-btn ops-btn-primary">
+                    <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Funcionário
+                </button>
             </div>
         </form>
-        <a href="Admin.php" class="btn btn-danger back-buttom">Voltar</a>
+
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_cep.js"></script>
-    <script src="../scripts/scriptSensor.js"></script>
-    <script src="../scripts/scriptAdmin.js"></script>
     <script src="../scripts/script_navbar.js"></script>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btn = document.getElementById('btn-toggle-senha-cad');
+            const input = document.getElementById('senha');
+            if (btn && input) {
+                btn.addEventListener('click', function () {
+                    const oculto = input.type === 'password';
+                    input.type = oculto ? 'text' : 'password';
+                    btn.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
+                    const icon = btn.querySelector('i');
+                    if (icon) icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
