@@ -5,14 +5,13 @@ require_once 'components/start.php';
 redirecionarSeNaoAdmin();
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-if ($id === false || $id <= 0) {
+if ($id === false || $id === null || $id <= 0) {
     header('Location: cadastro_trens.php');
     exit;
 }
 
 $erro = '';
 $sucesso = false;
-$responsavelId = '';
 
 $stmt = $db->prepare('SELECT id, nome, modelo, responsavel_usuario_id FROM trem WHERE id = ?');
 $stmt->bind_param('i', $id);
@@ -28,42 +27,34 @@ if (!$trem) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar-trem'])) {
     $nome = trim($_POST['nome'] ?? '');
     $modelo = trim($_POST['modelo'] ?? '');
-    $responsavelId = $_POST['responsavel_usuario_id'] ?? '';
+    $responsavelId = trim((string) ($_POST['responsavel_usuario_id'] ?? ''));
 
     if ($nome === '') {
         $erro = 'O nome do trem é obrigatório.';
-    } elseif (strlen($nome) < 2 || strlen($nome) > 100) {
+    } elseif (mb_strlen($nome) < 2 || mb_strlen($nome) > 100) {
         $erro = 'O nome do trem deve ter entre 2 e 100 caracteres.';
     } elseif ($modelo === '') {
         $erro = 'O modelo do trem é obrigatório.';
-    } elseif (strlen($modelo) < 2 || strlen($modelo) > 50) {
+    } elseif (mb_strlen($modelo) < 2 || mb_strlen($modelo) > 50) {
         $erro = 'O modelo do trem deve ter entre 2 e 50 caracteres.';
-    } elseif ($responsavelId !== '' && (!is_numeric($responsavelId) || (int) $responsavelId <= 0)) {
-        $erro = 'Selecione um responsável válido.';
+    } elseif ($responsavelId === '' || !ctype_digit($responsavelId) || (int) $responsavelId <= 0) {
+        $erro = 'Selecione um operador responsável válido.';
     }
 
     if ($erro === '') {
-        $responsavel = $responsavelId !== '' ? (int) $responsavelId : null;
-
-        if ($responsavel !== null) {
-            $check = $db->prepare('SELECT id FROM funcionario WHERE id = ?');
-            $check->bind_param('i', $responsavel);
-            $check->execute();
-            if ($check->get_result()->num_rows === 0) {
-                $erro = 'Esse funcionário não existe.';
-            }
-            $check->close();
+        $responsavel = (int) $responsavelId;
+        $check = $db->prepare('SELECT id FROM funcionario WHERE id = ?');
+        $check->bind_param('i', $responsavel);
+        $check->execute();
+        if ($check->get_result()->num_rows === 0) {
+            $erro = 'Esse funcionário não existe.';
         }
+        $check->close();
     }
 
     if ($erro === '') {
-        if ($responsavel === null) {
-            $update = $db->prepare('UPDATE trem SET nome = ?, modelo = ?, responsavel_usuario_id = NULL WHERE id = ?');
-            $update->bind_param('ssi', $nome, $modelo, $id);
-        } else {
-            $update = $db->prepare('UPDATE trem SET nome = ?, modelo = ?, responsavel_usuario_id = ? WHERE id = ?');
-            $update->bind_param('ssii', $nome, $modelo, $responsavel, $id);
-        }
+        $update = $db->prepare('UPDATE trem SET nome = ?, modelo = ?, responsavel_usuario_id = ? WHERE id = ?');
+        $update->bind_param('ssii', $nome, $modelo, $responsavel, $id);
 
         if ($update->execute()) {
             $trem['nome'] = $nome;
@@ -79,70 +70,128 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['atualizar-trem'])) {
 }
 
 $usuarios = $db->query('SELECT id, nome, cargo FROM funcionario ORDER BY nome ASC');
+$pageTitle = 'Editar Trem';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../Assets/logo/icone.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Styles/style.css">
-    <title>Editar Trem</title>
+    <?php include 'components/head.php'; ?>
 </head>
-<body class="cores-background" data-background="azure-escuro-fundo">
+
+<body class="ops-app-body">
     <header><?php include 'components/navbar.php'; ?></header>
-    <main class="container py-4">
-        <a href="cadastro_trens.php" class="btn btn-danger back-buttom">Voltar</a>
-        <div class="text-center mb-4">
-            <div class="cores-background p-3 rounded-4 d-inline-block" data-background="azure-claro-fundo">
-                <h1 class="titulo-Sensor mb-0">Editar Trem</h1>
+
+    <main class="ops-shell" style="max-width: 760px;">
+
+        <div class="ops-page-header">
+            <div>
+                <nav class="ops-breadcrumb" aria-label="Breadcrumb">
+                    <a href="hub.php">Dashboard</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <a href="trens_trilhos.php">Trens e Rotas</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <a href="cadastro_trens.php">Trens</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <span>Editar <?= sprintf('#TRM-%03d', (int) $id) ?></span>
+                </nav>
+                <h1 class="ops-page-title">Editar Composição Ferroviária</h1>
+                <p class="ops-page-subtitle">
+                    Atualize os dados ou altere o responsável pelo trem.
+                </p>
+            </div>
+
+            <div class="ops-header-actions">
+                <a href="cadastro_trens.php" class="ops-btn ops-btn-ghost">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar para Trens
+                </a>
             </div>
         </div>
 
         <?php if ($erro !== ''): ?>
-            <div class="alert alert-danger mx-auto" style="max-width: 720px;">
-                <?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?>
+            <div class="ops-alert ops-alert-danger" role="alert">
+                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
+                <div>
+                    <strong class="d-block">Revise os dados</strong>
+                    <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
+                </div>
             </div>
         <?php endif; ?>
 
         <?php if ($sucesso): ?>
-            <div class="alert alert-success mx-auto" style="max-width: 720px;">
-                Trem atualizado com sucesso.
+            <div class="ops-alert ops-alert-success" role="status">
+                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
+                    <div>
+                        <strong class="d-block">Composição atualizada com sucesso</strong>
+                        <span>As alterações já estão refletidas nas listagens de frota e rotas.</span>
+                    </div>
+                    <a href="trens_trilhos.php" class="ops-btn ops-btn-sm">Ver Frota e Rotas</a>
+                </div>
             </div>
         <?php endif; ?>
 
-        <form method="POST" class="mx-auto" style="max-width: 720px;">
-            <div class="cores-background p-4 rounded-4" data-background="azure-claro-fundo">
+        <form method="POST" class="ops-panel">
+            <div class="ops-panel-header">
+                <h2 class="ops-panel-title">
+                    <i class="bi bi-pencil-square text-cyan" aria-hidden="true"></i>Ficha de Edição &mdash; <?= sprintf('#TRM-%03d', (int) $id) ?>
+                </h2>
+            </div>
+
+            <div class="ops-panel-body">
                 <div class="mb-3">
-                    <label for="nome" class="form-label text-white">Nome do trem</label>
-                    <input type="text" id="nome" name="nome" class="form-control" maxlength="100" value="<?= htmlspecialchars((string) ($trem['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" required>
+                    <label for="nome" class="ops-label">Nome do trem <span class="ops-required" aria-hidden="true">*</span></label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        class="ops-input"
+                        maxlength="100"
+                        value="<?= htmlspecialchars((string) ($trem['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                        required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="modelo" class="form-label text-white">Modelo</label>
-                    <input type="text" id="modelo" name="modelo" class="form-control" maxlength="50" value="<?= htmlspecialchars((string) ($trem['modelo'] ?? ''), ENT_QUOTES, 'UTF-8') ?>" required>
+                    <label for="modelo" class="ops-label">Modelo técnico <span class="ops-required" aria-hidden="true">*</span></label>
+                    <input
+                        type="text"
+                        id="modelo"
+                        name="modelo"
+                        class="ops-input"
+                        maxlength="50"
+                        value="<?= htmlspecialchars((string) ($trem['modelo'] ?? ''), ENT_QUOTES, 'UTF-8') ?>"
+                        required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="responsavel_usuario_id" class="form-label text-white">Responsável</label>
-                    <select id="responsavel_usuario_id" name="responsavel_usuario_id" class="form-select">
-                        <option value="">Sem responsável</option>
-                        <?php while ($usuario = $usuarios->fetch_assoc()): ?>
-                            <option value="<?= (int) $usuario['id'] ?>" <?= ((string) ($trem['responsavel_usuario_id'] ?? '') === (string) $usuario['id']) ? 'selected' : '' ?>>
-                                <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?> (<?= htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8') ?>)
-                            </option>
-                        <?php endwhile; ?>
+                <div class="mb-2">
+                    <label for="responsavel_usuario_id" class="ops-label">Operador responsável <span class="ops-required" aria-hidden="true">*</span></label>
+                    <select id="responsavel_usuario_id" name="responsavel_usuario_id" class="ops-select" required>
+                        <option value="">Selecione um responsável...</option>
+                        <?php if ($usuarios): ?>
+                            <?php while ($usuario = $usuarios->fetch_assoc()): ?>
+                                <option value="<?= (int) $usuario['id'] ?>" <?= ((string) ($trem['responsavel_usuario_id'] ?? '') === (string) $usuario['id']) ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8') ?> (<?= $usuario['cargo'] === 'admin' ? 'Admin' : 'Operador' ?>)
+                                </option>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
                     </select>
                 </div>
+            </div>
 
-                <button type="submit" name="atualizar-trem" class="btn btn-primary w-100">Salvar alterações</button>
+            <div class="ops-panel-footer">
+                <a href="cadastro_trens.php" class="ops-btn ops-btn-ghost">Cancelar</a>
+                <button type="submit" name="atualizar-trem" class="ops-btn ops-btn-primary">
+                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                </button>
             </div>
         </form>
+
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
 </body>
+
 </html>
