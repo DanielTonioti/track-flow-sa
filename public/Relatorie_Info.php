@@ -2,75 +2,58 @@
 session_start();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
+
+$pageTitle = 'Detalhes do Relatório';
 ?>
+<!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/logo/icone.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Styles/style.css">
-    <title>Informações do relatorio</title>
-</head class="header">
-
-<head>
-    <header>
-
-        <?php
-
-        include("components/navbar.php");
-
-        ?>
-
-    </header>
-
+    <?php include 'components/head.php'; ?>
 </head>
 
+<body class="ops-app-body">
+    <header>
+        <?php include("components/navbar.php"); ?>
+    </header>
 
-<main>
-    <div class="centralizar-tabela">
-        <div class="flex">
-            <p class="border-tabela relatorio-tempo-tabela tabela-texto cores-color" data-color="white">
-                10:00
-            </p>
-            <p class="border-tabela relatorio-info-tabela  tabela-texto cores-color" data-color="white">
-                Marlon
-            </p>
-        </div>
-        <div class="flex">
-            <p class="border-tabela relatorio-tempo-tabela tabela-texto cores-color" data-color="white">
-                10:00
-            <p class="border-tabela relatorio-info-tabela  tabela-texto cores-color" data-color="white">
-                Susane
-            </p>
-        </div>
-        <div class="flex">
-            <p class="border-tabela relatorio-tempo-tabela tabela-texto cores-color" data-color="white">
-                10:00
-            <p class="border-tabela relatorio-info-tabela  tabela-texto cores-color" data-color="white">
-                Frederico
-            </p>
-        </div>
-        <div class="flex">
-            <p class="border-tabela relatorio-tempo-tabela tabela-texto cores-color" data-color="white">
-                10:00
-            <p class="border-tabela relatorio-info-tabela  tabela-texto cores-color" data-color="white">
-                Maicão
-            </p>
+    <main class="ops-shell" style="max-width: 900px;">
+        <div class="ops-page-header">
+            <div>
+                <nav class="ops-breadcrumb" aria-label="Breadcrumb">
+                    <a href="hub.php">Dashboard</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <a href="Relatories.php">Relatórios</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <span>Detalhes</span>
+                </nav>
+                <h1 class="ops-page-title">Detalhes do Relatório</h1>
+                <p class="ops-page-subtitle">
+                    Exibição detalhada dos registros do relatório selecionado.
+                </p>
+            </div>
+
+            <div class="ops-header-actions">
+                <a href="Relatories.php" class="ops-btn ops-btn-ghost">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Relatórios
+                </a>
+            </div>
         </div>
 
-</main>
+        <section class="ops-panel">
+            <div class="ops-empty-state">
+                <span class="ops-empty-icon"><i class="bi bi-bar-chart-line" aria-hidden="true"></i></span>
+                <p class="mb-2 fw-semibold text-white">Página em produção.</p>
+                <p class="small text-steel mb-3">A visualização detalhada de relatórios está em produção e estará disponível em breve.</p>
+                <a href="Relatories.php" class="ops-btn ops-btn-ghost ops-btn-sm">Voltar para Relatórios</a>
+            </div>
+        </section>
+    </main>
 
-<footer>
-
-</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-<script src="../scripts/script_navbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="../scripts/script_navbar.js"></script>
 </body>
 
 </html>
