@@ -24,106 +24,138 @@ function desenharGraficos() {
             ]);
 
             const optVel = {
+                title: '',
                 backgroundColor: 'transparent',
+                legend: { position: 'none' },
                 seriesType: 'bars',
-                series: { 1: { type: 'line', color: '#ff5757', lineDashStyle: [4, 4], pointSize: 0, visibleInLegend: true } },
-                legend: { position: 'top', textStyle: { color: '#94a3b8', fontSize: 11 } },
-                chartArea: { width: '82%', height: '65%', top: 32, bottom: 36, left: 42 },
-                hAxis: { textStyle: { color: '#94a3b8', fontSize: 11, fontName: 'Inter' } },
-                vAxis: {
-                    textStyle: { color: '#64748b', fontSize: 10, fontName: 'Inter' },
-                    gridlines: { color: 'rgba(255,255,255,0.06)' },
-                    baselineColor: 'rgba(255,255,255,0.12)',
-                    minValue: 0,
-                    maxValue: 100
-                },
-                annotations: { textStyle: { color: '#ffffff', fontSize: 10, bold: true } }
-            };
-
-            const chart = new google.visualization.ComboChart(el);
-            chart.draw(dataVel, optVel);
-
-        } else if (tipo === 'line') {
-            const dataTemp = google.visualization.arrayToDataTable([
-                ['Horário', 'Mancal C-01', 'Mancal C-02', 'Alerta (75°C)'],
-                ['06:00', 42, 45, 75],
-                ['07:00', 51, 53, 75],
-                ['08:00', 63, 61, 75],
-                ['09:00', 71, 68, 75],
-                ['10:00', 78, 72, 75],
-                ['11:00', 69, 74, 75]
-            ]);
-
-            const optTemp = {
-                backgroundColor: 'transparent',
-                curveType: 'function',
                 series: {
-                    0: { color: '#00d2ff', lineWidth: 2, pointSize: 4 },
-                    1: { color: '#c1ff72', lineWidth: 2, pointSize: 4 },
-                    2: { color: '#ff5757', lineDashStyle: [4, 4], pointSize: 0, lineWidth: 1.5 }
+                    1: {
+                        type: 'line',
+                        color: '#ef4444',
+                        lineDashStyle: [4, 4],
+                        lineWidth: 1.5,
+                        pointSize: 0,
+                        visibleInLegend: false
+                    }
                 },
-                legend: { position: 'top', textStyle: { color: '#94a3b8', fontSize: 11 } },
-                chartArea: { width: '82%', height: '65%', top: 32, bottom: 36, left: 42 },
-                hAxis: { textStyle: { color: '#94a3b8', fontSize: 11, fontName: 'Inter' } },
+                hAxis: {
+                    textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                    gridlines: { color: 'transparent' }
+                },
                 vAxis: {
-                    textStyle: { color: '#64748b', fontSize: 10, fontName: 'Inter' },
-                    gridlines: { color: 'rgba(255,255,255,0.06)' },
-                    baselineColor: 'rgba(255,255,255,0.12)'
+                    minValue: 0,
+                    maxValue: 100,
+                    textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                    gridlines: { count: 6, color: 'rgba(255,255,255,0.05)' },
+                    minorGridlines: { count: 0 },
+                    baselineColor: 'rgba(255,255,255,0.1)'
+                },
+                chartArea: { left: 38, top: 18, right: 16, bottom: 32, width: '92%', height: '80%' },
+                annotations: {
+                    textStyle: { fontName: 'Inter', fontSize: 10, color: '#f8fafc', bold: true }
                 }
             };
 
-            const chart = new google.visualization.LineChart(el);
-            chart.draw(dataTemp, optTemp);
+            new google.visualization.ComboChart(el).draw(dataVel, optVel);
+            return;
+        }
 
-        } else if (tipo === 'donut') {
-            const dataStatus = google.visualization.arrayToDataTable([
-                ['Condição', 'Sensores'],
-                ['Normal', 7],
-                ['Atenção', 2],
-                ['Falha/Crítico', 0]
+        if (tipo === 'line') {
+            const dataTemp = google.visualization.arrayToDataTable([
+                ['Dia', 'Média da Via (°C)', 'Limite Seguro (85 °C)'],
+                ['Seg', 52, 85],
+                ['Ter', 56, 85],
+                ['Qua', 54, 85],
+                ['Qui', 61, 85],
+                ['Sex', 64, 85],
+                ['Sáb', 55, 85],
+                ['Dom', 48, 85]
             ]);
 
-            const optStatus = {
+            const optTemp = {
+                title: '',
                 backgroundColor: 'transparent',
-                pieHole: 0.62,
-                colors: ['#00bf63', '#f59e0b', '#ff5757'],
-                legend: { position: 'bottom', textStyle: { color: '#94a3b8', fontSize: 11, fontName: 'Inter' } },
-                chartArea: { width: '90%', height: '75%', top: 10, bottom: 40 },
-                pieSliceBorderColor: 'transparent',
-                pieSliceTextStyle: { color: '#ffffff', fontSize: 11 }
+                legend: {
+                    position: 'top',
+                    alignment: 'end',
+                    textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 10 }
+                },
+                hAxis: {
+                    textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                    gridlines: { color: 'transparent' }
+                },
+                vAxis: {
+                    minValue: 20,
+                    maxValue: 100,
+                    textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                    gridlines: { count: 5, color: 'rgba(255,255,255,0.05)' },
+                    minorGridlines: { count: 0 },
+                    baselineColor: 'rgba(255,255,255,0.1)'
+                },
+                colors: ['#f59e0b', '#ef4444'],
+                chartArea: { left: 38, top: 24, right: 16, bottom: 32, width: '92%', height: '76%' },
+                pointSize: 4,
+                lineWidth: 2,
+                series: {
+                    1: { lineDashStyle: [4, 4], pointSize: 0, lineWidth: 1.5 }
+                }
             };
 
-            const chart = new google.visualization.PieChart(el);
-            chart.draw(dataStatus, optStatus);
+            new google.visualization.LineChart(el).draw(dataTemp, optTemp);
+            return;
         }
+
+        const dataSt = google.visualization.arrayToDataTable([
+            ['Status', 'Quantidade'],
+            ['Nominais', 8],
+            ['Alerta térmico', 1],
+            ['Inoperante', 1]
+        ]);
+
+        const optSt = {
+            title: '',
+            backgroundColor: 'transparent',
+            legend: {
+                position: 'bottom',
+                alignment: 'center',
+                textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 }
+            },
+            colors: ['#38bdf8', '#f59e0b', '#ef4444'],
+            chartArea: { left: 10, top: 6, right: 10, bottom: 28, width: '94%', height: '84%' },
+            pieHole: 0.72,
+            pieSliceBorderColor: '#0b1523',
+            pieSliceText: 'none'
+        };
+
+        new google.visualization.PieChart(el).draw(dataSt, optSt);
     });
 }
 
 function inicializarCarrosselGraficos() {
+    const track = document.getElementById('chart-carousel-track');
     const slides = Array.from(document.querySelectorAll('.ops-chart-slide'));
-    const dots = Array.from(document.querySelectorAll('[data-slide]'));
-    const buttons = document.querySelectorAll('[data-carousel]');
-
-    if (!slides.length) return;
-
+    const dots = Array.from(document.querySelectorAll('.ops-chart-dot'));
+    const buttons = Array.from(document.querySelectorAll('.ops-carousel-btn'));
     let indexAtual = 0;
 
-    const atualizarCarrossel = (novoIndex) => {
-        indexAtual = (novoIndex + slides.length) % slides.length;
+    if (!track || !slides.length) return;
 
-        slides.forEach((slide, index) => {
-            const ativo = index === indexAtual;
-            slide.classList.toggle('active', ativo);
-            slide.setAttribute('aria-hidden', (!ativo).toString());
+    const atualizarCarrossel = (novoIndice) => {
+        indexAtual = (novoIndice + slides.length) % slides.length;
+        track.style.transform = `translateX(-${indexAtual * 100}%)`;
+
+        slides.forEach((slide, idx) => {
+            slide.classList.toggle('is-active', idx === indexAtual);
         });
 
-        dots.forEach((dot, index) => {
-            const ativo = index === indexAtual;
-            dot.classList.toggle('active', ativo);
-            dot.setAttribute('aria-selected', ativo.toString());
+        dots.forEach((dot, idx) => {
+            dot.classList.toggle('is-active', idx === indexAtual);
+            dot.setAttribute('aria-pressed', idx === indexAtual ? 'true' : 'false');
         });
 
-        desenharGraficos();
+        setTimeout(() => {
+            desenharGraficos();
+        }, 50);
     };
 
     buttons.forEach((button) => {
@@ -142,17 +174,23 @@ function inicializarCarrosselGraficos() {
     atualizarCarrossel(0);
 }
 
-google.charts.setOnLoadCallback(() => {
+function iniciar() {
     desenharGraficos();
     inicializarCarrosselGraficos();
+}
+
+google.charts.setOnLoadCallback(() => {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', iniciar);
+    } else {
+        iniciar();
+    }
 
     let timerRedim;
     window.addEventListener('resize', () => {
         clearTimeout(timerRedim);
         timerRedim = setTimeout(() => {
             desenharGraficos();
-            inicializarCarrosselGraficos();
         }, 120);
     });
 });
-
