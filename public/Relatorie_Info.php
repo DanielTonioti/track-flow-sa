@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once '../infra/conn.php';
-require_once 'components/start.php';
-
+require '../infra/conn.php';
+require 'components/start.php';
+redirecionarSeNaoAdmin();
 $pageTitle = 'Detalhes do Relatório';
 ?>
 <!DOCTYPE html>

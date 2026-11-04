@@ -1,6 +1,8 @@
 <?php
+session_start();
 require_once '../infra/conn.php';
-
+include("components/start.php");
+redirecionarSeNaoAdmin();
 // Buscar funcionários sem coordenadas
 $sql = "SELECT id, cidade, uf FROM funcionario WHERE latitude IS NULL OR longitude IS NULL";
 
