@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'components/csrf.php';
+validarTokenCSRF();
 require_once 'components/start.php';
 include "../infra/conn.php";
 redirecionarSeNaoAdmin();

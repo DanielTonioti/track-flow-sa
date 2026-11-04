@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 include "../infra/conn.php";
 $erro = "";
 
@@ -19,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->close();
 
         if ($funcionario && password_verify($senha, $funcionario["senha"])) {
+            session_regenerate_id(true);
             $_SESSION["id"] = $funcionario["id"];
             $_SESSION["usuario"] = $funcionario["nome"];
             $_SESSION["email"] = $funcionario["email"];
@@ -97,6 +100,7 @@ $pageTitle = 'Autenticação de Operador';
                 <?php endif; ?>
 
                 <form method="POST" action="" class="ops-panel p-4" novalidate>
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
                     <div class="mb-3">
                         <label class="ops-label" for="usuario-email">
                             E-mail corporativo <span class="ops-required" aria-hidden="true">*</span>
@@ -151,8 +155,9 @@ $pageTitle = 'Autenticação de Operador';
                     </div>
                 </form>
             </div>
+            
         </section>
-
+       
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
