@@ -120,17 +120,16 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
             <div class="ops-header-actions">
                 <a href="trens_trilhos.php" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Visão Geral
+                    Visão Geral
                 </a>
                 <a href="cadastro_trens.php" class="ops-btn">
-                    <i class="bi bi-train-front" aria-hidden="true"></i>Gerenciar Trens
+                    Gerenciar Trens
                 </a>
             </div>
         </div>
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Verifique os campos da rota</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -140,7 +139,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
         <?php if ($sucesso && $mensagemSucesso !== ''): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Cadastrado com sucesso</strong>
                     <span><?= htmlspecialchars($mensagemSucesso, ENT_QUOTES, 'UTF-8') ?></span>
@@ -150,7 +148,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
         <?php if (empty($listaTrensSelect)): ?>
             <div class="ops-alert ops-alert-warning" role="status">
-                <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Nenhum trem cadastrado ainda</strong>
@@ -224,7 +221,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                         </div>
 
                         <div id="preview-velocidade-box" class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center" style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
-                            <span class="mono-font text-steel" style="font-size: 0.72rem;">VELOCIDADE MÉDIA ESTIMADA</span>
+                            <span class="mono-font text-steel" style="font-size: 0.72rem;">Velocidade média:</span>
                             <strong id="preview-velocidade-valor" class="mono-font text-cyan small">&mdash; km/h</strong>
                         </div>
 
@@ -253,7 +250,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                 <section class="ops-panel" aria-labelledby="titulo-lista-rotas">
                     <div class="ops-panel-header">
                         <h2 id="titulo-lista-rotas" class="ops-panel-title">
-                            <i class="bi bi-signpost-split text-cyan" aria-hidden="true"></i>Rotas Cadastradas
+                            Rotas Cadastradas
                         </h2>
                         <span class="ops-status-tag ops-status-neutral">
                             <?= $rotas ? (int) $rotas->num_rows : 0 ?> REGISTRO(S)
@@ -301,7 +298,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                                             <td class="text-end">
                                                 <div class="d-inline-flex gap-1">
                                                     <a href="editar_rota.php?id=<?= $idR ?>" class="ops-btn ops-btn-sm">
-                                                        <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
+                                                        Editar
                                                     </a>
                                                     <button
                                                         type="button"
@@ -310,7 +307,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                                                         data-bs-target="#modalExcluirRota"
                                                         data-rota-id="<?= $idR ?>"
                                                         data-rota-nome="<?= htmlspecialchars($nomeR, ENT_QUOTES, 'UTF-8') ?>">
-                                                        <i class="bi bi-trash3" aria-hidden="true"></i>Excluir
+                                                        Excluir
                                                     </button>
                                                 </div>
                                             </td>
@@ -357,7 +354,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                     <form action="excluir_rota.php" method="POST" class="m-0">
                         <input type="hidden" name="id" id="inputExcluirRotaId" value="">
                         <button type="submit" class="ops-btn ops-btn-danger">
-                            <i class="bi bi-trash3-fill" aria-hidden="true"></i>Confirmar Exclusão
+                            Confirmar Exclusão
                         </button>
                     </form>
                 </div>
@@ -370,6 +367,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
    <script src="../scripts/scriptRotas.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

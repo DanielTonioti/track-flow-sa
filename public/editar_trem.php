@@ -109,7 +109,6 @@ $pageTitle = 'Editar Trem';
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -119,7 +118,6 @@ $pageTitle = 'Editar Trem';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Composição atualizada com sucesso</strong>
@@ -134,7 +132,7 @@ $pageTitle = 'Editar Trem';
             <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <div class="ops-panel-header">
                 <h2 class="ops-panel-title">
-                    <i class="bi bi-pencil-square text-cyan" aria-hidden="true"></i>Ficha de Edição &mdash; <?= sprintf('#TRM-%03d', (int) $id) ?>
+                    Ficha de Edição &mdash; <?= sprintf('#TRM-%03d', (int) $id) ?>
                 </h2>
             </div>
 
@@ -181,7 +179,7 @@ $pageTitle = 'Editar Trem';
             <div class="ops-panel-footer">
                 <a href="cadastro_trens.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="atualizar-trem" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                    Salvar Alterações
                 </button>
             </div>
         </form>

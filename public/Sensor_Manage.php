@@ -47,7 +47,7 @@ $pageTitle = 'Gerenciar Sensores';
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Sensores
                 </a>
                 <a href="Sensor.php" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-plus-lg" aria-hidden="true"></i>Adicionar Sensor
+                    Adicionar Sensor
                 </a>
             </div>
         </div>
@@ -63,9 +63,9 @@ $pageTitle = 'Gerenciar Sensores';
         <section class="ops-panel">
             <div class="ops-panel-header">
                 <h2 class="ops-panel-title">
-                    <i class="bi bi-sliders text-cyan" aria-hidden="true"></i>Sensores Cadastrados
+                    Sensores Cadastrados
                 </h2>
-                <span class="ops-status-tag ops-status-neutral"><?= count($sensors) ?> ITEM(NS)</span>
+                <span class="ops-status-tag ops-status-neutral"><?= count($sensors) ?> Item(ns)</span>
             </div>
 
             <div class="table-responsive">
@@ -137,20 +137,8 @@ $pageTitle = 'Gerenciar Sensores';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const linkConfirmar = document.getElementById('link-confirmar-exclusao-sensor');
-            const nomeModal = document.getElementById('nome-sensor-modal');
-            document.querySelectorAll('.btn-preparar-exclusao').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    const id = btn.getAttribute('data-sensor-id') || '0';
-                    const nome = btn.getAttribute('data-sensor-nome') || 'selecionado';
-                    if (nomeModal) nomeModal.textContent = nome;
-                    if (linkConfirmar) linkConfirmar.setAttribute('href', 'excluir_sensor.php?id=' + encodeURIComponent(id));
-                });
-            });
-        });
-    </script>
+    <script src="../scripts/script_sensor_manage.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

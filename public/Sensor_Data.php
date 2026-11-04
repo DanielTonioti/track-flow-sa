@@ -48,10 +48,10 @@ $pageTitle = 'Sensores';
                 </a>
                 <?php if ($ehAdmin): ?>
                     <a href="Sensor_Manage.php" class="ops-btn">
-                        <i class="bi bi-sliders" aria-hidden="true"></i>Gerenciar
+                        Gerenciar
                     </a>
                     <a href="Sensor.php" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Sensor
+                        Cadastrar Sensor
                     </a>
                 <?php endif; ?>
             </div>
@@ -60,9 +60,9 @@ $pageTitle = 'Sensores';
         <section class="ops-panel" aria-labelledby="titulo-painel-sensores">
             <div class="ops-panel-header">
                 <h2 id="titulo-painel-sensores" class="ops-panel-title">
-                    <i class="bi bi-cpu text-cyan" aria-hidden="true"></i>Lista de Sensores
+                    Lista de Sensores
                 </h2>
-                <span class="ops-status-tag ops-status-neutral"><?= count($sensoresBanco) ?> REGISTRO(S)</span>
+                <span class="ops-status-tag ops-status-neutral"><?= count($sensoresBanco) ?> Regristro(s)</span>
             </div>
 
             <div class="table-responsive">
@@ -94,7 +94,7 @@ $pageTitle = 'Sensores';
                                     </td>
                                     <td>
                                         <span class="ops-status-tag ops-status-nominal">
-                                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>CADASTRADO
+                                            Cadastrado
                                         </span>
                                     </td>
                                 </tr>
@@ -119,6 +119,7 @@ $pageTitle = 'Sensores';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

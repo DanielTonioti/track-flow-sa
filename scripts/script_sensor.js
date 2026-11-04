@@ -1,23 +1,16 @@
-const localizacaoBox = document.getElementById("localizacao-box");
-const tremVinculadoBox = document.getElementById("trem-vinculado-box");
-const trem = document.getElementById("trem");
-const trilho = document.getElementById("trilho");
-const valorTipo = document.getElementById("valor-tipo");
+document.addEventListener('DOMContentLoaded', function () {
+    const radioTrem = document.getElementById('trem');
+    const radioTrilho = document.getElementById('trilho');
+    const boxTrem = document.getElementById('trem-vinculado-box');
+    const boxLocal = document.getElementById('localizacao-box');
 
-function mostrarTipo() {
-    if (trem.checked) {
-        tremVinculadoBox.classList.remove("hiden");
-    } else {
-        tremVinculadoBox.classList.add("hiden");
+    function atualizarCampos() {
+        const ehTrilho = radioTrilho && radioTrilho.checked;
+        if (boxTrem) boxTrem.classList.toggle('d-none', ehTrilho);
+        if (boxLocal) boxLocal.classList.toggle('d-none', !ehTrilho);
     }
 
-    if (trilho.checked) {
-        localizacaoBox.classList.remove("hiden");
-    } else {
-        localizacaoBox.classList.add("hiden");
-    }
-}
-
-valorTipo.addEventListener("change", mostrarTipo);
-trem.addEventListener("change", mostrarTipo);
-trilho.addEventListener("change", mostrarTipo);
+    if (radioTrem) radioTrem.addEventListener('change', atualizarCampos);
+    if (radioTrilho) radioTrilho.addEventListener('change', atualizarCampos);
+    atualizarCampos();
+});

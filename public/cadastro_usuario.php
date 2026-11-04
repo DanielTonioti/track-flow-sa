@@ -186,7 +186,6 @@ $pageTitle = 'Cadastrar Funcionário';
 
         <?php if ($erro !== ""): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados informados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -196,11 +195,9 @@ $pageTitle = 'Cadastrar Funcionário';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Funcionário cadastrado com sucesso</strong>
-                        <span>Os dados do funcionário foram salvos no banco de dados.</span>
                     </div>
                     <a href="Admin.php" class="ops-btn ops-btn-sm">Ver Quadro de Equipe</a>
                 </div>
@@ -408,7 +405,7 @@ $pageTitle = 'Cadastrar Funcionário';
             <div class="ops-panel-footer">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="CadastrarUsuario" value="Cadastrar" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Funcionário
+                    Cadastrar Funcionário
                 </button>
             </div>
         </form>
@@ -420,21 +417,7 @@ $pageTitle = 'Cadastrar Funcionário';
         crossorigin="anonymous"></script>
     <script src="../scripts/script_cep.js"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('btn-toggle-senha-cad');
-            const input = document.getElementById('senha');
-            if (btn && input) {
-                btn.addEventListener('click', function () {
-                    const oculto = input.type === 'password';
-                    input.type = oculto ? 'text' : 'password';
-                    btn.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
-                    const icon = btn.querySelector('i');
-                    if (icon) icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
-                });
-            }
-        });
-    </script>
+    <script src="../scripts/script_auth.js"></script>
 </body>
 
 </html>

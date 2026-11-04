@@ -214,6 +214,7 @@ $pageTitle = 'Funcionários e Credenciais';
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
    <script src="../scripts/scriptAdmin.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

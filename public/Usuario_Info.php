@@ -148,14 +148,14 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
 
             <div class="ops-header-actions">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-people" aria-hidden="true"></i>Lista de Equipe
+                    Lista de Equipe
                 </a>
                 <a href="hub.php" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-speedometer2" aria-hidden="true"></i>Dashboard
+                    Dashboard
                 </a>
                 <?php if ($ehAdmin && $id > 0): ?>
                     <a href="editar_usuario.php?id=<?= (int) $id ?>" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar Cadastro
+                        Editar Cadastro
                     </a>
                 <?php endif; ?>
             </div>
@@ -205,7 +205,7 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                 <section class="ops-panel mb-3">
                     <div class="ops-panel-header">
                         <h3 class="ops-panel-title">
-                            <i class="bi bi-card-list text-cyan" aria-hidden="true"></i> Informações
+                             Informações
                         </h3>
                     </div>
                     <div class="ops-panel-body">
@@ -241,9 +241,9 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                 <section class="ops-panel">
                     <div class="ops-panel-header">
                         <h3 class="ops-panel-title">
-                            <i class="bi bi-train-front text-cyan" aria-hidden="true"></i> Trens vinculados
+                             Trens vinculados
                         </h3>
-                        <span class="ops-status-tag ops-status-neutral"><?= count($trensVinculados) ?> TREM(NS)</span>
+                        <span class="ops-status-tag ops-status-neutral"><?= count($trensVinculados) ?> Trem(ns)</span>
                     </div>
                     <div class="ops-panel-body p-0">
                         <?php if (!empty($trensVinculados)): ?>
@@ -268,7 +268,7 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                                                 <?php if ($ehAdmin): ?>
                                                     <td class="text-end">
                                                         <a href="editar_trem.php?id=<?= (int) $tr['id'] ?>" class="ops-btn ops-btn-ghost ops-btn-sm">
-                                                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Gerenciar
+                                                            Gerenciar
                                                         </a>
                                                     </td>
                                                 <?php endif; ?>
@@ -293,6 +293,7 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

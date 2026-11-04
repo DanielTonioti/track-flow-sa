@@ -110,7 +110,7 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Visão Geral
                 </a>
                 <a href="cadastro_rotas.php" class="ops-btn">
-                    <i class="bi bi-signpost-split" aria-hidden="true"></i>Ir para Rotas
+                    Ir para Rotas
                 </a>
             </div>
         </div>
@@ -127,7 +127,6 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
 
         <?php if ($sucesso && $mensagemSucesso !== ''): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Frota atualizada</strong>
                     <span><?= htmlspecialchars($mensagemSucesso, ENT_QUOTES, 'UTF-8') ?></span>
@@ -180,13 +179,13 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                                     <?php endwhile; ?>
                                 <?php endif; ?>
                             </select>
-                            <span class="ops-help">Todo trem em operação deve estar vinculado a um funcionário cadastrado.</span>
+                            <span class="ops-help">Todo trem deve estar vinculado a um funcionário cadastrado.</span>
                         </div>
                     </div>
 
                     <div class="ops-panel-footer justify-content-end">
                         <button type="submit" name="cadastrar-trem" class="ops-btn ops-btn-primary w-100">
-                            <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Trem
+                            Cadastrar Trem
                         </button>
                     </div>
                 </form>
@@ -196,10 +195,10 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                 <section class="ops-panel" aria-labelledby="titulo-lista-trens">
                     <div class="ops-panel-header">
                         <h2 id="titulo-lista-trens" class="ops-panel-title">
-                            <i class="bi bi-train-front text-cyan" aria-hidden="true"></i>Trens Cadastrados
+                            Trens Cadastrados
                         </h2>
                         <span class="ops-status-tag ops-status-neutral">
-                            <?= $trens ? (int) $trens->num_rows : 0 ?> REGISTRO(S)
+                            <?= $trens ? (int) $trens->num_rows : 0 ?> Registro(s)
                         </span>
                     </div>
 
@@ -231,7 +230,7 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                                             <td class="text-end">
                                                 <div class="d-inline-flex gap-1">
                                                     <a href="editar_trem.php?id=<?= $idT ?>" class="ops-btn ops-btn-sm">
-                                                        <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
+                                                        Editar
                                                     </a>
                                                     <button
                                                         type="button"
@@ -240,7 +239,7 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                                                         data-bs-target="#modalExcluirTrem"
                                                         data-trem-id="<?= $idT ?>"
                                                         data-trem-nome="<?= htmlspecialchars($nomeT, ENT_QUOTES, 'UTF-8') ?>">
-                                                        <i class="bi bi-trash3" aria-hidden="true"></i>Excluir
+                                                        Excluir
                                                     </button>
                                                 </div>
                                             </td>
@@ -289,7 +288,7 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                     <form action="excluir_trem.php" method="POST" class="m-0">
                         <input type="hidden" name="id" id="inputExcluirTremId" value="">
                         <button type="submit" class="ops-btn ops-btn-danger">
-                            <i class="bi bi-trash3-fill" aria-hidden="true"></i>Confirmar Exclusão
+                            Confirmar Exclusão
                         </button>
                     </form>
                 </div>
@@ -301,16 +300,8 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.btn-preparar-exclusao-trem').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('inputExcluirTremId').value = btn.getAttribute('data-trem-id') || '';
-                    document.getElementById('nomeTremModal').textContent = btn.getAttribute('data-trem-nome') || '';
-                });
-            });
-        });
-    </script>
+    <script src="../scripts/script_cadastro_trens.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

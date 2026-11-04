@@ -3640,3 +3640,47 @@ body.cco-dashboard-body {
         transform: none;
     }
 }
+
+
+/* ==========================================================================
+   Componente de Paginação TrackFlow
+   ========================================================================== */
+.ops-pagination-wrapper {
+    background-color: rgba(13, 27, 46, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ops-pagination-wrapper .pagination {
+    margin-bottom: 0;
+}
+
+.ops-pagination-wrapper .page-link {
+    background-color: var(--cor-azure-claro-fundo, #0d1b2e);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--cor-letra-muted, #b8c7d9);
+    padding: 0.25rem 0.65rem;
+    font-size: 0.8rem;
+    font-family: var(--Fonte-mono, monospace);
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.ops-pagination-wrapper .page-link:hover {
+    background-color: var(--cor-cinza-claro-botoes, #1e2f47);
+    color: #ffffff;
+    border-color: var(--cor-azul-pastel, #67a4ff);
+}
+
+.ops-pagination-wrapper .page-item.active .page-link {
+    background-color: var(--cor-azul-real, #5271ff);
+    border-color: var(--cor-azul-real, #5271ff);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.ops-pagination-wrapper .page-item.disabled .page-link {
+    background-color: rgba(13, 27, 46, 0.6);
+    border-color: rgba(255, 255, 255, 0.05);
+    color: rgba(184, 199, 217, 0.35);
+    cursor: not-allowed;
+}
