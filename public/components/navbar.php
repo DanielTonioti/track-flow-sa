@@ -172,21 +172,5 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                 </li>
             </ul>
         </div>
-
-        <div class="pt-3 border-top border-light border-opacity-10">
-            <div class="d-flex align-items-center gap-2 px-2 py-2 rounded-2" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.06);">
-                <div class="perfil-mini flex-shrink-0">
-                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="" width="38" height="38" class="rounded-circle object-fit-cover"
-                        onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
-                </div>
-                <div class="flex-grow-1 overflow-hidden">
-                    <strong class="d-block text-white small text-truncate"><?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?></strong>
-                    <span class="text-steel mono-font d-flex align-items-center gap-1" style="font-size: 0.7rem;"><span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
-                </div>
-                <a href="logout.php" class="ops-btn ops-btn-danger-outline p-0" style="width: 38px; min-height: 38px;" title="Encerrar sessão" aria-label="Encerrar sessão">
-                    <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
     </div>
 </div>
