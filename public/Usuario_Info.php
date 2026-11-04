@@ -205,7 +205,7 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                 <section class="ops-panel mb-3">
                     <div class="ops-panel-header">
                         <h3 class="ops-panel-title">
-                            <i class="bi bi-card-list text-cyan" aria-hidden="true"></i>Dados de Contato e Estação Base
+                            <i class="bi bi-card-list text-cyan" aria-hidden="true"></i> Informações
                         </h3>
                     </div>
                     <div class="ops-panel-body">
@@ -241,7 +241,7 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                 <section class="ops-panel">
                     <div class="ops-panel-header">
                         <h3 class="ops-panel-title">
-                            <i class="bi bi-train-front text-cyan" aria-hidden="true"></i>Composições Ferroviárias sob Responsabilidade
+                            <i class="bi bi-train-front text-cyan" aria-hidden="true"></i> Trens vinculados
                         </h3>
                         <span class="ops-status-tag ops-status-neutral"><?= count($trensVinculados) ?> TREM(NS)</span>
                     </div>
