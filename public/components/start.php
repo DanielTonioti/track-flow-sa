@@ -15,7 +15,7 @@ if ($idSessao <= 0) {
     exit();
 }
 
-$stmtSessao = $db->prepare("SELECT id, nome, email, telefone, cargo, avatar FROM funcionario WHERE id = ?");
+$stmtSessao = $db->prepare("SELECT id, nome, email, rua, cidade, bairro, uf, telefone, cargo, avatar FROM funcionario WHERE id = ?");
 if (!$stmtSessao) {
     session_unset();
     session_destroy();
@@ -38,6 +38,10 @@ if (!$usuarioSessao) {
 $_SESSION['id'] = (int) $usuarioSessao['id'];
 $_SESSION['usuario'] = $usuarioSessao['nome'];
 $_SESSION['email'] = $usuarioSessao['email'];
+$_SESSION['rua'] = $usuarioSessao['rua'];
+$_SESSION['cidade'] = $usuarioSessao['cidade'];
+$_SESSION['bairro'] = $usuarioSessao['bairro'];
+$_SESSION['uf'] = $usuarioSessao['uf'];
 $_SESSION['telefone'] = $usuarioSessao['telefone'];
 $_SESSION['cargo'] = $usuarioSessao['cargo'];
 $_SESSION['avatar'] = $usuarioSessao['avatar'];

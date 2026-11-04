@@ -2,67 +2,92 @@
 session_start();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
+
+$pageTitle = 'Novo Relatório';
 ?>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/logo/icone.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Styles/style.css">
-    <title>Data dos sensores</title>
+    <?php include 'components/head.php'; ?>
 </head>
 
-<body>
+<body class="ops-app-body">
     <header>
-
-        <?php
-
-        include("components/navbar.php");
-
-        ?>
-
-
+        <?php include("components/navbar.php"); ?>
     </header>
 
-    <main class="container py-4">
-        <a href="Relatories.php" class="btn btn-danger back-buttom">Voltar</a>
-        <div class="ReportFormPanel mx-auto cores-background rounded-4 p-4 p-md-5" data-background="azure-claro-fundo">
-            <h1 class="text-white mb-4">Novo relatario</h1>
-            <form>
-                <div class="mb-3">
-                    <label class="form-label text-white" for="TituloRelatório">Título</label>
-                    <input class="form-control" type="text" id="TituloRelatório" placeholder="Título do relatario">
-                </div>
-                <div class="row g-3">
-                    <div class="col-12 col-md-6">
-                        <label class="form-label text-white" for="SensorRelatório">Sensor ou rota</label>
-                        <select class="form-select" id="SensorRelatório">
-                            <option selected>Selecione</option>
-                            <option>Rota Norte</option>
-                            <option>Sensor S001</option>
-                        </select>
+    <main class="ops-shell" style="max-width: 780px;">
+        <div class="ops-page-header">
+            <div>
+                <nav class="ops-breadcrumb" aria-label="Breadcrumb">
+                    <a href="hub.php">Dashboard</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <a href="Relatories.php">Relatórios</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <span>Novo</span>
+                </nav>
+                <h1 class="ops-page-title">Novo Relatório</h1>
+                <p class="ops-page-subtitle">
+                    Emissão de relatórios por sensor, trem ou período.
+                </p>
+            </div>
+
+            <div class="ops-header-actions">
+                <a href="Relatories.php" class="ops-btn ops-btn-ghost">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Relatórios
+                </a>
+            </div>
+        </div>
+
+        <div class="ops-alert ops-alert-info" role="status">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <div>
+                <strong>Em produção:</strong> a geração de novos relatórios está em produção e estará disponível em breve.
+            </div>
+        </div>
+
+        <section class="ops-panel">
+            <form action="Relatories.php" method="GET">
+                <div class="ops-panel-body">
+                    <div class="ops-form-section-title">
+                        <i class="bi bi-file-earmark-bar-graph" aria-hidden="true"></i> Parâmetros do Relatório
                     </div>
-                    <div class="col-12 col-md-6">
-                        <label class="form-label text-white" for="PeriodoRelatório">Período</label>
-                        <select class="form-select" id="PeriodoRelatório">
-                            <option selected>últimos 7 dias</option>
-                            <option>últimos 30 dias</option>
-                            <option>Período personalizado</option>
-                        </select>
+
+                    <div class="mb-3">
+                        <label class="ops-label" for="TituloRelatorio">Título</label>
+                        <input class="ops-input" type="text" id="TituloRelatorio" placeholder="Ex.: Relatório semanal da linha">
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="ops-label" for="SensorRelatorio">Sensor ou rota</label>
+                            <select class="ops-select" id="SensorRelatorio">
+                                <option selected>Selecione...</option>
+                                <option>Trens monitorados</option>
+                                <option>Sensores de via</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label class="ops-label" for="PeriodoRelatorio">Período</label>
+                            <select class="ops-select" id="PeriodoRelatorio">
+                                <option selected>Últimos 7 dias</option>
+                                <option>Últimos 30 dias</option>
+                                <option>Período personalizado</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-end gap-2 mt-4">
-                    <a class="btn btn-outline-light" href="Relatories.php">Cancelar</a>
-                    <button class="btn btn-light fw-bold" type="button">Gerar relatório</button>
+
+                <div class="ops-panel-footer">
+                    <a class="ops-btn ops-btn-ghost" href="Relatories.php">Cancelar</a>
+                    <button class="ops-btn ops-btn-primary" type="button" disabled title="Funcionalidade em produção">
+                        <i class="bi bi-file-earmark-check" aria-hidden="true"></i>Gerar Relatório
+                    </button>
                 </div>
             </form>
-        </div>
+        </section>
     </main>
-
-    </head>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

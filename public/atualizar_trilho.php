@@ -9,11 +9,11 @@ if (!isset($conn) && isset($db)) {
     $conn = $db;
 }
 
-$id = $_POST['id'];
-$nome = $_POST['nome'];
-$localizacao = $_POST['localizacao'];
+$id = (int) ($_POST['id'] ?? 0);
+$nome = trim($_POST['nome'] ?? '');
+$localizacao = trim($_POST['localizacao'] ?? '');
 
-if ($id <= 0) {
+if ($id <= 0 || $nome === '' || $localizacao === '') {
     header('Location: cadastro_linhas.php');
     exit();
 }
@@ -25,5 +25,5 @@ if ($stmt = $db->prepare($sql)) {
     $stmt->close();
 }
 
-header('Location: trens_trilhos.php');
+header('Location: cadastro_linhas.php?atualizado=1');
 exit();

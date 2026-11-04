@@ -1,160 +1,139 @@
 <?php
 session_start();
 require_once 'components/start.php';
-
+redirecionarSeNaoAdmin();
 include '../infra/conn.php';
 
 $mensagemCadastro = '';
 $mensagemErro = '';
 
-if (isset($_POST['CadastrarSensor'])) {
-    $tipo = $_POST['tipo'] ?? '';
-    $tipoDado = $_POST['tipo_dado'] ?? '';
-    $tremVinculado = trim($_POST['trem_vinculado'] ?? '');
-    $localizacao = trim($_POST['localizacao'] ?? '');
-
-    if (
-        $tipo === 'trem' && in_array($tipoDado, ['Velocidade', 'Temperatura', 'Falha'], true)
-        && preg_match('/^[\p{L}\p{N} ._-]{1,100}$/u', $tremVinculado)
-    ) {
-        $stmtBuscaTrem = $db->prepare('SELECT id FROM trem WHERE nome = ?');
-        if ($stmtBuscaTrem) {
-            $stmtBuscaTrem->bind_param('s', $tremVinculado);
-            $stmtBuscaTrem->execute();
-            $resultadoTrem = $stmtBuscaTrem->get_result();
-            $trem = $resultadoTrem->fetch_assoc();
-            $stmtBuscaTrem->close();
-
-            if (!empty($trem['id'])) {
-                $sql = 'INSERT INTO sensor (nome, tipo, trem_id) VALUES (?, ?, ?)';
-                $stmt = $db->prepare($sql);
-                if ($stmt) {
-                    $stmt->bind_param('ssi', $tremVinculado, $tipoDado, $trem['id']);
-                    $stmt->execute();
-                    $stmt->close();
-                    $mensagemCadastro = 'Sensor cadastrado com sucesso!';
-                }
-            } else {
-                $mensagemErro = 'Trem não encontrado. Cadastre o trem antes de vincular o sensor.';
-            }
-        }
-    } elseif ($tipo === 'trem') {
-        $mensagemErro = 'Informe um trem válido e um tipo de dado.';
-    }
-
-    if ($tipo === 'trilho') {
-        $sql = 'INSERT INTO trilho (tipo, nome) VALUES (?, ?)';
-        $stmt = $db->prepare($sql);
-        if ($stmt) {
-            $stmt->bind_param('ss', $tipoDado, $localizacao);
-            $stmt->execute();
-            $stmt->close();
-            $mensagemCadastro = 'Trilho cadastrado com sucesso!';
-            
-        }
-    }
-}
+$pageTitle = 'Cadastrar Sensor';
 ?>
-
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../assets/logo/icone.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="../Styles/style.css">
-    <title>Sensor</title>
+    <?php include 'components/head.php'; ?>
 </head>
 
-<body class="cores-background " data-background="azure-escuro-fundo" class=" cores-background "
-    data-background="azure-escuro-fundo">
+<body class="ops-app-body">
     <header>
-
-        <?php
-
-        include("components/navbar.php");
-
-        ?>
-
-
+        <?php include("components/navbar.php"); ?>
     </header>
 
-    <main>
-      <!--   <?php if (!empty($mensagemCadastro)): ?>  
-            <div class="alert alert-success mx-auto mt-3 w-50 text-center">
-                <?php echo $mensagemCadastro; ?>
+    <main class="ops-shell" style="max-width: 820px;">
+        <div class="ops-page-header">
+            <div>
+                <nav class="ops-breadcrumb" aria-label="Breadcrumb">
+                    <a href="hub.php">Dashboard</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <a href="Sensor_Data.php">Sensores</a>
+                    <span class="ops-breadcrumb-sep">/</span>
+                    <span>Cadastro</span>
+                </nav>
+                <h1 class="ops-page-title">Cadastrar Sensor</h1>
+                <p class="ops-page-subtitle">
+                    Vinculação de sensores a trens ou segmentos de trilho.
+                </p>
             </div>
-        <?php endif; ?>
-        <?php if ($mensagemErro !== ''): ?>
-            <div class="alert alert-danger mx-auto mt-3 w-50 text-center">
-                <?php echo $mensagemErro; ?>
-            </div>
-        <?php endif; ?>
 
-        <form id="CadastrarSensor" method="POST">
-            <div class="blockcentro titulo-sensor">
-                <div class="cores-background p-2 rounded-4" data-background="azure-claro-fundo">
-                    <h2 class="titulo-sensor">Cadastrar Sensor</h2>
-                </div>
-                <br>
-                <div id="valor-tipo" class="cores-background p-4 w-25 rounded-4" data-background="azure-claro-fundo">
-                    <div class="center-sensor">
-                        <input type="radio" name="tipo" id="trem" value="trem" required> Trem
-                        <input type="radio" name="tipo" id="trilho" value="trilho"> Trilho
+            <div class="ops-header-actions">
+                <a href="Sensor_Data.php" class="ops-btn ops-btn-ghost">
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Sensores
+                </a>
+                <a href="Sensor_Manage.php" class="ops-btn">
+                    <i class="bi bi-sliders" aria-hidden="true"></i>Gerenciar
+                </a>
+            </div>
+        </div>
+
+        <div class="ops-alert ops-alert-info" role="status">
+            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
+            <div>
+                <strong>Em produção:</strong> o cadastro de sensores está em produção e estará disponível em breve.
+            </div>
+        </div>
+
+        <section class="ops-panel">
+            <form id="CadastrarSensor" method="POST" action="">
+                <div class="ops-panel-body">
+                    <div class="ops-form-section-title">
+                        <i class="bi bi-cpu" aria-hidden="true"></i> Dados do Sensor
                     </div>
-                    <br>
-        --> <h1 class="text-white mb-0 WIP">Pagina em andamento(WIP)</h1><!--
-                    <div class="column-sensor" id="tipos">
-                        <label for="tipo-dado">Tipo de Dado</label>
-                        <select name="tipo_dado" id="tipo-dado" required>
-                            <option value="" disabled selected>Selecione</option>
-                            <option value="Velocidade">Velocidade</option>
-                            <option value="Temperatura">Temperatura</option>
-                            <option value="Falha">Falha</option>
-                        </select>
-                        <br>
-                        <div class="hiden" id="trem-vinculado-box">
-                            <label for="trem-vinculado">Trem vinculado</label>
-                            <br>
-                            <input class="w-100" type="text" id="trem-vinculado" name="trem_vinculado"
-                                placeholder="Ex: S.TRM.1" required>
+
+                    <div class="mb-3">
+                        <span class="ops-label">Onde o sensor será instalado?</span>
+                        <div class="ops-radio-grid">
+                            <label class="ops-radio-card" for="trem">
+                                <input type="radio" name="tipo" id="trem" value="trem" checked>
+                                <div>
+                                    <strong class="d-block text-white small">Trem</strong>
+                                    <span class="text-steel" style="font-size: 0.76rem;">Vinculado a uma composição ferroviária.</span>
+                                </div>
+                            </label>
+                            <label class="ops-radio-card" for="trilho">
+                                <input type="radio" name="tipo" id="trilho" value="trilho">
+                                <div>
+                                    <strong class="d-block text-white small">Trilho</strong>
+                                    <span class="text-steel" style="font-size: 0.76rem;">Vinculado a um trecho da linha.</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <label class="ops-label" for="tipo-dado">Tipo de dado</label>
+                            <select class="ops-select" name="tipo_dado" id="tipo-dado">
+                                <option value="Temperatura">Temperatura</option>
+                                <option value="Velocidade">Velocidade</option>
+                                <option value="Falha">Falha</option>
+                            </select>
                         </div>
 
-                        <div class="hiden" id="localizacao-box">
-                            <label for="localizacao">Localização</label>
-                            <br>
-                            <input class="w-100" type="text" id="localizacao" name="localizacao"
-                                placeholder="Joinville">
+                        <div class="col-12 col-md-6" id="trem-vinculado-box">
+                            <label class="ops-label" for="trem-vinculado">Trem vinculado</label>
+                            <input class="ops-input" type="text" id="trem-vinculado" name="trem_vinculado" placeholder="Ex.: Locomotiva C-01">
                         </div>
 
+                        <div class="col-12 col-md-6 d-none" id="localizacao-box">
+                            <label class="ops-label" for="localizacao">Localização do trilho</label>
+                            <input class="ops-input" type="text" id="localizacao" name="localizacao" placeholder="Ex.: Joinville - KM 12">
+                        </div>
                     </div>
                 </div>
-                <br>
-                <button type="submit" class="border-none-buttom cores-background titulo-sensor p-2 rounded-3"
-                    data-background="azure-claro-fundo" name="CadastrarSensor">Cadastrar</button>
-            </div>
-        </form>
 
-
-        <script src="../scripts/"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-            crossorigin="anonymous"></script>
-  -->
-        <a href="hub.php" class="btn btn-danger back-buttom">Voltar</a>
-  
+                <div class="ops-panel-footer">
+                    <a href="Sensor_Data.php" class="ops-btn ops-btn-ghost">Voltar</a>
+                    <button type="button" class="ops-btn ops-btn-primary" disabled title="Funcionalidade em produção">
+                        <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Sensor
+                    </button>
+                </div>
+            </form>
+        </section>
     </main>
-    <footer>
 
-    </footer>
-    <script src="../scripts/scriptSensor.js"></script>
-    <script src="../scripts/scriptAdmin.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/scriptNavbar.js"></script>
+    <script src="../scripts/script_navbar.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const radioTrem = document.getElementById('trem');
+            const radioTrilho = document.getElementById('trilho');
+            const boxTrem = document.getElementById('trem-vinculado-box');
+            const boxLocal = document.getElementById('localizacao-box');
+
+            function atualizarCampos() {
+                const ehTrilho = radioTrilho && radioTrilho.checked;
+                if (boxTrem) boxTrem.classList.toggle('d-none', ehTrilho);
+                if (boxLocal) boxLocal.classList.toggle('d-none', !ehTrilho);
+            }
+
+            if (radioTrem) radioTrem.addEventListener('change', atualizarCampos);
+            if (radioTrilho) radioTrilho.addEventListener('change', atualizarCampos);
+        });
+    </script>
 </body>
 
 </html>

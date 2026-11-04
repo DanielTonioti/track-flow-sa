@@ -20,5 +20,5 @@ $stmt->bind_param('i', $id);
 $stmt->execute();
 $stmt->close();
 
-header('Location: cadastro_rotas.php');
+header('Location: cadastro_rotas.php?excluida=1');
 exit;

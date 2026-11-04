@@ -13,29 +13,22 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
     <meta name="theme-color" content="#081220">
     <title>TrackFlow — Monitoramento Ferroviário</title>
     <link rel="shortcut icon" href="Assets/logo/icone.ico" type="image/x-icon">
-
-    <!-- Preconnect para CDNs e Fontes -->
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=League+Spartan:wght@600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap 5 CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <!-- Bootstrap Icons via CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Folha de Estilos Oficial do Projeto -->
     <link rel="stylesheet" href="Styles/style.css?v=<?= $cssVersion ?>">
 </head>
 
 <body class="ferrorama-landing">
-
     <!-- Cena 3D WebGL de Viadutos e Trens Passando no Fundo -->
     <canvas id="webgl-trains-canvas" class="webgl-trains-canvas" aria-hidden="true"></canvas>
 
     <!-- ========================================================================
-         1. BARRA SUPERIOR LIMPA (ESTILO CANVA / IDENTIDADE TRACKFLOW)
+         1. BARRA SUPERIOR
          ======================================================================== -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-canva" aria-label="Navegação Principal">
@@ -79,14 +72,14 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
 
     <main>
         <!-- ====================================================================
-             2. HERO SECTION CENTRALIZADA + VITRINE INTERATIVA ESTILO CANVA
+             2. HERO SECTION CENTRALIZADA + VITRINE INTERATIVA
              ==================================================================== -->
         <section id="inicio" class="hero-canva" aria-labelledby="hero-heading">
             <div class="container">
                 <div class="row justify-content-center text-center">
                     <div class="col-12 col-lg-9 col-xl-8">
                         <h1 id="hero-heading" class="hero-canva-title text-white mb-3">
-                            Gestão ferroviária simples, visual e no ritmo que move estados.
+                            No ritmo que move estados.
                         </h1>
                         <p class="hero-canva-subtitle mb-4 mx-auto">
                             Acompanhe sensores de trens e trilhos, cadastre composições, visualize gráficos por linha e organize sua equipe em um único lugar.
@@ -200,7 +193,7 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
         </section>
 
         <!-- ====================================================================
-             3. BENTO GRID ESTILO CANVA (BLOCOS VISUAIS E DIRETOS)
+             3. BENTO GRID
              ==================================================================== -->
         <section id="recursos" class="section-padding" aria-labelledby="recursos-heading">
             <div class="container">
@@ -326,7 +319,7 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
         </section>
 
         <!-- ====================================================================
-             4. SEÇÃO DE SENSORES (CARDS LIMPOS E OBJETIVOS ESTILO CANVA)
+             4. SEÇÃO DE SENSORES
              ==================================================================== -->
         <section id="sensores" class="section-padding section-surface-solid" aria-labelledby="sensores-heading">
             <div class="container">
@@ -412,7 +405,7 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
         </section>
 
         <!-- ====================================================================
-             5. VANTAGENS + CHAMADA FINAL LIMPA
+             5. VANTAGENS + CHAMADA FINAL
              ==================================================================== -->
         <section id="beneficios" class="section-padding" aria-labelledby="beneficios-heading">
             <div class="container">
@@ -488,7 +481,7 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
     </main>
 
     <!-- ========================================================================
-         6. RODAPÉ LIMPO
+         6. RODAPÉ
          ======================================================================== -->
     <footer class="footer-ferrorama py-4">
         <div class="container">
@@ -508,13 +501,9 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
             </div>
         </div>
     </footer>
-
-    <!-- Bootstrap 5 JS Bundle via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <!-- Three.js para Renderização 3D de Trilhos e Trens -->
     <script src="scripts/three.min.js"></script>
-    <!-- Script Oficial da Landing Page -->
     <script src="scripts/scriptIndex.js?v=<?= $jsVersion ?>" defer></script>
 </body>
 

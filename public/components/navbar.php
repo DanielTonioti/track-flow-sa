@@ -52,87 +52,121 @@ if (!empty($_SESSION["avatar"]) && $raizProjeto !== false && $pastaAssets !== fa
 }
 
 $usuarioEhAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
+$paginaAtual = basename($_SERVER['PHP_SELF'] ?? '');
 
+$navGrupoDashboard = ($paginaAtual === 'hub.php');
+$navGrupoUsuarios = in_array($paginaAtual, ['Admin.php', 'cadastro_usuario.php', 'editar_usuario.php', 'Usuario_Info.php'], true);
+$navGrupoFrota = in_array($paginaAtual, ['trens_trilhos.php', 'cadastro_trens.php', 'editar_trem.php', 'cadastro_rotas.php', 'editar_rota.php', 'cadastro_linhas.php'], true);
+$navGrupoSensores = in_array($paginaAtual, ['Sensor_Data.php', 'Sensor.php', 'Sensor_Manage.php', 'sensor_delete.php'], true);
+$navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.php', 'Relatorie_Info.php'], true);
 ?>
 
-<nav class="menu-nav navbar navbar-dark cores-background" data-background="azure-claro-fundo">
+<nav class="menu-nav navbar navbar-dark" aria-label="Navegação Principal TrackFlow">
+    <div class="container-fluid px-2 px-lg-3" style="max-width: 1600px; margin: 0 auto;">
 
-    <div class="container-fluid">
-
-        <!-- LOGO -->
-        <a class="navbar-brand d-flex align-items-center" href="hub.php">
-            <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon">
-            <h2 class="fw-bold cores-color mb-0" data-color="white">
-                Trackflow
-            </h2>
-        </a>
-
-        <div class="d-flex">
-
-            <!-- BOTÃO MENU -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
-                <span class="navbar-toggler-icon"></span>
+        <div class="d-flex align-items-center gap-2">
+            <button class="navbar-toggler ops-nav-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Abrir menu de navegação">
+                <i class="bi bi-list fs-4" aria-hidden="true"></i>
             </button>
 
-            <!-- MENU LATERAL -->
-            <div class="hub-end offcanvas offcanvas-start cores-background" tabindex="-1" id="offcanvasDarkNavbar"
-                aria-labelledby="offcanvasDarkNavbarLabel" data-background="azure-claro-fundo">
+            <a class="navbar-brand d-flex align-items-center gap-2 py-0 me-0" href="hub.php">
+                <span class="ops-brand-mark" aria-hidden="true">
+                    <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="26" height="26">
+                </span>
+                <span class="d-flex flex-column lh-1">
+                    <span class="fw-bold fs-4 text-white brand-font tracking-tight">TrackFlow</span>
+                    <span class="ops-brand-sub text-volt">Ferrorama</span>
+                </span>
+            </a>
+        </div>
 
-                <div class="offcanvas-header">
-                    <h3 class="offcanvas-title cores-color" data-color="white" id="offcanvasDarkNavbarLabel">
-                        TrackFlow
-                    </h3>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                        aria-label="Fechar"></button>
-                </div>
-
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Admin.php">Funcionários</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Relatories.php">Relatórios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="hub.php">Sensores</a>
-                        </li>
-                        <?php if ($usuarioEhAdmin): ?>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="trens_trilhos.php">Trilhos e trens</a>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- NOME DO USUÁRIO -->
-            <div class="d-flex align-items-center justify-content-center me-2">
-                <span id="usuario-logado" class="nav-nome cores-color small fw-bold" data-color="white">
-                    <?php
-                    if (!empty($_SESSION["usuario"])) {
-                        echo htmlspecialchars($_SESSION["usuario"], ENT_QUOTES, "UTF-8");
-                    }
-                    ?>
+        <div class="d-flex align-items-center gap-2 position-relative">
+            <div class="d-none d-md-flex flex-column text-end me-1 lh-sm">
+                <span id="usuario-logado" class="text-white small fw-semibold">
+                    <?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?>
+                </span>
+                <span class="mono-font ops-role-caption d-inline-flex align-items-center gap-1">
+                    <span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?>
                 </span>
             </div>
 
-            <!-- AVATAR -->
-            <div class="perfil">
-                <div class="imgCx">
-                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Avatar do usuário"
+            <button type="button" class="perfil ops-avatar-trigger" aria-haspopup="true" aria-expanded="false"
+                aria-controls="menu_user" aria-label="Abrir menu da conta de <?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, 'UTF-8') ?>">
+                <span class="imgCx">
+                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Foto de perfil"
                         onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
-                </div>
-            </div>
+                </span>
+            </button>
 
-            <!-- MENU DO USUÁRIO -->
-            <div id="menu_user" class="cores-color menu" data-color="white">
+            <!-- MENU DROPDOWN DO USUÁRIO -->
+            <div id="menu_user" class="menu" role="menu" aria-label="Opções do operador">
+                <div class="px-3 py-2 border-bottom border-light border-opacity-10 d-md-none">
+                    <strong class="d-block text-white small text-truncate"><?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?></strong>
+                    <span class="mono-font text-steel d-inline-flex align-items-center gap-1" style="font-size: 0.7rem;"><span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
+                </div>
                 <div>
-                    <p><a href="#">Perfil</a></p>
-                    <p class="Menu_Deslogar"><a href="logout.php">Deslogar</a></p>
+                    <p><a href="Usuario_Info.php" role="menuitem"><i class="bi bi-person-vcard me-2 text-cyan" aria-hidden="true"></i>Meu Perfil</a></p>
+                    <p class="Menu_Deslogar"><a href="logout.php" role="menuitem"><i class="bi bi-box-arrow-right me-2 text-danger" aria-hidden="true"></i>Encerrar Sessão</a></p>
                 </div>
             </div>
         </div>
     </div>
 </nav>
+
+<div class="offcanvas offcanvas-start trackflow-offcanvas" tabindex="-1" id="offcanvasDarkNavbar"
+    aria-labelledby="offcanvasDarkNavbarLabel" data-bs-scroll="true">
+
+    <div class="offcanvas-header border-bottom border-light border-opacity-10 py-3 px-4">
+        <div class="d-flex align-items-center gap-2">
+            <div>
+                <h2 class="offcanvas-title brand-font fs-4 text-white mb-0 lh-1" id="offcanvasDarkNavbarLabel">
+                   Menu
+                </h2>
+            </div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
+    </div>
+
+    <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
+        <div>
+            <div class="px-2 pb-2 mb-2 text-uppercase text-steel small" style="font-size: 0.68rem; letter-spacing: 0.08em;">
+                Módulos do Sistema
+            </div>
+            <ul class="navbar-nav pe-1 gap-1">
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 px-3 py-2 <?= $navGrupoDashboard ? 'active' : '' ?>" href="hub.php" <?= $navGrupoDashboard ? 'aria-current="page"' : '' ?>>
+                        <i class="bi bi-speedometer2 text-cyan fs-5" aria-hidden="true"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 px-3 py-2 <?= $navGrupoUsuarios ? 'active' : '' ?>" href="Admin.php" <?= $navGrupoUsuarios ? 'aria-current="page"' : '' ?>>
+                        <i class="bi bi-people text-cyan fs-5" aria-hidden="true"></i>
+                        <span>Funcionários e Acessos</span>
+                    </a>
+                </li>
+                <?php if ($usuarioEhAdmin): ?>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center gap-2 px-3 py-2 <?= $navGrupoFrota ? 'active' : '' ?>" href="trens_trilhos.php" <?= $navGrupoFrota ? 'aria-current="page"' : '' ?>>
+                            <i class="bi bi-train-front text-cyan fs-5" aria-hidden="true"></i>
+                            <span>Trens, Rotas e Trilhos</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 px-3 py-2 <?= $navGrupoSensores ? 'active' : '' ?>" href="Sensor_Data.php" <?= $navGrupoSensores ? 'aria-current="page"' : '' ?>>
+                        <i class="bi bi-cpu text-cyan fs-5" aria-hidden="true"></i>
+                        <span>Sensores da Malha</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex align-items-center gap-2 px-3 py-2 <?= $navGrupoRelatorios ? 'active' : '' ?>" href="Relatories.php" <?= $navGrupoRelatorios ? 'aria-current="page"' : '' ?>>
+                        <i class="bi bi-journal-text text-cyan fs-5" aria-hidden="true"></i>
+                        <span>Relatórios e Leituras</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

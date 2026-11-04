@@ -7,7 +7,7 @@ redirecionarSeNaoAdmin();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 include "../infra/conn.php";
 
-$id = $_GET['id'];
+$id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
 
 if ($id <= 0) {
     header("Location: Sensor_Manage.php");
