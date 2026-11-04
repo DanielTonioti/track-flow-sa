@@ -128,7 +128,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Verifique os campos da rota</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -138,7 +137,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
         <?php if ($sucesso && $mensagemSucesso !== ''): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Cadastrado com sucesso</strong>
                     <span><?= htmlspecialchars($mensagemSucesso, ENT_QUOTES, 'UTF-8') ?></span>
@@ -148,7 +146,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
         <?php if (empty($listaTrensSelect)): ?>
             <div class="ops-alert ops-alert-warning" role="status">
-                <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Nenhum trem cadastrado ainda</strong>
@@ -368,6 +365,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
    <script src="../scripts/scriptRotas.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

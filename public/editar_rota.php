@@ -121,7 +121,6 @@ $pageTitle = 'Editar Rota';
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -131,7 +130,6 @@ $pageTitle = 'Editar Rota';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Rota atualizada com sucesso</strong>
@@ -234,24 +232,7 @@ $pageTitle = 'Editar Rota';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const dEl = document.getElementById('distancia_km');
-            const tEl = document.getElementById('tempo_previsto_min');
-            const out = document.getElementById('preview-velocidade-edit');
-            function calc() {
-                if (!dEl || !tEl || !out) return;
-                const d = parseFloat(dEl.value);
-                const t = parseFloat(tEl.value);
-                out.textContent = (d > 0 && t > 0) ? (d / (t / 60)).toFixed(1).replace('.', ',') + ' km/h' : '— km/h';
-            }
-            if (dEl && tEl) {
-                dEl.addEventListener('input', calc);
-                tEl.addEventListener('input', calc);
-                calc();
-            }
-        });
-    </script>
+    <script src="../scripts/script_editar_rota.js"></script>
 </body>
 
 </html>

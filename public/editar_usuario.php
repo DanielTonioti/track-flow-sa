@@ -588,21 +588,7 @@ $pageTitle = 'Editar Funcionário';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('btn-toggle-senha-edit');
-            const input = document.getElementById('senha');
-            if (btn && input) {
-                btn.addEventListener('click', function () {
-                    const oculto = input.type === 'password';
-                    input.type = oculto ? 'text' : 'password';
-                    btn.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
-                    const icon = btn.querySelector('i');
-                    if (icon) icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
-                });
-            }
-        });
-    </script>
+    <script src="../scripts/script_auth.js"></script>
 
 </body>
 </html>

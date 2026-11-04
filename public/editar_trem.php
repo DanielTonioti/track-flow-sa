@@ -107,7 +107,6 @@ $pageTitle = 'Editar Trem';
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -117,7 +116,6 @@ $pageTitle = 'Editar Trem';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Composição atualizada com sucesso</strong>

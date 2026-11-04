@@ -184,7 +184,6 @@ $pageTitle = 'Cadastrar Funcionário';
 
         <?php if ($erro !== ""): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados informados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -415,21 +414,7 @@ $pageTitle = 'Cadastrar Funcionário';
         crossorigin="anonymous"></script>
     <script src="../scripts/script_cep.js"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('btn-toggle-senha-cad');
-            const input = document.getElementById('senha');
-            if (btn && input) {
-                btn.addEventListener('click', function () {
-                    const oculto = input.type === 'password';
-                    input.type = oculto ? 'text' : 'password';
-                    btn.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
-                    const icon = btn.querySelector('i');
-                    if (icon) icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
-                });
-            }
-        });
-    </script>
+    <script src="../scripts/script_auth.js"></script>
 </body>
 
 </html>

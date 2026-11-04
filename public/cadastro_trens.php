@@ -125,7 +125,6 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
 
         <?php if ($sucesso && $mensagemSucesso !== ''): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Frota atualizada</strong>
                     <span><?= htmlspecialchars($mensagemSucesso, ENT_QUOTES, 'UTF-8') ?></span>
@@ -299,16 +298,8 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.btn-preparar-exclusao-trem').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('inputExcluirTremId').value = btn.getAttribute('data-trem-id') || '';
-                    document.getElementById('nomeTremModal').textContent = btn.getAttribute('data-trem-nome') || '';
-                });
-            });
-        });
-    </script>
+    <script src="../scripts/script_cadastro_trens.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

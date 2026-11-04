@@ -60,7 +60,7 @@ $pageTitle = 'Relatórios';
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Dashboard
                 </a>
                 <a href="Relatories_New.php" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-plus-lg" aria-hidden="true"></i>Novo Relatório
+                    Novo Relatório
                 </a>
             </div>
         </div>
@@ -68,7 +68,7 @@ $pageTitle = 'Relatórios';
         <section class="ops-panel mb-3" aria-labelledby="titulo-filtro-relatorios">
             <div class="ops-panel-header">
                 <h2 id="titulo-filtro-relatorios" class="ops-panel-title">
-                    <i class="bi bi-funnel text-cyan" aria-hidden="true"></i>Filtro de Leituras
+                    Filtro de Leituras
                 </h2>
             </div>
             <div class="ops-panel-body">
@@ -94,7 +94,7 @@ $pageTitle = 'Relatórios';
                     </div>
                     <div class="col-12 col-md-2">
                         <button class="ops-btn ops-btn-primary w-100" type="submit">
-                            <i class="bi bi-search" aria-hidden="true"></i>Filtrar
+                            Filtrar
                         </button>
                     </div>
                 </form>
@@ -104,9 +104,9 @@ $pageTitle = 'Relatórios';
         <section class="ops-panel" aria-labelledby="titulo-tabela-relatorios">
             <div class="ops-panel-header">
                 <h2 id="titulo-tabela-relatorios" class="ops-panel-title">
-                    <i class="bi bi-journal-text text-cyan" aria-hidden="true"></i>Leituras dos Sensores
+                    Leituras dos Sensores
                 </h2>
-                <span class="ops-status-tag ops-status-neutral"><?= count($relatorios) ?> REGISTRO(S)</span>
+                <span class="ops-status-tag ops-status-neutral"><?= count($relatorios) ?> Registro(s)</span>
             </div>
 
             <div class="table-responsive">
@@ -151,6 +151,7 @@ $pageTitle = 'Relatórios';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

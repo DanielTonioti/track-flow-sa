@@ -375,41 +375,8 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const buscaInput = document.getElementById('busca-frota-rotas');
-            if (buscaInput) {
-                buscaInput.addEventListener('input', function () {
-                    const termo = buscaInput.value.trim().toLowerCase();
-                    document.querySelectorAll('tr[data-filter-row]').forEach(function (tr) {
-                        const alvo = tr.getAttribute('data-filter-row') || '';
-                        tr.classList.toggle('d-none', termo !== '' && alvo.indexOf(termo) === -1);
-                    });
-                });
-            }
-
-            document.querySelectorAll('.btn-consultar-ficha').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('fichaModalTipo').textContent = btn.getAttribute('data-ficha-tipo') || '';
-                    document.getElementById('fichaModalCodigo').textContent = btn.getAttribute('data-ficha-codigo') || '';
-                    document.getElementById('fichaModalNome').textContent = btn.getAttribute('data-ficha-titulo') || '';
-                    document.getElementById('fichaC1Label').textContent = btn.getAttribute('data-ficha-c1-label') || '';
-                    document.getElementById('fichaC1Val').textContent = btn.getAttribute('data-ficha-c1-val') || '';
-                    document.getElementById('fichaC2Label').textContent = btn.getAttribute('data-ficha-c2-label') || '';
-                    document.getElementById('fichaC2Val').textContent = btn.getAttribute('data-ficha-c2-val') || '';
-                    document.getElementById('fichaC3Label').textContent = btn.getAttribute('data-ficha-c3-label') || '';
-                    document.getElementById('fichaC3Val').textContent = btn.getAttribute('data-ficha-c3-val') || '';
-                    document.getElementById('fichaC4Label').textContent = btn.getAttribute('data-ficha-c4-label') || '';
-                    document.getElementById('fichaC4Val').textContent = btn.getAttribute('data-ficha-c4-val') || '';
-                    document.getElementById('fichaDesc').textContent = btn.getAttribute('data-ficha-desc') || '';
-                    const link = document.getElementById('fichaEditLink');
-                    if (link) {
-                        link.setAttribute('href', btn.getAttribute('data-ficha-edit-url') || '#');
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="../scripts/script_trens_trilhos.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>

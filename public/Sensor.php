@@ -42,7 +42,7 @@ $pageTitle = 'Cadastrar Sensor';
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Sensores
                 </a>
                 <a href="Sensor_Manage.php" class="ops-btn">
-                    <i class="bi bi-sliders" aria-hidden="true"></i>Gerenciar
+                    Gerenciar
                 </a>
             </div>
         </div>
@@ -57,7 +57,7 @@ $pageTitle = 'Cadastrar Sensor';
             <form id="CadastrarSensor" method="POST" action="">
                 <div class="ops-panel-body">
                     <div class="ops-form-section-title">
-                        <i class="bi bi-cpu" aria-hidden="true"></i> Dados do Sensor
+                         Dados do Sensor
                     </div>
 
                     <div class="mb-3">
@@ -105,7 +105,7 @@ $pageTitle = 'Cadastrar Sensor';
                 <div class="ops-panel-footer">
                     <a href="Sensor_Data.php" class="ops-btn ops-btn-ghost">Voltar</a>
                     <button type="button" class="ops-btn ops-btn-primary" disabled title="Funcionalidade em produção">
-                        <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Sensor
+                        Cadastrar Sensor
                     </button>
                 </div>
             </form>
@@ -116,23 +116,7 @@ $pageTitle = 'Cadastrar Sensor';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const radioTrem = document.getElementById('trem');
-            const radioTrilho = document.getElementById('trilho');
-            const boxTrem = document.getElementById('trem-vinculado-box');
-            const boxLocal = document.getElementById('localizacao-box');
-
-            function atualizarCampos() {
-                const ehTrilho = radioTrilho && radioTrilho.checked;
-                if (boxTrem) boxTrem.classList.toggle('d-none', ehTrilho);
-                if (boxLocal) boxLocal.classList.toggle('d-none', !ehTrilho);
-            }
-
-            if (radioTrem) radioTrem.addEventListener('change', atualizarCampos);
-            if (radioTrilho) radioTrilho.addEventListener('change', atualizarCampos);
-        });
-    </script>
+    <script src="../scripts/script_sensor.js"></script>
 </body>
 
 </html>

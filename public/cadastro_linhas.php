@@ -99,7 +99,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Operação não realizada</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -109,7 +108,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
 
         <?php if ($sucesso !== ''): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Via permanente atualizada</strong>
                     <span><?= htmlspecialchars($sucesso, ENT_QUOTES, 'UTF-8') ?></span>
@@ -295,24 +293,8 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.btn-editar-trilho').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('editTrilhoId').value = btn.getAttribute('data-id') || '';
-                    document.getElementById('editTrilhoNome').value = btn.getAttribute('data-nome') || '';
-                    document.getElementById('editTrilhoLocal').value = btn.getAttribute('data-local') || '';
-                });
-            });
-
-            document.querySelectorAll('.btn-excluir-trilho').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('delTrilhoId').value = btn.getAttribute('data-id') || '';
-                    document.getElementById('delTrilhoNome').textContent = btn.getAttribute('data-nome') || '';
-                });
-            });
-        });
-    </script>
+    <script src="../scripts/script_linhas.js"></script>
+    <script src="../scripts/pagination.js"></script>
 </body>
 
 </html>
