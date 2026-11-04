@@ -291,15 +291,15 @@ $pageTitle = 'Dashboard';
 
                     <div class="d-flex flex-wrap align-items-center justify-content-between pt-3 mt-3 border-top border-light border-opacity-10 gap-2">
                         <span class="text-steel small">
-                            <i class="bi bi-calendar3 me-1 text-warning" aria-hidden="true"></i><?= escapar_html($dataAtualFormatada) ?>
+                            <?= escapar_html($dataAtualFormatada) ?>
                         </span>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="Usuario_Info.php" class="ops-btn ops-btn-sm" aria-label="Acessar Perfil Operacional">
-                                <i class="bi bi-person-vcard" aria-hidden="true"></i>Meu Perfil
+                                Meu Perfil
                             </a>
                             <?php if ($ehAdmin): ?>
                                 <a href="trens_trilhos.php" class="ops-btn ops-btn-primary ops-btn-sm">
-                                    <i class="bi bi-train-front" aria-hidden="true"></i>Frota e Rotas
+                                   Frota e Rotas
                                 </a>
                             <?php endif; ?>
                         </div>
@@ -474,7 +474,7 @@ $pageTitle = 'Dashboard';
                     <!-- Painel 1: Em composições -->
                     <div class="col-12 col-lg-6 border-end border-light border-opacity-10">
                         <div class="py-2 px-3 border-bottom border-light border-opacity-10" style="background: rgba(255,255,255,0.015);">
-                            <span class="text-white fw-semibold small">Em composições</span>
+                            <span class="text-white fw-semibold small">No trem</span>
                         </div>
 
                         <div class="table-responsive">
@@ -521,7 +521,7 @@ $pageTitle = 'Dashboard';
                                             <td class="text-end">
                                                 <div class="ops-sensor-status <?= $statusClass ?>">
                                                     <span class="status-dot"></span>
-                                                    <span><?= $statusLabel ?></span>
+                                                    <span></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -579,7 +579,7 @@ $pageTitle = 'Dashboard';
                                             <td class="text-end">
                                                 <div class="ops-sensor-status <?= $statusClass ?>">
                                                     <span class="status-dot"></span>
-                                                    <span><?= $statusLabel ?></span>
+                                                    <span></span>
                                                 </div>
                                             </td>
                                         </tr>

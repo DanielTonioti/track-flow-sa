@@ -137,7 +137,6 @@ $pageTitle = 'Relatórios';
                                     <div class="ops-empty-state">
                                         <span class="ops-empty-icon"><i class="bi bi-journal-text" aria-hidden="true"></i></span>
                                         <p class="mb-1 fw-semibold text-white">Página em produção.</p>
-                                        <p class="small text-steel mb-0">O módulo de relatórios está em produção e estará disponível em breve.</p>
                                     </div>
                                 </td>
                             </tr>

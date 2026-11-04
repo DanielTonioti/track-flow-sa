@@ -40,9 +40,6 @@ $pageTitle = 'Gerenciar Sensores';
                     <span>Gerenciar</span>
                 </nav>
                 <h1 class="ops-page-title">Gerenciar Sensores</h1>
-                <p class="ops-page-subtitle">
-                    Administração e remoção de sensores cadastrados.
-                </p>
             </div>
 
             <div class="ops-header-actions">
@@ -107,7 +104,7 @@ $pageTitle = 'Gerenciar Sensores';
                                     <div class="ops-empty-state">
                                         <span class="ops-empty-icon"><i class="bi bi-sliders" aria-hidden="true"></i></span>
                                         <p class="mb-1 fw-semibold text-white">Página em produção.</p>
-                                        <p class="small text-steel mb-0">O gerenciamento de sensores está em produção e estará disponível em breve.</p>
+                                        <p class="small text-steel mb-0">O gerenciamento de sensores está em produção.</p>
                                     </div>
                                 </td>
                             </tr>

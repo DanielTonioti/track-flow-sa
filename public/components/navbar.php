@@ -76,7 +76,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                 </span>
                 <span class="d-flex flex-column lh-1">
                     <span class="fw-bold fs-4 text-white brand-font tracking-tight">TrackFlow</span>
-                    <span class="ops-brand-sub text-volt">FERRORAMA</span>
+                    <span class="ops-brand-sub text-volt">Ferrorama</span>
                 </span>
             </a>
         </div>
@@ -119,14 +119,10 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
 
     <div class="offcanvas-header border-bottom border-light border-opacity-10 py-3 px-4">
         <div class="d-flex align-items-center gap-2">
-            <span class="ops-brand-mark" aria-hidden="true">
-                <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="24" height="24">
-            </span>
             <div>
                 <h2 class="offcanvas-title brand-font fs-4 text-white mb-0 lh-1" id="offcanvasDarkNavbarLabel">
-                    TrackFlow
+                   Menu
                 </h2>
-                <span class="ops-brand-sub text-volt">MENU</span>
             </div>
         </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>

@@ -39,7 +39,7 @@ $pageTitle = 'Sensores';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Sensores</span>
                 </nav>
-                <h1 class="ops-page-title">Sensores da Malha</h1>
+                <h1 class="ops-page-title">Sensores Cadastrados</h1>
             </div>
 
             <div class="ops-header-actions">
@@ -105,7 +105,6 @@ $pageTitle = 'Sensores';
                                     <div class="ops-empty-state">
                                         <span class="ops-empty-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
                                         <p class="mb-1 fw-semibold text-white">Página em produção.</p>
-                                        <p class="small text-steel mb-0">O módulo de sensores está em produção e estará disponível em breve.</p>
                                     </div>
                                 </td>
                             </tr>
