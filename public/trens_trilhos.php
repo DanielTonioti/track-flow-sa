@@ -67,10 +67,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Trens e Rotas</span>
                 </nav>
-                <h1 class="ops-page-title">Gestão de Frota, Rotas e Trilhos</h1>
-                <p class="ops-page-subtitle">
-                    Consulte e administre composições ferroviárias, itinerários programados e segmentos de via permanente.
-                </p>
+                <h1 class="ops-page-title">Trens e Rotas</h1>
             </div>
 
             <div class="ops-header-actions">
@@ -91,29 +88,6 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
             </div>
         </div>
 
-        <section class="ops-kpi-strip" aria-label="Indicadores de Frota e Malha">
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-train-front text-cyan" aria-hidden="true"></i>Composições (Trens)</span>
-                <span class="ops-kpi-value"><?= count($listaTrens) ?></span>
-                <span class="ops-kpi-meta">Frota registrada na operação</span>
-            </div>
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-signpost-2 text-volt" aria-hidden="true"></i>Rotas Programadas</span>
-                <span class="ops-kpi-value"><?= count($listaRotas) ?></span>
-                <span class="ops-kpi-meta">Itinerários vinculados à frota</span>
-            </div>
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-rulers text-blue" aria-hidden="true"></i>Extensão Mapeada</span>
-                <span class="ops-kpi-value"><?= number_format($extensaoTotalKm, 1, ',', '.') ?> <small class="text-steel fw-normal fs-6">km</small></span>
-                <span class="ops-kpi-meta">Soma das rotas cadastradas</span>
-            </div>
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-distribute-vertical text-warning" aria-hidden="true"></i>Segmentos de Trilho</span>
-                <span class="ops-kpi-value"><?= $totalTrilhos ?></span>
-                <span class="ops-kpi-meta"><a href="cadastro_linhas.php" class="text-cyan text-decoration-none">Gerenciar via permanente &rarr;</a></span>
-            </div>
-        </section>
-
         <div class="ops-panel mb-3">
             <div class="ops-toolbar border-bottom-0">
                 <div class="ops-search-wrap" style="max-width: 460px;">
@@ -125,9 +99,6 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                         placeholder="Pesquisar trens por nome/modelo ou rotas por itinerário..."
                         aria-label="Pesquisar trens e rotas">
                 </div>
-                <span class="mono-font text-steel small">
-                    Clique em <strong class="text-white">Consultar</strong> para inspecionar a ficha técnica completa.
-                </span>
             </div>
         </div>
 
@@ -222,8 +193,8 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                         <td colspan="4">
                                             <div class="ops-empty-state">
                                                 <span class="ops-empty-icon"><i class="bi bi-train-front" aria-hidden="true"></i></span>
-                                                <p class="mb-1 fw-semibold text-white">Nenhum trem cadastrado na frota.</p>
-                                                <p class="small text-steel mb-3">Cadastre um trem para habilitar a criação de rotas e sensores embarcados.</p>
+                                                <p class="mb-1 fw-semibold text-white">Nenhum trem cadastrado.</p>
+                                                <p class="small text-steel mb-3">Cadastre um trem para habilitar criação de rotas.</p>
                                                 <?php if ($usuarioEhAdmin): ?>
                                                     <a href="cadastro_trens.php" class="ops-btn ops-btn-primary ops-btn-sm">
                                                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Primeiro Trem
@@ -331,7 +302,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                             <div class="ops-empty-state">
                                                 <span class="ops-empty-icon"><i class="bi bi-signpost-split" aria-hidden="true"></i></span>
                                                 <p class="mb-1 fw-semibold text-white">Nenhuma rota cadastrada.</p>
-                                                <p class="small text-steel mb-3">Defina itinerários com distância em quilômetros, tempo previsto e trem responsável.</p>
+                                                <p class="small text-steel mb-3">Cadastre a primeira rota.</p>
                                                 <?php if ($usuarioEhAdmin): ?>
                                                     <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary ops-btn-sm">
                                                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Primeira Rota

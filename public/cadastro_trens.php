@@ -100,10 +100,7 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Gerenciar Trens</span>
                 </nav>
-                <h1 class="ops-page-title">Cadastro e Frota de Trens</h1>
-                <p class="ops-page-subtitle">
-                    Registre composições ferroviárias, defina seu modelo técnico e atribua um operador responsável.
-                </p>
+                <h1 class="ops-page-title">Cadastro de Trens</h1>
             </div>
 
             <div class="ops-header-actions">
@@ -140,15 +137,10 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
 
             <div class="col-12 col-lg-5">
                 <form method="POST" class="ops-panel">
-                    <div class="ops-panel-header">
-                        <h2 class="ops-panel-title">
-                            <i class="bi bi-plus-square text-cyan" aria-hidden="true"></i>Nova Composição
-                        </h2>
-                    </div>
 
                     <div class="ops-panel-body">
                         <div class="mb-3">
-                            <label for="nome" class="ops-label">Identificação / Nome do trem <span class="ops-required" aria-hidden="true">*</span></label>
+                            <label for="nome" class="ops-label">Identificação do trem <span class="ops-required" aria-hidden="true">*</span></label>
                             <input
                                 type="text"
                                 id="nome"
@@ -258,7 +250,7 @@ $pageTitle = 'Cadastrar e Gerenciar Trens';
                                             <div class="ops-empty-state">
                                                 <span class="ops-empty-icon"><i class="bi bi-train-front" aria-hidden="true"></i></span>
                                                 <p class="mb-0 fw-semibold text-white">Nenhum trem cadastrado até o momento.</p>
-                                                <span class="small text-steel">Utilize o formulário ao lado para adicionar a primeira composição.</span>
+                                                <span class="small text-steel">Preencha o formulário ao lado.</span>
                                             </div>
                                         </td>
                                     </tr>
