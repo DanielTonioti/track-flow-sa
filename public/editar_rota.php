@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
 redirecionarSeNaoAdmin();
@@ -143,6 +145,7 @@ $pageTitle = 'Editar Rota';
         <?php endif; ?>
 
         <form method="POST" class="ops-panel">
+            <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <div class="ops-panel-header">
                 <h2 class="ops-panel-title">
                     <i class="bi bi-pencil-square text-volt" aria-hidden="true"></i>Ficha de Edição &mdash; <?= sprintf('#RTA-%03d', (int) $id) ?>

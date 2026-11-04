@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
 
@@ -321,6 +323,7 @@ $pageTitle = 'Editar Funcionário';
         <?php endif; ?>
 
         <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data" class="ops-panel mb-4">
+            <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <input type="hidden" name="id" value="<?= (int) $user['id'] ?>">
 
             <div class="ops-panel-body p-3 p-md-4">

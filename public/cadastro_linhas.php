@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
 redirecionarSeNaoAdmin();
@@ -121,6 +123,7 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
 
             <div class="col-12 col-lg-5">
                 <form id="CadastroTremForm" method="POST" class="ops-panel">
+                     <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
                     <input type="hidden" name="acao" value="cadastrar_trilho">
 
                     <div class="ops-panel-header">

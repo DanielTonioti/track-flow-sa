@@ -112,7 +112,9 @@ $pageTitle = 'Funcionários e Credenciais';
                                 <th scope="col" class="text-end">Telefone</th>
                             <?php endif; ?>
                             <th scope="col">Nível de Acesso</th>
+                            <?php if ($ehAdmin): ?>
                             <th scope="col" class="text-end">Ações</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -159,6 +161,7 @@ $pageTitle = 'Funcionários e Credenciais';
                                             </span>
                                         <?php endif; ?>
                                     </td>
+                                    <?php if ($ehAdmin): ?>
                                     <td class="text-end">
                                         <div class="d-inline-flex flex-wrap justify-content-end gap-1">
                                             <a href="Usuario_Info.php?id=<?= $idPessoa ?>"
@@ -166,12 +169,13 @@ $pageTitle = 'Funcionários e Credenciais';
                                                 title="Consultar ficha completa de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
                                                 Informações
                                             </a>
-                                            <?php if ($ehAdmin): ?>
+    
                                                 <a href="editar_usuario.php?id=<?= $idPessoa ?>"
                                                     class="ops-btn ops-btn-sm"
                                                     title="Editar cadastro de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
                                                     Editar
                                                 </a>
+                                      
                                             <?php endif; ?>
                                         </div>
                                     </td>

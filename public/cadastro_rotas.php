@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
 redirecionarSeNaoAdmin();
@@ -165,7 +167,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
             <div class="col-12 col-lg-5">
                 <form method="POST" class="ops-panel">
-
+                <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
                     <div class="ops-panel-body">
                         <div class="mb-3">
                             <label for="nome" class="ops-label">Nome da rota <span class="ops-required" aria-hidden="true">*</span></label>

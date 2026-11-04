@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once 'components/start.php';
 redirecionarSeNaoAdmin();
 include '../infra/conn.php';
@@ -56,6 +58,7 @@ $pageTitle = 'Cadastrar Sensor';
 
         <section class="ops-panel">
             <form id="CadastrarSensor" method="POST" action="">
+                <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
                 <div class="ops-panel-body">
                     <div class="ops-form-section-title">
                         <i class="bi bi-cpu" aria-hidden="true"></i> Dados do Sensor
