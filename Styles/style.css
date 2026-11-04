@@ -2691,6 +2691,56 @@ body.cco-dashboard-body {
     background-color: transparent;
 }
 
+.ops-chart-carousel {
+    overflow: hidden;
+    border-top: 1px solid var(--ops-border);
+}
+
+.ops-chart-track {
+    display: flex;
+    transition: transform 0.35s ease;
+    will-change: transform;
+}
+
+.ops-chart-slide {
+    min-width: 100%;
+    display: block;
+}
+
+.ops-chart-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.85rem 1rem 1rem;
+    border-top: 1px solid var(--ops-border);
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+.ops-chart-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 0;
+    background: rgba(148, 163, 184, 0.45);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ops-chart-dot.is-active {
+    width: 26px;
+    border-radius: 999px;
+    background: var(--ops-accent);
+}
+
+.ops-carousel-btn {
+    width: 34px;
+    min-width: 34px;
+    min-height: 34px;
+    padding: 0;
+}
+
 .ops-weather-box {
     display: flex;
     align-items: center;
