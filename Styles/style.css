@@ -1425,6 +1425,11 @@ html:has(.ferrorama-landing) {
 
 .text-volt {
     color: #c1ff72 !important;
+    font-weight: 600;
+}
+
+.ops-card-metric .ops-metric-val.text-volt {
+    color: var(--cor-lime-green, #c1ff72) !important;
 }
 
 .text-steel {
@@ -1567,9 +1572,14 @@ html:has(.ferrorama-landing) {
 
 .trackflow-offcanvas .nav-link.active {
     color: #ffffff !important;
-    background-color: rgba(82, 113, 255, 0.2) !important;
-    border-color: rgba(82, 113, 255, 0.4) !important;
+    background-color: rgba(82, 113, 255, 0.18) !important;
+    border-color: rgba(82, 113, 255, 0.40) !important;
+    border-left: 3px solid var(--cor-lime-green, #c1ff72) !important;
     font-weight: 700;
+}
+
+.trackflow-offcanvas .nav-link.active i {
+    color: var(--cor-lime-green, #c1ff72) !important;
 }
 
 /* Tabelas e Caixas de Admin / Sensores */
@@ -1785,56 +1795,39 @@ label,
 }
 :root {
 
-    --tf-raw-obsidian-950: #060d17;
-    --tf-raw-slate-900:    #0b1523;
-    --tf-raw-slate-850:    #0f1c2e;
-    --tf-raw-slate-800:    #15263d;
-    --tf-raw-steel-100:    #f0f4f8;
-    --tf-raw-steel-300:    #b8c7d9;
-    --tf-raw-steel-400:    #8fa3b8;
-    --tf-raw-blue-500:     #5271ff;
-    --tf-raw-blue-400:     #6884ff;
-    --tf-raw-sky-400:      #38bdf8;
-    --tf-raw-volt-300:     #c1ff72;
-    --tf-raw-green-500:    #22c55e;
-    --tf-raw-green-300:    #4ade80;
-    --tf-raw-amber-500:    #f59e0b;
-    --tf-raw-amber-300:    #fbbf24;
-    --tf-raw-red-500:      #ef4444;
-    --tf-raw-red-300:      #fca5a5;
-
-    --ops-ground:            var(--tf-raw-obsidian-950);
-    --ops-surface:           var(--tf-raw-slate-900);
-    --ops-surface-elevated:  var(--tf-raw-slate-850);
-    --ops-surface-active:    var(--tf-raw-slate-800);
+    /* Integração com as Cores Oficiais Históricas TrackFlow */
+    --ops-ground:            var(--cor-azure-escuro-fundo, #081220);
+    --ops-surface:           var(--cor-azure-claro-fundo, #0d1b2e);
+    --ops-surface-elevated:  var(--cor-cinza-claro, #162a42);
+    --ops-surface-active:    var(--cor-cinza-claro-botoes, #1e2f47);
     --ops-border-subtle:     rgba(255, 255, 255, 0.05);
     --ops-border:            rgba(255, 255, 255, 0.10);
-    --ops-border-strong:     rgba(255, 255, 255, 0.18);
+    --ops-border-strong:     rgba(82, 113, 255, 0.30);
 
-    --ops-text-main:         var(--tf-raw-steel-100);
-    --ops-text-secondary:    var(--tf-raw-steel-300);
-    --ops-text-muted:        var(--tf-raw-steel-400);
-    --ops-text-dim:          #7c91a6;
+    --ops-text-main:         var(--cor-letra, #f4f7fa);
+    --ops-text-secondary:    var(--cor-letra-muted, #b8c7d9);
+    --ops-text-muted:        #7c91a6;
+    --ops-text-dim:          #5a7088;
 
-    --ops-accent:            #f59e0b;       /* Âmbar de sinalização ferroviária */
-    --ops-accent-hover:      #fbbf24;
-    --ops-accent-active:     #d97706;
-    --ops-accent-subtle:     rgba(245, 158, 11, 0.14);
-    --ops-accent-border:     rgba(245, 158, 11, 0.35);
-    --ops-focus-ring:        #f59e0b;
-    --ops-data-blue:         #475569;
-    --ops-data-cyan:         #38bdf8;
-    --ops-data-volt:         #c1ff72;
+    --ops-accent:            var(--cor-azul-real, #5271ff);
+    --ops-accent-hover:      var(--cor-azul-pastel, #67a4ff);
+    --ops-accent-active:     var(--cor-azul-vivido, #0066ff);
+    --ops-accent-subtle:     rgba(82, 113, 255, 0.16);
+    --ops-accent-border:     rgba(82, 113, 255, 0.40);
+    --ops-focus-ring:        var(--cor-azul-real, #5271ff);
+    --ops-data-blue:         var(--cor-azul-real, #5271ff);
+    --ops-data-cyan:         var(--cor-azul-pastel, #67a4ff);
+    --ops-data-volt:         var(--cor-lime-green, #c1ff72);
 
-    --ops-status-nominal:    var(--tf-raw-green-500);
-    --ops-status-warning:    var(--tf-raw-amber-500);
-    --ops-status-critical:   var(--tf-raw-red-500);
-    --ops-status-info:       var(--tf-raw-sky-400);
+    --ops-status-nominal:    var(--cor-verde, #00bf63);
+    --ops-status-warning:    var(--ferro-amber, #f59e0b);
+    --ops-status-critical:   var(--cor-vermelho, #ff5757);
+    --ops-status-info:       var(--cor-azul-pastel, #67a4ff);
 
     --ops-radius:            8px;
-    --ops-radius-sm:         8px;
+    --ops-radius-sm:         6px;
     --ops-radius-md:         8px;
-    --ops-radius-lg:         8px;
+    --ops-radius-lg:         10px;
 }
 
 .navbar-brand-logo,
@@ -1887,7 +1880,9 @@ body.cco-dashboard-body {
 }
 
 .menu-nav {
-    background-color: rgba(6, 13, 23, 0.96) !important;
+    background-color: rgba(8, 18, 32, 0.95) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--ops-border) !important;
     padding: 0.55rem 0.75rem !important;
 }
@@ -1896,8 +1891,8 @@ body.cco-dashboard-body {
     width: 38px;
     height: 38px;
     border-radius: var(--ops-radius);
-    background-color: var(--ops-surface-elevated);
-    border: 1px solid rgba(82, 113, 255, 0.35);
+    background-color: var(--cor-azure-claro-fundo, #0d1b2e);
+    border: 1px solid rgba(82, 113, 255, 0.45);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1912,7 +1907,7 @@ body.cco-dashboard-body {
     left: 6px;
     right: 6px;
     height: 2px;
-    background-color: var(--ops-data-volt, #c1ff72);
+    background-color: var(--cor-lime-green, #c1ff72);
     border-radius: 2px;
 }
 
@@ -2221,9 +2216,9 @@ body.cco-dashboard-body {
 }
 
 .ops-filter-pill.active {
-    background-color: var(--ops-accent-subtle);
-    border-color: var(--ops-accent);
-    color: var(--ops-accent);
+    background-color: rgba(82, 113, 255, 0.20) !important;
+    border-color: var(--cor-azul-real, #5271ff) !important;
+    color: #ffffff !important;
 }
 
 .ops-table {
@@ -2295,21 +2290,21 @@ body.cco-dashboard-body {
     background-color: rgba(245, 158, 11, 0.05);
 }
 
-/* Matrícula / Códigos: sem caixinha azul, apenas texto direto */
+/* Matrícula / Códigos: sem caixinha nem borda, apenas texto direto mono */
 .ops-code-badge {
     display: inline;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.82rem;
     font-weight: 500;
-    color: var(--ops-text-secondary);
-    background: transparent;
-    border: none;
-    padding: 0;
+    color: var(--ops-text-secondary, #b8c7d9);
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
     white-space: nowrap;
     letter-spacing: 0.02em;
 }
 
-/* Badges ADMIN / FUNCIONÁRIO: texto simples com pontinho de status, sem ícone nem borda */
+/* Badges ADMIN / FUNCIONÁRIO: texto simples com pontinho de status, sem borda nem fundo */
 .ops-role-badge {
     display: inline-flex;
     align-items: center;
@@ -2319,9 +2314,9 @@ body.cco-dashboard-body {
     font-weight: 500;
     letter-spacing: normal;
     text-transform: none;
-    background: transparent;
-    border: none;
-    padding: 0;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
     line-height: 1;
 }
 
@@ -2334,19 +2329,25 @@ body.cco-dashboard-body {
 }
 
 .ops-role-admin {
-    color: var(--ops-status-nominal, #4ade80);
+    color: var(--cor-lime-green, #c1ff72) !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
 }
 .ops-role-admin .ops-role-dot,
 .ops-role-dot.dot-admin {
-    background-color: var(--ops-status-nominal, #22c55e);
+    background-color: var(--cor-lime-green, #c1ff72) !important;
 }
 
 .ops-role-func {
-    color: var(--ops-text-secondary, #b8c7d9);
+    color: var(--cor-letra-muted, #b8c7d9) !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
 }
 .ops-role-func .ops-role-dot,
 .ops-role-dot.dot-func {
-    background-color: var(--ops-data-cyan, #38bdf8);
+    background-color: var(--cor-azul-pastel, #67a4ff) !important;
 }
 
 .ops-status-tag {
@@ -2356,42 +2357,42 @@ body.cco-dashboard-body {
     padding: 0.2rem 0.55rem;
     border-radius: var(--ops-radius, 8px);
     font-family: var(--Fonte-padrao);
-    font-size: 0.72rem;
-    font-weight: 500;
+    font-size: 0.74rem;
+    font-weight: 600;
     letter-spacing: normal;
     text-transform: none;
-    border: none;
+    border: 1px solid transparent;
     white-space: nowrap;
 }
 
 .ops-status-nominal {
-    background-color: rgba(34, 197, 94, 0.12);
-    color: #4ade80;
-    border: none !important;
+    background-color: rgba(0, 191, 99, 0.14) !important;
+    color: #00bf63 !important;
+    border-color: rgba(0, 191, 99, 0.35) !important;
 }
 
 .ops-status-warning {
-    background-color: rgba(245, 158, 11, 0.14);
-    color: #fbbf24;
-    border: none !important;
+    background-color: rgba(245, 158, 11, 0.14) !important;
+    color: #fbbf24 !important;
+    border-color: rgba(245, 158, 11, 0.35) !important;
 }
 
 .ops-status-critical {
-    background-color: rgba(239, 68, 68, 0.16);
-    color: #fca5a5;
-    border: none !important;
+    background-color: rgba(255, 87, 87, 0.15) !important;
+    color: #ff5757 !important;
+    border-color: rgba(255, 87, 87, 0.35) !important;
 }
 
 .ops-status-info {
-    background-color: rgba(56, 189, 248, 0.12);
-    color: #7dd3fc;
-    border: none !important;
+    background-color: rgba(103, 164, 255, 0.14) !important;
+    color: #67a4ff !important;
+    border-color: rgba(103, 164, 255, 0.35) !important;
 }
 
 .ops-status-neutral {
-    background-color: rgba(143, 163, 184, 0.12);
-    color: var(--ops-text-secondary);
-    border: none !important;
+    background-color: rgba(184, 199, 217, 0.12) !important;
+    color: #b8c7d9 !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
 .ops-status-dot {
@@ -2402,10 +2403,10 @@ body.cco-dashboard-body {
     flex-shrink: 0;
 }
 
-.dot-nominal  { background-color: #22c55e; }
+.dot-nominal  { background-color: #00bf63; }
 .dot-warning  { background-color: #f59e0b; }
-.dot-critical { background-color: #ef4444; }
-.dot-info     { background-color: #38bdf8; }
+.dot-critical { background-color: #ff5757; }
+.dot-info     { background-color: #67a4ff; }
 
 .ops-btn {
     min-height: 40px;
@@ -2439,29 +2440,31 @@ body.cco-dashboard-body {
 }
 
 .ops-btn-primary {
-    background-color: var(--ops-accent);
-    border-color: var(--ops-accent);
-    color: #060d17 !important;
+    background-color: var(--cor-azul-real, #5271ff) !important;
+    border-color: var(--cor-azul-real, #5271ff) !important;
+    color: #ffffff !important;
     font-weight: 600;
 }
 
 .ops-btn-primary:hover {
-    background-color: var(--ops-accent-hover);
-    border-color: var(--ops-accent-hover);
-    color: #060d17 !important;
+    background-color: var(--cor-azul-pastel, #67a4ff) !important;
+    border-color: var(--cor-azul-pastel, #67a4ff) !important;
+    color: #ffffff !important;
 }
 
 .ops-btn-volt {
-    background-color: var(--ops-data-volt);
-    border-color: var(--ops-data-volt);
-    color: #060d17;
-    font-weight: 700;
+    background-color: var(--cor-lime-green, #c1ff72) !important;
+    border-color: var(--cor-lime-green, #c1ff72) !important;
+    color: #081220 !important;
+    font-weight: 700 !important;
+    transition: all 0.2s ease;
 }
 
 .ops-btn-volt:hover {
-    background-color: #d3ff99;
-    border-color: #d3ff99;
-    color: #060d17;
+    background-color: #d3ff99 !important;
+    border-color: #d3ff99 !important;
+    color: #081220 !important;
+    transform: translateY(-1px);
 }
 
 .ops-btn-ghost {
@@ -2810,7 +2813,7 @@ body.cco-dashboard-body {
 .ops-chart-dot.is-active {
     width: 26px;
     border-radius: 999px;
-    background: var(--ops-accent);
+    background: var(--cor-lime-green, #c1ff72) !important;
 }
 
 .ops-carousel-btn {
@@ -3091,28 +3094,28 @@ body.cco-dashboard-body {
 }
 
 .ops-sensor-status.status-nominal {
-    color: var(--ops-text-secondary);
-    font-weight: 400;
+    color: #00bf63 !important;
+    font-weight: 600;
 }
 .ops-sensor-status.status-nominal .status-dot {
-    background-color: #22c55e;
-    opacity: 0.85;
+    background-color: #00bf63 !important;
+    opacity: 1 !important;
 }
 
 .ops-sensor-status.status-alerta {
-    color: #f59e0b;
+    color: #fbbf24 !important;
     font-weight: 600;
 }
 .ops-sensor-status.status-alerta .status-dot {
-    background-color: #f59e0b;
+    background-color: #f59e0b !important;
 }
 
 .ops-sensor-status.status-inoperante {
-    color: #fca5a5;
+    color: #ff5757 !important;
     font-weight: 600;
 }
 .ops-sensor-status.status-inoperante .status-dot {
-    background-color: #ef4444;
+    background-color: #ff5757 !important;
 }
 
 .ops-table tr.row-sensor-alerta td:first-child {

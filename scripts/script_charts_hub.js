@@ -16,11 +16,11 @@ function desenharGraficos() {
         if (tipo === 'combo') {
             const dataVel = google.visualization.arrayToDataTable([
                 ['Composição', 'Velocidade (km/h)', { role: 'style' }, { role: 'annotation' }, 'Teto (80 km/h)'],
-                ['C-01', 62, '#64748b', null, 80],
-                ['C-02', 74, '#64748b', null, 80],
-                ['V-12', 58, '#64748b', null, 80],
+                ['C-01', 62, '#5271ff', null, 80],
+                ['C-02', 74, '#5271ff', null, 80],
+                ['V-12', 58, '#5271ff', null, 80],
                 ['V-14', 81, '#f59e0b', '81 km/h', 80],
-                ['T-08', 4,  '#334155', 'Parada', 80]
+                ['T-08', 4,  '#3b5870', 'Parada', 80]
             ]);
 
             const optVel = {
@@ -106,10 +106,10 @@ function desenharGraficos() {
         }
 
         const dataSt = google.visualization.arrayToDataTable([
-            ['Status', 'Quantidade'],
-            ['Nominais', 8],
-            ['Alerta térmico', 1],
-            ['Inoperante', 1]
+            ['Condição', 'Quantidade'],
+            ['Normal', 8],
+            ['Atenção', 1],
+            ['Falha', 1]
         ]);
 
         const optSt = {
@@ -120,7 +120,7 @@ function desenharGraficos() {
                 alignment: 'center',
                 textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 }
             },
-            colors: ['#38bdf8', '#f59e0b', '#ef4444'],
+            colors: ['#00bf63', '#f59e0b', '#ff5757'],
             chartArea: { left: 10, top: 6, right: 10, bottom: 28, width: '94%', height: '84%' },
             pieHole: 0.72,
             pieSliceBorderColor: '#0b1523',

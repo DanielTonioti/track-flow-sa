@@ -419,7 +419,7 @@ $pageTitle = 'Dashboard';
 
                     <article class="ops-chart-slide">
                         <div class="ops-card-metric">
-                            <span class="ops-metric-val">8 de 10</span>
+                            <span class="ops-metric-val text-volt">8 de 10</span>
                             <span class="ops-metric-sub">sensores operando normalmente</span>
                         </div>
                         <div class="ops-panel-body flex-grow-1 p-2 pt-0">
@@ -521,7 +521,6 @@ $pageTitle = 'Dashboard';
                                             <td class="text-end">
                                                 <div class="ops-sensor-status <?= $statusClass ?>">
                                                     <span class="status-dot"></span>
-                                                    <span></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -579,7 +578,6 @@ $pageTitle = 'Dashboard';
                                             <td class="text-end">
                                                 <div class="ops-sensor-status <?= $statusClass ?>">
                                                     <span class="status-dot"></span>
-                                                    <span></span>
                                                 </div>
                                             </td>
                                         </tr>
