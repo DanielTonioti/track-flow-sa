@@ -166,7 +166,7 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                             <i class="bi bi-list-ul text-cyan" aria-hidden="true"></i>Trilhos Cadastrados
                         </h2>
                         <span class="ops-status-tag ops-status-neutral">
-                            <?= $trilhos ? (int) $trilhos->num_rows : 0 ?> SEGMENTO(S)
+                            <?= $trilhos ? (int) $trilhos->num_rows : 0 ?> Segmento(s)
                         </span>
                     </div>
 
@@ -205,7 +205,7 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                                                         data-id="<?= $idTr ?>"
                                                         data-nome="<?= htmlspecialchars($nomeTr, ENT_QUOTES, 'UTF-8') ?>"
                                                         data-local="<?= htmlspecialchars($locTr, ENT_QUOTES, 'UTF-8') ?>">
-                                                        <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
+                                                        Editar
                                                     </button>
                                                     <button
                                                         type="button"
@@ -214,7 +214,7 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                                                         data-bs-target="#ModalExcluirTrilho"
                                                         data-id="<?= $idTr ?>"
                                                         data-nome="<?= htmlspecialchars($nomeTr, ENT_QUOTES, 'UTF-8') ?>">
-                                                        <i class="bi bi-trash3" aria-hidden="true"></i>Excluir
+                                                        Excluir
                                                     </button>
                                                 </div>
                                             </td>

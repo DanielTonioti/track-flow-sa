@@ -299,15 +299,15 @@ $pageTitle = 'Editar Funcionário';
                 </nav>
                 <h1 class="ops-page-title">Editar Funcionário</h1>
             </div>
-
             <div class="ops-header-actions">
-                <a href="Usuario_Info.php?id=<?= (int) $user['id'] ?>" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-eye" aria-hidden="true"></i>Ver Perfil
-                </a>
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar para Equipe
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar
+                </a>
+                <a href="Usuario_Info.php?id=<?= (int) $user['id'] ?>" class="ops-btn ops-btn-ghost">
+                    Ver Perfil
                 </a>
             </div>
+
         </div>
 
         <?php if ($erro !== ""): ?>
@@ -326,7 +326,7 @@ $pageTitle = 'Editar Funcionário';
             <div class="ops-panel-body p-3 p-md-4">
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-person-vcard" aria-hidden="true"></i>Dados Pessoais e Acesso
+                    Dados Pessoais e Acesso
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -391,7 +391,7 @@ $pageTitle = 'Editar Funcionário';
                 </div>
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-geo-alt" aria-hidden="true"></i>Endereço
+                    Endereço
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -460,7 +460,7 @@ $pageTitle = 'Editar Funcionário';
                 </div>
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-shield-lock" aria-hidden="true"></i>Cargo e Foto de Perfil
+                    Cargo e Foto de Perfil
                 </div>
 
                 <div class="row g-3 align-items-start">
@@ -526,7 +526,7 @@ $pageTitle = 'Editar Funcionário';
             <div class="ops-panel-footer">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="CadastrarUsuario" value="Salvar" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                    Salvar Alterações
                 </button>
             </div>
         </form>
@@ -547,7 +547,7 @@ $pageTitle = 'Editar Funcionário';
                 class="ops-btn ops-btn-danger-outline"
                 data-bs-toggle="modal"
                 data-bs-target="#modalConfirmarExclusaoUsuario">
-                <i class="bi bi-trash3" aria-hidden="true"></i>Excluir Funcionário
+                Excluir Funcionário
             </button>
         </section>
 
@@ -575,7 +575,7 @@ $pageTitle = 'Editar Funcionário';
                     <form method="POST" action="excluir_usuario.php?id=<?= (int) $user['id'] ?>" id="excluirUsuario" class="m-0">
                         <input type="hidden" name="id_excluir" value="<?= (int) $user['id'] ?>">
                         <button type="submit" class="ops-btn ops-btn-danger">
-                            <i class="bi bi-trash3-fill" aria-hidden="true"></i>Confirmar Exclusão
+                            Confirmar Exclusão
                         </button>
                     </form>
                 </div>

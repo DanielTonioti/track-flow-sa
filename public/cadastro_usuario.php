@@ -194,11 +194,9 @@ $pageTitle = 'Cadastrar Funcionário';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Funcionário cadastrado com sucesso</strong>
-                        <span>Os dados do funcionário foram salvos no banco de dados.</span>
                     </div>
                     <a href="Admin.php" class="ops-btn ops-btn-sm">Ver Quadro de Equipe</a>
                 </div>
@@ -405,7 +403,7 @@ $pageTitle = 'Cadastrar Funcionário';
             <div class="ops-panel-footer">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="CadastrarUsuario" value="Cadastrar" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Funcionário
+                    Cadastrar Funcionário
                 </button>
             </div>
         </form>

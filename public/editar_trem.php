@@ -131,7 +131,7 @@ $pageTitle = 'Editar Trem';
         <form method="POST" class="ops-panel">
             <div class="ops-panel-header">
                 <h2 class="ops-panel-title">
-                    <i class="bi bi-pencil-square text-cyan" aria-hidden="true"></i>Ficha de Edição &mdash; <?= sprintf('#TRM-%03d', (int) $id) ?>
+                    Ficha de Edição &mdash; <?= sprintf('#TRM-%03d', (int) $id) ?>
                 </h2>
             </div>
 
@@ -178,7 +178,7 @@ $pageTitle = 'Editar Trem';
             <div class="ops-panel-footer">
                 <a href="cadastro_trens.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="atualizar-trem" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                    Salvar Alterações
                 </button>
             </div>
         </form>

@@ -48,7 +48,6 @@ $pageTitle = 'Cadastrar Sensor';
         </div>
 
         <div class="ops-alert ops-alert-info" role="status">
-            <i class="bi bi-info-circle-fill" aria-hidden="true"></i>
             <div>
                 <strong>Em produção:</strong> o cadastro de sensores está em produção e estará disponível em breve.
             </div>

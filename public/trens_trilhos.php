@@ -76,13 +76,13 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                 </a>
                 <?php if ($usuarioEhAdmin): ?>
                     <a href="cadastro_linhas.php" class="ops-btn">
-                        <i class="bi bi-distribute-vertical" aria-hidden="true"></i>Trilhos e Linhas
+                        Trilhos e Linhas
                     </a>
                     <a href="cadastro_trens.php" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-train-front" aria-hidden="true"></i>Gerenciar Trens
+                        Gerenciar Trens
                     </a>
                     <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-signpost-split" aria-hidden="true"></i>Gerenciar Rotas
+                        Gerenciar Rotas
                     </a>
                 <?php endif; ?>
             </div>
@@ -108,10 +108,10 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                 <section class="ops-panel h-100 d-flex flex-column" aria-labelledby="heading-trens">
                     <div class="ops-panel-header">
                         <h2 id="heading-trens" class="ops-panel-title">
-                            <i class="bi bi-train-front-fill text-cyan" aria-hidden="true"></i>Trens Cadastrados
+                            Trens Cadastrados
                         </h2>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="ops-status-tag ops-status-neutral"><?= count($listaTrens) ?> TREM(NS)</span>
+                            <span class="ops-status-tag ops-status-neutral"><?= count($listaTrens) ?> Trem(ns)</span>
                             <?php if ($usuarioEhAdmin): ?>
                                 <a href="cadastro_trens.php" class="ops-btn ops-btn-primary ops-btn-sm">
                                     <i class="bi bi-plus-lg" aria-hidden="true"></i>Novo Trem
@@ -177,11 +177,11 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                         data-ficha-c4-val="<?= htmlspecialchars($criadoTrem, ENT_QUOTES, 'UTF-8') ?>"
                                                         data-ficha-desc="Composição habilitada para vinculação de itinerários e sensores embarcados de velocidade/temperatura."
                                                         data-ficha-edit-url="editar_trem.php?id=<?= $idTrem ?>">
-                                                        <i class="bi bi-eye" aria-hidden="true"></i>Consultar
+                                                        Consultar
                                                     </button>
                                                     <?php if ($usuarioEhAdmin): ?>
                                                         <a href="editar_trem.php?id=<?= $idTrem ?>" class="ops-btn ops-btn-sm">
-                                                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
+                                                            Editar
                                                         </a>
                                                     <?php endif; ?>
                                                 </div>
@@ -214,10 +214,10 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                 <section class="ops-panel h-100 d-flex flex-column" aria-labelledby="heading-rotas">
                     <div class="ops-panel-header">
                         <h2 id="heading-rotas" class="ops-panel-title">
-                            <i class="bi bi-signpost-split-fill text-volt" aria-hidden="true"></i>Rotas Cadastradas
+                            Rotas Cadastradas
                         </h2>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="ops-status-tag ops-status-neutral"><?= count($listaRotas) ?> ROTA(S)</span>
+                            <span class="ops-status-tag ops-status-neutral"><?= count($listaRotas) ?> Rota(s)</span>
                             <?php if ($usuarioEhAdmin): ?>
                                 <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary ops-btn-sm">
                                     <i class="bi bi-plus-lg" aria-hidden="true"></i>Nova Rota
@@ -256,7 +256,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                             <td>
                                                 <strong class="text-white d-block"><?= htmlspecialchars($nomeRota, ENT_QUOTES, 'UTF-8') ?></strong>
                                                 <span class="text-steel small">
-                                                    <i class="bi bi-train-front me-1 text-cyan" aria-hidden="true"></i><?= htmlspecialchars($tremRota, ENT_QUOTES, 'UTF-8') ?>
+                                                    <?= htmlspecialchars($tremRota, ENT_QUOTES, 'UTF-8') ?>
                                                 </span>
                                             </td>
                                             <td class="text-end mono-font small">
@@ -285,11 +285,11 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                         data-ficha-c4-val="<?= number_format($velMedia, 1, ',', '.') ?> km/h"
                                                         data-ficha-desc="<?= htmlspecialchars($descRota, ENT_QUOTES, 'UTF-8') ?>"
                                                         data-ficha-edit-url="editar_rota.php?id=<?= $idRota ?>">
-                                                        <i class="bi bi-eye" aria-hidden="true"></i>Consultar
+                                                        Consultar
                                                     </button>
                                                     <?php if ($usuarioEhAdmin): ?>
                                                         <a href="editar_rota.php?id=<?= $idRota ?>" class="ops-btn ops-btn-sm">
-                                                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
+                                                            Editar
                                                         </a>
                                                     <?php endif; ?>
                                                 </div>
@@ -363,7 +363,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                     <button type="button" class="ops-btn ops-btn-ghost" data-bs-dismiss="modal">Fechar</button>
                     <?php if ($usuarioEhAdmin): ?>
                         <a href="#" id="fichaEditLink" class="ops-btn ops-btn-primary">
-                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar Registro
+                           Editar Registro
                         </a>
                     <?php endif; ?>
                 </div>

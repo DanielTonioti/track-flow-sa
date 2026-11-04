@@ -135,7 +135,7 @@ $pageTitle = 'Editar Rota';
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Rota atualizada com sucesso</strong>
-                        <span>Os novos parâmetros do itinerário foram salvos.</span>
+                        
                     </div>
                     <a href="trens_trilhos.php" class="ops-btn ops-btn-sm">Ver Visão Geral</a>
                 </div>
@@ -145,7 +145,7 @@ $pageTitle = 'Editar Rota';
         <form method="POST" class="ops-panel">
             <div class="ops-panel-header">
                 <h2 class="ops-panel-title">
-                    <i class="bi bi-pencil-square text-volt" aria-hidden="true"></i>Ficha de Edição &mdash; <?= sprintf('#RTA-%03d', (int) $id) ?>
+                    Ficha de Edição &mdash; <?= sprintf('#RTA-%03d', (int) $id) ?>
                 </h2>
             </div>
 
@@ -201,7 +201,7 @@ $pageTitle = 'Editar Rota';
                 </div>
 
                 <div class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center" style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
-                    <span class="mono-font text-steel" style="font-size: 0.72rem;">VELOCIDADE MÉDIA PLANEJADA</span>
+                    <span class="mono-font text-steel" style="font-size: 0.72rem;">Velocidade média</span>
                     <strong id="preview-velocidade-edit" class="mono-font text-cyan small">&mdash; km/h</strong>
                 </div>
 
@@ -223,7 +223,7 @@ $pageTitle = 'Editar Rota';
             <div class="ops-panel-footer">
                 <a href="cadastro_rotas.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="atualizar-rota" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                    Salvar Alterações
                 </button>
             </div>
         </form>
