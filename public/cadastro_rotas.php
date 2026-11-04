@@ -113,10 +113,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Gerenciar Rotas</span>
                 </nav>
-                <h1 class="ops-page-title">Cadastro e Programação de Rotas</h1>
-                <p class="ops-page-subtitle">
-                    Defina itinerários, extensão quilométrica, tempo estimado de viagem e trem vinculado.
-                </p>
+                <h1 class="ops-page-title">Cadastro de Rotas</h1>
             </div>
 
             <div class="ops-header-actions">
@@ -143,7 +140,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
             <div class="ops-alert ops-alert-success" role="status">
                 <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div>
-                    <strong class="d-block">Malha atualizada</strong>
+                    <strong class="d-block">Cadastrado com sucesso</strong>
                     <span><?= htmlspecialchars($mensagemSucesso, ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             </div>
@@ -155,7 +152,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Nenhum trem cadastrado ainda</strong>
-                        <span>Toda rota ferroviária exige uma composição vinculada. Cadastre um trem antes de criar rotas.</span>
+                        <span>Cadastre um trem antes de criar rotas.</span>
                     </div>
                     <a href="cadastro_trens.php" class="ops-btn ops-btn-volt ops-btn-sm">
                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Trem Agora
@@ -168,11 +165,6 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
             <div class="col-12 col-lg-5">
                 <form method="POST" class="ops-panel">
-                    <div class="ops-panel-header">
-                        <h2 class="ops-panel-title">
-                            <i class="bi bi-signpost-2 text-volt" aria-hidden="true"></i>Nova Rota
-                        </h2>
-                    </div>
 
                     <div class="ops-panel-body">
                         <div class="mb-3">
@@ -328,7 +320,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                                             <div class="ops-empty-state">
                                                 <span class="ops-empty-icon"><i class="bi bi-signpost-split" aria-hidden="true"></i></span>
                                                 <p class="mb-0 fw-semibold text-white">Nenhuma rota cadastrada.</p>
-                                                <span class="small text-steel">Preencha o formulário ao lado para registrar o primeiro itinerário.</span>
+                                                <span class="small text-steel">Preencha o formulário ao lado.</span>
                                             </div>
                                         </td>
                                     </tr>
@@ -375,38 +367,7 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const distEl = document.getElementById('distancia_km');
-            const tempoEl = document.getElementById('tempo_previsto_min');
-            const velOut = document.getElementById('preview-velocidade-valor');
-
-            function atualizarVelocidade() {
-                if (!distEl || !tempoEl || !velOut) return;
-                const d = parseFloat(distEl.value);
-                const t = parseFloat(tempoEl.value);
-                if (d > 0 && t > 0) {
-                    const vel = d / (t / 60);
-                    velOut.textContent = vel.toFixed(1).replace('.', ',') + ' km/h';
-                } else {
-                    velOut.textContent = '— km/h';
-                }
-            }
-
-            if (distEl && tempoEl) {
-                distEl.addEventListener('input', atualizarVelocidade);
-                tempoEl.addEventListener('input', atualizarVelocidade);
-                atualizarVelocidade();
-            }
-
-            document.querySelectorAll('.btn-preparar-exclusao-rota').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('inputExcluirRotaId').value = btn.getAttribute('data-rota-id') || '';
-                    document.getElementById('nomeRotaModal').textContent = btn.getAttribute('data-rota-nome') || '';
-                });
-            });
-        });
-    </script>
+   <script src="../scripts/scriptRotas.js"></script>
 </body>
 
 </html>
