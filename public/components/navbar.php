@@ -72,11 +72,11 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
 
             <a class="navbar-brand d-flex align-items-center gap-2 py-0 me-0" href="hub.php">
                 <span class="ops-brand-mark" aria-hidden="true">
-                    <img src="../assets/logo/logo-track-flow.png" alt="" class="hub-icon" width="24" height="24">
+                    <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="26" height="26">
                 </span>
                 <span class="d-flex flex-column lh-1">
                     <span class="fw-bold fs-4 text-white brand-font tracking-tight">TrackFlow</span>
-                    <span class="ops-brand-sub mono-font">FERRORAMA</span>
+                    <span class="ops-brand-sub text-volt">FERRORAMA</span>
                 </span>
             </a>
         </div>
@@ -86,8 +86,8 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                 <span id="usuario-logado" class="text-white small fw-semibold">
                     <?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?>
                 </span>
-                <span class="mono-font ops-role-caption">
-                    <i class="bi <?= $usuarioEhAdmin ? 'bi-shield-lock-fill text-volt' : 'bi-person-badge text-cyan' ?> me-1" aria-hidden="true"></i><?= $usuarioEhAdmin ? 'ADMIN' : 'FUNCIONÁRIO' ?>
+                <span class="mono-font ops-role-caption d-inline-flex align-items-center gap-1">
+                    <span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?>
                 </span>
             </div>
 
@@ -103,7 +103,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
             <div id="menu_user" class="menu" role="menu" aria-label="Opções do operador">
                 <div class="px-3 py-2 border-bottom border-light border-opacity-10 d-md-none">
                     <strong class="d-block text-white small text-truncate"><?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?></strong>
-                    <span class="mono-font text-steel" style="font-size: 0.7rem;"><?= $usuarioEhAdmin ? 'ADMIN' : 'FUNCIONÁRIO' ?></span>
+                    <span class="mono-font text-steel d-inline-flex align-items-center gap-1" style="font-size: 0.7rem;"><span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
                 </div>
                 <div>
                     <p><a href="Usuario_Info.php" role="menuitem"><i class="bi bi-person-vcard me-2 text-cyan" aria-hidden="true"></i>Meu Perfil</a></p>
@@ -120,13 +120,13 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
     <div class="offcanvas-header border-bottom border-light border-opacity-10 py-3 px-4">
         <div class="d-flex align-items-center gap-2">
             <span class="ops-brand-mark" aria-hidden="true">
-                <img src="../assets/logo/logo-track-flow.png" alt="" width="22" height="22" class="hub-icon">
+                <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="24" height="24">
             </span>
             <div>
                 <h2 class="offcanvas-title brand-font fs-4 text-white mb-0 lh-1" id="offcanvasDarkNavbarLabel">
                     TrackFlow
                 </h2>
-                <span class="ops-brand-sub mono-font">MENU</span>
+                <span class="ops-brand-sub text-volt">MENU</span>
             </div>
         </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
@@ -134,7 +134,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
 
     <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
         <div>
-            <div class="px-2 pb-2 mb-2 text-uppercase mono-font text-steel" style="font-size: 0.68rem; letter-spacing: 0.08em;">
+            <div class="px-2 pb-2 mb-2 text-uppercase text-steel small" style="font-size: 0.68rem; letter-spacing: 0.08em;">
                 Módulos do Sistema
             </div>
             <ul class="navbar-nav pe-1 gap-1">
@@ -181,7 +181,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                 </div>
                 <div class="flex-grow-1 overflow-hidden">
                     <strong class="d-block text-white small text-truncate"><?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?></strong>
-                    <span class="text-steel mono-font d-block" style="font-size: 0.7rem;"><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
+                    <span class="text-steel mono-font d-flex align-items-center gap-1" style="font-size: 0.7rem;"><span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
                 </div>
                 <a href="logout.php" class="ops-btn ops-btn-danger-outline p-0" style="width: 38px; min-height: 38px;" title="Encerrar sessão" aria-label="Encerrar sessão">
                     <i class="bi bi-box-arrow-right" aria-hidden="true"></i>

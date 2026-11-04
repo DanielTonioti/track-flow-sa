@@ -11,6 +11,28 @@ function escapar_html($valor): string
     return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
 }
 
+function formatarAlocacaoComposicao(string $raw): string
+{
+    $partes = array_map('trim', explode('//', $raw));
+    $comp = $partes[0] ?? '';
+    $local = $partes[1] ?? '';
+
+    $substituicoes = [
+        'Truque Diant.' => 'truque dianteiro',
+        'Mancal Tras.' => 'mancal traseiro',
+        'Rolamento E1' => 'rolamento E1',
+        'Rolamento E4' => 'rolamento E4',
+        'Freio Dinâm.' => 'freio dinâmico'
+    ];
+
+    if (isset($substituicoes[$local])) {
+        $local = $substituicoes[$local];
+    }
+
+    return $local !== '' ? ($comp . ', ' . $local) : $comp;
+}
+
+
 $idUsuario = (int) ($_SESSION['id'] ?? 0);
 $nomeUsuario = $_SESSION['usuario'] ?? 'Operador Ferroviário';
 $cargoUsuario = $_SESSION['cargo'] ?? 'funcionario';
@@ -218,12 +240,16 @@ foreach ($sensores as $s) {
 
 $temAlertaCritico = !empty($sensoresCriticos);
 
-// Data formatada para o cabeçalho técnico
-$diasSemana = [0 => 'Domingo', 1 => 'Segunda-feira', 2 => 'Terça-feira', 3 => 'Quarta-feira', 4 => 'Quinta-feira', 5 => 'Sexta-feira', 6 => 'Sábado'];
-$mesesAno = [1 => 'Janeiro', 2 => 'Fevereiro', 3 => 'Março', 4 => 'Abril', 5 => 'Maio', 6 => 'Junho', 7 => 'Julho', 8 => 'Agosto', 9 => 'Setembro', 10 => 'Outubro', 11 => 'Novembro', 12 => 'Dezembro'];
-$diaSemanaTexto = $diasSemana[(int) date('w')] ?? '';
-$mesTexto = $mesesAno[(int) date('n')] ?? '';
-$dataAtualFormatada = sprintf('%s, %s de %s de %s', $diaSemanaTexto, date('d'), $mesTexto, date('Y'));
+// Data e hora estritamente formatadas em America/Sao_Paulo
+date_default_timezone_set('America/Sao_Paulo');
+$fusoSP = new DateTimeZone('America/Sao_Paulo');
+$agoraSP = new DateTime('now', $fusoSP);
+$diasSemana = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+$mesesAno = [1 => 'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+$diaSemanaTexto = $diasSemana[(int) $agoraSP->format('w')];
+$mesTexto = $mesesAno[(int) $agoraSP->format('n')];
+$dataAtualFormatada = sprintf('%s, %d de %s de %s', $diaSemanaTexto, (int) $agoraSP->format('d'), $mesTexto, $agoraSP->format('Y'));
+$horaAtualizacaoClima = $agoraSP->format('H:i:s');
 
 $pageTitle = 'Dashboard';
 ?>
@@ -250,26 +276,22 @@ $pageTitle = 'Dashboard';
                 <div class="ops-panel h-100 d-flex flex-column justify-content-between p-3 p-md-4">
                     <div>
                         <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
-                            <span class="ops-status-tag <?= $ehAdmin ? 'ops-status-nominal' : 'ops-status-info' ?>">
-                                <i class="bi <?= $ehAdmin ? 'bi-shield-check' : 'bi-person-badge' ?>" aria-hidden="true"></i>
-                                <?= escapar_html($nivelAcessoLabel) ?>
+                            <span class="ops-role-badge <?= $ehAdmin ? 'ops-role-admin' : 'ops-role-func' ?>">
+                                <span class="ops-role-dot"></span><?= escapar_html($nivelAcessoLabel) ?>
                             </span>
-                            <span class="mono-font text-steel" style="font-size: 0.74rem;">
-                                BASE OPERACIONAL // <?= escapar_html(mb_strtoupper($cidade, 'UTF-8')) ?> &mdash; <?= escapar_html($uf) ?>
+                            <span class="text-steel small">
+                                <?= escapar_html($cidade) ?>, <?= escapar_html($uf) ?>
                             </span>
                         </div>
 
                         <h1 class="h3 fw-bold text-white mb-1 brand-font">
                             <?= escapar_html($nomeUsuario) ?>
                         </h1>
-                        <p class="text-steel small mb-0">
-                            Supervisão integrada de telemetria térmica, sensores de via permanente e circulação ferroviária.
-                        </p>
                     </div>
 
                     <div class="d-flex flex-wrap align-items-center justify-content-between pt-3 mt-3 border-top border-light border-opacity-10 gap-2">
-                        <span class="mono-font text-steel small">
-                            <i class="bi bi-calendar3 me-1 text-cyan" aria-hidden="true"></i><?= escapar_html($dataAtualFormatada) ?>
+                        <span class="text-steel small">
+                            <i class="bi bi-calendar3 me-1 text-warning" aria-hidden="true"></i><?= escapar_html($dataAtualFormatada) ?>
                         </span>
                         <div class="d-flex flex-wrap gap-2">
                             <a href="Usuario_Info.php" class="ops-btn ops-btn-sm" aria-label="Acessar Perfil Operacional">
@@ -295,11 +317,11 @@ $pageTitle = 'Dashboard';
 
                     <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
                         <div class="d-flex align-items-center gap-2">
-                            <i class="bi bi-geo-alt-fill text-cyan" aria-hidden="true"></i>
-                            <strong id="clima-localizacao" class="text-white small mono-font text-uppercase">
+                            <i class="bi bi-geo-alt-fill text-warning" aria-hidden="true"></i>
+                            <strong id="clima-localizacao" class="text-white small">
                                 <?= escapar_html($localizacaoPadrao) ?>
                             </strong>
-                            <span class="ops-code-badge">VIA PRINCIPAL</span>
+                            <span class="text-steel small">Via Principal</span>
                         </div>
 
                         <div class="d-flex align-items-center gap-2">
@@ -325,7 +347,7 @@ $pageTitle = 'Dashboard';
                                 <span id="clima-temperatura" class="fs-3 fw-bold text-white mono-font d-block" style="line-height: 1.1;">
                                     <?= number_format($temperatura, 1, '.', '') ?> °C
                                 </span>
-                                <span id="clima-condicao" class="small text-steel mono-font">
+                                <span id="clima-condicao" class="small text-steel">
                                     <?= escapar_html($descricaoClima) ?>
                                 </span>
                             </div>
@@ -333,11 +355,11 @@ $pageTitle = 'Dashboard';
 
                         <div class="ops-weather-box ms-auto">
                             <div class="ops-weather-metric">
-                                <span class="d-block text-steel mono-font" style="font-size: 0.68rem;">SENSAÇÃO</span>
+                                <span class="d-block text-steel small" style="font-size: 0.72rem;">Sensação</span>
                                 <strong id="clima-sensacao" class="text-white mono-font fs-6"><?= number_format($sensacaoTermica, 1, '.', '') ?> °C</strong>
                             </div>
                             <div class="ops-weather-metric">
-                                <span class="d-block text-steel mono-font" style="font-size: 0.68rem;">UMIDADE</span>
+                                <span class="d-block text-steel small" style="font-size: 0.72rem;">Umidade</span>
                                 <strong id="clima-umidade" class="text-white mono-font fs-6"><?= (int) $umidade ?>%</strong>
                             </div>
                         </div>
@@ -366,91 +388,80 @@ $pageTitle = 'Dashboard';
             <div class="col-12 col-lg-4">
                 <div class="ops-panel h-100 d-flex flex-column">
                     <div class="ops-panel-header">
-                        <span class="ops-kpi-label mb-0">
-                            <i class="bi bi-speedometer2 text-cyan" aria-hidden="true"></i>Velocidade por Composição
-                        </span>
-                        <span class="ops-status-tag ops-status-nominal">
-                            <span class="ops-status-dot dot-nominal"></span>TEMPO REAL
-                        </span>
+                        <h2 class="ops-panel-title mb-0">Velocidade por composição</h2>
+                    </div>
+                    <div class="ops-card-metric">
+                        <span class="ops-metric-val">1</span>
+                        <span class="ops-metric-sub">acima do limite de 80 km/h</span>
                     </div>
                     <div class="ops-panel-body flex-grow-1 p-2">
                         <div id="chart-velocidade" class="ops-chart-container"></div>
                     </div>
-                    <div class="px-3 py-2 border-top border-light border-opacity-10 text-steel mono-font" style="font-size: 0.72rem;">
-                        Teto operacional: <strong>80 km/h</strong> &bull; Excesso em S.TRM.004 (81 km/h)
-                    </div>
                 </div>
             </div>
 
-            <!-- Gráfico 2: Monitoramento Térmico Contínuo (°C) -->
+            <!-- Gráfico 2: Curva Térmica da Malha (°C) -->
             <div class="col-12 col-lg-4">
                 <div class="ops-panel h-100 d-flex flex-column">
                     <div class="ops-panel-header">
-                        <span class="ops-kpi-label mb-0">
-                            <i class="bi bi-thermometer-high text-warning" aria-hidden="true"></i>Curva Térmica da Malha
-                        </span>
-                        <span class="ops-status-tag ops-status-warning">
-                            <i class="bi bi-exclamation-triangle-fill" aria-hidden="true"></i>LIMITE 85 °C
-                        </span>
+                        <h2 class="ops-panel-title mb-0">Curva térmica da malha</h2>
+                    </div>
+                    <div class="ops-card-metric">
+                        <span class="ops-metric-val">64 °C</span>
+                        <span class="ops-metric-sub">pico registrado na semana</span>
                     </div>
                     <div class="ops-panel-body flex-grow-1 p-2">
                         <div id="chart-temperatura" class="ops-chart-container"></div>
                     </div>
-                    <div class="px-3 py-2 border-top border-light border-opacity-10 text-steel mono-font" style="font-size: 0.72rem;">
-                        Pico semanal: <strong>64 °C</strong> &bull; Faixa nominal: &le; 60 °C
-                    </div>
                 </div>
             </div>
 
-            <!-- Gráfico 3: Disponibilidade Operacional da Malha (%) -->
+            <!-- Gráfico 3: Disponibilidade de Sensores (%) -->
             <div class="col-12 col-lg-4">
                 <div class="ops-panel h-100 d-flex flex-column">
                     <div class="ops-panel-header">
-                        <span class="ops-kpi-label mb-0">
-                            <i class="bi bi-pie-chart-fill text-blue" aria-hidden="true"></i>Disponibilidade de Sensores
-                        </span>
-                        <span class="ops-status-tag ops-status-nominal">
-                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>MALHA ATIVA
-                        </span>
+                        <h2 class="ops-panel-title mb-0">Disponibilidade de sensores</h2>
+                    </div>
+                    <div class="ops-card-metric">
+                        <span class="ops-metric-val">8 de 10</span>
+                        <span class="ops-metric-sub">sensores operando normalmente</span>
                     </div>
                     <div class="ops-panel-body flex-grow-1 p-2">
-                        <div id="chart-status" class="ops-chart-container"></div>
-                    </div>
-                    <div class="px-3 py-2 border-top border-light border-opacity-10 text-steel mono-font" style="font-size: 0.72rem;">
-                        <?= (int) $sensoresAtivosCount ?> Nominais &bull; 1 Sobreaquecimento &bull; 1 Inoperante
+                        <div class="ops-donut-wrap">
+                            <div id="chart-status" class="ops-chart-container"></div>
+                            <div class="ops-donut-center">
+                                <span class="ops-donut-count">10</span>
+                                <span class="ops-donut-label">sensores</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </section>
 
-        <section class="ops-panel mb-3" aria-label="Matriz de Sensores e Telemetria em Tempo Real">
+        <section class="ops-panel mb-3" aria-label="Sensores da malha ferroviária">
 
             <div class="ops-panel-header">
-                <h2 class="ops-panel-title text-uppercase">
-                    <i class="bi bi-hdd-rack-fill text-cyan" aria-hidden="true"></i>Matriz Operacional de Sensores da Malha
-                </h2>
+                <div class="d-flex align-items-baseline gap-2">
+                    <h2 class="ops-panel-title mb-0">Sensores da malha</h2>
+                    <span class="text-steel small"><?= count($sensores) ?> sensores</span>
+                </div>
 
-                <div class="d-flex flex-wrap align-items-center gap-2">
-                    <span class="ops-status-tag ops-status-info">
-                        <i class="bi bi-broadcast" aria-hidden="true"></i><?= count($sensores) ?> UNIDADES
-                    </span>
+                <div class="d-flex align-items-center gap-2">
                     <a href="Sensor_Data.php" class="ops-btn ops-btn-primary ops-btn-sm">
-                        <i class="bi bi-table" aria-hidden="true"></i>Consultar Todos os Sensores
+                        Ver todos
                     </a>
                 </div>
             </div>
 
             <?php if ($temAlertaCritico): ?>
-                <div class="ops-alert-banner ops-pulse-alert d-flex flex-wrap align-items-center justify-content-between px-3 py-2 border-bottom border-light border-opacity-10 gap-2" role="alert">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="bi bi-exclamation-triangle-fill text-danger" aria-hidden="true"></i>
-                        <span class="mono-font text-white" style="font-size: 0.78rem;">
-                            <strong>ANOMALIA TÉRMICA:</strong> <?= escapar_html($sensoresCriticos[0]['codigo']) ?> registrou <strong><?= number_format((float) $sensoresCriticos[0]['temperatura'], 1, '.', '') ?> °C</strong> (limite de segurança: 85.0 °C).
-                        </span>
-                    </div>
-                    <a href="Sensor_Data.php?filtro=alerta" class="ops-btn ops-btn-danger-outline ops-btn-sm">
-                        <i class="bi bi-search" aria-hidden="true"></i>Inspecionar Sensor
+                <div class="ops-anomaly-banner d-flex flex-wrap align-items-center justify-content-between px-3 py-2 border-bottom border-light border-opacity-10 gap-2" role="alert">
+                    <span class="text-white small">
+                        <span class="mono-font fw-semibold"><?= escapar_html($sensoresCriticos[0]['codigo']) ?></span> está a <span class="mono-font fw-semibold"><?= number_format((float) $sensoresCriticos[0]['temperatura'], 1, '.', '') ?> °C</span>, acima do limite de <span class="mono-font">85 °C</span>.
+                    </span>
+                    <a href="Sensor_Data.php?filtro=alerta" class="ops-btn ops-btn-sm">
+                        Inspecionar
                     </a>
                 </div>
             <?php endif; ?>
@@ -458,20 +469,17 @@ $pageTitle = 'Dashboard';
             <div class="ops-panel-body p-0">
                 <div class="row g-0">
 
-                    <!-- Coluna 1: Sensores Embarcados (Trens, Truques e Mancais) -->
+                    <!-- Painel 1: Em composições -->
                     <div class="col-12 col-lg-6 border-end border-light border-opacity-10">
-                        <div class="py-2 px-3 border-bottom border-light border-opacity-10 d-flex justify-content-between align-items-center" style="font-size: 0.73rem; background: rgba(255,255,255,0.015);">
-                            <span class="text-white fw-bold mono-font">
-                                <i class="bi bi-train-front text-cyan me-1" aria-hidden="true"></i>SENSORES EMBARCADOS // COMPOSIÇÕES
-                            </span>
-                            <span class="mono-font text-steel"><?= count($colunas['trem']) ?> UNIDADES</span>
+                        <div class="py-2 px-3 border-bottom border-light border-opacity-10" style="background: rgba(255,255,255,0.015);">
+                            <span class="text-white fw-semibold small">Em composições</span>
                         </div>
 
                         <div class="table-responsive">
-                            <table class="ops-table ops-table-compact" aria-label="Tabela de Sensores Embarcados">
+                            <table class="ops-table ops-table-compact" aria-label="Tabela de sensores em composições">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Sensor // Alocação</th>
+                                        <th scope="col">Sensor e alocação</th>
                                         <th scope="col" class="text-end">Velocidade</th>
                                         <th scope="col" class="text-end">Temperatura</th>
                                         <th scope="col" class="text-end">Estado</th>
@@ -479,46 +487,40 @@ $pageTitle = 'Dashboard';
                                 </thead>
                                 <tbody>
                                     <?php foreach ($colunas['trem'] as $s):
-                                        $isCritico = ($s['temperatura'] >= 85 || $s['status'] === 'Em Alerta' || $s['status'] === 'Não Funcionando');
-                                        $statusClass = 'ops-status-nominal';
-                                        $iconStatus = 'bi-check-circle-fill';
-                                        $labelStatus = 'NOMINAL';
+                                        $statusLabel = 'Nominal';
+                                        $statusClass = 'status-nominal';
+                                        $rowClass = '';
 
                                         if ($s['status'] === 'Em Alerta') {
-                                            $statusClass = 'ops-status-warning';
-                                            $iconStatus = 'bi-exclamation-triangle-fill';
-                                            $labelStatus = 'ATENÇÃO';
-                                        } elseif ($s['status'] === 'Não Funcionando') {
-                                            $statusClass = 'ops-status-critical';
-                                            $iconStatus = 'bi-x-octagon-fill';
-                                            $labelStatus = 'INOPERANTE';
+                                            $statusLabel = 'Alerta';
+                                            $statusClass = 'status-alerta';
+                                            $rowClass = 'row-sensor-alerta';
+                                        } elseif ($s['status'] === 'Não Funcionando' || $s['status'] === 'Inoperante') {
+                                            $statusLabel = 'Inoperante';
+                                            $statusClass = 'status-inoperante';
+                                            $rowClass = 'row-sensor-inoperante';
                                         }
+
+                                        $alocacaoFormatada = formatarAlocacaoComposicao($s['subdivisao'] ?? '');
                                     ?>
-                                        <tr class="<?= $isCritico ? 'row-critical' : '' ?>">
+                                        <tr class="<?= $rowClass ?>">
                                             <td>
-                                                <div class="d-flex align-items-center gap-1">
-                                                    <strong class="mono-font text-white"><?= escapar_html($s['codigo']) ?></strong>
-                                                    <?php if ($s['temperatura'] >= 85): ?>
-                                                        <span class="ops-status-tag ops-status-critical py-0 px-1" style="font-size: 0.6rem;">&ge; 85°C</span>
-                                                    <?php endif; ?>
-                                                </div>
-                                                <div class="text-steel mono-font text-truncate" style="font-size: 0.7rem; max-width: 240px;">
-                                                    <?= escapar_html($s['subdivisao']) ?>
-                                                </div>
+                                                <strong class="mono-font text-white d-block"><?= escapar_html($s['codigo']) ?></strong>
+                                                <span class="text-steel small d-block"><?= escapar_html($alocacaoFormatada) ?></span>
                                             </td>
                                             <td class="text-end mono-font">
-                                                <?= isset($s['velocidade']) ? sprintf('%02d', $s['velocidade']) . ' <span class="text-steel" style="font-size: 0.68rem;">km/h</span>' : '&mdash;' ?>
+                                                <?= isset($s['velocidade']) ? ((int) $s['velocidade'] . ' <span class="text-steel" style="font-size: 0.72rem;">km/h</span>') : '&mdash;' ?>
                                             </td>
                                             <td class="text-end mono-font">
-                                                <span class="<?= $s['temperatura'] >= 85 ? 'text-danger fw-bold' : ($s['temperatura'] >= 60 ? 'text-warning' : 'text-white') ?>">
+                                                <span class="<?= $s['temperatura'] >= 85 ? 'text-warning fw-bold' : ($s['temperatura'] >= 60 ? 'text-warning' : 'text-white') ?>">
                                                     <?= number_format((float) $s['temperatura'], 1, '.', '') ?> °C
                                                 </span>
                                             </td>
                                             <td class="text-end">
-                                                <span class="ops-status-tag <?= $statusClass ?>">
-                                                    <i class="bi <?= $iconStatus ?>" aria-hidden="true"></i>
-                                                    <?= $labelStatus ?>
-                                                </span>
+                                                <div class="ops-sensor-status <?= $statusClass ?>">
+                                                    <span class="status-dot"></span>
+                                                    <span><?= $statusLabel ?></span>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -527,50 +529,45 @@ $pageTitle = 'Dashboard';
                         </div>
                     </div>
 
-                    <!-- Coluna 2: Sensores de Via (Trilhos, AMVs e Dormentes) -->
+                    <!-- Painel 2: Na via -->
                     <div class="col-12 col-lg-6">
-                        <div class="py-2 px-3 border-bottom border-light border-opacity-10 d-flex justify-content-between align-items-center" style="font-size: 0.73rem; background: rgba(255,255,255,0.015);">
-                            <span class="text-white fw-bold mono-font">
-                                <i class="bi bi-distribute-vertical text-cyan me-1" aria-hidden="true"></i>SENSORES DE VIA // TRILHOS
-                            </span>
-                            <span class="mono-font text-steel"><?= count($colunas['trilho']) ?> UNIDADES</span>
+                        <div class="py-2 px-3 border-bottom border-light border-opacity-10" style="background: rgba(255,255,255,0.015);">
+                            <span class="text-white fw-semibold small">Na via</span>
                         </div>
 
                         <div class="table-responsive">
-                            <table class="ops-table ops-table-compact" aria-label="Tabela de Sensores Fixos na Via">
+                            <table class="ops-table ops-table-compact" aria-label="Tabela de sensores fixos na via">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Sensor // Quilometragem</th>
-                                        <th scope="col">Ponto Operacional</th>
+                                        <th scope="col">Sensor e quilometragem</th>
+                                        <th scope="col">Ponto</th>
                                         <th scope="col" class="text-end">Temperatura</th>
                                         <th scope="col" class="text-end">Estado</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php foreach ($colunas['trilho'] as $s):
-                                        $statusClass = 'ops-status-nominal';
-                                        $iconStatus = 'bi-check-circle-fill';
-                                        $labelStatus = 'NOMINAL';
+                                        $statusLabel = 'Nominal';
+                                        $statusClass = 'status-nominal';
+                                        $rowClass = '';
 
                                         if ($s['status'] === 'Em Alerta') {
-                                            $statusClass = 'ops-status-warning';
-                                            $iconStatus = 'bi-exclamation-triangle-fill';
-                                            $labelStatus = 'ATENÇÃO';
-                                        } elseif ($s['status'] === 'Não Funcionando') {
-                                            $statusClass = 'ops-status-critical';
-                                            $iconStatus = 'bi-x-octagon-fill';
-                                            $labelStatus = 'INOPERANTE';
+                                            $statusLabel = 'Alerta';
+                                            $statusClass = 'status-alerta';
+                                            $rowClass = 'row-sensor-alerta';
+                                        } elseif ($s['status'] === 'Não Funcionando' || $s['status'] === 'Inoperante') {
+                                            $statusLabel = 'Inoperante';
+                                            $statusClass = 'status-inoperante';
+                                            $rowClass = 'row-sensor-inoperante';
                                         }
                                     ?>
-                                        <tr>
+                                        <tr class="<?= $rowClass ?>">
                                             <td>
                                                 <strong class="mono-font text-white d-block"><?= escapar_html($s['codigo']) ?></strong>
-                                                <span class="text-steel mono-font" style="font-size: 0.7rem;">
-                                                    <?= escapar_html($s['subdivisao']) ?>
-                                                </span>
+                                                <span class="mono-font text-steel small"><?= escapar_html($s['subdivisao']) ?></span>
                                             </td>
-                                            <td class="mono-font text-steel" style="font-size: 0.73rem;">
-                                                <?= escapar_html($s['local'] ?? 'Via Permanente') ?>
+                                            <td>
+                                                <span class="text-steel small"><?= escapar_html($s['local'] ?? 'Via permanente') ?></span>
                                             </td>
                                             <td class="text-end mono-font">
                                                 <span class="<?= $s['temperatura'] >= 50 ? 'text-warning' : 'text-white' ?>">
@@ -578,10 +575,10 @@ $pageTitle = 'Dashboard';
                                                 </span>
                                             </td>
                                             <td class="text-end">
-                                                <span class="ops-status-tag <?= $statusClass ?>">
-                                                    <i class="bi <?= $iconStatus ?>" aria-hidden="true"></i>
-                                                    <?= $labelStatus ?>
-                                                </span>
+                                                <div class="ops-sensor-status <?= $statusClass ?>">
+                                                    <span class="status-dot"></span>
+                                                    <span><?= $statusLabel ?></span>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -593,22 +590,22 @@ $pageTitle = 'Dashboard';
                 </div>
             </div>
 
-            <!-- Rodapé Técnico Compacto -->
+            <!-- Rodapé Técnico Sóbrio -->
             <div class="ops-panel-footer">
-                <div class="text-steel mono-font" style="font-size: 0.75rem;">
-                    <i class="bi bi-shield-check text-cyan me-1" aria-hidden="true"></i>Protocolo de Supervisão: <strong>Monitoramento contínuo ativo</strong>
+                <div class="text-steel small">
+                    Última leitura às <?= $agoraSP->format('H:i') ?>
                 </div>
 
-                <div class="d-flex flex-wrap align-items-center gap-2">
-                    <a href="Relatories.php" class="ops-btn ops-btn-sm">
-                        <i class="bi bi-journal-text" aria-hidden="true"></i>Histórico de Leituras
+                <div class="d-flex flex-wrap align-items-center gap-3">
+                    <a href="Relatories.php" class="ops-link-subtle small">
+                        Ver histórico
                     </a>
                     <?php if ($ehAdmin): ?>
-                        <a href="Sensor.php" id="AddSensor" class="ops-btn ops-btn-primary ops-btn-sm">
-                            <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Sensor
+                        <a href="Sensor.php" id="AddSensor" class="ops-btn ops-btn-sm ops-btn-ghost">
+                            Cadastrar sensor
                         </a>
-                        <a href="Sensor_Manage.php" id="gerenciarsensor" class="ops-btn ops-btn-sm">
-                            <i class="bi bi-sliders" aria-hidden="true"></i>Gerenciar Sensores
+                        <a href="Sensor_Manage.php" id="gerenciarsensor" class="ops-btn ops-btn-sm ops-btn-ghost">
+                            Gerenciar sensores
                         </a>
                     <?php endif; ?>
                 </div>
@@ -622,44 +619,63 @@ $pageTitle = 'Dashboard';
     <script>
         google.charts.load('current', { packages: ['corechart'], language: 'pt-BR' });
 
-        const dadosGraficos = [
-            {
-                id: 'chart-velocidade',
-                type: 'LineChart',
-                data: [
-                    ['Composição', 'Velocidade (km/h)'],
-                    ['C-01 (TRM.001)', 62],
-                    ['C-01 (TRM.002)', 74],
-                    ['V-12 (TRM.003)', 58],
-                    ['V-14 (TRM.004)', 81],
-                    ['T-08 (TRM.005)', 0]
-                ],
-                options: {
+        function desenharGraficos() {
+            if (typeof google === 'undefined' || !google.visualization) return;
+
+            // 1. Velocidade por composição (Barras + Linha de teto 80 km/h)
+            const elVelocidade = document.getElementById('chart-velocidade');
+            if (elVelocidade) {
+                const dataVel = google.visualization.arrayToDataTable([
+                    ['Composição', 'Velocidade (km/h)', { role: 'style' }, { role: 'annotation' }, 'Teto (80 km/h)'],
+                    ['C-01', 62, '#64748b', null, 80],
+                    ['C-02', 74, '#64748b', null, 80],
+                    ['V-12', 58, '#64748b', null, 80],
+                    ['V-14', 81, '#f59e0b', '81 km/h', 80],
+                    ['T-08', 4,  '#334155', 'Parada', 80]
+                ]);
+
+                const optVel = {
                     title: '',
                     backgroundColor: 'transparent',
                     legend: { position: 'none' },
+                    seriesType: 'bars',
+                    series: {
+                        1: {
+                            type: 'line',
+                            color: '#ef4444',
+                            lineDashStyle: [4, 4],
+                            lineWidth: 1.5,
+                            pointSize: 0,
+                            visibleInLegend: false
+                        }
+                    },
                     hAxis: {
-                        textStyle: { color: '#8fa3b8', fontName: 'JetBrains Mono', fontSize: 11 },
-                        gridlines: { color: 'rgba(255,255,255,0.04)' }
+                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                        gridlines: { color: 'transparent' }
                     },
                     vAxis: {
-                        textStyle: { color: '#8fa3b8', fontName: 'JetBrains Mono', fontSize: 11 },
                         minValue: 0,
                         maxValue: 100,
-                        gridlines: { color: 'rgba(255,255,255,0.06)' },
-                        baselineColor: 'rgba(255,255,255,0.15)'
+                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                        gridlines: { count: 6, color: 'rgba(255,255,255,0.05)' },
+                        minorGridlines: { count: 0 },
+                        baselineColor: 'rgba(255,255,255,0.1)'
                     },
-                    colors: ['#5271ff'],
-                    chartArea: { left: 42, top: 16, right: 18, bottom: 32, width: '92%', height: '80%' },
-                    pointSize: 5,
-                    lineWidth: 2
-                }
-            },
-            {
-                id: 'chart-temperatura',
-                type: 'LineChart',
-                data: [
-                    ['Dia', 'Média da Via (°C)', 'Teto Operacional'],
+                    chartArea: { left: 38, top: 18, right: 16, bottom: 32, width: '92%', height: '80%' },
+                    annotations: {
+                        textStyle: { fontName: 'Inter', fontSize: 10, color: '#f8fafc', bold: true }
+                    }
+                };
+
+                const chartVel = new google.visualization.ComboChart(elVelocidade);
+                chartVel.draw(dataVel, optVel);
+            }
+
+            // 2. Curva térmica da malha (Linha Âmbar + Linha limite 85 °C)
+            const elTemperatura = document.getElementById('chart-temperatura');
+            if (elTemperatura) {
+                const dataTemp = google.visualization.arrayToDataTable([
+                    ['Dia', 'Média da Via (°C)', 'Limite Seguro (85 °C)'],
                     ['Seg', 52, 85],
                     ['Ter', 56, 85],
                     ['Qua', 54, 85],
@@ -667,80 +683,78 @@ $pageTitle = 'Dashboard';
                     ['Sex', 64, 85],
                     ['Sáb', 55, 85],
                     ['Dom', 48, 85]
-                ],
-                options: {
+                ]);
+
+                const optTemp = {
                     title: '',
                     backgroundColor: 'transparent',
                     legend: {
                         position: 'top',
                         alignment: 'end',
-                        textStyle: { color: '#8fa3b8', fontName: 'JetBrains Mono', fontSize: 10 }
+                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 10 }
                     },
                     hAxis: {
-                        textStyle: { color: '#8fa3b8', fontName: 'JetBrains Mono', fontSize: 11 },
-                        gridlines: { color: 'rgba(255,255,255,0.04)' }
+                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                        gridlines: { color: 'transparent' }
                     },
                     vAxis: {
-                        textStyle: { color: '#8fa3b8', fontName: 'JetBrains Mono', fontSize: 11 },
                         minValue: 20,
                         maxValue: 100,
-                        gridlines: { color: 'rgba(255,255,255,0.06)' },
-                        baselineColor: 'rgba(255,255,255,0.15)'
+                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
+                        gridlines: { count: 5, color: 'rgba(255,255,255,0.05)' },
+                        minorGridlines: { count: 0 },
+                        baselineColor: 'rgba(255,255,255,0.1)'
                     },
-                    colors: ['#c1ff72', '#ef4444'],
-                    chartArea: { left: 42, top: 24, right: 18, bottom: 32, width: '92%', height: '76%' },
+                    colors: ['#f59e0b', '#ef4444'],
+                    chartArea: { left: 38, top: 24, right: 16, bottom: 32, width: '92%', height: '76%' },
                     pointSize: 4,
                     lineWidth: 2,
                     series: {
                         1: { lineDashStyle: [4, 4], pointSize: 0, lineWidth: 1.5 }
                     }
-                }
-            },
-            {
-                id: 'chart-status',
-                type: 'PieChart',
-                data: [
-                    ['Status da Malha', 'Sensores'],
-                    ['Nominal', <?= (int) $sensoresAtivosCount ?>],
-                    ['Alerta Térmico', 1],
+                };
+
+                const chartTemp = new google.visualization.LineChart(elTemperatura);
+                chartTemp.draw(dataTemp, optTemp);
+            }
+
+            // 3. Disponibilidade de sensores (Donut refinado com total no centro)
+            const elStatus = document.getElementById('chart-status');
+            if (elStatus) {
+                const dataSt = google.visualization.arrayToDataTable([
+                    ['Status', 'Quantidade'],
+                    ['Nominais', 8],
+                    ['Alerta térmico', 1],
                     ['Inoperante', 1]
-                ],
-                options: {
+                ]);
+
+                const optSt = {
                     title: '',
                     backgroundColor: 'transparent',
                     legend: {
                         position: 'bottom',
-                        textStyle: { color: '#8fa3b8', fontName: 'JetBrains Mono', fontSize: 11 }
+                        alignment: 'center',
+                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 }
                     },
-                    colors: ['#22c55e', '#f59e0b', '#ef4444'],
-                    chartArea: { left: 15, top: 8, right: 15, bottom: 30, width: '92%', height: '82%' },
-                    pieHole: 0.65,
+                    colors: ['#38bdf8', '#f59e0b', '#ef4444'],
+                    chartArea: { left: 10, top: 6, right: 10, bottom: 28, width: '94%', height: '84%' },
+                    pieHole: 0.72,
                     pieSliceBorderColor: '#0b1523',
                     pieSliceText: 'none'
-                }
+                };
+
+                const chartSt = new google.visualization.PieChart(elStatus);
+                chartSt.draw(dataSt, optSt);
             }
-        ];
-
-        function renderizarGraficosOperacionais() {
-            if (typeof google === 'undefined' || !google.visualization) return;
-
-            dadosGraficos.forEach(cfg => {
-                const el = document.getElementById(cfg.id);
-                if (!el) return;
-                const dataTable = google.visualization.arrayToDataTable(cfg.data);
-                const chart = new google.visualization[cfg.type](el);
-                chart.draw(dataTable, cfg.options);
-            });
         }
 
         google.charts.setOnLoadCallback(() => {
-            renderizarGraficosOperacionais();
+            desenharGraficos();
 
-            // Resize com debounce para manter estabilidade
             let timerRedim;
             window.addEventListener('resize', () => {
                 clearTimeout(timerRedim);
-                timerRedim = setTimeout(renderizarGraficosOperacionais, 120);
+                timerRedim = setTimeout(desenharGraficos, 120);
             });
         });
     </script>

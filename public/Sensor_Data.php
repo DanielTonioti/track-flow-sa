@@ -40,9 +40,6 @@ $pageTitle = 'Sensores';
                     <span>Sensores</span>
                 </nav>
                 <h1 class="ops-page-title">Sensores da Malha</h1>
-                <p class="ops-page-subtitle">
-                    Consulta e acompanhamento dos sensores instalados em trens e trilhos.
-                </p>
             </div>
 
             <div class="ops-header-actions">

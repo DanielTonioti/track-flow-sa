@@ -85,9 +85,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                     <span>Trilhos e Linhas</span>
                 </nav>
                 <h1 class="ops-page-title">Via Permanente — Trilhos e Linhas</h1>
-                <p class="ops-page-subtitle">
-                    Cadastre e mantenha segmentos de trilho utilizados para alocação de sensores fixos de via.
-                </p>
             </div>
 
             <div class="ops-header-actions">

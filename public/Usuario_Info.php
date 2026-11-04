@@ -144,9 +144,6 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                     <span><?= $ehProprioPerfil ? 'Meu Perfil' : sprintf('Ficha #OP-%03d', $id) ?></span>
                 </nav>
                 <h1 class="ops-page-title"><?= $ehProprioPerfil ? 'Meu Perfil' : 'Consulta de Funcionário' ?></h1>
-                <p class="ops-page-subtitle">
-                    Dossiê cadastral, localização de base ferroviária e composições vinculadas ao operador.
-                </p>
             </div>
 
             <div class="ops-header-actions">
@@ -181,24 +178,24 @@ $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
                         <h2 class="h4 brand-font fw-bold text-white mb-2"><?= $nomeUsuario ?></h2>
 
                         <?php if ($cargoReal === 'admin'): ?>
-                            <span class="ops-status-tag ops-status-nominal">
-                                <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>ADMINISTRADOR
+                            <span class="ops-role-badge ops-role-admin">
+                                <span class="ops-role-dot"></span>Administrador
                             </span>
                         <?php else: ?>
-                            <span class="ops-status-tag ops-status-info">
-                                <i class="bi bi-person-badge" aria-hidden="true"></i>OPERADOR FERROVIÁRIO
+                            <span class="ops-role-badge ops-role-func">
+                                <span class="ops-role-dot"></span>Funcionário
                             </span>
                         <?php endif; ?>
                     </div>
 
                     <div class="w-100 pt-3 mt-4 border-top border-light border-opacity-10 text-start">
                         <div class="d-flex justify-content-between align-items-center small mb-1">
-                            <span class="text-steel mono-font">CADASTRO</span>
+                            <span class="text-steel small">Cadastro</span>
                             <span class="text-white mono-font"><?= htmlspecialchars($criadoEm, ENT_QUOTES, 'UTF-8') ?></span>
                         </div>
                         <div class="d-flex justify-content-between align-items-center small">
-                            <span class="text-steel mono-font">TRENS ATRIBUÍDOS</span>
-                            <span class="text-volt mono-font fw-bold"><?= count($trensVinculados) ?></span>
+                            <span class="text-steel small">Trens atribuídos</span>
+                            <span class="text-warning mono-font fw-bold"><?= count($trensVinculados) ?></span>
                         </div>
                     </div>
                 </section>

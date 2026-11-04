@@ -110,9 +110,6 @@ $pageTitle = 'Editar Rota';
                     <span>Editar <?= sprintf('#RTA-%03d', (int) $id) ?></span>
                 </nav>
                 <h1 class="ops-page-title">Editar Rota</h1>
-                <p class="ops-page-subtitle">
-                    Ajuste parâmetros de quilometragem, duração prevista ou composição atribuída.
-                </p>
             </div>
 
             <div class="ops-header-actions">

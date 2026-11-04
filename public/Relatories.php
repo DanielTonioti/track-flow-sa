@@ -53,9 +53,6 @@ $pageTitle = 'Relatórios';
                     <span>Relatórios</span>
                 </nav>
                 <h1 class="ops-page-title">Relatórios</h1>
-                <p class="ops-page-subtitle">
-                    Consulta e filtragem de relatórios de leitura dos sensores.
-                </p>
             </div>
 
             <div class="ops-header-actions">

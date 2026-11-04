@@ -21,7 +21,7 @@
 
     /* Tipografia Técnica */
     --Fonte-padrao: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --Fonte-titulo: "League Spartan", system-ui, sans-serif;
+    --Fonte-titulo: "Space Grotesk", system-ui, sans-serif;
     --Fonte-mono: "JetBrains Mono", monospace;
     --Fonte-lucinda: "Lucida Sans", Geneva, Verdana, sans-serif;
 
@@ -1737,20 +1737,25 @@ label,
     --ops-text-muted:        var(--tf-raw-steel-400);
     --ops-text-dim:          #7c91a6;
 
-    --ops-data-blue:         var(--tf-raw-blue-500);
-    --ops-data-blue-hover:   var(--tf-raw-blue-400);
-    --ops-data-cyan:         var(--tf-raw-sky-400);
-    --ops-data-volt:         var(--tf-raw-volt-300);
-    --ops-focus-ring:        var(--tf-raw-sky-400);
+    --ops-accent:            #f59e0b;       /* Âmbar de sinalização ferroviária */
+    --ops-accent-hover:      #fbbf24;
+    --ops-accent-active:     #d97706;
+    --ops-accent-subtle:     rgba(245, 158, 11, 0.14);
+    --ops-accent-border:     rgba(245, 158, 11, 0.35);
+    --ops-focus-ring:        #f59e0b;
+    --ops-data-blue:         #475569;
+    --ops-data-cyan:         #38bdf8;
+    --ops-data-volt:         #c1ff72;
 
     --ops-status-nominal:    var(--tf-raw-green-500);
     --ops-status-warning:    var(--tf-raw-amber-500);
     --ops-status-critical:   var(--tf-raw-red-500);
     --ops-status-info:       var(--tf-raw-sky-400);
 
-    --ops-radius-sm:         4px;
-    --ops-radius-md:         6px;
-    --ops-radius-lg:         10px;
+    --ops-radius:            8px;
+    --ops-radius-sm:         8px;
+    --ops-radius-md:         8px;
+    --ops-radius-lg:         8px;
 }
 
 .navbar-brand-logo,
@@ -1797,8 +1802,9 @@ body.cco-dashboard-body {
 .ops-app-body [tabindex]:focus-visible,
 .cco-dashboard-body a:focus-visible,
 .cco-dashboard-body button:focus-visible {
-    outline: 2px solid var(--ops-focus-ring) !important;
+    outline: 2px solid var(--ops-accent) !important;
     outline-offset: 2px !important;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25) !important;
 }
 
 .menu-nav {
@@ -1810,9 +1816,9 @@ body.cco-dashboard-body {
 .ops-brand-mark {
     width: 38px;
     height: 38px;
-    border-radius: var(--ops-radius-md);
+    border-radius: var(--ops-radius);
     background-color: var(--ops-surface-elevated);
-    border: 1px solid rgba(82, 113, 255, 0.45);
+    border: 1px solid rgba(82, 113, 255, 0.35);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1827,7 +1833,7 @@ body.cco-dashboard-body {
     left: 6px;
     right: 6px;
     height: 2px;
-    background-color: var(--ops-data-volt);
+    background-color: var(--ops-data-volt, #c1ff72);
     border-radius: 2px;
 }
 
@@ -1886,12 +1892,12 @@ body.cco-dashboard-body {
 .ops-top-nav-link.active {
     color: #ffffff;
     font-weight: 600;
-    background-color: rgba(82, 113, 255, 0.16);
-    border-color: rgba(82, 113, 255, 0.48);
+    background-color: var(--ops-accent-subtle);
+    border-color: var(--ops-accent-border);
 }
 
 .ops-top-nav-link.active i {
-    color: var(--ops-data-volt);
+    color: var(--ops-accent);
 }
 
 .ops-role-caption {
@@ -1930,20 +1936,7 @@ body.cco-dashboard-body {
 
 .ops-page-header::after,
 .ops-rail-Rule {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -4px;
-    height: 3px;
-    background-image: repeating-linear-gradient(
-        90deg,
-        rgba(143, 163, 184, 0.25) 0,
-        rgba(143, 163, 184, 0.25) 1px,
-        transparent 1px,
-        transparent 10px
-    );
-    pointer-events: none;
+    display: none !important;
 }
 
 .ops-breadcrumb {
@@ -1951,10 +1944,8 @@ body.cco-dashboard-body {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.4rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
+    font-family: var(--Fonte-padrao);
+    font-size: 0.8rem;
     color: var(--ops-text-muted);
     margin-bottom: 0.35rem;
 }
@@ -1974,12 +1965,12 @@ body.cco-dashboard-body {
 }
 
 .ops-page-title {
-    font-family: 'League Spartan', system-ui, sans-serif;
-    font-size: clamp(1.45rem, 1.2rem + 1vw, 1.95rem);
-    font-weight: 800;
+    font-family: var(--Fonte-titulo);
+    font-size: clamp(1.5rem, 1.2rem + 1vw, 2.1rem);
+    font-weight: 700;
     color: #ffffff;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
     margin: 0;
 }
 
@@ -2018,15 +2009,14 @@ body.cco-dashboard-body {
 }
 
 .ops-kpi-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-family: var(--Fonte-padrao);
+    font-size: 0.78rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ops-text-muted);
+    color: var(--ops-text-secondary);
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
+    letter-spacing: normal;
 }
 
 .ops-kpi-value {
@@ -2061,14 +2051,15 @@ body.cco-dashboard-body {
 }
 
 .ops-panel-title {
-    font-family: 'League Spartan', system-ui, sans-serif;
-    font-size: 1.08rem;
-    font-weight: 700;
+    font-family: var(--Fonte-titulo);
+    font-size: 1.1rem;
+    font-weight: 600;
     color: #ffffff;
     margin: 0;
     display: flex;
     align-items: center;
     gap: 0.45rem;
+    letter-spacing: -0.01em;
 }
 
 .ops-panel-body {
@@ -2151,14 +2142,15 @@ body.cco-dashboard-body {
 }
 
 .ops-filter-pill.active {
-    background-color: rgba(82, 113, 255, 0.18);
-    border-color: var(--ops-data-blue);
-    color: #ffffff;
+    background-color: var(--ops-accent-subtle);
+    border-color: var(--ops-accent);
+    color: var(--ops-accent);
 }
 
 .ops-table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     font-size: 0.86rem;
 }
 
@@ -2167,13 +2159,13 @@ body.cco-dashboard-body {
 }
 
 .ops-table th {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
+    font-family: var(--Fonte-padrao);
+    font-size: 0.78rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ops-text-muted);
-    padding: 0.65rem 0.9rem;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ops-text-secondary);
+    padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--ops-border);
     background-color: rgba(255, 255, 255, 0.02);
     text-align: left;
@@ -2181,7 +2173,7 @@ body.cco-dashboard-body {
 }
 
 .ops-table-compact th {
-    padding: 0.4rem 0.65rem;
+    padding: 0.45rem 0.75rem;
     font-size: 0.68rem;
 }
 
@@ -2191,24 +2183,29 @@ body.cco-dashboard-body {
 }
 
 .ops-table td {
-    padding: 0.72rem 0.9rem;
-    border-bottom: 1px solid var(--ops-border-subtle);
+    padding: 0.8rem 1rem;
+    border-bottom: none;
     vertical-align: middle;
     color: var(--ops-text-main);
-    line-height: 1.35;
+    line-height: 1.4;
 }
 
 .ops-table-compact td {
-    padding: 0.38rem 0.65rem;
-    line-height: 1.2;
+    padding: 0.42rem 0.75rem;
+    line-height: 1.25;
 }
 
 .ops-table tbody tr:last-child td {
     border-bottom: none;
 }
 
+/* Fundo alternado sutil (zebra striping) para dispensar linhas finas */
+.ops-table tbody tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
 .ops-table tbody tr:hover td {
-    background-color: rgba(82, 113, 255, 0.05);
+    background-color: rgba(245, 158, 11, 0.04);
 }
 
 .ops-table tr.row-critical td {
@@ -2219,62 +2216,103 @@ body.cco-dashboard-body {
     background-color: rgba(245, 158, 11, 0.05);
 }
 
+/* Matrícula / Códigos: sem caixinha azul, apenas texto direto */
 .ops-code-badge {
-    display: inline-block;
+    display: inline;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--ops-data-cyan);
-    background-color: rgba(56, 189, 248, 0.1);
-    border: 1px solid rgba(56, 189, 248, 0.24);
-    border-radius: 3px;
-    padding: 0.1rem 0.42rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ops-text-secondary);
+    background: transparent;
+    border: none;
+    padding: 0;
     white-space: nowrap;
+    letter-spacing: 0.02em;
+}
+
+/* Badges ADMIN / FUNCIONÁRIO: texto simples com pontinho de status, sem ícone nem borda */
+.ops-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-family: var(--Fonte-padrao);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    line-height: 1;
+}
+
+.ops-role-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.ops-role-admin {
+    color: var(--ops-status-nominal, #4ade80);
+}
+.ops-role-admin .ops-role-dot,
+.ops-role-dot.dot-admin {
+    background-color: var(--ops-status-nominal, #22c55e);
+}
+
+.ops-role-func {
+    color: var(--ops-text-secondary, #b8c7d9);
+}
+.ops-role-func .ops-role-dot,
+.ops-role-dot.dot-func {
+    background-color: var(--ops-data-cyan, #38bdf8);
 }
 
 .ops-status-tag {
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.18rem 0.52rem;
-    border-radius: 4px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    border: 1px solid transparent;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--ops-radius, 8px);
+    font-family: var(--Fonte-padrao);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: normal;
+    text-transform: none;
+    border: none;
     white-space: nowrap;
 }
 
 .ops-status-nominal {
     background-color: rgba(34, 197, 94, 0.12);
     color: #4ade80;
-    border-color: rgba(34, 197, 94, 0.32);
+    border: none !important;
 }
 
 .ops-status-warning {
     background-color: rgba(245, 158, 11, 0.14);
     color: #fbbf24;
-    border-color: rgba(245, 158, 11, 0.35);
+    border: none !important;
 }
 
 .ops-status-critical {
     background-color: rgba(239, 68, 68, 0.16);
     color: #fca5a5;
-    border-color: rgba(239, 68, 68, 0.42);
+    border: none !important;
 }
 
 .ops-status-info {
     background-color: rgba(56, 189, 248, 0.12);
     color: #7dd3fc;
-    border-color: rgba(56, 189, 248, 0.32);
+    border: none !important;
 }
 
 .ops-status-neutral {
     background-color: rgba(143, 163, 184, 0.12);
     color: var(--ops-text-secondary);
-    border-color: rgba(143, 163, 184, 0.25);
+    border: none !important;
 }
 
 .ops-status-dot {
@@ -2322,15 +2360,16 @@ body.cco-dashboard-body {
 }
 
 .ops-btn-primary {
-    background-color: var(--ops-data-blue);
-    border-color: var(--ops-data-blue);
-    color: #ffffff;
+    background-color: var(--ops-accent);
+    border-color: var(--ops-accent);
+    color: #060d17 !important;
+    font-weight: 600;
 }
 
 .ops-btn-primary:hover {
-    background-color: var(--ops-data-blue-hover);
-    border-color: var(--ops-data-blue-hover);
-    color: #ffffff;
+    background-color: var(--ops-accent-hover);
+    border-color: var(--ops-accent-hover);
+    color: #060d17 !important;
 }
 
 .ops-btn-volt {
@@ -2396,18 +2435,23 @@ body.cco-dashboard-body {
 }
 
 .ops-form-section-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.74rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--ops-data-cyan);
-    padding-bottom: 0.45rem;
-    margin-bottom: 0.95rem;
+    font-family: var(--Fonte-padrao);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--ops-text-main);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.1rem;
     border-bottom: 1px solid var(--ops-border);
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.5rem;
+}
+
+.ops-form-section-title i {
+    color: var(--ops-text-secondary);
+    font-size: 1.05rem;
 }
 
 .ops-label {
@@ -2794,5 +2838,174 @@ body.cco-dashboard-body {
 
 .brand-font,
 .brand-font * {
-    font-family: 'League Spartan', system-ui, sans-serif !important;
+    font-family: var(--Fonte-titulo) !important;
 }
+
+
+/* ==========================================================================
+   PADRONIZAÇÃO UNIFORME DE BORDER-RADIUS (8px em tudo)
+   ========================================================================== */
+.ops-panel,
+.ops-kpi-strip,
+.ops-btn,
+.ops-btn-sm,
+.ops-search-input,
+.ops-filter-pill,
+.ops-input,
+.ops-select,
+.ops-textarea,
+.ops-form-control,
+.ops-modal .modal-content,
+.ops-alert,
+.ops-danger-zone,
+.ops-weather-metric,
+.ops-kv-item,
+.ops-empty-icon,
+.ops-status-tag,
+.CadastroTremForm,
+.CadastroTremList,
+.login-card,
+.modal-content,
+.form-control,
+.form-select,
+.btn,
+.card {
+    border-radius: var(--ops-radius, 8px) !important;
+}
+
+
+/* ==========================================================================
+   CARDS DE TELEMETRIA - DESTAQUES NUMÉRICOS & DONUT OVERLAY
+   ========================================================================== */
+.ops-card-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    padding: 0.85rem 1.1rem 0;
+}
+
+.ops-card-metric .ops-metric-val {
+    font-family: var(--Fonte-titulo);
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.ops-card-metric .ops-metric-sub {
+    font-family: var(--Fonte-padrao);
+    font-size: 0.82rem;
+    color: var(--ops-text-secondary);
+    font-weight: 400;
+}
+
+.ops-donut-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ops-donut-center {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.1;
+}
+
+.ops-donut-center .ops-donut-count {
+    font-family: var(--Fonte-titulo);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.ops-donut-center .ops-donut-label {
+    font-family: var(--Fonte-padrao);
+    font-size: 0.72rem;
+    color: var(--ops-text-secondary);
+    text-transform: lowercase;
+}
+
+
+/* ==========================================================================
+   SEÇÃO SENSORES DA MALHA - REFINAMENTO VISUAL
+   ========================================================================== */
+.ops-anomaly-banner {
+    background-color: rgba(245, 158, 11, 0.05);
+    border-left: 3px solid var(--ops-accent, #f59e0b);
+    padding: 0.65rem 1.15rem;
+}
+
+.ops-sensor-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--Fonte-padrao);
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.ops-sensor-status .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.ops-sensor-status.status-nominal {
+    color: var(--ops-text-secondary);
+    font-weight: 400;
+}
+.ops-sensor-status.status-nominal .status-dot {
+    background-color: #22c55e;
+    opacity: 0.85;
+}
+
+.ops-sensor-status.status-alerta {
+    color: #f59e0b;
+    font-weight: 600;
+}
+.ops-sensor-status.status-alerta .status-dot {
+    background-color: #f59e0b;
+}
+
+.ops-sensor-status.status-inoperante {
+    color: #fca5a5;
+    font-weight: 600;
+}
+.ops-sensor-status.status-inoperante .status-dot {
+    background-color: #ef4444;
+}
+
+.ops-table tr.row-sensor-alerta td:first-child {
+    box-shadow: inset 3px 0 0 #f59e0b;
+}
+
+.ops-table tr.row-sensor-inoperante td:first-child {
+    box-shadow: inset 3px 0 0 #ef4444;
+}
+
+.ops-table tr.row-sensor-alerta td,
+.ops-table tr.row-sensor-inoperante td {
+    background-color: transparent !important;
+}
+
+.ops-link-subtle {
+    color: var(--ops-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+.ops-link-subtle:hover {
+    color: #ffffff;
+    text-decoration: underline !important;
+}
+

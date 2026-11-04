@@ -96,9 +96,6 @@ $pageTitle = 'Editar Trem';
                     <span>Editar <?= sprintf('#TRM-%03d', (int) $id) ?></span>
                 </nav>
                 <h1 class="ops-page-title">Editar Composição Ferroviária</h1>
-                <p class="ops-page-subtitle">
-                    Atualize os dados ou altere o responsável pelo trem.
-                </p>
             </div>
 
             <div class="ops-header-actions">

@@ -298,9 +298,6 @@ $pageTitle = 'Editar Funcionário';
                     <span>Editar <?= sprintf('#OP-%03d', (int) $user['id']) ?></span>
                 </nav>
                 <h1 class="ops-page-title">Editar Funcionário</h1>
-                <p class="ops-page-subtitle">
-                    Atualize informações cadastrais, endereço base ou permissões de <strong><?= htmlspecialchars($user['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>.
-                </p>
             </div>
 
             <div class="ops-header-actions">

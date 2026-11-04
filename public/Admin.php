@@ -61,9 +61,6 @@ $pageTitle = 'Funcionários e Credenciais';
                     <span>Funcionários</span>
                 </nav>
                 <h1 class="ops-page-title">Funcionários</h1>
-                <p class="ops-page-subtitle">
-                    Consulte administradores e funcionários cadastrados na malha ferroviária.
-                </p>
             </div>
 
             <div class="ops-header-actions">
@@ -81,10 +78,10 @@ $pageTitle = 'Funcionários e Credenciais';
         <section class="ops-panel" aria-labelledby="titulo-tabela-equipe">
             <div class="ops-panel-header">
                 <h2 id="titulo-tabela-equipe" class="ops-panel-title">
-                    <i class="bi bi-person-lines-fill text-cyan" aria-hidden="true"></i>Quadro de Funcionários Cadastrados
+                    Quadro de funcionários cadastrados
                 </h2>
                 <span id="contador-usuarios" class="ops-status-tag ops-status-neutral">
-                    <?= count($funcionarios) ?> REGISTRO(S)
+                    <?= count($funcionarios) ?> funcionários
                 </span>
             </div>
 
@@ -155,18 +152,18 @@ $pageTitle = 'Funcionários e Credenciais';
                                         <?= htmlspecialchars((string) ($pessoa['email'] ?? ''), ENT_QUOTES, 'UTF-8') ?>
                                     </td>
                                     <?php if ($ehAdmin): ?>
-                                        <td class="text-end mono-font small">
+                                        <td class="text-end small text-steel">
                                             <?= htmlspecialchars(formatarTelefoneOperacional($pessoa['telefone'] ?? ''), ENT_QUOTES, 'UTF-8') ?>
                                         </td>
                                     <?php endif; ?>
                                     <td>
                                         <?php if ($cargoPessoa === 'admin'): ?>
-                                            <span class="ops-status-tag ops-status-nominal">
-                                                <i class="bi bi-shield-lock-fill" aria-hidden="true"></i>ADMIN
+                                            <span class="ops-role-badge ops-role-admin">
+                                                <span class="ops-role-dot"></span>Administrador
                                             </span>
                                         <?php else: ?>
-                                            <span class="ops-status-tag ops-status-info">
-                                                <i class="bi bi-person-badge" aria-hidden="true"></i>FUNCIONÁRIO
+                                            <span class="ops-role-badge ops-role-func">
+                                                <span class="ops-role-dot"></span>Funcionário
                                             </span>
                                         <?php endif; ?>
                                     </td>
@@ -207,10 +204,10 @@ $pageTitle = 'Funcionários e Credenciais';
                 </table>
             </div>
 
-            <div id="estado-busca-vazia" class="ops-empty-state d-none">
+            <div id="estado-busca-vazia" class="ops-empty-state d-none py-4">
                 <span class="ops-empty-icon"><i class="bi bi-search" aria-hidden="true"></i></span>
-                <p class="mb-1 fw-semibold text-white">Nenhum funcionário corresponde ao filtro aplicado.</p>
-                <p class="small text-steel mb-0">Limpe o termo de pesquisa ou altere o filtro de nível de acesso.</p>
+                <p class="mb-1 fw-semibold text-white">Nenhum funcionário encontrado.</p>
+                <p class="small text-steel mb-0">Tente buscar por outro termo ou limpe o filtro de nível de acesso.</p>
             </div>
         </section>
 
@@ -249,7 +246,7 @@ $pageTitle = 'Funcionários e Credenciais';
                 });
 
                 if (contador) {
-                    contador.textContent = visiveis + ' REGISTRO(S)';
+                    contador.textContent = visiveis + (visiveis === 1 ? ' funcionário' : ' funcionários');
                 }
                 if (vazioBox && linhas.length > 0) {
                     vazioBox.classList.toggle('d-none', visiveis > 0);
