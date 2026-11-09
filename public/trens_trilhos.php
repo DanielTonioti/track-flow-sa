@@ -113,7 +113,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                         <div class="d-flex align-items-center gap-2">
                             <span class="ops-status-tag ops-status-neutral"><?= count($listaTrens) ?> Trem(ns)</span>
                             <?php if ($usuarioEhAdmin): ?>
-                                <a href="cadastro_trens.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                <a href="cadastro_trens.php" class="ops-btn ops-btn-success ops-btn-sm">
                                     <i class="bi bi-plus-lg" aria-hidden="true"></i>Novo Trem
                                 </a>
                             <?php endif; ?>
@@ -179,11 +179,6 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                         data-ficha-edit-url="editar_trem.php?id=<?= $idTrem ?>">
                                                         Consultar
                                                     </button>
-                                                    <?php if ($usuarioEhAdmin): ?>
-                                                        <a href="editar_trem.php?id=<?= $idTrem ?>" class="ops-btn ops-btn-sm">
-                                                            Editar
-                                                        </a>
-                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         </tr>
@@ -196,7 +191,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                 <p class="mb-1 fw-semibold text-white">Nenhum trem cadastrado.</p>
                                                 <p class="small text-steel mb-3">Cadastre um trem para habilitar criação de rotas.</p>
                                                 <?php if ($usuarioEhAdmin): ?>
-                                                    <a href="cadastro_trens.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                                    <a href="cadastro_trens.php" class="ops-btn ops-btn-success ops-btn-sm">
                                                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Primeiro Trem
                                                     </a>
                                                 <?php endif; ?>
@@ -219,7 +214,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                         <div class="d-flex align-items-center gap-2">
                             <span class="ops-status-tag ops-status-neutral"><?= count($listaRotas) ?> Rota(s)</span>
                             <?php if ($usuarioEhAdmin): ?>
-                                <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                <a href="cadastro_rotas.php" class="ops-btn ops-btn-success ops-btn-sm">
                                     <i class="bi bi-plus-lg" aria-hidden="true"></i>Nova Rota
                                 </a>
                             <?php endif; ?>
@@ -287,11 +282,6 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                         data-ficha-edit-url="editar_rota.php?id=<?= $idRota ?>">
                                                         Consultar
                                                     </button>
-                                                    <?php if ($usuarioEhAdmin): ?>
-                                                        <a href="editar_rota.php?id=<?= $idRota ?>" class="ops-btn ops-btn-sm">
-                                                            Editar
-                                                        </a>
-                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         </tr>
@@ -304,7 +294,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                 <p class="mb-1 fw-semibold text-white">Nenhuma rota cadastrada.</p>
                                                 <p class="small text-steel mb-3">Cadastre a primeira rota.</p>
                                                 <?php if ($usuarioEhAdmin): ?>
-                                                    <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                                    <a href="cadastro_rotas.php" class="ops-btn ops-btn-success ops-btn-sm">
                                                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Primeira Rota
                                                     </a>
                                                 <?php endif; ?>
@@ -371,12 +361,12 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script src="../scripts/script_trens_trilhos.js"></script>
-    <script src="../scripts/pagination.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/script_trens_trilhos.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

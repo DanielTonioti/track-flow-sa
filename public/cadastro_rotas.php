@@ -362,12 +362,12 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-   <script src="../scripts/scriptRotas.js"></script>
-    <script src="../scripts/pagination.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+   <script defer src="../scripts/scriptRotas.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

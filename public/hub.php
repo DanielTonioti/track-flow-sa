@@ -293,16 +293,6 @@ $pageTitle = 'Dashboard';
                         <span class="text-steel small">
                             <?= escapar_html($dataAtualFormatada) ?>
                         </span>
-                        <div class="d-flex flex-wrap gap-2">
-                            <a href="Usuario_Info.php" class="ops-btn ops-btn-sm" aria-label="Acessar Perfil Operacional">
-                                Meu Perfil
-                            </a>
-                            <?php if ($ehAdmin): ?>
-                                <a href="trens_trilhos.php" class="ops-btn ops-btn-primary ops-btn-sm">
-                                   Frota e Rotas
-                                </a>
-                            <?php endif; ?>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -615,18 +605,13 @@ $pageTitle = 'Dashboard';
 
     </main>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../scripts/script_charts_hub.js"></script>
-
-    <!-- Script de Integração com Clima Open-Meteo -->
-    <script src="../scripts/scriptClima.js"></script>
-
-    <!-- Bootstrap Bundle JS e Script da Navbar -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="../scripts/script_charts_hub.js"></script>
+    <script defer src="../scripts/scriptClima.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script src="../scripts/pagination.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

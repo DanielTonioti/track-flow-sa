@@ -68,7 +68,7 @@ $pageTitle = 'Funcionários e Credenciais';
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Dashboard
                 </a>
                 <?php if ($ehAdmin): ?>
-                    <a href="cadastro_usuario.php" class="ops-btn ops-btn-primary" id="admin-button">
+                    <a href="cadastro_usuario.php" class="ops-btn ops-btn-success" id="admin-button">
                         <i class="bi bi-person-plus-fill" aria-hidden="true"></i>Adicionar Funcionário
                     </a>
                 <?php endif; ?>
@@ -209,12 +209,12 @@ $pageTitle = 'Funcionários e Credenciais';
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-   <script src="../scripts/scriptAdmin.js"></script>
-    <script src="../scripts/pagination.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+   <script defer src="../scripts/scriptAdmin.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>
