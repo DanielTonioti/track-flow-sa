@@ -119,7 +119,7 @@ $ufUsuario = htmlspecialchars(strtoupper((string) ($user['uf'] ?? $_SESSION["uf"
 $criadoEm = !empty($user['criado_em']) ? date('d/m/Y H:i', strtotime((string) $user['criado_em'])) : 'Registro ativo';
 
 $pageTitle = $ehProprioPerfil ? 'Meu Perfil' : 'Ficha de Funcionário';
-if (!$ehProprioPerfilA){
+if (!$ehProprioPerfil){
     redirecionarSeNaoAdmin();
 }
 ?>
