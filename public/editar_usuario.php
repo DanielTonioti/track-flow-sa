@@ -246,7 +246,6 @@ if (isset($_POST['CadastrarUsuario'])) {
 
                 header("Location: Admin.php");
                 exit();
-
             } else {
                 $erro = "Erro ao atualizar o usuário.";
 
@@ -323,7 +322,7 @@ $pageTitle = 'Editar Funcionário';
         <?php endif; ?>
 
         <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data" class="ops-panel mb-4">
-            <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <input type="hidden" name="id" value="<?= (int) $user['id'] ?>">
 
             <div class="ops-panel-body p-3 p-md-4">
@@ -498,7 +497,7 @@ $pageTitle = 'Editar Funcionário';
                             </label>
                         </div>
                     </div>
-
+                    <br>
                     <div class="col-12 col-md-5">
                         <label class="ops-label" for="avatar">Foto de perfil</label>
                         <?php if (!empty($user['avatar'])): ?>
@@ -523,6 +522,26 @@ $pageTitle = 'Editar Funcionário';
                         <span class="ops-help">PNG ou JPG até 5 MB. Deixe vazio para manter a foto atual.</span>
                     </div>
                 </div>
+                <br>
+                <section class="ops-danger-zone" aria-labelledby="titulo-danger-zone">
+                    <div>
+                        <h2 id="titulo-danger-zone" class="h6 fw-bold text-white mb-1 d-flex align-items-center gap-2">
+                            <i class="bi bi-exclamation-triangle-fill text-danger" aria-hidden="true"></i>Zona de Exclusão de Conta
+                        </h2>
+                        <p class="small text-steel mb-0">
+                            Remove permanentemente o acesso de <strong class="text-white"><?= htmlspecialchars($user['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>. Contas vinculadas como responsáveis por trens ativos são protegidas contra exclusão acidental.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="botaoExcluirUsuario"
+                        class="ops-btn ops-btn-danger-outline"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalConfirmarExclusaoUsuario">
+                        Excluir Funcionário
+                    </button>
+                </section>
 
             </div>
 
@@ -533,26 +552,6 @@ $pageTitle = 'Editar Funcionário';
                 </button>
             </div>
         </form>
-
-        <section class="ops-danger-zone" aria-labelledby="titulo-danger-zone">
-            <div>
-                <h2 id="titulo-danger-zone" class="h6 fw-bold text-white mb-1 d-flex align-items-center gap-2">
-                    <i class="bi bi-exclamation-triangle-fill text-danger" aria-hidden="true"></i>Zona de Exclusão de Conta
-                </h2>
-                <p class="small text-steel mb-0">
-                    Remove permanentemente o acesso de <strong class="text-white"><?= htmlspecialchars($user['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>. Contas vinculadas como responsáveis por trens ativos são protegidas contra exclusão acidental.
-                </p>
-            </div>
-
-            <button
-                type="button"
-                id="botaoExcluirUsuario"
-                class="ops-btn ops-btn-danger-outline"
-                data-bs-toggle="modal"
-                data-bs-target="#modalConfirmarExclusaoUsuario">
-                Excluir Funcionário
-            </button>
-        </section>
 
     </main>
 
@@ -594,4 +593,5 @@ $pageTitle = 'Editar Funcionário';
     <script src="../scripts/script_auth.js"></script>
 
 </body>
+
 </html>
