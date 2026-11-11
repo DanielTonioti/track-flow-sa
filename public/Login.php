@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 include "../infra/conn.php";
 $erro = "";
 
@@ -19,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->close();
 
         if ($funcionario && password_verify($senha, $funcionario["senha"])) {
+            session_regenerate_id(true);
             $_SESSION["id"] = $funcionario["id"];
             $_SESSION["usuario"] = $funcionario["nome"];
             $_SESSION["email"] = $funcionario["email"];
@@ -97,6 +100,7 @@ $pageTitle = 'Autenticação de Operador';
                 <?php endif; ?>
 
                 <form method="POST" action="" class="ops-panel p-4" novalidate>
+                    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
                     <div class="mb-3">
                         <label class="ops-label" for="usuario-email">
                             E-mail corporativo <span class="ops-required" aria-hidden="true">*</span>
@@ -125,19 +129,10 @@ $pageTitle = 'Autenticação de Operador';
                                 placeholder="Digite sua senha"
                                 autocomplete="current-password"
                                 required>
-                            <button
-                                type="button"
-                                class="ops-password-toggle"
-                                id="btn-toggle-senha"
-                                aria-label="Mostrar senha"
-                                aria-controls="usuario-senha">
-                                <i class="bi bi-eye" aria-hidden="true"></i>
-                            </button>
                         </div>
                     </div>
 
                     <button type="submit" class="ops-btn ops-btn-primary w-100 py-2 fs-6">
-                        <i class="bi bi-box-arrow-in-right" aria-hidden="true"></i>
                         <span>Entrar no Sistema</span>
                     </button>
 
@@ -160,30 +155,15 @@ $pageTitle = 'Autenticação de Operador';
                     </div>
                 </form>
             </div>
+            
         </section>
-
+       
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnToggle = document.getElementById('btn-toggle-senha');
-            const inputSenha = document.getElementById('usuario-senha');
-            if (btnToggle && inputSenha) {
-                btnToggle.addEventListener('click', function () {
-                    const oculto = inputSenha.type === 'password';
-                    inputSenha.type = oculto ? 'text' : 'password';
-                    btnToggle.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
-                    const icon = btnToggle.querySelector('i');
-                    if (icon) {
-                        icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
-                    }
-                });
-            }
-        });
-    </script>
+    <script defer src="../scripts/script_auth.js"></script>
 </body>
 
 </html>

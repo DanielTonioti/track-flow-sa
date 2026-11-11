@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once '../infra/conn.php';
 require_once 'components/start.php';
 redirecionarSeNaoAdmin();
@@ -121,7 +123,6 @@ $pageTitle = 'Editar Rota';
 
         <?php if ($erro !== ''): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -131,11 +132,10 @@ $pageTitle = 'Editar Rota';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Rota atualizada com sucesso</strong>
-                        <span>Os novos parâmetros do itinerário foram salvos.</span>
+                        
                     </div>
                     <a href="trens_trilhos.php" class="ops-btn ops-btn-sm">Ver Visão Geral</a>
                 </div>
@@ -143,9 +143,10 @@ $pageTitle = 'Editar Rota';
         <?php endif; ?>
 
         <form method="POST" class="ops-panel">
+            <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <div class="ops-panel-header">
                 <h2 class="ops-panel-title">
-                    <i class="bi bi-pencil-square text-volt" aria-hidden="true"></i>Ficha de Edição &mdash; <?= sprintf('#RTA-%03d', (int) $id) ?>
+                    Ficha de Edição &mdash; <?= sprintf('#RTA-%03d', (int) $id) ?>
                 </h2>
             </div>
 
@@ -201,7 +202,7 @@ $pageTitle = 'Editar Rota';
                 </div>
 
                 <div class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center" style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
-                    <span class="mono-font text-steel" style="font-size: 0.72rem;">VELOCIDADE MÉDIA PLANEJADA</span>
+                    <span class="mono-font text-steel" style="font-size: 0.72rem;">Velocidade média</span>
                     <strong id="preview-velocidade-edit" class="mono-font text-cyan small">&mdash; km/h</strong>
                 </div>
 
@@ -223,35 +224,18 @@ $pageTitle = 'Editar Rota';
             <div class="ops-panel-footer">
                 <a href="cadastro_rotas.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="atualizar-rota" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                    Salvar Alterações
                 </button>
             </div>
         </form>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const dEl = document.getElementById('distancia_km');
-            const tEl = document.getElementById('tempo_previsto_min');
-            const out = document.getElementById('preview-velocidade-edit');
-            function calc() {
-                if (!dEl || !tEl || !out) return;
-                const d = parseFloat(dEl.value);
-                const t = parseFloat(tEl.value);
-                out.textContent = (d > 0 && t > 0) ? (d / (t / 60)).toFixed(1).replace('.', ',') + ' km/h' : '— km/h';
-            }
-            if (dEl && tEl) {
-                dEl.addEventListener('input', calc);
-                tEl.addEventListener('input', calc);
-                calc();
-            }
-        });
-    </script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/script_editar_rota.js"></script>
 </body>
 
 </html>

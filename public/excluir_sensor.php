@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'components/csrf.php';
+validarTokenCSRF();
 require_once 'components/start.php';
 
 redirecionarSeNaoAdmin();
@@ -7,7 +9,12 @@ redirecionarSeNaoAdmin();
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 include "../infra/conn.php";
 
-$id = (int) ($_GET['id'] ?? $_POST['id'] ?? 0);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: Sensor_Manage.php");
+    exit();
+}
+
+$id = (int) ($_POST['id'] ?? 0);
 
 if ($id <= 0) {
     header("Location: Sensor_Manage.php");

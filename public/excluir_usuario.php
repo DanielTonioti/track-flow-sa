@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'components/csrf.php';
+validarTokenCSRF();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
 
@@ -8,21 +10,19 @@ redirecionarSeNaoAdmin();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $id = isset($_POST['id_excluir']) ? (int) $_POST['id_excluir'] : 0;
-    $cancel = 0;
-    $sql2 = "SELECT * FROM trem WHERE responsavel_usuario_id = $id";
-    $result = mysqli_query($db, $sql2);
-    while ($joshua = $result->fetch_assoc())
-        {
-        if (isset($joshua['id']));
-        {
-        $cancel = 1;
-        }
-        }
-
     if ($id <= 0) {
         header("Location: Admin.php");
         exit();
     }
+
+    $cancel = 0;
+    $stmtTrem = $db->prepare("SELECT id FROM trem WHERE responsavel_usuario_id = ? LIMIT 1");
+    $stmtTrem->bind_param('i', $id);
+    $stmtTrem->execute();
+    if ($stmtTrem->get_result()->num_rows > 0) {
+        $cancel = 1;
+    }
+    $stmtTrem->close();
 
     $idSessao = (int) ($_SESSION['id'] ?? 0);
 

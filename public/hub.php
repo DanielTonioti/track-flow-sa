@@ -291,18 +291,8 @@ $pageTitle = 'Dashboard';
 
                     <div class="d-flex flex-wrap align-items-center justify-content-between pt-3 mt-3 border-top border-light border-opacity-10 gap-2">
                         <span class="text-steel small">
-                            <i class="bi bi-calendar3 me-1 text-warning" aria-hidden="true"></i><?= escapar_html($dataAtualFormatada) ?>
+                            <?= escapar_html($dataAtualFormatada) ?>
                         </span>
-                        <div class="d-flex flex-wrap gap-2">
-                            <a href="Usuario_Info.php" class="ops-btn ops-btn-sm" aria-label="Acessar Perfil Operacional">
-                                <i class="bi bi-person-vcard" aria-hidden="true"></i>Meu Perfil
-                            </a>
-                            <?php if ($ehAdmin): ?>
-                                <a href="trens_trilhos.php" class="ops-btn ops-btn-primary ops-btn-sm">
-                                    <i class="bi bi-train-front" aria-hidden="true"></i>Frota e Rotas
-                                </a>
-                            <?php endif; ?>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -382,69 +372,71 @@ $pageTitle = 'Dashboard';
             </div>
         </section>
 
-        <section class="row g-3 mb-3" aria-label="Curvas de Telemetria e Monitoramento em Tempo Real">
-
-            <!-- Gráfico 1: Velocidade por Composição (km/h) -->
-            <div class="col-12 col-lg-4">
-                <div class="ops-panel h-100 d-flex flex-column">
-                    <div class="ops-panel-header">
-                        <h2 class="ops-panel-title mb-0">Velocidade por composição</h2>
-                    </div>
-                    <div class="ops-card-metric">
-                        <span class="ops-metric-val">1</span>
-                        <span class="ops-metric-sub">acima do limite de 80 km/h</span>
-                    </div>
-                    <div class="ops-panel-body flex-grow-1 p-2">
-                        <div id="chart-velocidade" class="ops-chart-container"></div>
-                    </div>
+        <section class="ops-panel mb-3" aria-label="Curvas de Telemetria e Monitoramento em Tempo Real">
+            <div class="ops-panel-header align-items-center">
+                <h2 class="ops-panel-title mb-0">Indicadores operacionais</h2>
+                <div class="d-flex align-items-center gap-2">
+                    <button type="button" class="ops-btn ops-btn-ghost ops-btn-sm ops-carousel-btn" data-carousel="prev" aria-label="Gráfico anterior">
+                        <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="ops-btn ops-btn-ghost ops-btn-sm ops-carousel-btn" data-carousel="next" aria-label="Próximo gráfico">
+                        <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- Gráfico 2: Curva Térmica da Malha (°C) -->
-            <div class="col-12 col-lg-4">
-                <div class="ops-panel h-100 d-flex flex-column">
-                    <div class="ops-panel-header">
-                        <h2 class="ops-panel-title mb-0">Curva térmica da malha</h2>
-                    </div>
-                    <div class="ops-card-metric">
-                        <span class="ops-metric-val">64 °C</span>
-                        <span class="ops-metric-sub">pico registrado na semana</span>
-                    </div>
-                    <div class="ops-panel-body flex-grow-1 p-2">
-                        <div id="chart-temperatura" class="ops-chart-container"></div>
-                    </div>
-                </div>
-            </div>
+            <div class="ops-chart-carousel">
+                <div class="ops-chart-track" id="chart-carousel-track">
+                    <article class="ops-chart-slide is-active">
+                        <div class="ops-card-metric">
+                            <span class="ops-metric-val">1</span>
+                            <span class="ops-metric-sub">acima do limite de 80 km/h</span>
+                        </div>
+                        <div class="ops-panel-body flex-grow-1 p-2 pt-0">
+                            <div id="chart-velocidade" class="ops-chart-container"></div>
+                        </div>
+                    </article>
 
-            <!-- Gráfico 3: Disponibilidade de Sensores (%) -->
-            <div class="col-12 col-lg-4">
-                <div class="ops-panel h-100 d-flex flex-column">
-                    <div class="ops-panel-header">
-                        <h2 class="ops-panel-title mb-0">Disponibilidade de sensores</h2>
-                    </div>
-                    <div class="ops-card-metric">
-                        <span class="ops-metric-val">8 de 10</span>
-                        <span class="ops-metric-sub">sensores operando normalmente</span>
-                    </div>
-                    <div class="ops-panel-body flex-grow-1 p-2">
-                        <div class="ops-donut-wrap">
-                            <div id="chart-status" class="ops-chart-container"></div>
-                            <div class="ops-donut-center">
-                                <span class="ops-donut-count">10</span>
-                                <span class="ops-donut-label">sensores</span>
+                    <article class="ops-chart-slide">
+                        <div class="ops-card-metric">
+                            <span class="ops-metric-val">64 °C</span>
+                            <span class="ops-metric-sub">pico registrado na semana</span>
+                        </div>
+                        <div class="ops-panel-body flex-grow-1 p-2 pt-0">
+                            <div id="chart-temperatura" class="ops-chart-container"></div>
+                        </div>
+                    </article>
+
+                    <article class="ops-chart-slide">
+                        <div class="ops-card-metric">
+                            <span class="ops-metric-val text-volt">8 de 10</span>
+                            <span class="ops-metric-sub">sensores operando normalmente</span>
+                        </div>
+                        <div class="ops-panel-body flex-grow-1 p-2 pt-0">
+                            <div class="ops-donut-wrap">
+                                <div id="chart-status" class="ops-chart-container"></div>
+                                <div class="ops-donut-center">
+                                    <span class="ops-donut-count">10</span>
+                                    <span class="ops-donut-label">sensores</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
 
+            <div class="ops-chart-dots" aria-label="Navegação do carrossel de gráficos">
+                <button type="button" class="ops-chart-dot is-active" data-slide="0" aria-label="Exibir slide 1"></button>
+                <button type="button" class="ops-chart-dot" data-slide="1" aria-label="Exibir slide 2"></button>
+                <button type="button" class="ops-chart-dot" data-slide="2" aria-label="Exibir slide 3"></button>
+            </div>
         </section>
 
         <section class="ops-panel mb-3" aria-label="Sensores da malha ferroviária">
 
             <div class="ops-panel-header">
                 <div class="d-flex align-items-baseline gap-2">
-                    <h2 class="ops-panel-title mb-0">Sensores da malha</h2>
+                    <h2 class="ops-panel-title mb-0">Sensores</h2>
                     <span class="text-steel small"><?= count($sensores) ?> sensores</span>
                 </div>
 
@@ -472,7 +464,7 @@ $pageTitle = 'Dashboard';
                     <!-- Painel 1: Em composições -->
                     <div class="col-12 col-lg-6 border-end border-light border-opacity-10">
                         <div class="py-2 px-3 border-bottom border-light border-opacity-10" style="background: rgba(255,255,255,0.015);">
-                            <span class="text-white fw-semibold small">Em composições</span>
+                            <span class="text-white fw-semibold small">No trem</span>
                         </div>
 
                         <div class="table-responsive">
@@ -519,7 +511,6 @@ $pageTitle = 'Dashboard';
                                             <td class="text-end">
                                                 <div class="ops-sensor-status <?= $statusClass ?>">
                                                     <span class="status-dot"></span>
-                                                    <span><?= $statusLabel ?></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -577,7 +568,6 @@ $pageTitle = 'Dashboard';
                                             <td class="text-end">
                                                 <div class="ops-sensor-status <?= $statusClass ?>">
                                                     <span class="status-dot"></span>
-                                                    <span><?= $statusLabel ?></span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -615,158 +605,13 @@ $pageTitle = 'Dashboard';
 
     </main>
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
-        google.charts.load('current', { packages: ['corechart'], language: 'pt-BR' });
-
-        function desenharGraficos() {
-            if (typeof google === 'undefined' || !google.visualization) return;
-
-            // 1. Velocidade por composição (Barras + Linha de teto 80 km/h)
-            const elVelocidade = document.getElementById('chart-velocidade');
-            if (elVelocidade) {
-                const dataVel = google.visualization.arrayToDataTable([
-                    ['Composição', 'Velocidade (km/h)', { role: 'style' }, { role: 'annotation' }, 'Teto (80 km/h)'],
-                    ['C-01', 62, '#64748b', null, 80],
-                    ['C-02', 74, '#64748b', null, 80],
-                    ['V-12', 58, '#64748b', null, 80],
-                    ['V-14', 81, '#f59e0b', '81 km/h', 80],
-                    ['T-08', 4,  '#334155', 'Parada', 80]
-                ]);
-
-                const optVel = {
-                    title: '',
-                    backgroundColor: 'transparent',
-                    legend: { position: 'none' },
-                    seriesType: 'bars',
-                    series: {
-                        1: {
-                            type: 'line',
-                            color: '#ef4444',
-                            lineDashStyle: [4, 4],
-                            lineWidth: 1.5,
-                            pointSize: 0,
-                            visibleInLegend: false
-                        }
-                    },
-                    hAxis: {
-                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
-                        gridlines: { color: 'transparent' }
-                    },
-                    vAxis: {
-                        minValue: 0,
-                        maxValue: 100,
-                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
-                        gridlines: { count: 6, color: 'rgba(255,255,255,0.05)' },
-                        minorGridlines: { count: 0 },
-                        baselineColor: 'rgba(255,255,255,0.1)'
-                    },
-                    chartArea: { left: 38, top: 18, right: 16, bottom: 32, width: '92%', height: '80%' },
-                    annotations: {
-                        textStyle: { fontName: 'Inter', fontSize: 10, color: '#f8fafc', bold: true }
-                    }
-                };
-
-                const chartVel = new google.visualization.ComboChart(elVelocidade);
-                chartVel.draw(dataVel, optVel);
-            }
-
-            // 2. Curva térmica da malha (Linha Âmbar + Linha limite 85 °C)
-            const elTemperatura = document.getElementById('chart-temperatura');
-            if (elTemperatura) {
-                const dataTemp = google.visualization.arrayToDataTable([
-                    ['Dia', 'Média da Via (°C)', 'Limite Seguro (85 °C)'],
-                    ['Seg', 52, 85],
-                    ['Ter', 56, 85],
-                    ['Qua', 54, 85],
-                    ['Qui', 61, 85],
-                    ['Sex', 64, 85],
-                    ['Sáb', 55, 85],
-                    ['Dom', 48, 85]
-                ]);
-
-                const optTemp = {
-                    title: '',
-                    backgroundColor: 'transparent',
-                    legend: {
-                        position: 'top',
-                        alignment: 'end',
-                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 10 }
-                    },
-                    hAxis: {
-                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
-                        gridlines: { color: 'transparent' }
-                    },
-                    vAxis: {
-                        minValue: 20,
-                        maxValue: 100,
-                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 },
-                        gridlines: { count: 5, color: 'rgba(255,255,255,0.05)' },
-                        minorGridlines: { count: 0 },
-                        baselineColor: 'rgba(255,255,255,0.1)'
-                    },
-                    colors: ['#f59e0b', '#ef4444'],
-                    chartArea: { left: 38, top: 24, right: 16, bottom: 32, width: '92%', height: '76%' },
-                    pointSize: 4,
-                    lineWidth: 2,
-                    series: {
-                        1: { lineDashStyle: [4, 4], pointSize: 0, lineWidth: 1.5 }
-                    }
-                };
-
-                const chartTemp = new google.visualization.LineChart(elTemperatura);
-                chartTemp.draw(dataTemp, optTemp);
-            }
-
-            // 3. Disponibilidade de sensores (Donut refinado com total no centro)
-            const elStatus = document.getElementById('chart-status');
-            if (elStatus) {
-                const dataSt = google.visualization.arrayToDataTable([
-                    ['Status', 'Quantidade'],
-                    ['Nominais', 8],
-                    ['Alerta térmico', 1],
-                    ['Inoperante', 1]
-                ]);
-
-                const optSt = {
-                    title: '',
-                    backgroundColor: 'transparent',
-                    legend: {
-                        position: 'bottom',
-                        alignment: 'center',
-                        textStyle: { color: '#94a3b8', fontName: 'Inter', fontSize: 11 }
-                    },
-                    colors: ['#38bdf8', '#f59e0b', '#ef4444'],
-                    chartArea: { left: 10, top: 6, right: 10, bottom: 28, width: '94%', height: '84%' },
-                    pieHole: 0.72,
-                    pieSliceBorderColor: '#0b1523',
-                    pieSliceText: 'none'
-                };
-
-                const chartSt = new google.visualization.PieChart(elStatus);
-                chartSt.draw(dataSt, optSt);
-            }
-        }
-
-        google.charts.setOnLoadCallback(() => {
-            desenharGraficos();
-
-            let timerRedim;
-            window.addEventListener('resize', () => {
-                clearTimeout(timerRedim);
-                timerRedim = setTimeout(desenharGraficos, 120);
-            });
-        });
-    </script>
-
-    <!-- Script de Integração com Clima Open-Meteo -->
-    <script src="../scripts/scriptClima.js"></script>
-
-    <!-- Bootstrap Bundle JS e Script da Navbar -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="../scripts/script_charts_hub.js"></script>
+    <script defer src="../scripts/scriptClima.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

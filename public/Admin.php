@@ -68,7 +68,7 @@ $pageTitle = 'Funcionários e Credenciais';
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Dashboard
                 </a>
                 <?php if ($ehAdmin): ?>
-                    <a href="cadastro_usuario.php" class="ops-btn ops-btn-primary" id="admin-button">
+                    <a href="cadastro_usuario.php" class="ops-btn ops-btn-success" id="admin-button">
                         <i class="bi bi-person-plus-fill" aria-hidden="true"></i>Adicionar Funcionário
                     </a>
                 <?php endif; ?>
@@ -76,14 +76,6 @@ $pageTitle = 'Funcionários e Credenciais';
         </div>
 
         <section class="ops-panel" aria-labelledby="titulo-tabela-equipe">
-            <div class="ops-panel-header">
-                <h2 id="titulo-tabela-equipe" class="ops-panel-title">
-                    Quadro de funcionários cadastrados
-                </h2>
-                <span id="contador-usuarios" class="ops-status-tag ops-status-neutral">
-                    <?= count($funcionarios) ?> funcionários
-                </span>
-            </div>
 
             <div class="ops-toolbar">
                 <div class="ops-search-wrap">
@@ -114,13 +106,15 @@ $pageTitle = 'Funcionários e Credenciais';
                     <thead>
                         <tr>
                             <th scope="col">Matrícula</th>
-                            <th scope="col">Nome / Cidade</th>
+                            <th scope="col">Nome & Cidade</th>
                             <th scope="col">E-mail Corporativo</th>
                             <?php if ($ehAdmin): ?>
                                 <th scope="col" class="text-end">Telefone</th>
                             <?php endif; ?>
                             <th scope="col">Nível de Acesso</th>
+                            <?php if ($ehAdmin): ?>
                             <th scope="col" class="text-end">Ações</th>
+                            <?php endif; ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -167,19 +161,21 @@ $pageTitle = 'Funcionários e Credenciais';
                                             </span>
                                         <?php endif; ?>
                                     </td>
+                                    <?php if ($ehAdmin): ?>
                                     <td class="text-end">
                                         <div class="d-inline-flex flex-wrap justify-content-end gap-1">
                                             <a href="Usuario_Info.php?id=<?= $idPessoa ?>"
                                                 class="ops-btn ops-btn-ghost ops-btn-sm"
                                                 title="Consultar ficha completa de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
-                                                <i class="bi bi-eye" aria-hidden="true"></i>Consultar
+                                                Informações
                                             </a>
-                                            <?php if ($ehAdmin): ?>
+    
                                                 <a href="editar_usuario.php?id=<?= $idPessoa ?>"
                                                     class="ops-btn ops-btn-sm"
                                                     title="Editar cadastro de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
-                                                    <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
+                                                    Editar
                                                 </a>
+                                      
                                             <?php endif; ?>
                                         </div>
                                     </td>
@@ -213,63 +209,12 @@ $pageTitle = 'Funcionários e Credenciais';
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const inputBusca = document.getElementById('busca-funcionario');
-            const botoesFiltro = document.querySelectorAll('[data-role-filter]');
-            const linhas = document.querySelectorAll('#tabela-funcionarios tbody tr[data-role]');
-            const contador = document.getElementById('contador-usuarios');
-            const vazioBox = document.getElementById('estado-busca-vazia');
-
-            let roleAtiva = 'todos';
-
-            function aplicarFiltros() {
-                const termo = (inputBusca ? inputBusca.value : '').trim().toLowerCase();
-                let visiveis = 0;
-
-                linhas.forEach(function (tr) {
-                    const roleLinha = tr.getAttribute('data-role') || '';
-                    const buscaLinha = tr.getAttribute('data-search') || '';
-                    const bateRole = (roleAtiva === 'todos' || roleLinha === roleAtiva);
-                    const bateTermo = (termo === '' || buscaLinha.indexOf(termo) !== -1);
-
-                    if (bateRole && bateTermo) {
-                        tr.classList.remove('d-none');
-                        visiveis++;
-                    } else {
-                        tr.classList.add('d-none');
-                    }
-                });
-
-                if (contador) {
-                    contador.textContent = visiveis + (visiveis === 1 ? ' funcionário' : ' funcionários');
-                }
-                if (vazioBox && linhas.length > 0) {
-                    vazioBox.classList.toggle('d-none', visiveis > 0);
-                }
-            }
-
-            if (inputBusca) {
-                inputBusca.addEventListener('input', aplicarFiltros);
-            }
-
-            botoesFiltro.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    roleAtiva = btn.getAttribute('data-role-filter') || 'todos';
-                    botoesFiltro.forEach(function (b) {
-                        const ativo = (b === btn);
-                        b.classList.toggle('active', ativo);
-                        b.setAttribute('aria-pressed', ativo ? 'true' : 'false');
-                    });
-                    aplicarFiltros();
-                });
-            });
-        });
-    </script>
+    <script defer src="../scripts/script_navbar.js"></script>
+   <script defer src="../scripts/scriptAdmin.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

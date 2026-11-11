@@ -127,13 +127,33 @@
         });
 
         const url = `https://api.open-meteo.com/v1/forecast?${params.toString()}`;
+        const cacheKey = `tf-clima-${lat}-${lon}`;
+
+        const renderizarDados = (atual, horarioStr) => {
+            const temp = Number(atual.temperature_2m ?? atual.temperature);
+            const sensacao = Number(atual.apparent_temperature ?? temp);
+            const umidade = atual.relative_humidity_2m ?? "--";
+            const codeWMO = Number(atual.weather_code ?? atual.weathercode ?? 0);
+            const info = decodificarWMO(codeWMO);
+
+            if (elLocalizacao) elLocalizacao.textContent = localNome;
+            if (elTemp) elTemp.textContent = Number.isFinite(temp) ? `${temp.toFixed(1)} °C` : "-- °C";
+            if (elSensacao) elSensacao.textContent = Number.isFinite(sensacao) ? `${sensacao.toFixed(1)} °C` : "-- °C";
+            if (elUmidade) elUmidade.textContent = `${umidade}%`;
+            if (elIcone) elIcone.innerHTML = `<i class="bi ${info.iconeClasse}" aria-hidden="true"></i>`;
+            if (elCondicao) elCondicao.textContent = info.texto;
+            if (elAtualizacao) elAtualizacao.textContent = `Atualizado às ${horarioStr}`;
+
+            if (elAlertaExtremo) {
+                elAlertaExtremo.classList.toggle("d-none", !info.severo);
+            }
+        };
 
         try {
             const resposta = await fetch(url, {
                 method: "GET",
                 headers: { "Accept": "application/json" },
-                signal: controller.signal,
-                cache: "no-store"
+                signal: controller.signal
             });
 
             clearTimeout(timeoutId);
@@ -155,43 +175,12 @@
                 throw new Error("Dados meteorológicos não disponíveis no momento.");
             }
 
-            const temp = Number(atual.temperature_2m ?? atual.temperature);
-            const sensacao = Number(atual.apparent_temperature ?? temp);
-            const umidade = atual.relative_humidity_2m ?? "--";
-            const codeWMO = Number(atual.weather_code ?? atual.weathercode ?? 0);
+            const horaStr = formatarHora(new Date());
+            renderizarDados(atual, horaStr);
 
-            const info = decodificarWMO(codeWMO);
-
-            if (elLocalizacao) {
-                elLocalizacao.textContent = localNome;
-            }
-            if (elTemp) {
-                elTemp.textContent = Number.isFinite(temp) ? `${temp.toFixed(1)} °C` : "-- °C";
-            }
-            if (elSensacao) {
-                elSensacao.textContent = Number.isFinite(sensacao) ? `${sensacao.toFixed(1)} °C` : "-- °C";
-            }
-            if (elUmidade) {
-                elUmidade.textContent = `${umidade}%`;
-            }
-            if (elIcone) {
-                elIcone.innerHTML = `<i class="bi ${info.iconeClasse}" aria-hidden="true"></i>`;
-            }
-            if (elCondicao) {
-                elCondicao.textContent = info.texto;
-            }
-            if (elAtualizacao) {
-                elAtualizacao.textContent = `Atualizado às ${formatarHora(new Date())}`;
-            }
-
-            // Exibe alerta meteorológico SOMENTE em caso de tempestades severas extremas (WMO 95, 96, 99)
-            if (elAlertaExtremo) {
-                if (info.severo) {
-                    elAlertaExtremo.classList.remove("d-none");
-                } else {
-                    elAlertaExtremo.classList.add("d-none");
-                }
-            }
+            try {
+                sessionStorage.setItem(cacheKey, JSON.stringify({ ts: Date.now(), atual, horaStr }));
+            } catch (_) {}
         } catch (erro) {
             clearTimeout(timeoutId);
 
@@ -221,6 +210,38 @@
         if (btn) {
             btn.addEventListener("click", consultarClima);
         }
-        consultarClima();
+
+        const widget = document.getElementById("widget-clima-cco");
+        if (!widget) return;
+
+        const lat = parseFloat(widget.getAttribute("data-lat")) || CONFIG_CLIMA.latitude;
+        const lon = parseFloat(widget.getAttribute("data-lon")) || CONFIG_CLIMA.longitude;
+        const cacheKey = `tf-clima-${lat}-${lon}`;
+
+        try {
+            const raw = sessionStorage.getItem(cacheKey);
+            if (raw) {
+                const cached = JSON.parse(raw);
+                if (cached && cached.atual && (Date.now() - cached.ts) < 600000) {
+                    const info = decodificarWMO(Number(cached.atual.weather_code ?? cached.atual.weathercode ?? 0));
+                    const elTemp = document.getElementById("clima-temperatura");
+                    const elSensacao = document.getElementById("clima-sensacao");
+                    const elUmidade = document.getElementById("clima-umidade");
+                    const elIcone = document.getElementById("clima-icone");
+                    const elCondicao = document.getElementById("clima-condicao");
+                    const elAtualizacao = document.getElementById("clima-atualizacao");
+                    if (elTemp) elTemp.textContent = `${Number(cached.atual.temperature_2m ?? cached.atual.temperature).toFixed(1)} °C`;
+                    if (elSensacao) elSensacao.textContent = `${Number(cached.atual.apparent_temperature ?? cached.atual.temperature_2m).toFixed(1)} °C`;
+                    if (elUmidade) elUmidade.textContent = `${cached.atual.relative_humidity_2m ?? "--"}%`;
+                    if (elIcone) elIcone.innerHTML = `<i class="bi ${info.iconeClasse}" aria-hidden="true"></i>`;
+                    if (elCondicao) elCondicao.textContent = info.texto;
+                    if (elAtualizacao) elAtualizacao.textContent = `Atualizado às ${cached.horaStr}`;
+                    return;
+                }
+            }
+        } catch (_) {}
+
+        const runIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 150));
+        runIdle(consultarClima);
     });
 })();

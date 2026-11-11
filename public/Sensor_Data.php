@@ -39,7 +39,7 @@ $pageTitle = 'Sensores';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Sensores</span>
                 </nav>
-                <h1 class="ops-page-title">Sensores da Malha</h1>
+                <h1 class="ops-page-title">Sensores Cadastrados</h1>
             </div>
 
             <div class="ops-header-actions">
@@ -48,10 +48,10 @@ $pageTitle = 'Sensores';
                 </a>
                 <?php if ($ehAdmin): ?>
                     <a href="Sensor_Manage.php" class="ops-btn">
-                        <i class="bi bi-sliders" aria-hidden="true"></i>Gerenciar
+                        Gerenciar
                     </a>
                     <a href="Sensor.php" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Sensor
+                        Cadastrar Sensor
                     </a>
                 <?php endif; ?>
             </div>
@@ -60,9 +60,9 @@ $pageTitle = 'Sensores';
         <section class="ops-panel" aria-labelledby="titulo-painel-sensores">
             <div class="ops-panel-header">
                 <h2 id="titulo-painel-sensores" class="ops-panel-title">
-                    <i class="bi bi-cpu text-cyan" aria-hidden="true"></i>Lista de Sensores
+                    Lista de Sensores
                 </h2>
-                <span class="ops-status-tag ops-status-neutral"><?= count($sensoresBanco) ?> REGISTRO(S)</span>
+                <span class="ops-status-tag ops-status-neutral"><?= count($sensoresBanco) ?> Regristro(s)</span>
             </div>
 
             <div class="table-responsive">
@@ -94,7 +94,7 @@ $pageTitle = 'Sensores';
                                     </td>
                                     <td>
                                         <span class="ops-status-tag ops-status-nominal">
-                                            <i class="bi bi-check-circle-fill" aria-hidden="true"></i>CADASTRADO
+                                            Cadastrado
                                         </span>
                                     </td>
                                 </tr>
@@ -105,7 +105,6 @@ $pageTitle = 'Sensores';
                                     <div class="ops-empty-state">
                                         <span class="ops-empty-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
                                         <p class="mb-1 fw-semibold text-white">Página em produção.</p>
-                                        <p class="small text-steel mb-0">O módulo de sensores está em produção e estará disponível em breve.</p>
                                     </div>
                                 </td>
                             </tr>
@@ -116,10 +115,11 @@ $pageTitle = 'Sensores';
         </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

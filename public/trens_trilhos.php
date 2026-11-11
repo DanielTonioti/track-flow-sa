@@ -67,10 +67,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Trens e Rotas</span>
                 </nav>
-                <h1 class="ops-page-title">Gestão de Frota, Rotas e Trilhos</h1>
-                <p class="ops-page-subtitle">
-                    Consulte e administre composições ferroviárias, itinerários programados e segmentos de via permanente.
-                </p>
+                <h1 class="ops-page-title">Trens e Rotas</h1>
             </div>
 
             <div class="ops-header-actions">
@@ -79,40 +76,17 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                 </a>
                 <?php if ($usuarioEhAdmin): ?>
                     <a href="cadastro_linhas.php" class="ops-btn">
-                        <i class="bi bi-distribute-vertical" aria-hidden="true"></i>Trilhos e Linhas
+                        Trilhos e Linhas
                     </a>
                     <a href="cadastro_trens.php" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-train-front" aria-hidden="true"></i>Gerenciar Trens
+                        Gerenciar Trens
                     </a>
                     <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary">
-                        <i class="bi bi-signpost-split" aria-hidden="true"></i>Gerenciar Rotas
+                        Gerenciar Rotas
                     </a>
                 <?php endif; ?>
             </div>
         </div>
-
-        <section class="ops-kpi-strip" aria-label="Indicadores de Frota e Malha">
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-train-front text-cyan" aria-hidden="true"></i>Composições (Trens)</span>
-                <span class="ops-kpi-value"><?= count($listaTrens) ?></span>
-                <span class="ops-kpi-meta">Frota registrada na operação</span>
-            </div>
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-signpost-2 text-volt" aria-hidden="true"></i>Rotas Programadas</span>
-                <span class="ops-kpi-value"><?= count($listaRotas) ?></span>
-                <span class="ops-kpi-meta">Itinerários vinculados à frota</span>
-            </div>
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-rulers text-blue" aria-hidden="true"></i>Extensão Mapeada</span>
-                <span class="ops-kpi-value"><?= number_format($extensaoTotalKm, 1, ',', '.') ?> <small class="text-steel fw-normal fs-6">km</small></span>
-                <span class="ops-kpi-meta">Soma das rotas cadastradas</span>
-            </div>
-            <div class="ops-kpi-cell">
-                <span class="ops-kpi-label"><i class="bi bi-distribute-vertical text-warning" aria-hidden="true"></i>Segmentos de Trilho</span>
-                <span class="ops-kpi-value"><?= $totalTrilhos ?></span>
-                <span class="ops-kpi-meta"><a href="cadastro_linhas.php" class="text-cyan text-decoration-none">Gerenciar via permanente &rarr;</a></span>
-            </div>
-        </section>
 
         <div class="ops-panel mb-3">
             <div class="ops-toolbar border-bottom-0">
@@ -125,9 +99,6 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                         placeholder="Pesquisar trens por nome/modelo ou rotas por itinerário..."
                         aria-label="Pesquisar trens e rotas">
                 </div>
-                <span class="mono-font text-steel small">
-                    Clique em <strong class="text-white">Consultar</strong> para inspecionar a ficha técnica completa.
-                </span>
             </div>
         </div>
 
@@ -137,12 +108,12 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                 <section class="ops-panel h-100 d-flex flex-column" aria-labelledby="heading-trens">
                     <div class="ops-panel-header">
                         <h2 id="heading-trens" class="ops-panel-title">
-                            <i class="bi bi-train-front-fill text-cyan" aria-hidden="true"></i>Trens Cadastrados
+                            Trens Cadastrados
                         </h2>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="ops-status-tag ops-status-neutral"><?= count($listaTrens) ?> TREM(NS)</span>
+                            <span class="ops-status-tag ops-status-neutral"><?= count($listaTrens) ?> Trem(ns)</span>
                             <?php if ($usuarioEhAdmin): ?>
-                                <a href="cadastro_trens.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                <a href="cadastro_trens.php" class="ops-btn ops-btn-success ops-btn-sm">
                                     <i class="bi bi-plus-lg" aria-hidden="true"></i>Novo Trem
                                 </a>
                             <?php endif; ?>
@@ -206,13 +177,8 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                         data-ficha-c4-val="<?= htmlspecialchars($criadoTrem, ENT_QUOTES, 'UTF-8') ?>"
                                                         data-ficha-desc="Composição habilitada para vinculação de itinerários e sensores embarcados de velocidade/temperatura."
                                                         data-ficha-edit-url="editar_trem.php?id=<?= $idTrem ?>">
-                                                        <i class="bi bi-eye" aria-hidden="true"></i>Consultar
+                                                        Consultar
                                                     </button>
-                                                    <?php if ($usuarioEhAdmin): ?>
-                                                        <a href="editar_trem.php?id=<?= $idTrem ?>" class="ops-btn ops-btn-sm">
-                                                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
-                                                        </a>
-                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         </tr>
@@ -222,10 +188,10 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                         <td colspan="4">
                                             <div class="ops-empty-state">
                                                 <span class="ops-empty-icon"><i class="bi bi-train-front" aria-hidden="true"></i></span>
-                                                <p class="mb-1 fw-semibold text-white">Nenhum trem cadastrado na frota.</p>
-                                                <p class="small text-steel mb-3">Cadastre um trem para habilitar a criação de rotas e sensores embarcados.</p>
+                                                <p class="mb-1 fw-semibold text-white">Nenhum trem cadastrado.</p>
+                                                <p class="small text-steel mb-3">Cadastre um trem para habilitar criação de rotas.</p>
                                                 <?php if ($usuarioEhAdmin): ?>
-                                                    <a href="cadastro_trens.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                                    <a href="cadastro_trens.php" class="ops-btn ops-btn-success ops-btn-sm">
                                                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Primeiro Trem
                                                     </a>
                                                 <?php endif; ?>
@@ -243,12 +209,12 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                 <section class="ops-panel h-100 d-flex flex-column" aria-labelledby="heading-rotas">
                     <div class="ops-panel-header">
                         <h2 id="heading-rotas" class="ops-panel-title">
-                            <i class="bi bi-signpost-split-fill text-volt" aria-hidden="true"></i>Rotas Cadastradas
+                            Rotas Cadastradas
                         </h2>
                         <div class="d-flex align-items-center gap-2">
-                            <span class="ops-status-tag ops-status-neutral"><?= count($listaRotas) ?> ROTA(S)</span>
+                            <span class="ops-status-tag ops-status-neutral"><?= count($listaRotas) ?> Rota(s)</span>
                             <?php if ($usuarioEhAdmin): ?>
-                                <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                <a href="cadastro_rotas.php" class="ops-btn ops-btn-success ops-btn-sm">
                                     <i class="bi bi-plus-lg" aria-hidden="true"></i>Nova Rota
                                 </a>
                             <?php endif; ?>
@@ -285,7 +251,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                             <td>
                                                 <strong class="text-white d-block"><?= htmlspecialchars($nomeRota, ENT_QUOTES, 'UTF-8') ?></strong>
                                                 <span class="text-steel small">
-                                                    <i class="bi bi-train-front me-1 text-cyan" aria-hidden="true"></i><?= htmlspecialchars($tremRota, ENT_QUOTES, 'UTF-8') ?>
+                                                    <?= htmlspecialchars($tremRota, ENT_QUOTES, 'UTF-8') ?>
                                                 </span>
                                             </td>
                                             <td class="text-end mono-font small">
@@ -314,13 +280,8 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                         data-ficha-c4-val="<?= number_format($velMedia, 1, ',', '.') ?> km/h"
                                                         data-ficha-desc="<?= htmlspecialchars($descRota, ENT_QUOTES, 'UTF-8') ?>"
                                                         data-ficha-edit-url="editar_rota.php?id=<?= $idRota ?>">
-                                                        <i class="bi bi-eye" aria-hidden="true"></i>Consultar
+                                                        Consultar
                                                     </button>
-                                                    <?php if ($usuarioEhAdmin): ?>
-                                                        <a href="editar_rota.php?id=<?= $idRota ?>" class="ops-btn ops-btn-sm">
-                                                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar
-                                                        </a>
-                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         </tr>
@@ -331,9 +292,9 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                             <div class="ops-empty-state">
                                                 <span class="ops-empty-icon"><i class="bi bi-signpost-split" aria-hidden="true"></i></span>
                                                 <p class="mb-1 fw-semibold text-white">Nenhuma rota cadastrada.</p>
-                                                <p class="small text-steel mb-3">Defina itinerários com distância em quilômetros, tempo previsto e trem responsável.</p>
+                                                <p class="small text-steel mb-3">Cadastre a primeira rota.</p>
                                                 <?php if ($usuarioEhAdmin): ?>
-                                                    <a href="cadastro_rotas.php" class="ops-btn ops-btn-primary ops-btn-sm">
+                                                    <a href="cadastro_rotas.php" class="ops-btn ops-btn-success ops-btn-sm">
                                                         <i class="bi bi-plus-lg" aria-hidden="true"></i>Cadastrar Primeira Rota
                                                     </a>
                                                 <?php endif; ?>
@@ -392,7 +353,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                     <button type="button" class="ops-btn ops-btn-ghost" data-bs-dismiss="modal">Fechar</button>
                     <?php if ($usuarioEhAdmin): ?>
                         <a href="#" id="fichaEditLink" class="ops-btn ops-btn-primary">
-                            <i class="bi bi-pencil-square" aria-hidden="true"></i>Editar Registro
+                           Editar Registro
                         </a>
                     <?php endif; ?>
                 </div>
@@ -400,45 +361,12 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const buscaInput = document.getElementById('busca-frota-rotas');
-            if (buscaInput) {
-                buscaInput.addEventListener('input', function () {
-                    const termo = buscaInput.value.trim().toLowerCase();
-                    document.querySelectorAll('tr[data-filter-row]').forEach(function (tr) {
-                        const alvo = tr.getAttribute('data-filter-row') || '';
-                        tr.classList.toggle('d-none', termo !== '' && alvo.indexOf(termo) === -1);
-                    });
-                });
-            }
-
-            document.querySelectorAll('.btn-consultar-ficha').forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    document.getElementById('fichaModalTipo').textContent = btn.getAttribute('data-ficha-tipo') || '';
-                    document.getElementById('fichaModalCodigo').textContent = btn.getAttribute('data-ficha-codigo') || '';
-                    document.getElementById('fichaModalNome').textContent = btn.getAttribute('data-ficha-titulo') || '';
-                    document.getElementById('fichaC1Label').textContent = btn.getAttribute('data-ficha-c1-label') || '';
-                    document.getElementById('fichaC1Val').textContent = btn.getAttribute('data-ficha-c1-val') || '';
-                    document.getElementById('fichaC2Label').textContent = btn.getAttribute('data-ficha-c2-label') || '';
-                    document.getElementById('fichaC2Val').textContent = btn.getAttribute('data-ficha-c2-val') || '';
-                    document.getElementById('fichaC3Label').textContent = btn.getAttribute('data-ficha-c3-label') || '';
-                    document.getElementById('fichaC3Val').textContent = btn.getAttribute('data-ficha-c3-val') || '';
-                    document.getElementById('fichaC4Label').textContent = btn.getAttribute('data-ficha-c4-label') || '';
-                    document.getElementById('fichaC4Val').textContent = btn.getAttribute('data-ficha-c4-val') || '';
-                    document.getElementById('fichaDesc').textContent = btn.getAttribute('data-ficha-desc') || '';
-                    const link = document.getElementById('fichaEditLink');
-                    if (link) {
-                        link.setAttribute('href', btn.getAttribute('data-ficha-edit-url') || '#');
-                    }
-                });
-            });
-        });
-    </script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/script_trens_trilhos.js"></script>
+    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

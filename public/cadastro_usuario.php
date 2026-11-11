@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
 
@@ -173,21 +175,17 @@ $pageTitle = 'Cadastrar Funcionário';
                     <span>Novo Cadastro</span>
                 </nav>
                 <h1 class="ops-page-title">Cadastrar Funcionário</h1>
-                <p class="ops-page-subtitle">
-                    Registre um novo operador ou administrador com geolocalização automática de estação base.
-                </p>
             </div>
 
             <div class="ops-header-actions">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar para Equipe
+                    Voltar
                 </a>
             </div>
         </div>
 
         <?php if ($erro !== ""): ?>
             <div class="ops-alert ops-alert-danger" role="alert">
-                <i class="bi bi-exclamation-octagon-fill" aria-hidden="true"></i>
                 <div>
                     <strong class="d-block">Revise os dados informados</strong>
                     <span><?= htmlspecialchars($erro, ENT_QUOTES, 'UTF-8') ?></span>
@@ -197,11 +195,9 @@ $pageTitle = 'Cadastrar Funcionário';
 
         <?php if ($sucesso): ?>
             <div class="ops-alert ops-alert-success" role="status">
-                <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
                 <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 w-100">
                     <div>
                         <strong class="d-block">Funcionário cadastrado com sucesso</strong>
-                        <span>Os dados do funcionário foram salvos no banco de dados.</span>
                     </div>
                     <a href="Admin.php" class="ops-btn ops-btn-sm">Ver Quadro de Equipe</a>
                 </div>
@@ -209,10 +205,11 @@ $pageTitle = 'Cadastrar Funcionário';
         <?php endif; ?>
 
         <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data" class="ops-panel">
+            <input type="hidden" name="csrf_token"value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <div class="ops-panel-body p-3 p-md-4">
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-person-vcard" aria-hidden="true"></i>Dados Pessoais e Acesso
+                    Dados Pessoais e Acesso
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -257,11 +254,7 @@ $pageTitle = 'Cadastrar Funcionário';
                                 maxlength="255"
                                 placeholder="Mínimo de 6 caracteres"
                                 required>
-                            <button type="button" class="ops-password-toggle" id="btn-toggle-senha-cad" aria-label="Mostrar senha">
-                                <i class="bi bi-eye" aria-hidden="true"></i>
-                            </button>
                         </div>
-                        <span class="ops-help">Armazenada com criptografia segura (hash bcrypt).</span>
                     </div>
 
                     <div class="col-12 col-md-6">
@@ -283,7 +276,7 @@ $pageTitle = 'Cadastrar Funcionário';
                 </div>
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-geo-alt" aria-hidden="true"></i>Endereço
+                      Endereço
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -358,7 +351,7 @@ $pageTitle = 'Cadastrar Funcionário';
                 </div>
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-shield-lock" aria-hidden="true"></i>Cargo e Foto de Perfil
+                    Cargo e Foto de Perfil
                 </div>
 
                 <div class="row g-3">
@@ -412,33 +405,19 @@ $pageTitle = 'Cadastrar Funcionário';
             <div class="ops-panel-footer">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="CadastrarUsuario" value="Cadastrar" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-check2-circle" aria-hidden="true"></i>Cadastrar Funcionário
+                    Cadastrar Funcionário
                 </button>
             </div>
         </form>
 
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script src="../scripts/script_cep.js"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('btn-toggle-senha-cad');
-            const input = document.getElementById('senha');
-            if (btn && input) {
-                btn.addEventListener('click', function () {
-                    const oculto = input.type === 'password';
-                    input.type = oculto ? 'text' : 'password';
-                    btn.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
-                    const icon = btn.querySelector('i');
-                    if (icon) icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
-                });
-            }
-        });
-    </script>
+    <script defer src="../scripts/script_cep.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="../scripts/script_auth.js"></script>
 </body>
 
 </html>

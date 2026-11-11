@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once('components/csrf.php');
+validarTokenCSRF();
 require_once 'components/start.php';
 require_once '../infra/conn.php';
 
@@ -244,7 +246,6 @@ if (isset($_POST['CadastrarUsuario'])) {
 
                 header("Location: Admin.php");
                 exit();
-
             } else {
                 $erro = "Erro ao atualizar o usuário.";
 
@@ -299,15 +300,15 @@ $pageTitle = 'Editar Funcionário';
                 </nav>
                 <h1 class="ops-page-title">Editar Funcionário</h1>
             </div>
-
             <div class="ops-header-actions">
-                <a href="Usuario_Info.php?id=<?= (int) $user['id'] ?>" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-eye" aria-hidden="true"></i>Ver Perfil
-                </a>
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">
-                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar para Equipe
+                    <i class="bi bi-arrow-left" aria-hidden="true"></i>Voltar
+                </a>
+                <a href="Usuario_Info.php?id=<?= (int) $user['id'] ?>" class="ops-btn ops-btn-ghost">
+                    Ver Perfil
                 </a>
             </div>
+
         </div>
 
         <?php if ($erro !== ""): ?>
@@ -321,12 +322,13 @@ $pageTitle = 'Editar Funcionário';
         <?php endif; ?>
 
         <form method="POST" id="CadastrarUsuario" enctype="multipart/form-data" class="ops-panel mb-4">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(gerarTokenCSRF(), ENT_QUOTES, 'UTF-8') ?>">
             <input type="hidden" name="id" value="<?= (int) $user['id'] ?>">
 
             <div class="ops-panel-body p-3 p-md-4">
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-person-vcard" aria-hidden="true"></i>Dados Pessoais e Acesso
+                    Dados Pessoais e Acesso
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -391,7 +393,7 @@ $pageTitle = 'Editar Funcionário';
                 </div>
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-geo-alt" aria-hidden="true"></i>Endereço
+                    Endereço
                 </div>
 
                 <div class="row g-3 mb-4">
@@ -460,7 +462,7 @@ $pageTitle = 'Editar Funcionário';
                 </div>
 
                 <div class="ops-form-section-title">
-                    <i class="bi bi-shield-lock" aria-hidden="true"></i>Cargo e Foto de Perfil
+                    Cargo e Foto de Perfil
                 </div>
 
                 <div class="row g-3 align-items-start">
@@ -495,7 +497,7 @@ $pageTitle = 'Editar Funcionário';
                             </label>
                         </div>
                     </div>
-
+                    <br>
                     <div class="col-12 col-md-5">
                         <label class="ops-label" for="avatar">Foto de perfil</label>
                         <?php if (!empty($user['avatar'])): ?>
@@ -520,36 +522,36 @@ $pageTitle = 'Editar Funcionário';
                         <span class="ops-help">PNG ou JPG até 5 MB. Deixe vazio para manter a foto atual.</span>
                     </div>
                 </div>
+                <br>
+                <section class="ops-danger-zone" aria-labelledby="titulo-danger-zone">
+                    <div>
+                        <h2 id="titulo-danger-zone" class="h6 fw-bold text-white mb-1 d-flex align-items-center gap-2">
+                            <i class="bi bi-exclamation-triangle-fill text-danger" aria-hidden="true"></i>Zona de Exclusão de Conta
+                        </h2>
+                        <p class="small text-steel mb-0">
+                            Remove permanentemente o acesso de <strong class="text-white"><?= htmlspecialchars($user['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>. Contas vinculadas como responsáveis por trens ativos são protegidas contra exclusão acidental.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="botaoExcluirUsuario"
+                        class="ops-btn ops-btn-danger-outline"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalConfirmarExclusaoUsuario">
+                        Excluir Funcionário
+                    </button>
+                </section>
 
             </div>
 
             <div class="ops-panel-footer">
                 <a href="Admin.php" class="ops-btn ops-btn-ghost">Cancelar</a>
                 <button type="submit" name="CadastrarUsuario" value="Salvar" class="ops-btn ops-btn-primary">
-                    <i class="bi bi-floppy" aria-hidden="true"></i>Salvar Alterações
+                    Salvar Alterações
                 </button>
             </div>
         </form>
-
-        <section class="ops-danger-zone" aria-labelledby="titulo-danger-zone">
-            <div>
-                <h2 id="titulo-danger-zone" class="h6 fw-bold text-white mb-1 d-flex align-items-center gap-2">
-                    <i class="bi bi-exclamation-triangle-fill text-danger" aria-hidden="true"></i>Zona de Exclusão de Conta
-                </h2>
-                <p class="small text-steel mb-0">
-                    Remove permanentemente o acesso de <strong class="text-white"><?= htmlspecialchars($user['nome'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>. Contas vinculadas como responsáveis por trens ativos são protegidas contra exclusão acidental.
-                </p>
-            </div>
-
-            <button
-                type="button"
-                id="botaoExcluirUsuario"
-                class="ops-btn ops-btn-danger-outline"
-                data-bs-toggle="modal"
-                data-bs-target="#modalConfirmarExclusaoUsuario">
-                <i class="bi bi-trash3" aria-hidden="true"></i>Excluir Funcionário
-            </button>
-        </section>
 
     </main>
 
@@ -575,7 +577,7 @@ $pageTitle = 'Editar Funcionário';
                     <form method="POST" action="excluir_usuario.php?id=<?= (int) $user['id'] ?>" id="excluirUsuario" class="m-0">
                         <input type="hidden" name="id_excluir" value="<?= (int) $user['id'] ?>">
                         <button type="submit" class="ops-btn ops-btn-danger">
-                            <i class="bi bi-trash3-fill" aria-hidden="true"></i>Confirmar Exclusão
+                            Confirmar Exclusão
                         </button>
                     </form>
                 </div>
@@ -583,26 +585,13 @@ $pageTitle = 'Editar Funcionário';
         </div>
     </div>
 
-    <script src="../scripts/script_cep.js"></script>
-    <script src="../scripts/script_navbar.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    <script defer src="../scripts/script_cep.js"></script>
+    <script defer src="../scripts/script_navbar.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('btn-toggle-senha-edit');
-            const input = document.getElementById('senha');
-            if (btn && input) {
-                btn.addEventListener('click', function () {
-                    const oculto = input.type === 'password';
-                    input.type = oculto ? 'text' : 'password';
-                    btn.setAttribute('aria-label', oculto ? 'Ocultar senha' : 'Mostrar senha');
-                    const icon = btn.querySelector('i');
-                    if (icon) icon.className = oculto ? 'bi bi-eye-slash' : 'bi bi-eye';
-                });
-            }
-        });
-    </script>
+    <script defer src="../scripts/script_auth.js"></script>
 
 </body>
+
 </html>

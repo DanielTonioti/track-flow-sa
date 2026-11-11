@@ -72,16 +72,24 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
 
             <a class="navbar-brand d-flex align-items-center gap-2 py-0 me-0" href="hub.php">
                 <span class="ops-brand-mark" aria-hidden="true">
-                    <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="26" height="26">
+                    <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="26" height="26" decoding="async">
                 </span>
                 <span class="d-flex flex-column lh-1">
                     <span class="fw-bold fs-4 text-white brand-font tracking-tight">TrackFlow</span>
-                    <span class="ops-brand-sub text-volt">FERRORAMA</span>
+                    <span class="ops-brand-sub text-volt">Ferrorama</span>
                 </span>
             </a>
         </div>
 
         <div class="d-flex align-items-center gap-2 position-relative">
+            <!-- Alternador de Tema (Modo Claro / Modo Escuro) -->
+            <button type="button" id="btn-theme-toggle" class="ops-btn ops-btn-ghost ops-btn-sm ops-theme-toggle"
+                aria-label="Alternar entre modo claro e modo escuro" title="Alternar entre Modo Claro e Modo Escuro">
+                <i class="bi bi-sun-fill ops-theme-icon-light" aria-hidden="true"></i>
+                <i class="bi bi-moon-stars-fill ops-theme-icon-dark" aria-hidden="true"></i>
+                <span class="d-none d-sm-inline ops-theme-label" id="theme-toggle-label">Modo Claro</span>
+            </button>
+
             <div class="d-none d-md-flex flex-column text-end me-1 lh-sm">
                 <span id="usuario-logado" class="text-white small fw-semibold">
                     <?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?>
@@ -94,7 +102,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
             <button type="button" class="perfil ops-avatar-trigger" aria-haspopup="true" aria-expanded="false"
                 aria-controls="menu_user" aria-label="Abrir menu da conta de <?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, 'UTF-8') ?>">
                 <span class="imgCx">
-                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Foto de perfil"
+                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="Foto de perfil" width="40" height="40" decoding="async"
                         onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
                 </span>
             </button>
@@ -107,6 +115,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                 </div>
                 <div>
                     <p><a href="Usuario_Info.php" role="menuitem"><i class="bi bi-person-vcard me-2 text-cyan" aria-hidden="true"></i>Meu Perfil</a></p>
+                    <p><button type="button" id="menu-theme-action" class="ops-menu-action-btn" role="menuitem"><i class="bi bi-sun-fill me-2 text-cyan" id="menu-theme-icon" aria-hidden="true"></i><span id="menu-theme-text">Ativar Modo Claro</span></button></p>
                     <p class="Menu_Deslogar"><a href="logout.php" role="menuitem"><i class="bi bi-box-arrow-right me-2 text-danger" aria-hidden="true"></i>Encerrar Sessão</a></p>
                 </div>
             </div>
@@ -119,14 +128,10 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
 
     <div class="offcanvas-header border-bottom border-light border-opacity-10 py-3 px-4">
         <div class="d-flex align-items-center gap-2">
-            <span class="ops-brand-mark" aria-hidden="true">
-                <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="hub-icon" width="24" height="24">
-            </span>
             <div>
                 <h2 class="offcanvas-title brand-font fs-4 text-white mb-0 lh-1" id="offcanvasDarkNavbarLabel">
-                    TrackFlow
+                   Menu
                 </h2>
-                <span class="ops-brand-sub text-volt">MENU</span>
             </div>
         </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar menu"></button>
@@ -171,22 +176,6 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                     </a>
                 </li>
             </ul>
-        </div>
-
-        <div class="pt-3 border-top border-light border-opacity-10">
-            <div class="d-flex align-items-center gap-2 px-2 py-2 rounded-2" style="background-color: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255,255,255,0.06);">
-                <div class="perfil-mini flex-shrink-0">
-                    <img src="<?= htmlspecialchars($avatar, ENT_QUOTES, 'UTF-8') ?>" alt="" width="38" height="38" class="rounded-circle object-fit-cover"
-                        onerror="this.onerror=null; this.src='<?= htmlspecialchars($avatarPadrao, ENT_QUOTES, 'UTF-8') ?>';">
-                </div>
-                <div class="flex-grow-1 overflow-hidden">
-                    <strong class="d-block text-white small text-truncate"><?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?></strong>
-                    <span class="text-steel mono-font d-flex align-items-center gap-1" style="font-size: 0.7rem;"><span class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
-                </div>
-                <a href="logout.php" class="ops-btn ops-btn-danger-outline p-0" style="width: 38px; min-height: 38px;" title="Encerrar sessão" aria-label="Encerrar sessão">
-                    <i class="bi bi-box-arrow-right" aria-hidden="true"></i>
-                </a>
-            </div>
         </div>
     </div>
 </div>
