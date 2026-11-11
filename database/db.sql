@@ -39,6 +39,15 @@ CREATE TABLE IF NOT EXISTS trem (
         FOREIGN KEY (responsavel_usuario_id) REFERENCES funcionario(id)
     );
 
+INSERT INTO
+    trem (nome, modelo, responsavel_usuario_id)
+VALUES
+('Thomas', 'LB&SCR E2 class' , 1),
+('Locomotiva do Marlon', 'ABC-123' , 2),
+('Ritacildo', 'DEF-456' , 3),
+('Bomba de hidrogênio', 'GHI-789' , 4);
+    
+
 CREATE TABLE IF NOT EXISTS rota (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(100) NOT NULL,
@@ -49,6 +58,14 @@ CREATE TABLE IF NOT EXISTS rota (
         criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (trem_id) REFERENCES trem(id) ON DELETE RESTRICT
     );
+
+INSERT INTO
+    rota (nome,descricao,distancia_km,tempo_previsto_min,trem_id)
+VALUES
+('Rota do mal', 'Passa pelo vale do inferno, rumo a estação pandemônio.', 30.0, 120, 4),
+('Rota do bem', 'Passa pela floresta das fadas, pelas margens da lagoa.', 20.0, 90, 1),
+('Rota Gigante', 'Ironicamente pequena. Recebe esse nome por passar pela colina do gigante.', 5.0, 30, 2),
+('Rota submarina', 'Atravessa o oceano atlântico por algum motivo', 50.0, 180, 3);
 
 CREATE TABLE IF NOT EXISTS trilho (
         id INT AUTO_INCREMENT PRIMARY KEY,
