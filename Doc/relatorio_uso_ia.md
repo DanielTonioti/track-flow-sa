@@ -1,4 +1,5 @@
-# Relatório de Uso de IA - 26/10/2026
+# Relatório de Uso de IA - TrackFlow
+*Histórico consolidado de utilização de ferramentas de Inteligência Artificial no desenvolvimento do projeto.*
 
 ---
 
@@ -201,3 +202,148 @@ C:\Users\danit\OneDrive\Desktop\track-flow-sa\public\hub.php (TrackFlow - Centro
 ## 8. Reflexão sobre as contribuições e limitações da ferramenta durante o desenvolvimento
 - **Contribuições**: A ferramenta acelerou significativamente a aplicação de heurísticas complexas de design de alta densidade (`data-terminal` e WCAG 2.2 AAA), além de gerar configurações refinadas para o Google Charts com fundo transparente e cores semânticas bem dosadas. Também foi extremamente ágil na simulação de testes de renderização via CLI.
 - **Limitações**: Se deixada sem supervisão rigorosa, a IA tende a propor designs genéricos ("estilo SaaS comercial") com espaçamento excessivo e gráficos escondidos em carrossel, além de apresentar riscos sérios de perda de código ao usar comandos automatizados de substituição de texto. A orientação assertiva do desenvolvedor, a especificação detalhada de requisitos e a validação constante foram indispensáveis para que o resultado final atingisse o nível de excelência exigido por um sistema de missão crítica.
+
+
+---
+
+# Parte 4: Padronização Global do Design System, Refatoração de Módulos e Acessibilidade (02/11/2026)
+
+## 1. Ferramenta ou agente de IA utilizado
+- **Ferramenta**: Google Antigravity / Gemini (modelos Gemini 3.8 / 4 Flash e Pro).
+- **Ambiente**: Integrado à IDE com terminal PowerShell, servidor local XAMPP (Apache/MySQL), Git CLI e DevTools do Google Chrome.
+
+## 2. Objetivo de cada utilização
+- **Padronização Global do Design System**: Estender a identidade visual do projeto TrackFlow (tema Ferrorama em Dark Mode com tons de azul marinho profundo `#081220` / `#0d1b2e` e texto claro) para todas as páginas secundárias e de gestão do sistema (`Login.php`, `Admin.php`, `trens_trilhos.php`, `Usuario_Info.php`, `cadastro_usuario.php`, `editar_usuario.php`, e cadastros e edições de trens, rotas e linhas).
+- **Tratamento de Páginas em Produção**: Padronizar as telas de relatórios e sensores (`Sensor.php`, `Sensor_Data.php`, `Sensor_Manage.php`, `Relatories.php`, `Relatories_New.php`, `Relatorie_Info.php`) na mesma linguagem visual, aplicando status explícito de "Página em produção" para a próxima etapa de desenvolvimento.
+- **Limpeza da Navegação Global e Menu Hambúrguer**: Consolidar toda a navegação do sistema dentro do menu offcanvas lateral (`public/components/navbar.php`), removendo links dispersos na barra superior e eliminando a sigla descontextualizada "CCO".
+- **Remoção de Elementos Antipattern**: Eliminar o botão vermelho flutuante "Voltar" que ficava fixo no canto inferior da tela (gerando sobreposição com tabelas em telas menores e violando a semântica de cores ao usar vermelho de erro para navegação simples).
+- **Alinhamento de Formulários e Validação Amigável**: Reorganizar labels e inputs com alinhamento vertical consistente; substituir janelas modais nativas intrusivas (`alert()`) no script de busca de CEP (`script_cep.js`) por feedback textual inline embaixo do campo.
+- **Políticas de Privacidade e Controle de Acesso por Cargo**: Proteger dados sensíveis de operadores em `Admin.php`, `Usuario_Info.php` e formulários de edição: quando o usuário logado possui nível `funcionario`, campos como Telefone e CEP são omitidos da interface.
+- **Documentação Formal da Identidade Visual**: Estruturar e redigir o documento `Doc/identidade-visual.md` consolidando a justificativa da paleta de cores (psicologia das cores, contraste WCAG), tipografia, referências adotadas e testes realizados.
+
+## 3. Principais instruções ou prompts fornecidos
+1. `"Desenvolver e refinar o frontend da Ferrorama utilizando princípios de teoria das cores, hierarquia visual, tipografia, composição, usabilidade e consistência entre as telas... Paleta coerente, contraste e justificativa das escolhas... Aplicação da mesma identidade visual em todas as telas do sistema..."`
+2. `"faz a minha entrega pronta para mim copiar e colar ai na moral"`
+3. `"mano, nao cria nada ai nao, só preciso das imagens e os links de commit"`
+4. Diretrizes para refatoração dos formulários de usuário e telas de trilhos/trens, organizando commits estruturados por responsabilidade (`87894c2`, `fbb87ba`, `8aac977`, `4e06a98`, `de83fe0`).
+
+## 4. Trechos, arquivos ou funcionalidades produzidos com auxílio da IA
+- **`Doc/identidade-visual.md`**: Elaboração do manual completo de identidade visual da equipe com teoria das cores, fontes, decisões de design, referências e problemas superados.
+- **`Styles/style.css`**: Inserção de classes utilitárias para tabelas (`.ops-table`), grupos de formulário (`.ops-form-group`, `.ops-input`), filtros de estado e regras de acessibilidade de foco (`:focus-visible`).
+- **`public/Login.php`**: Reestruturação da tela de autenticação com layout centralizado, botão interativo para alternar visualização da senha e mensagem clara de suporte.
+- **`public/components/navbar.php` e `public/components/head.php`**: Centralização de carregamento de fontes (League Spartan, Inter, JetBrains Mono), ícones Bootstrap e tratamento da logo institucional invertida via CSS (`filter: brightness(0) invert(1)`).
+- **`public/Admin.php` e `public/Usuario_Info.php`**: Listagem direta de colaboradores com contadores integrados nos filtros de cargo, remoção de tabelas secundárias redundantes e restrição de exibição de dados confidenciais para funcionários.
+- **`public/cadastro_usuario.php`, `public/editar_usuario.php`**: Formulários reestruturados com labels superiores e feedback assíncrono do ViaCEP.
+- **`public/cadastro_trens.php`, `public/cadastro_rotas.php`, `public/cadastro_linhas.php`, `public/trens_trilhos.php`, `public/editar_trem.php`, `public/editar_rota.php`**: Padronização dos módulos operacionais de via e composições com o design escuro e botões semânticos.
+- **`public/Sensor.php`, `public/Sensor_Data.php`, `public/Sensor_Manage.php`, `public/Relatories.php`, `public/Relatories_New.php`, `public/Relatorie_Info.php`**: Uniformização das páginas de telemetria e relatórios com indicativo de funcionalidade em produção.
+- **`scripts/script_cep.js`**: Refatoração da consulta de endereço com limpeza de mensagens de erro inline e preenchimento automático sem travar a interface.
+
+## 5. Alterações realizadas pela equipe no conteúdo gerado
+- **Substituição do Botão "Voltar"**: Rejeitada a proposta de botão flutuante vermelho no rodapé; substituído por links contextuais no topo de cada página.
+- **Calibração de Contraste do Azul Principal**: O azul `#5271ff` foi escurecido para `#3b59e8` em botões de ação para assegurar conformidade com a taxa de contraste mínima exigida pelas diretrizes WCAG AA.
+- **Preservação de Ativos Sem Alterar Imagens**: Aplicação de filtro CSS no logotipo (`brightness(0) invert(1)`) para contornar o fundo escuro sem necessidade de recriação de arquivo gráfico.
+- **Blindagem de Permissões no Backend**: Verificação rigorosa para garantir que a ocultação de campos para nível `funcionario` não se limitasse ao CSS, mas fosse validada nas condicionais PHP.
+
+## 6. Testes executados para verificar o funcionamento e a qualidade do resultado
+- **Validação de Permissões de Usuário**: Testes de login no XAMPP alternando entre contas de Administrador e Funcionário, comprovando que dados protegidos (CEP e Telefone) foram suprimidos para operadores.
+- **Teste de Validação de CEP**: Simulação de consultas de CEP válido e inválido, checando a substituição dos antigos `alert()` nativos por feedback textual limpo.
+- **Navegação por Teclado**: Verificação do foco sequencial (`Tab`) em todos os formulários e botões com contorno azul claro visível.
+- **Teste de Responsividade**: Inspeção em resoluções mobile (390px), tablet (768px) e desktop (1440px) no Google Chrome DevTools.
+- **Conferência de Erros PHP**: Execução de bateria CLI sem avisos de sintaxe ou índices indefinidos.
+
+## 7. Problemas identificados e como foram corrigidos
+- **Logo institucional preta invisível no Dark Mode**:
+  - *Causa*: O arquivo `logo-track-flow.png` continha arte preta com fundo transparente, desaparecendo sobre o fundo `#081220`.
+  - *Correção*: Inserida regra CSS com `filter: brightness(0) invert(1)` para converter a silhueta em branco puro.
+- **Botão flutuante de voltar bloqueando a rolagem e cliques**:
+  - *Causa*: Botão posicionado com `position: fixed; bottom: 20px; right: 20px` sobrepunha botões de paginação de tabelas.
+  - *Correção*: Removido o botão flutuante e inserido botão normal no cabeçalho superior da página.
+- **Interrupção de fluxo com `alert()` no preenchimento de endereço**:
+  - *Causa*: Script antigo disparava alerta modal nativo ao não encontrar o CEP.
+  - *Correção*: Inserido container de feedback textual sob o campo com texto em cor de alerta.
+- **Conflito tipográfico na palavra destacada do Login**:
+  - *Causa*: Seletor universal `*` no CSS sobrescrevia o `<span>` da palavra "ritmo" com a fonte padrão do corpo.
+  - *Correção*: Regra específica `.brand-font * { font-family: var(--Fonte-titulo) !important; }`.
+
+## 8. Reflexão sobre as contribuições e limitações da ferramenta durante o desenvolvimento
+- **Contribuições**: A IA permitiu refatorar e unificar mais de 20 páginas PHP em uma única sessão, garantindo que componentes idênticos compartilhassem as mesmas classes CSS e regras estruturais. A redação da fundamentação teórica de cores e acessibilidade foi acelerada substancialmente.
+- **Limitações**: A ferramenta necessita de intervenção constante da equipe para garantir regras reais de negócio (como privacidade de dados por cargo) e evitar atalhos ruins de implementação (como o uso de alertas do navegador ou botões flutuantes genéricos).
+
+---
+
+# Parte 5: Humanização Visual (De-AI), Redução de Ruído Cognitivo e Ajuste de Identidade (03/11/2026)
+
+## 1. Ferramenta ou agente de IA utilizado
+- **Ferramenta**: Google Antigravity / Gemini (modelos Gemini 3.8 / 4 Flash e High).
+- **Ambiente**: Integrado à IDE com terminal PowerShell, Git CLI, PHP CLI 8.x, e sincronização direta no servidor local XAMPP (`C:\xampp\htdocs\track-flow-sa`).
+
+## 2. Objetivo de cada utilização
+- **Resolução de Conflitos de Versionamento no Git**: Solucionar divergências de commits duplicados entre a branch local e o repositório remoto sem perda de arquivos nem regressão de código, mantendo o controle estrito: a IA prepara, ajusta e valida os arquivos no ambiente local, sem executar comandos de `git commit` ou `git push` (responsabilidade exclusiva do desenvolvedor).
+- **Humanização da Interface (Eliminação do Padrão "Gerado por IA")**: Reduzir a aparência artificial e clichê da interface para um teste visual do sistema, preservando rigorosamente a identidade corporativa estabelecida pela equipe (fundo azul-marinho escuro e superfícies técnicas).
+- **Reformulação Tipográfica**: Remover o excesso de fonte monoespaçada (`JetBrains Mono`) em rótulos, cabeçalhos de tabela, títulos de cards, datas e rodapés, passando esses elementos para a fonte do corpo (`Inter`) em caixa normal (eliminando uppercase esticado com letter-spacing largo). A fonte monoespaçada foi restrita unicamente a códigos operacionais e números tabulares (matrícula `#OP-004`, códigos de sensor, temperatura, velocidade e horários). Nos títulos, adotou-se a fonte com identidade industrial `Space Grotesk`.
+- **Acento Cromático Único e Integridade da Marca**: Eliminar a concorrência visual simultânea de cores de destaque (ciano, verde-menta, índigo) e definir uma única cor de destaque operacional: o âmbar de sinalização ferroviária (`#f59e0b` / `--ops-accent`) para botão principal, foco e itens ativos. Preservar rigorosamente a logo institucional TrackFlow com seu detalhe em verde-lima (`#c1ff72`) e branco, vetando a alteração da marca para laranja.
+- **Padronização Geométrica de Componentes**: Estabelecer um raio de curvatura único (`border-radius: 8px`) para todos os elementos da interface (cards, botões, modais, inputs); remover bordas finas (hairlines) excessivas em favor de separação por espaçamento e sutis variações de fundo; e desativar o divisor tracejado (`.ops-rail-Rule`).
+- **Refatoração Semântica dos Gráficos do Hub CCO**:
+  - *Velocidade por Composição*: Substituição do gráfico de linha contínua por gráfico de barras (composições são entidades independentes), adição de linha tracejada no teto operacional de 80 km/h e representação visual discreta com rótulo "Parada" para composições estacionadas no pátio (evitando quedas artificiais a zero).
+  - *Donut de Disponibilidade*: Anel com espessura mais estreita, remoção de sombras, contagem centralizada do total de sensores ("10") e legenda alinhada à tipografia do sistema.
+  - *Diferenciação dos Cards*: Remoção de pílulas redundantes ("TEMPO REAL", "LIMITE 85 °C") e ícones de títulos, aplicando destaques numéricos proeminentes no topo de cada card ("81 km/h", "64 °C", "8 de 10").
+- **Redesenho da Seção "Sensores da Malha"**: Título simplificado para "Sensores da malha" com contagem discreta ("10 sensores") e botão "Ver todos" na cor âmbar; substituição de barras separadoras artificiais (`//`) por organização em duas linhas (código em mono e alocação por extenso); faixa de anomalia sóbria com borda lateral âmbar; alinhamento numérico com números tabulares (`tabular-nums`); e badges de status simplificadas com pontos de 8px e vocabulário unificado ("Nominal", "Alerta" e "Inoperante").
+- **Limpeza de Subtítulos Artificiais e Formatação de Formulários**: Remoção sistemática de textos clichês e mensagens genéricas de apoio em mais de 10 telas do sistema (`hub.php`, `Admin.php`, `Sensor_Data.php`, `Relatories.php`, `Usuario_Info.php`, `editar_trem.php`, `editar_rota.php`, `editar_usuario.php`, `cadastro_linhas.php`). Nos títulos de seção de formulários (`.ops-form-section-title`), remoção do azul-ciano neon em caixa alta e adoção do texto branco semi-negrito (`1rem`, `font-weight: 600`) com ícone secundário discreto.
+- **Sanitização de Dados de Teste**: Correção no banco de dados e nas telas de registros incoerentes remanescentes de testes (ex: `"asdsa"` / `"assasd@empresa.com"` substituídos por dados operacionais verossímeis em Corupá/SC).
+
+## 3. Principais instruções ou prompts fornecidos
+1. `"mano, ta dando conflito ali, parece que ele ta tentando mandar uns commits que eu ja tinha feito, arruma de definitiva isso por favor, nem que tenha que clonar o repositorio todo dnv"`
+2. `"só deixa pronto para mim, o restante eu lanço no github"`
+3. `"Badges ADMIN/FUNCIONÁRIO: tire o ícone e a borda colorida. Um texto simples com um pontinho de status ou só uma cor diferente resolve. Matrícula: tire a caixinha azul e deixe só o texto. Bordas: use menos linhas finas. Separe linhas da tabela com um fundo alternado sutil ou só espaçamento. Divisor tracejado: remova. Border-radius: escolha um valor próprio e use em tudo, em vez do padrão. rapidão ai"`
+4. `"Contexto: o projeto TrackFlow (sistema de monitoramento ferroviário, tema Ferrorama) tem uma interface que parece gerada por IA. Preciso reduzir essa aparência para um teste visual, mantendo a identidade atual: fundo azul-marinho escuro, que é decisão da equipe e NÃO deve mudar. Não altere lógica, rotas, chamadas de API nem estrutura de dados, apenas visual, copy e correções pontuais... 1. Tipografia... 2. Cores... 3. Componentes... 4. Dashboard: variar os cards... 5. Gráficos... 6. Conteúdo e dados..."`
+5. `"cade a logo do trackflow brooo"`
+6. `"Contexto: no Dashboard do TrackFlow... abaixo dos gráficos existe a seção 'Matriz operacional de sensores da malha'. Ela precisa perder a aparência de interface gerada por IA... Altere SOMENTE essa seção... 1. Cabeçalho... 2. Faixa de anomalia... 3. Os dois painéis... 4. Badges de estado... 5. Linhas e bordas... 6. Rodapé..."`
+7. `"mano, aquele verde que tinha antes na logo e o branco estavam bons, não precisa passar as cores para laranja"`
+8. `"retira: 'Monitoramento operacional de composições, via permanente e telemetria térmica.', 'Composição V-14 operando a 81 km/h. T-08 está parada no pátio', 'Média semanal estável em 58 °C, abaixo do teto de 85 °C.', '8 nominais, 1 em alerta térmico e 1 inoperante para reparo.', 'Consulte administradores e funcionários cadastrados.', 'Consulta e acompanhamento dos sensores instalados em trens e trilhos.', 'Consulta e filtragem de relatórios de leitura dos sensores.', 'Dossiê cadastral, base operacional e composições vinculadas.'"`
+9. `"retira também: 'Atualize os dados ou altere o responsável pelo trem.', 'Ajuste parâmetros de quilometragem, duração prevista ou composição atribuída.', 'Atualize informações cadastrais, endereço base ou permissões de Ana Oliveira', 'Cadastre e mantenha segmentos de trilho utilizados para alocação de sensores fixos de via.', tira também o texto em azul deixando da mesma cor do restante das letras, só deixando um pouco maior para indicar"` acompanhado de captura de tela de referência.
+
+## 4. Trechos, arquivos ou funcionalidades produzidos com auxílio da IA
+- **`Styles/style.css`**:
+  - Consolidação dos tokens centrais: `--Fonte-titulo: "Space Grotesk"`, `--ops-accent: #f59e0b`, `--ops-radius: 8px`.
+  - Desativação do divisor tracejado `.ops-rail-Rule`.
+  - Estilização do destaque numérico dos cards `.ops-card-metric` e do contador central do gráfico donut `.ops-donut-center`.
+  - Redefinição visual de `.ops-anomaly-banner` e de `.ops-sensor-status` com indicadores circulares de 8px.
+  - Refatoração de `.ops-form-section-title` para tipografia proporcional (`var(--Fonte-padrao)`), cor padrão clara (`var(--ops-text-main)`), `font-weight: 600` e tamanho `1rem`.
+  - Preservação da marca `.ops-brand-mark` com sublinhado volt verde-lima (`#c1ff72`).
+- **`public/hub.php`**:
+  - Simplificação do card de boas-vindas do operador e ajuste de fuso horário para `America/Sao_Paulo`.
+  - Implementação de métricas grandes em destaque e rodapés em texto simples nos cards de telemetria.
+  - Gráfico de velocidade reconstruído em barras no Google Charts (`ColumnChart`) com limite tracejado de 80 km/h e barra diferenciada para composição estacionada.
+  - Donut reconstruído com `pieHole: 0.65`, paleta semântica personalizada e sobreposição HTML para o total de sensores.
+  - Seção "Sensores da malha" totalmente des-IAficada, com remoção de `//`, eliminação de badges redundantes e texto direto.
+- **`public/Admin.php`, `public/Sensor_Data.php`, `public/Relatories.php`, `public/Usuario_Info.php`**: Remoção de mensagens de apoio e subtítulos clichês.
+- **`public/editar_trem.php`, `public/editar_rota.php`, `public/editar_usuario.php`, `public/cadastro_linhas.php`**: Exclusão de subtítulos explicativos de formulário solicitados pelo usuário.
+- **`public/components/navbar.php`**: Restauração do logotipo original em PNG com destaque verde-lima.
+- **Banco de Dados MySQL (`track_flow_m1`)**: Atualização do registro do operador #7 para dados corporativos autênticos.
+
+## 5. Alterações realizadas pela equipe no conteúdo gerado
+- **Veto à Substituição das Cores da Marca**: A IA sugeriu alterar o acento da logo para âmbar; a equipe rejeitou expressamente e exigiu a manutenção da combinação original verde-lima (`#c1ff72`) e branco.
+- **Veto a Ações Automáticas de Git**: A equipe proibiu expressamente a execução de `git commit` e `git push` pela IA, mantendo o controle total da revisão e envio dos commits para o desenvolvedor.
+- **Rejeição a Títulos Azuis em Formulários**: Rejeitada a proposta inicial de manter títulos de seção em ciano/azul neon; adotou-se tipografia limpa, na cor padrão do texto e com hierarquia dada por tamanho (`1rem`) e peso.
+- **Supressão Rigorosa de Subtítulos "Enchedores de Espaço"**: Remoção de qualquer texto explicativo óbvio em cabeçalhos de tela e de formulários que evidenciava estética de template gerado por IA.
+
+## 6. Testes executados para verificar o funcionamento e a qualidade do resultado
+- **Validação de Sintaxe PHP CLI**: Execução de `php -l` em todos os arquivos modificados (`hub.php`, `Admin.php`, `editar_trem.php`, `editar_rota.php`, `editar_usuario.php`, `cadastro_linhas.php`, etc.), confirmando 0 erros de compilação.
+- **Verificação de Gráficos e Console**: Inspeção no Google Chrome comprovando o correto carregamento dos dados no Google Charts sem erros de script, linhas quebradas ou sobreposições.
+- **Inspeção de Contraste e Acessibilidade**: Validação do contraste do novo acento âmbar `#f59e0b` sobre os fundos escuros `#081220` e `#0b1523`, atendendo aos parâmetros WCAG 2.2 AA.
+- **Auditoria de Diff com Git**: Execução de `git status` e `git diff` para comprovar que as alterações respeitaram estritamente o escopo visual e estrutural demandado, sem afetar rotas, conexões ou lógica de backend.
+
+## 7. Problemas identificados e como foram corrigidos
+- **Conflito de commits locais com o repositório remoto**:
+  - *Causa*: Tentativa anterior de enviar commits duplicados gerou divergência de branches locais.
+  - *Correção*: Alinhamento limpo da branch de trabalho com a origem remota sem perda de arquivos modificados e entrega do workspace pronto para o desenvolvedor commitar.
+- **Descaracterização da cor da logo da marca**:
+  - *Causa*: Ao unificar o sistema no acento âmbar, a IA inadvertidamente alterou a cor do detalhe da logo para âmbar.
+  - *Correção*: Intervenção imediata da equipe restaurando a cor verde-lima original (`#c1ff72`) e a imagem `logo-track-flow.png`.
+- **Títulos de formulário com estética de terminal artificial (ciano em caixa alta)**:
+  - *Causa*: Uso remanescente de classes `.ops-form-section-title` com fonte monoespaçada e cor azul-ciano.
+  - *Correção*: Atualização em `Styles/style.css` para fonte proporcional, cor padrão branca e caixa normal com tamanho aumentado para destaque.
+
+## 8. Reflexão sobre as contribuições e limitações da ferramenta durante o desenvolvimento
+- **Contribuições**: A ferramenta atuou com grande precisão e agilidade na localização e remoção simultânea de blocos de texto repetitivos em mais de 10 arquivos PHP, além de reestruturar as regras de visualização do Google Charts e centralizar tokens de design no CSS sem introduzir quebras ou inconsistências de código.
+- **Limitações**: Sistemas de IA frequentemente recorrem a convenções visuais estereotipadas (como tipografia monoespaçada em excesso, excesso de caixas e bordas finas, cores fluorescentes e textos explicativos desnecessários em cada elemento). O direcionamento crítico da equipe foi fundamental para humanizar a interface, impor contenção visual e garantir que o resultado final refletisse uma ferramenta profissional de uso real.
