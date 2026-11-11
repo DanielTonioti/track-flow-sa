@@ -3,20 +3,26 @@ session_start();
 require_once '../infra/conn.php';
 include("components/start.php");
 redirecionarSeNaoAdmin();
-// Buscar funcionários sem coordenadas
-$sql = "SELECT id, cidade, uf FROM funcionario WHERE latitude IS NULL OR longitude IS NULL";
+// Buscar o funcionário recém-cadastrado sem coordenadas
+$sql = "SELECT id, cidade, uf FROM funcionario WHERE latitude IS NULL OR longitude IS NULL ORDER BY id DESC LIMIT 1";
+
 
 $resultado = $db->query($sql);
 
+
 if (!$resultado) {
-    exit("Erro ao consultar funcionários.");
+    header('Location: cadastro_usuario.php?sucesso=1');
+    exit;
 }
 
+
 while ($funcionario = $resultado->fetch_assoc()) {
+
 
     $id = (int) $funcionario['id'];
     $cidade = trim($funcionario['cidade']);
     $uf = strtoupper(trim($funcionario['uf']));
+
 
     // Consultar a API de geolocalização
     $parametros = http_build_query([
@@ -27,35 +33,44 @@ while ($funcionario = $resultado->fetch_assoc()) {
         'countryCode' => 'BR'
     ]);
 
+
     $url = "https://geocoding-api.open-meteo.com/v1/search?$parametros";
+
 
     $contexto = stream_context_create([
         'http' => [
-            'timeout' => 10,
-            'ignore_errors' => false
+            'timeout' => 2,
+            'ignore_errors' => true
         ]
     ]);
 
+
     $resposta = @file_get_contents($url, false, $contexto);
+
 
     if ($resposta === false) {
         error_log("Falha na API para funcionário ID $id");
         continue;
     }
 
+
     $dados = json_decode($resposta, true);
+
 
     if (empty($dados['results'])) {
         error_log("Cidade não encontrada: $cidade - $uf");
         continue;
     }
 
+
     // Procurar uma correspondência de cidade e estado
     $local = null;
+
 
     foreach ($dados['results'] as $item) {
         $nomeCidade = $item['name'] ?? '';
         $nomeEstado = $item['admin1'] ?? '';
+
 
         // A API pode retornar a sigla ou o nome completo do estado.
         $estados = [
@@ -88,7 +103,9 @@ while ($funcionario = $resultado->fetch_assoc()) {
             'TO' => 'Tocantins'
         ];
 
+
         $estadoEsperado = $estados[$uf] ?? '';
+
 
         if (
             strcasecmp($nomeCidade, $cidade) === 0 &&
@@ -102,13 +119,16 @@ while ($funcionario = $resultado->fetch_assoc()) {
         }
     }
 
+
     if (!$local) {
         error_log("Correspondência não confirmada: $cidade - $uf");
         continue;
     }
 
+
     $latitude = (float) $local['latitude'];
     $longitude = (float) $local['longitude'];
+
 
     // Salvar as coordenadas no banco
     $stmt = $db->prepare("
@@ -117,14 +137,18 @@ while ($funcionario = $resultado->fetch_assoc()) {
         WHERE id = ?
     ");
 
+
     $stmt->bind_param("ddi", $latitude, $longitude, $id);
+
 
     if (!$stmt->execute()) {
         error_log("Erro ao salvar coordenadas do funcionário ID $id");
     }
 
+
     $stmt->close();
 }
+
 
 $resultado->free();
 $db->close();

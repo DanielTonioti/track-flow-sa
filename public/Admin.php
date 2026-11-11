@@ -3,16 +3,20 @@ session_start();
 include_once("../infra/conn.php");
 include("components/start.php");
 
+
 $ehAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
+
 
 $sql = $ehAdmin
     ? "SELECT id, nome, email, telefone, cidade, uf, cargo FROM funcionario ORDER BY FIELD(cargo, 'admin', 'funcionario'), nome ASC"
     : "SELECT id, nome, email, cidade, uf, cargo FROM funcionario ORDER BY FIELD(cargo, 'admin', 'funcionario'), nome ASC";
 $resFuncionarios = $db->query($sql);
 
+
 $funcionarios = [];
 $totalAdmins = 0;
 $totalOperadores = 0;
+
 
 if ($resFuncionarios) {
     while ($row = $resFuncionarios->fetch_assoc()) {
@@ -24,6 +28,7 @@ if ($resFuncionarios) {
         }
     }
 }
+
 
 function formatarTelefoneOperacional(?string $tel): string
 {
@@ -37,21 +42,26 @@ function formatarTelefoneOperacional(?string $tel): string
     return $tel !== null && $tel !== '' ? $tel : '—';
 }
 
+
 $pageTitle = 'Funcionários e Credenciais';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 
+
 <head>
     <?php include 'components/head.php'; ?>
 </head>
+
 
 <body class="ops-app-body">
     <header>
         <?php include("components/navbar.php"); ?>
     </header>
 
+
     <main class="ops-shell">
+
 
         <div class="ops-page-header">
             <div>
@@ -62,6 +72,7 @@ $pageTitle = 'Funcionários e Credenciais';
                 </nav>
                 <h1 class="ops-page-title">Funcionários</h1>
             </div>
+
 
             <div class="ops-header-actions">
                 <a href="hub.php" class="ops-btn ops-btn-ghost">
@@ -75,18 +86,18 @@ $pageTitle = 'Funcionários e Credenciais';
             </div>
         </div>
 
+
         <section class="ops-panel" aria-labelledby="titulo-tabela-equipe">
+
 
             <div class="ops-toolbar">
                 <div class="ops-search-wrap">
                     <i class="bi bi-search" aria-hidden="true"></i>
-                    <input
-                        type="search"
-                        id="busca-funcionario"
-                        class="ops-search-input"
+                    <input type="search" id="busca-funcionario" class="ops-search-input"
                         placeholder="Filtrar por nome, e-mail ou cidade..."
                         aria-label="Filtrar funcionários por nome, e-mail ou cidade">
                 </div>
+
 
                 <div class="ops-filter-group" role="group" aria-label="Filtrar por nível de acesso">
                     <button type="button" class="ops-filter-pill active" data-role-filter="todos" aria-pressed="true">
@@ -101,6 +112,7 @@ $pageTitle = 'Funcionários e Credenciais';
                 </div>
             </div>
 
+
             <div class="table-responsive">
                 <table class="ops-table" id="tabela-funcionarios" aria-label="Lista de funcionários e administradores">
                     <thead>
@@ -113,7 +125,7 @@ $pageTitle = 'Funcionários e Credenciais';
                             <?php endif; ?>
                             <th scope="col">Nível de Acesso</th>
                             <?php if ($ehAdmin): ?>
-                            <th scope="col" class="text-end">Ações</th>
+                                <th scope="col" class="text-end">Ações</th>
                             <?php endif; ?>
                         </tr>
                     </thead>
@@ -130,16 +142,18 @@ $pageTitle = 'Funcionários e Credenciais';
                                     ($pessoa['nome'] ?? '') . ' ' . ($pessoa['email'] ?? '') . ' ' . $cidadeUf,
                                     'UTF-8'
                                 );
-                            ?>
+                                ?>
                                 <tr data-role="<?= htmlspecialchars($cargoPessoa, ENT_QUOTES, 'UTF-8') ?>"
                                     data-search="<?= htmlspecialchars($textoBusca, ENT_QUOTES, 'UTF-8') ?>">
                                     <td>
                                         <span class="ops-code-badge"><?= sprintf('#OP-%03d', $idPessoa) ?></span>
                                     </td>
                                     <td>
-                                        <strong class="text-white d-block"><?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?></strong>
+                                        <strong
+                                            class="text-white d-block"><?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?></strong>
                                         <span class="text-steel small">
-                                            <i class="bi bi-geo-alt me-1" aria-hidden="true"></i><?= htmlspecialchars($cidadeUf !== '' ? $cidadeUf : 'Base não informada', ENT_QUOTES, 'UTF-8') ?>
+                                            <i class="bi bi-geo-alt me-1"
+                                                aria-hidden="true"></i><?= htmlspecialchars($cidadeUf !== '' ? $cidadeUf : 'Base não informada', ENT_QUOTES, 'UTF-8') ?>
                                         </span>
                                     </td>
                                     <td class="mono-font small text-steel">
@@ -162,23 +176,20 @@ $pageTitle = 'Funcionários e Credenciais';
                                         <?php endif; ?>
                                     </td>
                                     <?php if ($ehAdmin): ?>
-                                    <td class="text-end">
-                                        <div class="d-inline-flex flex-wrap justify-content-end gap-1">
-                                            <a href="Usuario_Info.php?id=<?= $idPessoa ?>"
-                                                class="ops-btn ops-btn-ghost ops-btn-sm"
-                                                title="Consultar ficha completa de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
-                                                Informações
-                                            </a>
-    
-                                                <a href="editar_usuario.php?id=<?= $idPessoa ?>"
-                                                    class="ops-btn ops-btn-sm"
+                                        <td class="text-end">
+                                            <div class="d-inline-flex flex-wrap justify-content-end gap-1">
+                                                <a href="Usuario_Info.php?id=<?= $idPessoa ?>"
+                                                    class="ops-btn ops-btn-ghost ops-btn-sm"
+                                                    title="Consultar ficha completa de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
+                                                    Informações
+                                                </a>
+                                                <a href="editar_usuario.php?id=<?= $idPessoa ?>" class="ops-btn ops-btn-sm"
                                                     title="Editar cadastro de <?= htmlspecialchars((string) ($pessoa['nome'] ?? ''), ENT_QUOTES, 'UTF-8') ?>">
                                                     Editar
                                                 </a>
-                                      
-                                            <?php endif; ?>
-                                        </div>
-                                    </td>
+                                            </div>
+                                        </td>
+                                    <?php endif; ?>
                                 </tr>
                             <?php endforeach; ?>
                         <?php else: ?>
@@ -189,7 +200,8 @@ $pageTitle = 'Funcionários e Credenciais';
                                         <p class="mb-2 fw-semibold text-white">Nenhum funcionário cadastrado.</p>
                                         <?php if ($ehAdmin): ?>
                                             <a href="cadastro_usuario.php" class="ops-btn ops-btn-primary ops-btn-sm">
-                                                <i class="bi bi-person-plus" aria-hidden="true"></i>Cadastrar primeiro funcionário
+                                                <i class="bi bi-person-plus" aria-hidden="true"></i>Cadastrar primeiro
+                                                funcionário
                                             </a>
                                         <?php endif; ?>
                                     </div>
@@ -200,6 +212,7 @@ $pageTitle = 'Funcionários e Credenciais';
                 </table>
             </div>
 
+
             <div id="estado-busca-vazia" class="ops-empty-state d-none py-4">
                 <span class="ops-empty-icon"><i class="bi bi-search" aria-hidden="true"></i></span>
                 <p class="mb-1 fw-semibold text-white">Nenhum funcionário encontrado.</p>
@@ -207,14 +220,17 @@ $pageTitle = 'Funcionários e Credenciais';
             </div>
         </section>
 
+
     </main>
+
 
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script defer src="../scripts/script_navbar.js"></script>
-   <script defer src="../scripts/scriptAdmin.js"></script>
+    <script defer src="../scripts/scriptAdmin.js"></script>
     <script defer src="../scripts/pagination.js"></script>
 </body>
+
 
 </html>
