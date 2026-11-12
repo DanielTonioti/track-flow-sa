@@ -22,6 +22,13 @@ Passo 3: Clique e preencha o campo "senha" com a senha "123456". Essa é a senha
 Passo 5: Clicar no botão “Entrar no sistema”.
 
 
+### Níveis de acesso.
+
+O sistema separa os usuários em duas categorias, chamadas de "nível de acesso". Sempre que um novo usuário é cadastrado, ele deve ser colocado em uma dessas categorias.
+Os administradores/admins possuem acesso total ao sistema, com acesso a todas as páginas, funcionalidades e dados cadastrados. Nessa categoria devem apenas ser cadastrados pessoas de confiaça, responsáveis pelo gerenciamento de trens, rotas e outros usuários.
+Os funcionários incluem funcionários "chão de fábrica", que não estão supostos a ter acesso total ao sistema. Eles tem acesso a leitura de dados, com limitações na leitura de funcionário, além da permissão de criar relatórios.
+
+
 ### Página hub / Sensores
 
 Após a entrada do administrador no sistema, você verá diversas informações:
@@ -75,7 +82,65 @@ No canto superior esquerdo, há uma barra de pesquisa, permitindo buscar usuári
  - Clique em "Salvar Alterações".
  - Se você desejar excluir a conta, essa ação é efetuada por meio da página de edição também. Apenas clique no botão de "Excluir conta" destacado em vermelho e clique em "Confirmar exclusão" no pop-up que aparecer.
 
+### Gerenciamento de trems e rotas
 
+A página de funcionários lista todos os trems e rotas cadastrados. A tabela na esquerda corresponde aos trens, e a da direita corresponde as rotas. 
+Admins conseguem cadastrar, editar e excluir trens e rotas.
+Novamente, apenas 10 trens/rotas são mostrados na tabela de cada vez. Mais que isso e botões para acessar o resto apareceram.
+Na direita de cada entrada das tabela há um botão de "consultar", que revela dados extras sobre o objeto consultado.
+No canto superior esquerdo, há uma barra de pesquisa, permitindo buscar trens e rotas pelo nome, modelo e itinerário. 
+
+#### Cadastrar trem
+
+ - Clique em "Novo Trem" dentro da tabela de trens à esquerda, na página de trens e rotas. Alternativamente, você pode clicar no botão "Gerenciar trens" no canto superior direito.
+ - Preencha as informações solicitadas.
+ - Informa o usuário responsável pelo trem. Você precisa ter pelo menos um usuário cadastrado.
+ - Clique em "Cadastrar trem".
+
+ #### Editar trem
+
+ - Na mesma página do cadastro de trem, é possível ver uma lista de trens cadastrados. Novamente, essa página pode ser acessada pelo botão "Novo trem" ou "Gerenciar trens" na página de trens e rotas.
+ - Clique em "editar" no trem que você deseja editar. 
+ - Altere qualquer informação desejada.
+ - Clique em "Salvar Alterações".
+
+#### Excluir trem
+
+ - Na mesma página do cadastro de trem, é possível ver uma lista de trens cadastrados. Novamente, essa página pode ser acessada pelo botão "Novo trem" ou "Gerenciar trens" na página de trens e rotas.
+ - Clique em "excluir" no trem que você deseja excluir. 
+ - Clique em "Confirmar Exclusão"
+
+ #### Cadastrar trem
+
+ - Clique em "Nova Rota" dentro da tabela de rotas à direita, na página de trens e rotas. Alternativamente, você pode clicar no botão "Gerenciar rotas" no canto superior direito.
+ - Preencha as informações solicitadas.
+ - Informa o trem que passa por essa rota. Você precisa ter pelo menos um trem cadastrado.
+ - Clique em "Cadastrar rota".
+
+ #### Editar trem
+
+ - Na mesma página do cadastro de rotas, é possível ver uma lista de rotas cadastrados. Novamente, essa página pode ser acessada pelo botão "Nova rotas" ou "Gerenciar rotas" na página de trens e rotas.
+ - Clique em "editar" na rota que você deseja editar. 
+ - Altere qualquer informação desejada.
+ - Clique em "Salvar Alterações".
+
+#### Excluir trem
+
+ - Na mesma página do cadastro de rotas, é possível ver uma lista de rotas cadastrados. Novamente, essa página pode ser acessada pelo botão "Nova rota" ou "Gerenciar rotas" na página de trens e rotas.
+ - Clique em "excluir" na rota que você deseja excluir. 
+ - Clique em "Confirmar Exclusão"
+
+### Gerenciamento de sensores.
+
+O sistema final não possui a funcionalidade completa de gerenciamento de sensores. Os dados e sensores apresentados no Dashboard são decorativos, apresentando como seria se essa funcionalidade existisse.
+
+É possível acessar á página principal, junto das páginas de criação e gerenciamente de sensores, mas não é possível realizar nada nelas. O sistema informa que são páginas em produção.
+
+### Gerenciamento de relatórios.
+
+Assim como o gerenciamento de sensores, o gerenciamento de relatórios não está completo. Isso é devido a sua dependencia ao funcionamento de sensores.
+
+É possível acessar á página principal, junto das páginas de criação e gerenciamente de relatórios, mas não é possível realizar nada nelas. O sistema informa que são páginas em produção.
 
 
 
