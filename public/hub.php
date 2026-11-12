@@ -439,12 +439,6 @@ $pageTitle = 'Dashboard';
                     <h2 class="ops-panel-title mb-0">Sensores</h2>
                     <span class="text-steel small"><?= count($sensores) ?> sensores</span>
                 </div>
-
-                <div class="d-flex align-items-center gap-2">
-                    <a href="Sensor_Data.php" class="ops-btn ops-btn-primary ops-btn-sm">
-                        Ver todos
-                    </a>
-                </div>
             </div>
 
             <?php if ($temAlertaCritico): ?>
@@ -591,10 +585,10 @@ $pageTitle = 'Dashboard';
                         Ver histórico
                     </a>
                     <?php if ($ehAdmin): ?>
-                        <a href="Sensor.php" id="AddSensor" class="ops-btn ops-btn-sm ops-btn-ghost">
+                        <a href="Sensor.php" id="AddSensor" class="ops-btn ops-btn-primary ops-btn-sm">
                             Cadastrar sensor
                         </a>
-                        <a href="Sensor_Manage.php" id="gerenciarsensor" class="ops-btn ops-btn-sm ops-btn-ghost">
+                        <a href="Sensor_Data.php" id="gerenciarsensor" class="ops-btn ops-btn-primary ops-btn-sm">
                             Gerenciar sensores
                         </a>
                     <?php endif; ?>
