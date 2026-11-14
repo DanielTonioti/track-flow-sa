@@ -11,6 +11,8 @@ Samuel Elias Candinho, Roberto Stockhausen Hille, Lucas Vieira Pedroso , Daniel 
 O projeto consiste em fazer um aplicativo de um sistema interno de uma empresa ferroviária, com funções de geração de relatórios, gerenciamento de usuários, sensores, linhas e trens, além de um sistema de autenticação para permitir acesso apenas a pessoal autorizado. Usuários são separados entre Funcionários e Administradores, com o primeiro tendo apenas permissões de gerenciamento de relatórios, enquanto o último tem acesso total as funcioanlidades do site. 
 O objetivo do projeto é criar um aplicativo que consiga, de maneira automática, registrar, monitorar e relatar a atual situação dos trens e trilhos com seus respectivos sensores, no final, tendo um sistema automatizado.
 
+<img src="Assets/readme/Home.png">
+
 ## Requisitos Funcionais Previstos:
 
 ### Login/Logout:
