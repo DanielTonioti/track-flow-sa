@@ -42,7 +42,7 @@ Após a entrada do administrador no sistema, você verá diversas informações:
 <li> O segundo gráfico mostra a variação de temperatura média detectada pelos sensores de temperatura cadastrados.
 <img src="../Assets/manual/Grafico2.png" width="256px">
 <li> O terceiro e último gráfico apresenta dados de funcionamento de todos os sensores, informando possíveis erros registrados.
-<img src="../Assets/manual/Grafico3.png" width="256px">
+<img src="../Assets/manual/Grafico3.png" width="256px"> <br>
 <b> Sensores: </b> No fim da página, são duas listas de sensores informando dados relevantes. Na esquerda, há os sensores alocados em trens. Na direita, há sensores alocados em trilhos.
 Nesse secção, há botões para gerenciamento e cadastro de sensores.
 
