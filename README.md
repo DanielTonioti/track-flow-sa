@@ -1,5 +1,8 @@
 # TrackFlow-SA
 ---
+
+<img src="Assets/readme/Landing.png">
+
 ## Nomes dos membros:
 Samuel Elias Candinho, Roberto Stockhausen Hille, Lucas Vieira Pedroso , Daniel Tonioti e Natan Vitor Dré Avanço Barbosa
 
@@ -57,3 +60,27 @@ Sob sugestão do docente, o SCRUM será utilizado para manter a comunicação en
 Aparentemente, vamos usar formatações difentes para cada tipo de arquivo. Está planejadp que snake case seja usado nos arquivos PHP/HTML, enquanto camel case continuará nos arquivos javascript. Estamos incertos sobre a formatação usada nos assets. Nossa fonte League Spartan veio em Pascal case por padrão, por exemplo.
 
 Estou reconsiderando o nosso uso atual de Javascript. O Javascript atual é usado para simular as funções que serão feitas pelo php, especialmente tudo envolvendo banco de dados, como o log-in, cadastro, exclusão, e geração de tabelas expondo dados cadastrados. Algumas funções no javascript ainda são utilizáveis, mas são em sua maioria efeitos visuais, como a navbar lateral colapsável. Mas ainda assim, a maioria do nosso javascript se tornará obsoleto.
+
+## Tecnologias utilizadas
+O plano original envolveria o uso de Internet das Coisas (IoT), mas devido ao tempo, acabamos com um site de CRUDs que utitliza SQL, PHP e servidores locais.
+
+## Requisitos de execução
+Da forma que ele está, para utilizar o sistema, tudo que é necessário é um navegador e um servidor local para executar o php.
+
+## Execução
+Para executar o sistema, recomendamos:
+ - Instalar o XAMPP
+ - Instalar o VSCode
+ - Clonar o repositório do github no VSCode
+ - Salvar a pasta clonada dentro de C:\xampp\htdocs com o nome "track-flow-sa";
+ - Iniciar o servidor Apache e Mysql usando o XAMPP.
+ - Entrar no seu navegador no endereço http://localhost:?/phpmyadmin, substituindo o "?" pelo port do apache no XAMPP. (Exemplo: 80, 8080, 9090)
+ - Clique em "SQL" para abrir um editor de texto para a execução da linguagem SQL.
+ - Cole o código dentro do arquivo db.sql no repositório, dentro da pasta "database"
+ - Clique em executar ou aperte ctrl+enter. Isso vai criar o banco de dados necessário para o funcionamento do sistema.
+ - Entrar no seu navegador no endereço http://localhost:?/track-flow-sa, substituindo o "?" pelo port do apache no XAMPP. (Exemplo: 80, 8080, 9090)
+
+
+
+
+
