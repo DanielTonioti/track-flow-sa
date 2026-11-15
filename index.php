@@ -302,14 +302,14 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
                                         <span class="text-white">Linha 1 — Corredor Principal</span>
                                         <span class="text-volt fw-bold">68 km/h</span>
                                     </div>
-                                    <div class="progress telemetry-progress"><div class="progress-bar bg-info" style="width: 78%"></div></div>
+                                    <div class="progress telemetry-progress"><div class="progress-bar bg-info telemetry-bar-78"></div></div>
                                 </div>
                                 <div>
                                     <div class="d-flex justify-content-between small mb-1">
                                         <span class="text-white">Linha 2 — Corredor de Carga</span>
                                         <span class="text-volt fw-bold">52 km/h</span>
                                     </div>
-                                    <div class="progress telemetry-progress"><div class="progress-bar bg-success" style="width: 60%"></div></div>
+                                    <div class="progress telemetry-progress"><div class="progress-bar bg-success telemetry-bar-60"></div></div>
                                 </div>
                             </div>
                         </div>
@@ -469,7 +469,7 @@ $jsVersion = @filemtime(__DIR__ . '/scripts/scriptIndex.js') ?: '2026';
                     <h3 class="display-6 fw-bold text-white mb-3 brand-font">
                         No ritmo que move estados.
                     </h3>
-                    <p class="text-white text-opacity-75 fs-5 mb-4 mx-auto" style="max-width: 38rem;">
+                    <p class="text-white text-opacity-75 fs-5 mb-4 mx-auto canva-cta-subtitle">
                         Entre na plataforma TrackFlow para acompanhar os sensores, trens, linhas e relatórios da sua operação.
                     </p>
                     <a href="public/Login.php" class="btn btn-canva-primary rounded-pill px-5 py-3">

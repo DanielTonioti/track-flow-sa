@@ -267,7 +267,7 @@ $pageTitle = 'Dashboard';
         <?php include("components/navbar.php"); ?>
     </header>
 
-    <main class="container-fluid px-3 px-xl-4 py-3" style="max-width: 1600px; margin: 0 auto;">
+    <main class="container-fluid px-3 px-xl-4 py-3 ops-container-wide">
 
         <section class="row g-3 mb-3 align-items-stretch" aria-label="Identificação Operacional e Condições Meteorológicas da Malha">
 
@@ -315,11 +315,10 @@ $pageTitle = 'Dashboard';
                         </div>
 
                         <div class="d-flex align-items-center gap-2">
-                            <span id="clima-atualizacao" class="text-steel mono-font" style="font-size: 0.74rem;">
+                            <span id="clima-atualizacao" class="text-steel mono-font ops-text-sm-xs">
                                 Sincronizado às <?= escapar_html($horaAtualizacaoClima) ?>
                             </span>
-                            <button type="button" id="btn-atualizar-clima" class="ops-btn p-0"
-                                style="width: 38px; min-height: 38px;"
+                            <button type="button" id="btn-atualizar-clima" class="ops-btn p-0 ops-btn-icon-sm"
                                 title="Sincronizar telemetria meteorológica da via" aria-label="Atualizar dados meteorológicos Open-Meteo">
                                 <span id="clima-spinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
                                 <i id="clima-btn-icon" class="bi bi-arrow-clockwise" aria-hidden="true"></i>
@@ -330,11 +329,11 @@ $pageTitle = 'Dashboard';
                     <!-- Dados Meteorológicos Estritos (Temperatura, Condição, Sensação e Umidade) -->
                     <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 my-auto py-2">
                         <div class="d-flex align-items-center gap-3">
-                            <div id="clima-icone" class="fs-1 d-flex align-items-center justify-content-center" aria-hidden="true" style="width: 48px; height: 48px;">
+                            <div id="clima-icone" class="fs-1 d-flex align-items-center justify-content-center ops-weather-icon-box" aria-hidden="true">
                                 <i class="bi <?= escapar_html($iconeClimaClasse) ?>"></i>
                             </div>
                             <div>
-                                <span id="clima-temperatura" class="fs-3 fw-bold text-white mono-font d-block" style="line-height: 1.1;">
+                                <span id="clima-temperatura" class="fs-3 fw-bold text-white mono-font d-block ops-weather-temp">
                                     <?= number_format($temperatura, 1, '.', '') ?> °C
                                 </span>
                                 <span id="clima-condicao" class="small text-steel">
@@ -345,11 +344,11 @@ $pageTitle = 'Dashboard';
 
                         <div class="ops-weather-box ms-auto">
                             <div class="ops-weather-metric">
-                                <span class="d-block text-steel small" style="font-size: 0.72rem;">Sensação</span>
+                                <span class="d-block text-steel small ops-text-xs">Sensação</span>
                                 <strong id="clima-sensacao" class="text-white mono-font fs-6"><?= number_format($sensacaoTermica, 1, '.', '') ?> °C</strong>
                             </div>
                             <div class="ops-weather-metric">
-                                <span class="d-block text-steel small" style="font-size: 0.72rem;">Umidade</span>
+                                <span class="d-block text-steel small ops-text-xs">Umidade</span>
                                 <strong id="clima-umidade" class="text-white mono-font fs-6"><?= (int) $umidade ?>%</strong>
                             </div>
                         </div>
@@ -361,7 +360,7 @@ $pageTitle = 'Dashboard';
                     </div>
 
                     <!-- Alerta Dinâmico para Eventos Meteorológicos Severos (WMO 95/96/99) -->
-                    <div id="clima-alerta-extremo" class="ops-alert-banner mt-2 d-none" role="alert" style="border: 1px solid rgba(239, 68, 68, 0.45); border-radius: 4px; padding: 0.5rem 0.85rem;">
+                    <div id="clima-alerta-extremo" class="ops-alert-banner mt-2 d-none ops-weather-severe-alert" role="alert">
                         <div class="d-flex align-items-center gap-2 small">
                             <i class="bi bi-lightning-fill text-danger" aria-hidden="true"></i>
                             <strong class="text-white mono-font">ALERTA CLIMÁTICO SEVERO:</strong>
@@ -446,9 +445,6 @@ $pageTitle = 'Dashboard';
                     <span class="text-white small">
                         <span class="mono-font fw-semibold"><?= escapar_html($sensoresCriticos[0]['codigo']) ?></span> está a <span class="mono-font fw-semibold"><?= number_format((float) $sensoresCriticos[0]['temperatura'], 1, '.', '') ?> °C</span>, acima do limite de <span class="mono-font">85 °C</span>.
                     </span>
-                    <a href="Sensor_Data.php?filtro=alerta" class="ops-btn ops-btn-sm">
-                        Inspecionar
-                    </a>
                 </div>
             <?php endif; ?>
 
@@ -457,7 +453,7 @@ $pageTitle = 'Dashboard';
 
                     <!-- Painel 1: Em composições -->
                     <div class="col-12 col-lg-6 border-end border-light border-opacity-10">
-                        <div class="py-2 px-3 border-bottom border-light border-opacity-10" style="background: rgba(255,255,255,0.015);">
+                        <div class="py-2 px-3 border-bottom border-light border-opacity-10 ops-panel-subbar">
                             <span class="text-white fw-semibold small">No trem</span>
                         </div>
 
@@ -495,7 +491,7 @@ $pageTitle = 'Dashboard';
                                                 <span class="text-steel small d-block"><?= escapar_html($alocacaoFormatada) ?></span>
                                             </td>
                                             <td class="text-end mono-font">
-                                                <?= isset($s['velocidade']) ? ((int) $s['velocidade'] . ' <span class="text-steel" style="font-size: 0.72rem;">km/h</span>') : '&mdash;' ?>
+                                                <?= isset($s['velocidade']) ? ((int) $s['velocidade'] . ' <span class="text-steel ops-text-xs">km/h</span>') : '&mdash;' ?>
                                             </td>
                                             <td class="text-end mono-font">
                                                 <span class="<?= $s['temperatura'] >= 85 ? 'text-warning fw-bold' : ($s['temperatura'] >= 60 ? 'text-warning' : 'text-white') ?>">
@@ -516,7 +512,7 @@ $pageTitle = 'Dashboard';
 
                     <!-- Painel 2: Na via -->
                     <div class="col-12 col-lg-6">
-                        <div class="py-2 px-3 border-bottom border-light border-opacity-10" style="background: rgba(255,255,255,0.015);">
+                        <div class="py-2 px-3 border-bottom border-light border-opacity-10 ops-panel-subbar">
                             <span class="text-white fw-semibold small">Na via</span>
                         </div>
 
@@ -584,14 +580,6 @@ $pageTitle = 'Dashboard';
                     <a href="Relatories.php" class="ops-link-subtle small">
                         Ver histórico
                     </a>
-                    <?php if ($ehAdmin): ?>
-                        <a href="Sensor.php" id="AddSensor" class="ops-btn ops-btn-primary ops-btn-sm">
-                            Cadastrar sensor
-                        </a>
-                        <a href="Sensor_Data.php" id="gerenciarsensor" class="ops-btn ops-btn-primary ops-btn-sm">
-                            Gerenciar sensores
-                        </a>
-                    <?php endif; ?>
                 </div>
             </div>
 

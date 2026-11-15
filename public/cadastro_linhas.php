@@ -106,9 +106,6 @@ $pageTitle = 'Trilhos e Linhas da Via Permanente';
                 <a href="trens_trilhos.php" class="ops-btn ops-btn-ghost">
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Frota e Rotas
                 </a>
-                <a href="Sensor.php" class="ops-btn">
-                    <i class="bi bi-cpu" aria-hidden="true"></i>Vincular Sensor
-                </a>
             </div>
         </div>
 

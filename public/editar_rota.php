@@ -98,7 +98,7 @@ $pageTitle = 'Editar Rota';
 <body class="ops-app-body">
     <header><?php include 'components/navbar.php'; ?></header>
 
-    <main class="ops-shell" style="max-width: 820px;">
+    <main class="ops-shell ops-shell-sm">
 
         <div class="ops-page-header">
             <div>
@@ -201,8 +201,8 @@ $pageTitle = 'Editar Rota';
                     </div>
                 </div>
 
-                <div class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center" style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
-                    <span class="mono-font text-steel" style="font-size: 0.72rem;">Velocidade média</span>
+                <div class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center ops-inset-box">
+                    <span class="mono-font text-steel ops-text-xs">Velocidade média</span>
                     <strong id="preview-velocidade-edit" class="mono-font text-cyan small">&mdash; km/h</strong>
                 </div>
 

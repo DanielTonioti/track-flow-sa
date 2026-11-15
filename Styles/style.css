@@ -2655,6 +2655,294 @@ html[data-perf="low"] .ops-panel + .ops-panel {
   display: none !important;
 }
 
-.d-none-filter {
-  display: none !important;
+/* ==========================================================================
+   ESTILOS CENTRALIZADOS (EXTRAÍDOS DE <style> E ATRIBUTOS INLINE)
+   ========================================================================== */
+
+/* Container & Shell Modifiers */
+.ops-container-wide {
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.ops-shell-xs {
+  max-width: 760px;
+}
+
+.ops-shell-sm {
+  max-width: 820px;
+}
+
+.ops-shell-md {
+  max-width: 900px;
+}
+
+.ops-shell-lg {
+  max-width: 960px;
+}
+
+.ops-shell-xl {
+  max-width: 1020px;
+}
+
+/* Tipografia & Auxiliares */
+.ops-text-2xs {
+  font-size: 0.7rem;
+}
+
+.ops-text-xs {
+  font-size: 0.72rem;
+}
+
+.ops-text-sm-xs {
+  font-size: 0.74rem;
+}
+
+.ops-radio-desc {
+  font-size: 0.76rem;
+}
+
+.ops-nav-section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.ops-kicker-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.ops-modal-kicker {
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+}
+
+.ops-modal-desc {
+  line-height: 1.55;
+}
+
+.ops-truncate-240 {
+  max-width: 240px;
+}
+
+.ops-search-wrap-lg {
+  max-width: 460px;
+}
+
+.ops-kv-item-full {
+  grid-column: 1 / -1;
+}
+
+.ops-inset-box {
+  background: var(--ops-ground);
+  border: 1px solid var(--ops-border);
+}
+
+.ops-panel-subbar {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+html[data-theme="light"] .ops-panel-subbar {
+  background: rgba(15, 23, 42, 0.025);
+}
+
+/* Dashboard / Clima */
+.ops-btn-icon-sm {
+  width: 38px;
+  min-height: 38px;
+}
+
+.ops-weather-icon-box {
+  width: 48px;
+  height: 48px;
+}
+
+.ops-weather-temp {
+  line-height: 1.1;
+}
+
+.ops-weather-severe-alert {
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  border-radius: 4px;
+  padding: 0.5rem 0.85rem;
+}
+
+/* Login Showcase */
+.ops-z-1 {
+  z-index: 1;
+}
+
+.ops-login-hero-box {
+  z-index: 1;
+  max-width: 520px;
+}
+
+.ops-login-hero-title {
+  font-size: clamp(2.4rem, 1.8rem + 2.5vw, 3.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+/* Landing Page (index.php) */
+.telemetry-bar-78 {
+  width: 78%;
+}
+
+.telemetry-bar-60 {
+  width: 60%;
+}
+
+.canva-cta-subtitle {
+  max-width: 38rem;
+}
+
+/* Página de Erro CSRF (erro_csrf.php) */
+body.ops-csrf-error-body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background:
+    radial-gradient(circle at top, #172c49, transparent 55%),
+    linear-gradient(145deg, #07111f, #101d30) !important;
+  font-family: "Inter", sans-serif;
+  color: #fff !important;
+}
+
+.ops-csrf-error-body .container-erro {
+  width: 100%;
+  max-width: 540px;
+  padding: 45px 35px;
+  text-align: center;
+  background: rgba(15, 27, 44, 0.95);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 22px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+.ops-csrf-error-body .icone-erro {
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 24px;
+  color: #f87171;
+  font-size: 40px;
+}
+
+.ops-csrf-error-body .codigo-erro {
+  color: #f87171;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.ops-csrf-error-body h1 {
+  font-size: 30px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.ops-csrf-error-body h2 {
+  color: #cbd5e1;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.ops-csrf-error-body .descricao {
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+.ops-csrf-error-body .aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 17px;
+  margin-bottom: 25px;
+  background: rgba(37, 99, 235, 0.12);
+  border: 1px solid rgba(96, 165, 250, 0.2);
+  border-radius: 13px;
+  text-align: left;
+}
+
+.ops-csrf-error-body .aviso i {
+  color: #60a5fa;
+  font-size: 20px;
+}
+
+.ops-csrf-error-body .aviso strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.ops-csrf-error-body .aviso span {
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ops-csrf-error-body .botoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ops-csrf-error-body .botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 14px;
+  border-radius: 11px;
+  background: #2563eb;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.ops-csrf-error-body .botao:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+.ops-csrf-error-body .botao-secundario {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+}
+
+.ops-csrf-error-body .botao-secundario:hover {
+  background: rgba(148, 163, 184, 0.1);
+}
+
+.ops-csrf-error-body .rodape {
+  margin-top: 30px;
+  color: #64748b;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+}
+
+@media (max-width: 480px) {
+  .ops-csrf-error-body .container-erro {
+    padding: 35px 22px;
+  }
+
+  .ops-csrf-error-body h1 {
+    font-size: 25px;
+  }
 }

@@ -50,7 +50,7 @@ $pageTitle = 'Autenticação de Operador';
     <main class="ops-login-layout">
 
         <section class="ops-login-showcase" aria-label="TrackFlow">
-            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 position-relative" style="z-index: 1;">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 position-relative ops-z-1">
                 <a href="../index.php" class="d-inline-flex align-items-center gap-2 text-decoration-none">
                     <span class="ops-brand-mark">
                         <img src="../assets/logo/logo-track-flow.png" alt="Logo TrackFlow" class="ops-logo-invert" width="24" height="24">
@@ -66,8 +66,8 @@ $pageTitle = 'Autenticação de Operador';
                 </a>
             </div>
 
-            <div class="my-4 my-lg-auto py-4 position-relative" style="z-index: 1; max-width: 520px;">
-                <h1 class="brand-font fw-bold text-white mb-0" style="font-size: clamp(2.4rem, 1.8rem + 2.5vw, 3.75rem); line-height: 1.08; letter-spacing: -0.025em;">
+            <div class="my-4 my-lg-auto py-4 position-relative ops-login-hero-box">
+                <h1 class="brand-font fw-bold text-white mb-0 ops-login-hero-title">
                     No <span class="text-volt">ritmo</span> que move estados.
                 </h1>
             </div>
@@ -78,7 +78,7 @@ $pageTitle = 'Autenticação de Operador';
         <section class="ops-login-panel-wrap" aria-labelledby="login-heading">
             <div class="ops-login-card">
                 <div class="mb-4">
-                    <span class="mono-font text-cyan text-uppercase d-block mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">
+                    <span class="mono-font text-cyan text-uppercase d-block mb-1 ops-kicker-label">
                         Acesso ao Sistema
                     </span>
                     <h2 id="login-heading" class="brand-font fw-bold text-white fs-2 mb-1">
@@ -148,7 +148,7 @@ $pageTitle = 'Autenticação de Operador';
                         </button>
 
                         <div class="collapse mt-2 text-start" id="ajudaRecuperacaoSenha">
-                            <div class="p-2 rounded-1 small text-steel" style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
+                            <div class="p-2 rounded-1 small text-steel ops-inset-box">
                                 Por segurança, entre em contato com a empresa para que possamos analisar.
                             </div>
                         </div>

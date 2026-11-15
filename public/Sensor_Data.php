@@ -1,21 +1,6 @@
 <?php
 session_start();
-require_once '../infra/conn.php';
 require_once 'components/start.php';
-
-$ehAdmin = (($_SESSION['cargo'] ?? '') === 'admin');
-
-$sensoresBanco = [];
-$sql = "SELECT s.id, s.nome, s.tipo, t.nome AS trem_nome, tr.nome AS trilho_nome
-        FROM sensor s
-        LEFT JOIN trem t ON t.id = s.trem_id
-        LEFT JOIN trilho tr ON tr.id = s.trilho_id
-        ORDER BY s.id DESC";
-if ($res = $db->query($sql)) {
-    while ($row = $res->fetch_assoc()) {
-        $sensoresBanco[] = $row;
-    }
-}
 
 $pageTitle = 'Sensores';
 ?>
@@ -31,7 +16,7 @@ $pageTitle = 'Sensores';
         <?php include("components/navbar.php"); ?>
     </header>
 
-    <main class="ops-shell">
+    <main class="ops-shell ops-shell-md">
         <div class="ops-page-header">
             <div>
                 <nav class="ops-breadcrumb" aria-label="Breadcrumb">
@@ -39,78 +24,22 @@ $pageTitle = 'Sensores';
                     <span class="ops-breadcrumb-sep">/</span>
                     <span>Sensores</span>
                 </nav>
-                <h1 class="ops-page-title">Sensores Cadastrados</h1>
+                <h1 class="ops-page-title">Sensores</h1>
             </div>
 
             <div class="ops-header-actions">
                 <a href="hub.php" class="ops-btn ops-btn-ghost">
                     <i class="bi bi-arrow-left" aria-hidden="true"></i>Dashboard
                 </a>
-                <?php if ($ehAdmin): ?>
-                    <a href="Sensor_Manage.php" class="ops-btn">
-                        Gerenciar
-                    </a>
-                    <a href="Sensor.php" class="ops-btn ops-btn-primary">
-                        Cadastrar Sensor
-                    </a>
-                <?php endif; ?>
             </div>
         </div>
 
-        <section class="ops-panel" aria-labelledby="titulo-painel-sensores">
-            <div class="ops-panel-header">
-                <h2 id="titulo-painel-sensores" class="ops-panel-title">
-                    Lista de Sensores
-                </h2>
-                <span class="ops-status-tag ops-status-neutral"><?= count($sensoresBanco) ?> Regristro(s)</span>
-            </div>
-
-            <div class="table-responsive">
-                <table class="ops-table" aria-label="Sensores cadastrados">
-                    <thead>
-                        <tr>
-                            <th scope="col">Código</th>
-                            <th scope="col">Identificação</th>
-                            <th scope="col">Tipo de Dado</th>
-                            <th scope="col">Vínculo</th>
-                            <th scope="col">Estado</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($sensoresBanco)): ?>
-                            <?php foreach ($sensoresBanco as $s): ?>
-                                <tr>
-                                    <td><span class="ops-code-badge"><?= sprintf('#SNS-%03d', (int) $s['id']) ?></span></td>
-                                    <td class="fw-semibold text-white"><?= htmlspecialchars((string) $s['nome'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td class="text-steel"><?= htmlspecialchars((string) $s['tipo'], ENT_QUOTES, 'UTF-8') ?></td>
-                                    <td class="text-steel">
-                                        <?php if (!empty($s['trem_nome'])): ?>
-                                            Trem: <?= htmlspecialchars((string) $s['trem_nome'], ENT_QUOTES, 'UTF-8') ?>
-                                        <?php elseif (!empty($s['trilho_nome'])): ?>
-                                            Trilho: <?= htmlspecialchars((string) $s['trilho_nome'], ENT_QUOTES, 'UTF-8') ?>
-                                        <?php else: ?>
-                                            —
-                                        <?php endif; ?>
-                                    </td>
-                                    <td>
-                                        <span class="ops-status-tag ops-status-nominal">
-                                            Cadastrado
-                                        </span>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        <?php else: ?>
-                            <tr>
-                                <td colspan="5">
-                                    <div class="ops-empty-state">
-                                        <span class="ops-empty-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
-                                        <p class="mb-1 fw-semibold text-white">Página em produção.</p>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
+        <section class="ops-panel" aria-labelledby="titulo-sensores-dev">
+            <div class="ops-empty-state">
+                <span class="ops-empty-icon"><i class="bi bi-cpu" aria-hidden="true"></i></span>
+                <h2 id="titulo-sensores-dev" class="h5 mb-2 fw-semibold text-white">Página em desenvolvimento.</h2>
+                <p class="small text-steel mb-3">O módulo de sensores está em desenvolvimento e estará disponível em breve.</p>
+                <a href="hub.php" class="ops-btn ops-btn-ghost ops-btn-sm">Voltar para o Dashboard</a>
             </div>
         </section>
     </main>
@@ -119,7 +48,6 @@ $pageTitle = 'Sensores';
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <script defer src="../scripts/script_navbar.js"></script>
-    <script defer src="../scripts/pagination.js"></script>
 </body>
 
 </html>

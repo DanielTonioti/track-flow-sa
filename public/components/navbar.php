@@ -68,13 +68,13 @@ $paginaAtual = basename($_SERVER['PHP_SELF'] ?? '');
 $navGrupoDashboard = ($paginaAtual === 'hub.php');
 $navGrupoUsuarios = in_array($paginaAtual, ['Admin.php', 'cadastro_usuario.php', 'editar_usuario.php', 'Usuario_Info.php'], true);
 $navGrupoFrota = in_array($paginaAtual, ['trens_trilhos.php', 'cadastro_trens.php', 'editar_trem.php', 'cadastro_rotas.php', 'editar_rota.php', 'cadastro_linhas.php'], true);
-$navGrupoSensores = in_array($paginaAtual, ['Sensor_Data.php', 'Sensor.php', 'Sensor_Manage.php', 'sensor_delete.php'], true);
-$navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.php', 'Relatorie_Info.php'], true);
+$navGrupoSensores = ($paginaAtual === 'Sensor_Data.php');
+$navGrupoRelatorios = ($paginaAtual === 'Relatories.php');
 ?>
 
 
 <nav class="menu-nav navbar navbar-dark" aria-label="Navegação Principal TrackFlow">
-    <div class="container-fluid px-2 px-lg-3" style="max-width: 1600px; margin: 0 auto;">
+    <div class="container-fluid px-2 px-lg-3 ops-container-wide">
 
 
         <div class="d-flex align-items-center gap-2">
@@ -128,8 +128,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
                 <div class="px-3 py-2 border-bottom border-light border-opacity-10 d-md-none">
                     <strong
                         class="d-block text-white small text-truncate"><?= htmlspecialchars($_SESSION["usuario"] ?? 'Operador', ENT_QUOTES, "UTF-8") ?></strong>
-                    <span class="mono-font text-steel d-inline-flex align-items-center gap-1"
-                        style="font-size: 0.7rem;"><span
+                    <span class="mono-font text-steel d-inline-flex align-items-center gap-1 ops-text-2xs"><span
                             class="ops-role-dot <?= $usuarioEhAdmin ? 'dot-admin' : 'dot-func' ?>"></span><?= $usuarioEhAdmin ? 'Administrador' : 'Funcionário' ?></span>
                 </div>
                 <div>
@@ -167,8 +166,7 @@ $navGrupoRelatorios = in_array($paginaAtual, ['Relatories.php', 'Relatories_New.
 
     <div class="offcanvas-body d-flex flex-column justify-content-between p-3">
         <div>
-            <div class="px-2 pb-2 mb-2 text-uppercase text-steel small"
-                style="font-size: 0.68rem; letter-spacing: 0.08em;">
+            <div class="px-2 pb-2 mb-2 text-uppercase text-steel small ops-nav-section-label">
                 Módulos do Sistema
             </div>
             <ul class="navbar-nav pe-1 gap-1">

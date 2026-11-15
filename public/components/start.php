@@ -67,8 +67,6 @@ function redirecionarSeNaoAdmin($fallback = 'hub.php')
         'trens_trilhos.php',
         'Sensor_Data.php',
         'Relatories.php',
-        'Relatories_New.php',
-        'Relatorie_Info.php',
         'Usuario_Info.php'
     ];
 

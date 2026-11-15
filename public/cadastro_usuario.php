@@ -163,7 +163,7 @@ $pageTitle = 'Cadastrar Funcionário';
         <?php include "components/navbar.php"; ?>
     </header>
 
-    <main class="ops-shell" style="max-width: 960px;">
+    <main class="ops-shell ops-shell-lg">
 
         <div class="ops-page-header">
             <div>
@@ -368,7 +368,7 @@ $pageTitle = 'Cadastrar Funcionário';
                                     required>
                                 <span>
                                     <strong class="d-block text-white small">Funcionário / Operador</strong>
-                                    <span class="text-steel" style="font-size: 0.76rem;">Acesso ao painel, sensores e relatórios.</span>
+                                    <span class="text-steel ops-radio-desc">Acesso ao painel, sensores e relatórios.</span>
                                 </span>
                             </label>
 
@@ -381,7 +381,7 @@ $pageTitle = 'Cadastrar Funcionário';
                                     <?= (($_POST['acesso'] ?? '') === 'admin') ? 'checked' : '' ?>>
                                 <span>
                                     <strong class="d-block text-white small">Administrador</strong>
-                                    <span class="text-steel" style="font-size: 0.76rem;">Gestão completa de equipe, trens, rotas e sensores.</span>
+                                    <span class="text-steel ops-radio-desc">Gestão completa de equipe, trens, rotas e sensores.</span>
                                 </span>
                             </label>
                         </div>

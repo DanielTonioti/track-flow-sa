@@ -329,7 +329,7 @@ $pageTitle = 'Editar Funcionário';
     </header>
 
 
-    <main class="ops-shell" style="max-width: 960px;">
+    <main class="ops-shell ops-shell-lg">
 
 
         <div class="ops-page-header">
@@ -488,7 +488,7 @@ $pageTitle = 'Editar Funcionário';
                                     <?= (($user['cargo'] ?? '') === 'funcionario') ? 'checked' : '' ?> required>
                                 <span>
                                     <strong class="d-block text-white small">Funcionário / Operador</strong>
-                                    <span class="text-steel" style="font-size: 0.76rem;">Acesso de consulta e
+                                    <span class="text-steel ops-radio-desc">Acesso de consulta e
                                         acompanhamento do sistema.</span>
                                 </span>
                             </label>
@@ -499,7 +499,7 @@ $pageTitle = 'Editar Funcionário';
                                     <?= (($user['cargo'] ?? '') === 'admin') ? 'checked' : '' ?>>
                                 <span>
                                     <strong class="d-block text-white small">Administrador</strong>
-                                    <span class="text-steel" style="font-size: 0.76rem;">Permissão administrativa integral.</span>
+                                    <span class="text-steel ops-radio-desc">Permissão administrativa integral.</span>
                                 </span>
                             </label>
                         </div>
@@ -508,8 +508,7 @@ $pageTitle = 'Editar Funcionário';
                     <div class="col-12 col-md-5">
                         <label class="ops-label" for="avatar">Foto de perfil</label>
                         <?php if (!empty($user['avatar'])): ?>
-                            <div class="d-flex align-items-center gap-2 mb-2 p-2 rounded-1"
-                                style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
+                            <div class="d-flex align-items-center gap-2 mb-2 p-2 rounded-1 ops-inset-box">
                                 <img src="../<?= htmlspecialchars(ltrim((string) $user['avatar'], '/'), ENT_QUOTES, 'UTF-8') ?>"
                                     alt="Foto atual do usuário" width="48" height="48"
                                     class="rounded-circle object-fit-cover"

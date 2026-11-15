@@ -84,7 +84,7 @@ $pageTitle = 'Editar Trem';
 <body class="ops-app-body">
     <header><?php include 'components/navbar.php'; ?></header>
 
-    <main class="ops-shell" style="max-width: 760px;">
+    <main class="ops-shell ops-shell-xs">
 
         <div class="ops-page-header">
             <div>

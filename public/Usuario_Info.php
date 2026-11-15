@@ -135,7 +135,7 @@ if (!$ehProprioPerfil){
         <?php include("components/navbar.php"); ?>
     </header>
 
-    <main class="ops-shell" style="max-width: 1020px;">
+    <main class="ops-shell ops-shell-xl">
 
         <div class="ops-page-header">
             <div>
@@ -233,7 +233,7 @@ if (!$ehProprioPerfil){
                                     <span class="ops-kv-value mono-font small"><?= $cepUsuario ?></span>
                                 </div>
                             <?php endif; ?>
-                            <div class="ops-kv-item" style="grid-column: 1 / -1;">
+                            <div class="ops-kv-item ops-kv-item-full">
                                 <span class="ops-kv-label">Logradouro e Bairro</span>
                                 <span class="ops-kv-value"><?= $ruaUsuario ?> &mdash; <?= $bairroUsuario ?></span>
                             </div>

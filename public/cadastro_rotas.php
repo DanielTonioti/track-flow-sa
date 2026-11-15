@@ -228,9 +228,8 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
 
 
                         <div id="preview-velocidade-box"
-                            class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center"
-                            style="background: var(--ops-ground); border: 1px solid var(--ops-border);">
-                            <span class="mono-font text-steel" style="font-size: 0.72rem;">Velocidade média:</span>
+                            class="p-2 rounded-1 mb-3 d-flex justify-content-between align-items-center ops-inset-box">
+                            <span class="mono-font text-steel ops-text-xs">Velocidade média:</span>
                             <strong id="preview-velocidade-valor" class="mono-font text-cyan small">&mdash;
                                 km/h</strong>
                         </div>
@@ -300,11 +299,11 @@ $pageTitle = 'Cadastrar e Gerenciar Rotas';
                                             <td>
                                                 <strong
                                                     class="text-white d-block"><?= htmlspecialchars($nomeR, ENT_QUOTES, 'UTF-8') ?></strong>
-                                                <span class="text-steel small d-block text-truncate" style="max-width: 240px;"
+                                                <span class="text-steel small d-block text-truncate ops-truncate-240"
                                                     title="<?= htmlspecialchars($descR, ENT_QUOTES, 'UTF-8') ?>">
                                                     <?= htmlspecialchars($descR, ENT_QUOTES, 'UTF-8') ?>
                                                 </span>
-                                                <span class="mono-font text-cyan" style="font-size: 0.72rem;">
+                                                <span class="mono-font text-cyan ops-text-xs">
                                                     <i class="bi bi-train-front me-1"
                                                         aria-hidden="true"></i><?= htmlspecialchars($tremNomeR, ENT_QUOTES, 'UTF-8') ?>
                                                 </span>

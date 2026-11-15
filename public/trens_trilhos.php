@@ -103,7 +103,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
 
         <div class="ops-panel mb-3">
             <div class="ops-toolbar border-bottom-0">
-                <div class="ops-search-wrap" style="max-width: 460px;">
+                <div class="ops-search-wrap ops-search-wrap-lg">
                     <i class="bi bi-search" aria-hidden="true"></i>
                     <input type="search" id="busca-frota-rotas" class="ops-search-input"
                         placeholder="Pesquisar trens por nome/modelo ou rotas por itinerário..."
@@ -333,8 +333,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <div>
-                                                                        <span id="fichaModalTipo" class="mono-font text-cyan text-uppercase d-block"
-                                                                            style="font-size: 0.7rem; letter-spacing: 0.07em;">Ficha Técnica</span>
+                                                                        <span id="fichaModalTipo" class="mono-font text-cyan text-uppercase d-block ops-modal-kicker">Ficha Técnica</span>
                                                                         <h3 class="modal-title fs-5 fw-bold text-white d-flex align-items-center gap-2"
                                                                             id="fichaModalTitulo">
                                                                             <span id="fichaModalCodigo" class="ops-code-badge"></span>
@@ -365,7 +364,7 @@ $pageTitle = 'Trens, Rotas e Via Permanente';
                                                                     </div>
                                                                     <div class="ops-kv-item">
                                                                         <span class="ops-kv-label">Descrição / Observações Operacionais</span>
-                                                                        <p id="fichaDesc" class="mb-0 text-steel small" style="line-height: 1.55;"></p>
+                                                                        <p id="fichaDesc" class="mb-0 text-steel small ops-modal-desc"></p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
