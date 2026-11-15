@@ -21,6 +21,7 @@ Passo 3: Clique e preencha o campo "senha" com a senha "123456". Essa é a senha
 
 Passo 5: Clicar no botão “Entrar no sistema”.
 
+<img src="../Assets/manual/Login.png" width="256px">
 
 ### Níveis de acesso.
 
@@ -36,6 +37,12 @@ Após a entrada do administrador no sistema, você verá diversas informações:
 <b> Dados de sessão: </b> No canto superior esquerdo, hávera informações relacionados a sessão: O nome do usuário, seu nível de acesso, e a data atual.
 <b> Dados de clima: </b> No canto superior direito, informa dados climáticos relacionados ao CEP cadastrado na conta atual.
 <b> Indicadores operacionais: </b> No meio da página, é um carrossel de gráficos que demonstra as informações relevantes coletadas pelos sensores. Clique nas setas a direita do título para alternar entre os gráficos.
+<li> O primeiro gráfico mostra o dado de alguns sensores de velocidade, dando destaque à aqueles detectarem um movimento rápido demais.
+<img src="../Assets/manual/Grafico1.png" width="256px">
+<li> O segundo gráfico mostra a variação de temperatura média detectada pelos sensores de temperatura cadastrados.
+<img src="../Assets/manual/Grafico2.png" width="256px">
+<li> O terceiro e último gráfico apresenta dados de funcionamento de todos os sensores, informando possíveis erros registrados.
+<img src="../Assets/manual/Grafico3.png" width="256px"> <br>
 <b> Sensores: </b> No fim da página, são duas listas de sensores informando dados relevantes. Na esquerda, há os sensores alocados em trens. Na direita, há sensores alocados em trilhos.
 Nesse secção, há botões para gerenciamento e cadastro de sensores.
 
@@ -53,6 +60,8 @@ No topo de todas as páginas, é possível ver a "navbar", que permite uma naveg
 
 Para fechar o menu, é só clicar fora dele, ou clicar no "X".
 
+<img src="../Assets/manual/Menu.png" width="256px">
+
 <b> Home: </b> Representada pela logo, acompanhada de "Trackflow" e "ferrorama". Clicar te leva ao Dashboard/hub, independente de onde você estiver.
 
 <b> Usuário: </b> Mostra informações de sessão, junto da foto de perfil, se houver. Clicar na foto de perfil abre um painel com algumas funções:
@@ -60,6 +69,7 @@ Para fechar o menu, é só clicar fora dele, ou clicar no "X".
  - Trocar tema: Alterna entre tema claro e escuro;
  - Sair: Encerra a sessão e leva para á pagina inicial.
 
+ <img src="../Assets/manual/Opcoes.png" width="256px">
 
  ### Gerenciamento de usuários
 
@@ -67,6 +77,8 @@ A página de funcionários lista todos os funcionários e administradores na emp
 Apenas 10 usuários são mostrados na tabela ao mesmo tempo. Se haver mais de 10 usuários, haverá múltiplas páginas para serem acessadas por meio de botões numéricos no canto inferior direito.
 No canto superior direito da tabela, há botões para mostrar apenas os funcionários ou apenas os administradores.
 No canto superior esquerdo, há uma barra de pesquisa, permitindo buscar usuários pelo nome, e-mail ou cidade. 
+
+<img src="../Assets/manual/Funcionarios.png" width="256px">
 
 #### Cadastrar funcionário
 
@@ -90,6 +102,12 @@ Novamente, apenas 10 trens/rotas são mostrados na tabela de cada vez. Mais que 
 Na direita de cada entrada das tabela há um botão de "consultar", que revela dados extras sobre o objeto consultado.
 No canto superior esquerdo, há uma barra de pesquisa, permitindo buscar trens e rotas pelo nome, modelo e itinerário. 
 
+<img src="../Assets/manual/TrensRotas.png" width="256px">
+
+### Gerenciamento de trems
+
+<img src="../Assets/manual/Trens.png" width="256px">
+
 #### Cadastrar trem
 
  - Clique em "Novo Trem" dentro da tabela de trens à esquerda, na página de trens e rotas. Alternativamente, você pode clicar no botão "Gerenciar trens" no canto superior direito.
@@ -110,21 +128,25 @@ No canto superior esquerdo, há uma barra de pesquisa, permitindo buscar trens e
  - Clique em "excluir" no trem que você deseja excluir. 
  - Clique em "Confirmar Exclusão"
 
- #### Cadastrar trem
+### Gerenciamento de rotas
+
+<img src="../Assets/manual/Rotas.png" width="256px">
+
+ #### Cadastrar rota
 
  - Clique em "Nova Rota" dentro da tabela de rotas à direita, na página de trens e rotas. Alternativamente, você pode clicar no botão "Gerenciar rotas" no canto superior direito.
  - Preencha as informações solicitadas.
  - Informa o trem que passa por essa rota. Você precisa ter pelo menos um trem cadastrado.
  - Clique em "Cadastrar rota".
 
- #### Editar trem
+ #### Editar rota
 
  - Na mesma página do cadastro de rotas, é possível ver uma lista de rotas cadastrados. Novamente, essa página pode ser acessada pelo botão "Nova rotas" ou "Gerenciar rotas" na página de trens e rotas.
  - Clique em "editar" na rota que você deseja editar. 
  - Altere qualquer informação desejada.
  - Clique em "Salvar Alterações".
 
-#### Excluir trem
+#### Excluir rota
 
  - Na mesma página do cadastro de rotas, é possível ver uma lista de rotas cadastrados. Novamente, essa página pode ser acessada pelo botão "Nova rota" ou "Gerenciar rotas" na página de trens e rotas.
  - Clique em "excluir" na rota que você deseja excluir. 
