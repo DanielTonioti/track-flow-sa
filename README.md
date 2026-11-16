@@ -9,7 +9,7 @@
   ![MySQL](https://img.shields.io/badge/MySQL-utf8mb4-4479A1?logo=mysql&logoColor=white)
   ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.8-7952B3?logo=bootstrap&logoColor=white)
   ![Three.js](https://img.shields.io/badge/Three.js-WebGL_3D-000000?logo=threedotjs&logoColor=white)
-  ![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento_(SA)-c1ff72?labelColor=081220)
+  ![Status](https://img.shields.io/badge/Status-Finalizado(SA)-c1ff72?labelColor=081220)
 </div>
 
 ---
