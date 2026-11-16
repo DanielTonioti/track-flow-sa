@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="Assets/logo/logo-track-flow.png" alt="Logo TrackFlow" width="96" height="96">
+  <img src="assets/logo/logo-track-flow.png" alt="Logo TrackFlow" width="96" height="96">
 
   # TrackFlow — Ferrorama
   **Sistema Integrado de Telemetria, Gestão de Frota e Monitoramento Ferroviário (CCO)**  
@@ -101,9 +101,9 @@ Disponibilizar um sistema web centralizado, seguro e responsivo que permita à *
 - **CRUD de Rotas com Calculadora Operacional:** Cadastro, edição e exclusão de rotas vinculadas a um trem, com cálculo automático em tempo real da **velocidade média planejada ($\text{km/h}$)** a partir da distância ($\text{km}$) e do tempo previsto ($\text{min}$).
 - **CRUD de Trilhos / Via Permanente (`cadastro_linhas.php`):** Cadastro, edição via modal e exclusão de segmentos de trilho (`#VIA-001`), classificando o tipo de estrutura (*Bitola Larga (1,60 m)*, *Bitola Métrica (1,00 m)*, *Bitola Padrão (1,435 m)*, *AMV*, *Ponte / Viaduto*, *Túnel*, *Pátio de Manobras*) e impedindo a exclusão de segmentos que possuam sensores instalados.
 
-#### 6. Catálogo de Sensores e Relatórios (`public/Sensor_Data.php`, `Relatories.php`)
-- **Listagem de Sensores (`Sensor_Data.php`):** Exibe os sensores cadastrados no banco (`#SNS-001`), seu tipo de leitura e o ativo vinculado (*Trem* ou *Trilho*).
-- **Consulta e Filtro de Relatórios (`Relatories.php`):** Filtra o histórico de leituras da tabela `dados_sensor` por sensor específico e por período (data inicial e data final).
+#### 6. Módulos de Sensores e Relatórios (`public/Sensor_Data.php`, `public/Relatories.php`) — *Em desenvolvimento*
+- Os módulos dedicados ao gerenciamento de **Sensores** (`Sensor_Data.php`) e à emissão/consulta de **Relatórios** (`Relatories.php`) tiveram seus fluxos de CRUD removidos nesta entrega e exibem atualmente a tela de *"Página em desenvolvimento"*.
+- O acompanhamento visual dos sensores embarcados e da via permanente permanece disponível diretamente no **Dashboard CCO (`public/hub.php`)**.
 
 #### 7. Tema Claro/Escuro e Adaptação de Performance
 - **Dark Mode / Light Mode:** Alternância de tema persistida via `localStorage` (`color-scheme`).
@@ -306,10 +306,8 @@ O controle de autorização é gerenciado pela coluna `cargo` (`ENUM('funcionari
 | **CRUD de Trens (Composições)** | `cadastro_trens.php`, `editar_trem.php`, `excluir_trem.php` | ❌ Bloqueado | ✅ Permitido |
 | **CRUD de Rotas Ferroviárias** | `cadastro_rotas.php`, `editar_rota.php`, `excluir_rota.php` | ❌ Bloqueado | ✅ Permitido |
 | **CRUD de Trilhos / Via Permanente** | `cadastro_linhas.php`, `atualizar_trilho.php` | ❌ Bloqueado | ✅ Permitido |
-| **Catálogo de Sensores da Malha** | `public/Sensor_Data.php` | 👁️ Apenas consulta | ✅ Consulta + botões de gerenciamento |
-| **Cadastrar / Gerenciar / Excluir Sensor** | `Sensor.php`, `Sensor_Manage.php`, `sensor_delete.php`, `excluir_sensor.php` | ❌ Bloqueado | ✅ Permitido |
-| **Consulta e Filtro de Relatórios** | `public/Relatories.php`, `Relatories_New.php` | ✅ Permitido | ✅ Permitido |
-| **Detalhamento de Relatório** | `public/Relatorie_Info.php` | ❌ Bloqueado | ✅ Permitido |
+| **Módulo de Sensores (em desenvolvimento)** | `public/Sensor_Data.php` | 🚧 Em desenvolvimento | 🚧 Em desenvolvimento |
+| **Módulo de Relatórios (em desenvolvimento)** | `public/Relatories.php` | 🚧 Em desenvolvimento | 🚧 Em desenvolvimento |
 
 ---
 
@@ -354,13 +352,8 @@ track-flow-sa/
 │   ├── latitude.php                   # Geocodificação automática via Open-Meteo após cadastro de funcionário
 │   ├── Login.php                      # Tela de login de operadores e administradores
 │   ├── logout.php                     # Encerramento seguro de sessão e limpeza de cookies
-│   ├── Relatorie_Info.php             # Visualização detalhada de relatório (em produção)
-│   ├── Relatories.php                 # Histórico e filtro de leituras da tabela dados_sensor por sensor e data
-│   ├── Relatories_New.php             # Tela de parâmetros para geração de novo relatório (em produção)
-│   ├── Sensor.php                     # Tela de cadastro de sensores na malha (em produção)
-│   ├── Sensor_Data.php                # Listagem de sensores cadastrados na malha
-│   ├── sensor_delete.php              # Tela de remoção de sensores (em produção)
-│   ├── Sensor_Manage.php              # Gerenciamento de sensores cadastrados
+│   ├── Relatories.php                 # Tela do módulo de relatórios (em desenvolvimento)
+│   ├── Sensor_Data.php                # Tela do módulo de sensores (em desenvolvimento)
 │   ├── trens_trilhos.php              # Visão geral integrada de Trens e Rotas com modal de Ficha Técnica
 │   └── Usuario_Info.php               # Ficha detalhada do funcionário / Meu Perfil e trens sob responsabilidade
 ├── scripts/                           # Módulos JavaScript do Front-end
@@ -372,8 +365,6 @@ track-flow-sa/
 │   ├── script_editar_rota.js          # Cálculo dinâmico da velocidade média planejada na edição de rota
 │   ├── script_linhas.js               # Controle dos modais de edição e exclusão de trilhos
 │   ├── script_navbar.js               # Menu de perfil, alternância Dark/Light Mode e telemetria de performance
-│   ├── script_sensor.js               # Alternância dinâmica de vínculo Trem/Trilho no formulário de sensor
-│   ├── script_sensor_manage.js        # Controle do modal de confirmação de exclusão de sensores
 │   ├── script_trens_trilhos.js        # Busca unificada e modal de Ficha Técnica de trens e rotas
 │   ├── scriptAdmin.js                 # Filtro por nível de acesso e busca instantânea na tabela de funcionários
 │   ├── scriptClima.js                 # Atualização client-side do clima via Open-Meteo e decodificação WMO
@@ -404,8 +395,8 @@ O projeto foi desenvolvido utilizando as metodologias ágeis **Scrum** (com spri
 
 ### Identidade Visual Oficial
 <div align="center">
-  <img src="Assets/logo/logo-track-flow.png" alt="Logotipo Oficial TrackFlow" width="140">
-  <p><em>Logotipo oficial do sistema TrackFlow — Ferrorama (<code>Assets/logo/logo-track-flow.png</code>)</em></p>
+  <img src="assets/logo/logo-track-flow.png" alt="Logotipo Oficial TrackFlow" width="140">
+  <p><em>Logotipo oficial do sistema TrackFlow — Ferrorama (<code>assets/logo/logo-track-flow.png</code>)</em></p>
 </div>
 
 ### Telas da Versão Final do Sistema
@@ -421,21 +412,16 @@ As principais interfaces que compõem a versão final do **TrackFlow** são:
    - Listagem com busca instantânea, filtro por cargo, ficha detalhada (`Usuario_Info.php`) e formulário com autopreenchimento via ViaCEP e geocodificação automática.
 5. **Gestão de Trens, Rotas e Via Permanente (`public/trens_trilhos.php`, `cadastro_trens.php`, `cadastro_rotas.php`, `cadastro_linhas.php`):**
    - Tabelas conjugadas de trens e rotas, modal de Ficha Técnica, calculadora automática de velocidade média planejada ($\text{km/h}$) e gestão de segmentos de trilho.
-6. **Sensores da Malha e Histórico de Relatórios (`public/Sensor_Data.php` e `public/Relatories.php`):**
-   - Catálogo de sensores vinculados a trens ou trilhos e filtro de leituras históricas por sensor e intervalo de datas.
 
 ---
 
 ## 13. Limitações Conhecidas
 
-1. **Telas de Cadastro/Exclusão de Sensores e Emissão de Novos Relatórios em Produção:**
-   - As páginas `public/Sensor.php` (cadastro de novo sensor), `public/sensor_delete.php` (remoção dedicada de sensor), `public/Relatories_New.php` (geração de novo relatório) e `public/Relatorie_Info.php` (detalhamento individual de relatório) possuem toda a estrutura visual do Design System implementada, mas encontram-se sinalizadas com o aviso *"Em produção"* (botão de submissão desabilitado nesta entrega).
-   - Em contrapartida, a listagem de sensores (`public/Sensor_Data.php`) e a consulta/filtragem de relatórios por sensor e período (`public/Relatories.php`) **estão totalmente funcionais** e integradas ao banco de dados MySQL.
-2. **Fluxo de Exclusão na Tela `Sensor_Manage.php`:**
-   - O modal de confirmação em `public/Sensor_Manage.php` (`scripts/script_sensor_manage.js`) redireciona via requisição `GET` (`excluir_sensor.php?id=...`), enquanto o endpoint `public/excluir_sensor.php` exige requisição `POST` validada com token CSRF por segurança, impedindo a exclusão direta por link GET.
-3. **Dados Híbridos (Demonstrativos + Banco de Dados) no Hub CCO (`public/Hub.php`):**
-   - Para garantir que o Centro de Controle Operacional exiba telemetria ativa imediatamente após a instalação, o `Hub.php` carrega um conjunto base de 10 sensores demonstrativos (`S.TRM.001` a `S.TRM.005` e `S.TRLH.001` a `S.TRLH.005`) e **mescla automaticamente** a essa listagem todos os sensores reais cadastrados na tabela `sensor`. Os gráficos do carrossel (`scripts/script_charts_hub.js`) utilizam séries operacionais demonstrativas.
-4. **Recuperação de Senha Manual:**
+1. **Módulos de Sensores e Relatórios em Desenvolvimento:**
+   - Os arquivos de CRUD completo de sensores e relatórios foram removidos da entrega atual. As páginas `public/Sensor_Data.php` e `public/Relatories.php` permanecem acessíveis no menu apenas com o aviso *"Página em desenvolvimento"*.
+2. **Dados Híbridos (Demonstrativos + Banco de Dados) no Hub CCO (`public/hub.php`):**
+   - Para garantir que o Centro de Controle Operacional exiba telemetria ativa imediatamente após a instalação, o `hub.php` carrega um conjunto base de 10 sensores demonstrativos (`S.TRM.001` a `S.TRM.005` e `S.TRLH.001` a `S.TRLH.005`) e **mescla automaticamente** a essa listagem os sensores cadastrados na tabela `sensor`. Os gráficos do carrossel (`scripts/script_charts_hub.js`) utilizam séries operacionais demonstrativas.
+3. **Recuperação de Senha Manual:**
    - Por se tratar de um sistema interno de operação ferroviária, não há redefinição autônoma de senha via disparo de e-mail SMTP; operadores que esquecerem sua credencial devem solicitar a redefinição a um usuário com perfil **Administrador** na tela de gestão de funcionários.
-5. **Dependência de Internet para Recursos Externos (Com Fallbacks):**
+4. **Dependência de Internet para Recursos Externos (Com Fallbacks):**
    - A consulta ao ViaCEP e a atualização meteorológica da Open-Meteo requerem conexão ativa com a internet. Caso o servidor esteja *offline*, o endereço pode ser digitado manualmente e o widget climático utiliza automaticamente as coordenadas padrão de fallback (`Joinville / SC`), mantendo o sistema operacional.
